@@ -26,7 +26,7 @@ class _RegisterPage extends State<RegisterPage> {
                   width: 200,
                   height: 200,
                   child: Image.asset(
-                    'assets/images/logo.png',
+                    'assets/logo.png',
                     scale: 0.1,
                   ),
                 ),

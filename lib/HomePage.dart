@@ -23,7 +23,7 @@ class _MainPage extends State<MainPage> {
                         width: 300,
                         height: 300,
                         child: Image.asset(
-                          'assets/images/logo.png',
+                          'assets/logo.png',
                           scale: 0.1,
                         )
                     )
