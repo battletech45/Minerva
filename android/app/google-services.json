@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "731737825079",
+    "project_id": "minerva-610af",
+    "storage_bucket": "minerva-610af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731737825079:android:994ded08eac5ede48a84b2",
+        "android_client_info": {
+          "package_name": "com.example.minerva"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731737825079-vtjckac8415gd8nkc5nitlsuae9tnidh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.minerva",
+            "certificate_hash": "a7f90d62abd453499637733f0fe261fb9c4a9a11"
+          }
+        },
+        {
+          "client_id": "731737825079-eq85cf5soe0jfdojn5l7u7q0p3e4h81r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSr2NvoEq_iiIVq9JBAJJtThQ6bpnjpgo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731737825079-eq85cf5soe0jfdojn5l7u7q0p3e4h81r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
