@@ -6,6 +6,11 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPage extends State<RegisterPage> {
+ final passwordController= TextEditingController();
+ final emailController= TextEditingController();
+ final registrationNumberController= TextEditingController();
+ final TCController= TextEditingController();
+ final schoolNumberController= TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,120 +21,106 @@ class _RegisterPage extends State<RegisterPage> {
         backgroundColor: Colors.deepOrange[300],
         title: Text('Register Page'),
       ),
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 5.0),
-              child: Center(
-                child: Container(
-                  width: 200,
-                  height: 200,
-                  child: Image.asset(
-                    'assets/logo.png',
-                    scale: 0.1,
-                  ),
-                ),
+            SizedBox(
+              width: 200,
+              height: 200,
+              child: Image.asset(
+                'assets/logo.png',
               ),
             ),
-            const Padding(
-                padding: EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 1, bottom: 5),
-                child: TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.horizontal(
-                          left: Radius.circular(50),
-                          right: Radius.circular(50),
-                        )),
-                        labelText: 'TC',
-                        labelStyle: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.black,
-                        )))),
-            const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.horizontal(
-                          left: Radius.circular(50),
-                          right: Radius.circular(50),
-                        )),
-                        labelText: 'School Number',
-                        labelStyle: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.black,
-                        )))),
-            const Padding(
-                padding: EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 5, bottom: 5),
-                child: TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.horizontal(
-                          left: Radius.circular(50),
-                          right: Radius.circular(50),
-                        )),
-                        labelText: 'Email',
-                        labelStyle: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.black,
-                        )))),
-            const Padding(
-                padding: EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 5, bottom: 5),
-                child: TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.horizontal(
-                          left: Radius.circular(50),
-                          right: Radius.circular(50),
-                        )),
-                        labelText: 'Password',
-                        labelStyle: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.black,
-                        )))),
-            const Padding(
-                padding: EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 5, bottom: 5),
-                child: TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.horizontal(
-                          left: Radius.circular(50),
-                          right: Radius.circular(50),
-                        )),
-                        labelText: 'Registration Number',
-                        labelStyle: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.black,
-                        )))),
+             SizedBox(
+              width:  MediaQuery.of(context).size.width*0.9,
+              child: TextField(
+                controller: TCController,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      labelText: 'TC',
+                      labelStyle: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                      ))),
+            ),
+            SizedBox( 
+              width:  MediaQuery.of(context).size.width*0.9,
+              child: TextField(
+                  controller: schoolNumberController,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      labelText: 'School Number',
+                      labelStyle: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                      ))),
+            ),
+            SizedBox(
+              width:  MediaQuery.of(context).size.width*0.9,
+              child: TextField(
+                  controller: emailController,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      labelText: 'Email',
+                      labelStyle: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                      ))),
+            ),
+            SizedBox(
+               width:  MediaQuery.of(context).size.width*0.9,
+              child: TextField(
+                  controller: passwordController,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      labelText: 'Password',
+                      labelStyle: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                      ))),
+            ),
+            SizedBox(
+               width:  MediaQuery.of(context).size.width*0.9,
+              child: TextField(
+                  controller: registrationNumberController,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      labelText: 'Registration Number',
+                      labelStyle: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                      ))),
+            ),
             Container(
-              height: 50,
-              width: 250,
+             height:MediaQuery.of(context).size.width*0.13,
+              width:  MediaQuery.of(context).size.width*0.35,
               decoration: BoxDecoration(
-                  color: Colors.black, borderRadius: BorderRadius.circular(50)),
+                  color: Colors.black, borderRadius: BorderRadius.circular(10)),
               child: TextButton(
                 onPressed: () {},
                 child: const Text(
-                  'register',
+                  'Register',
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
