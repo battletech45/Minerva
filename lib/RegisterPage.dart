@@ -25,12 +25,10 @@ class _RegisterPage extends State<RegisterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            SizedBox(
+            Image.asset(
+              'assets/logo.png',
               width: 200,
               height: 200,
-              child: Image.asset(
-                'assets/logo.png',
-              ),
             ),
              SizedBox(
               width:  MediaQuery.of(context).size.width*0.9,
