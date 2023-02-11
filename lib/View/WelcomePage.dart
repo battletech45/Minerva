@@ -53,7 +53,7 @@ class _MainPage extends State<MainPage> {
                   color: Colors.black, borderRadius: BorderRadius.circular(50)),
               child: TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginDemo()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                 },
                 child: const Text(
                   'Sign in',
