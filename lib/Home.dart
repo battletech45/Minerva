@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -38,35 +36,16 @@ class _Home extends State<Home> {
         drawer: Drawer(
           width: 300,
           backgroundColor: Colors.green,
-          child: SingleChildScrollView(
-            child: Container(
-
-              child: Column(
-                children: [
-                  Container(
-                    color: Colors.greenAccent,
-                    width:double.infinity,
-                    height: 200,
-                    padding: EdgeInsets.only(top:20.0),
-
+          child: ListView(
+            children: <Widget>[
+                  DrawerHeader(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          height: 70,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image:DecorationImage(image:
-                              AssetImage('assets/pp.png'),)
-                          ),
-                        ),
-                        Text("Baybars Arslan", style: TextStyle(color: Colors.white,fontSize: 20),
-                        )
-
+                        Icon(Icons.person, size: 50.0),
+                        Text('Metin Baybars Arslan', style: TextStyle(color: Colors.white,fontSize: 20))
                       ],
                     ),
-
                   ),
                   ListTile(
                     title: Text('HOME',style: TextStyle(fontSize: 24),textAlign: TextAlign.center,),
@@ -97,11 +76,7 @@ class _Home extends State<Home> {
                     title: Text('CONTENT',style: TextStyle(fontSize: 24),textAlign: TextAlign.center),
                     onTap: (){},
                   ),
-
                 ],
-              ),
-
-            ),
           ),
         )
     );
