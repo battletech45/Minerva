@@ -22,6 +22,7 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
         alignment: Alignment.center,
         color: Colors.deepOrange[300],
         child: ListView(
+          //Listview hareketleri ve appBar durusu tam hosuma gitmedi Ona bakalim
           shrinkWrap: true,
           physics: BouncingScrollPhysics(),
           children: <Widget>[
