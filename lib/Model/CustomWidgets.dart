@@ -63,3 +63,47 @@ class _customDrawerState extends State<customDrawer> {
     );
   }
 }
+
+class customAttendanceCard extends StatefulWidget {
+
+  String teacherName;
+
+  @override
+  State<customAttendanceCard> createState() => _customAttendanceCardState();
+
+  customAttendanceCard(this.teacherName);
+}
+
+class _customAttendanceCardState extends State<customAttendanceCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+      color: Colors.deepOrange[400],
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.person),
+            title: Text(widget.teacherName, textAlign: TextAlign.center),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text('Course Name', style: TextStyle(backgroundColor: Colors.deepOrange[500])),
+              Text('Attendance', style: TextStyle(backgroundColor: Colors.deepOrange[500]))
+            ],
+          ),
+          SizedBox(height: 10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text('01/03/2023', style: TextStyle(backgroundColor: Colors.grey)),
+              Text('2 Hours', style: TextStyle(backgroundColor: Colors.grey))
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
