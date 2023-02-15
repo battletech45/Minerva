@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'ProfilePage.dart';
+import 'WelcomePage.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -16,10 +18,14 @@ class _RegisterPage extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.deepOrange[300],
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_sharp),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> MainPage()));
+          },
+        ),
         elevation: 0,
-        centerTitle: true,
         backgroundColor: Colors.deepOrange[300],
-        title: Text('Register Page'),
       ),
       body: Center(
         child: Column(
@@ -116,7 +122,9 @@ class _RegisterPage extends State<RegisterPage> {
               decoration: BoxDecoration(
                   color: Colors.black, borderRadius: BorderRadius.circular(10)),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ProfilePage()));
+                },
                 child: const Text(
                   'Register',
                   style: TextStyle(color: Colors.white, fontSize: 25),
