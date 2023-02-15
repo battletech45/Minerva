@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
+import 'package:minerva/Model/CustomWidgets.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -19,14 +18,10 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
-
         centerTitle: true,
         title: Text('Chats', style: TextStyle(
           fontSize: 24, color: Colors.black, fontStyle: FontStyle.italic,),
-
         ),
-
         toolbarHeight: 150.0,
         elevation: 0.0,
         automaticallyImplyLeading: true,
@@ -36,7 +31,6 @@ class _ChatPageState extends State<ChatPage> {
               height: 150,
               width: 150),
         ],
-
       ),
       body: Container(
         alignment: Alignment.center,
@@ -66,7 +60,6 @@ class _ChatPageState extends State<ChatPage> {
                     onPressed: () {
                       if (_textEditingController.text.isNotEmpty) {
                         setState(() {
-
                           _message.add(BubbleMessage(
                               text: _textEditingController.text, isMe: true),
                           );
@@ -79,63 +72,8 @@ class _ChatPageState extends State<ChatPage> {
             ),
           ],
         ),
-
-
       ),
-      drawer: Drawer(
-        width: 300,
-        backgroundColor: Colors.green,
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(Icons.person, size: 50.0),
-                  Text('Metin Baybars Arslan',
-                      style: TextStyle(color: Colors.white, fontSize: 20))
-                ],
-              ),
-            ),
-            ListTile(
-              title: Text('HOME', style: TextStyle(fontSize: 24),
-                textAlign: TextAlign.center,),
-              onTap: () {},
-
-            ),
-            ListTile(
-              title: Text('PROFILE', style: TextStyle(fontSize: 24),
-                  textAlign: TextAlign.center),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text('GRADES', style: TextStyle(fontSize: 24),
-                  textAlign: TextAlign.center),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text('ATTENDANCE', style: TextStyle(fontSize: 24),
-                  textAlign: TextAlign.center),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text('CHAT', style: TextStyle(fontSize: 24),
-                  textAlign: TextAlign.center),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text('ANNOUNCEMENTS', style: TextStyle(fontSize: 24),
-                  textAlign: TextAlign.center),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text('CONTENT', style: TextStyle(fontSize: 24),
-                  textAlign: TextAlign.center),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+      drawer: customDrawer()
     );
   }
 }
@@ -153,7 +91,6 @@ class BubbleMessage extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-
         Container(
           margin: EdgeInsets.only(top:16,left: 200, right: 50),
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
@@ -166,7 +103,6 @@ class BubbleMessage extends StatelessWidget {
               bottomRight: isMe ? Radius.circular(0) : Radius.circular(16),
             ),
           ),
-
           child: Text(
             textAlign: TextAlign.center,
             text,
@@ -175,22 +111,12 @@ class BubbleMessage extends StatelessWidget {
           ),
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 1.0,horizontal: 1.0),
-
-
           child: CircleAvatar(backgroundColor: Colors.white,foregroundColor: Colors.black,
-
             child: Icon(Icons.man),maxRadius: 20.0,
-
           ),
-        )
-        ,
-
+        ),
       ],
     );
-
-
-
   }
-
 }
 
