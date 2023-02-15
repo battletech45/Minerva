@@ -13,6 +13,7 @@ class _HomePage extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0.0,
           automaticallyImplyLeading: true,
           backgroundColor: Colors.deepOrange[300],
         ),
