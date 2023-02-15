@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'WelcomePage.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -16,7 +18,10 @@ class _LoginPageState extends State<LoginPage> {
         elevation: 0,
         centerTitle: true,
         backgroundColor: Colors.deepOrange[300],
-        title: Text("Sign in Page"),
+        leading: IconButton(icon: Icon(Icons.arrow_back_sharp),
+        onPressed: () {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> MainPage()));
+        },)
       ),
       body: Center(
         child: Column(
