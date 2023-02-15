@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/View/AttendanceStudentPage.dart';
+import 'package:minerva/View/ChatPage.dart';
 import 'package:minerva/View/HomePage.dart';
 import 'package:minerva/View/ProfilePage.dart';
 
@@ -52,7 +53,9 @@ class _customDrawerState extends State<customDrawer> {
           ),
           ListTile(
             title: Text('CHAT',style: TextStyle(fontSize: 24),textAlign: TextAlign.center),
-            onTap: (){},
+            onTap: (){
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ChatPage()));
+            },
           ),
           ListTile(
             title: Text('ANNOUNCEMENTS',style: TextStyle(fontSize: 24),textAlign: TextAlign.center),
