@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class ProfilePage extends StatefulWidget {
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,16 +34,17 @@ class _ProfileState extends State<Profile> {
             ),
             Expanded(
               child: ListView(
-                      shrinkWrap: true,
-                      children: [
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  children: <Widget>[
                       Card(
-              margin: EdgeInsets.symmetric(horizontal: 18,vertical: 10),
-              child: ListTile(
-                leading: Icon(Icons.person_2_outlined),
-                title: Text("Name Surname"),
-                subtitle: Text("Yarkın Ata"),
-                 trailing: Icon(Icons.edit_attributes_rounded),
-              ),
+                        margin: EdgeInsets.symmetric(horizontal: 18,vertical: 10),
+                        child: ListTile(
+                          leading: Icon(Icons.person_2_outlined),
+                          title: Text("Name Surname"),
+                          subtitle: Text("Yarkın Ata"),
+                          trailing: Icon(Icons.edit_attributes_rounded),
+                        ),
                       ),
                       Card(
               margin: EdgeInsets.symmetric(horizontal: 18,vertical: 10),
