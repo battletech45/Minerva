@@ -35,7 +35,7 @@ class _MainPage extends State<MainPage> {
                   color: Colors.black, borderRadius: BorderRadius.circular(50)),
               child: TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> RegisterPage()));
                 },
                 child: const Text(
                   'Register',
@@ -53,17 +53,14 @@ class _MainPage extends State<MainPage> {
                   color: Colors.black, borderRadius: BorderRadius.circular(50)),
               child: TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> LoginPage()));
                 },
                 child: const Text(
                   'Sign in',
-
                   style: TextStyle(color: Colors.white, fontSize: 25),
-
                 ),
               ),
             ),
-
           ],
         ),
       ),
