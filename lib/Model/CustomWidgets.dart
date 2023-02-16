@@ -4,6 +4,7 @@ import 'package:minerva/View/AttendanceStudentPage.dart';
 import 'package:minerva/View/ChatPage.dart';
 import 'package:minerva/View/HomePage.dart';
 import 'package:minerva/View/ProfilePage.dart';
+import 'package:minerva/View/StudentGradePage.dart';
 
 import '../View/ContentStudentPage.dart';
 
@@ -44,7 +45,9 @@ class _customDrawerState extends State<customDrawer> {
           ),
           ListTile(
             title: Text('GRADES',style: TextStyle(fontSize: 24),textAlign: TextAlign.center),
-            onTap: (){},
+            onTap: (){
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> StudentGradePage()));
+            },
           ),
           ListTile(
             title: Text('ATTENDANCE',style: TextStyle(fontSize: 24),textAlign: TextAlign.center),
