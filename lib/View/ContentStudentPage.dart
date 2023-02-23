@@ -7,14 +7,18 @@ class ContentStudent extends StatefulWidget {
 }
 
 class _ContentStudentState extends State<ContentStudent> {
+  final Color mainColor= Color.fromRGBO(28, 88, 140, 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.deepOrange[300],
+     //   backgroundColor: Colors.deepOrange[300],
         appBar: AppBar(
           elevation: 0.0,
           automaticallyImplyLeading: true,
-          backgroundColor: Colors.deepOrange[300],
+          backgroundColor: mainColor,
+          title:  Text("MATERIALS",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
         body: Container(
           alignment: Alignment.center,
@@ -22,9 +26,6 @@ class _ContentStudentState extends State<ContentStudent> {
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
             children: [
-              Text("MATERIALS",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
               SizedBox(height: 15.0),
               Card(
                 margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
