@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
+import 'package:minerva/Model/ColorPlates.dart';
 
 class ContentStudent extends StatefulWidget {
   @override
@@ -7,18 +8,18 @@ class ContentStudent extends StatefulWidget {
 }
 
 class _ContentStudentState extends State<ContentStudent> {
-  final Color mainColor= Color.fromRGBO(28, 88, 140, 1);
+  // final Color mainColor = Color.fromRGBO(28, 88, 140, 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     //   backgroundColor: Colors.deepOrange[300],
+        //   backgroundColor: Colors.deepOrange[300],
         appBar: AppBar(
           elevation: 0.0,
           automaticallyImplyLeading: true,
-          backgroundColor: mainColor,
-          title:  Text("MATERIALS",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          backgroundColor: PageColors.mainColor,
+          centerTitle: true,
+          title: Text("MATERIALS",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
         body: Container(
           alignment: Alignment.center,
@@ -156,4 +157,3 @@ class _ContentStudentState extends State<ContentStudent> {
         drawer: customDrawer());
   }
 }
-

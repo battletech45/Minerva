@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
+import '../Model/ColorPlates.dart';
+
 class StudentGradePage extends StatefulWidget {
   const StudentGradePage({Key? key}) : super(key: key);
 
@@ -11,7 +13,7 @@ class StudentGradePage extends StatefulWidget {
 }
 
 class _StudentGradePage extends State<StudentGradePage> {
-  final Color mainColor= Color.fromRGBO(28, 88, 140, 1);
+  //final Color mainColor= Color.fromRGBO(28, 88, 140, 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,13 +21,10 @@ class _StudentGradePage extends State<StudentGradePage> {
         centerTitle: true,
         title: Text(
           'Grades',
-          style: TextStyle(color: Colors.black),
         ),
-
         elevation: 0.0,
         automaticallyImplyLeading: true,
-        backgroundColor: mainColor,
-
+        backgroundColor: PageColors.mainColor,
       ),
       body: Container(
         color: Colors.white,
@@ -38,17 +37,16 @@ class _StudentGradePage extends State<StudentGradePage> {
               Card(
                 elevation: 10.0,
                 shape: Border.all(
-                    width: 2,
-                    color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside,),
+                  width: 2,
+                  color: Colors.black54,
+                  strokeAlign: BorderSide.strokeAlignInside,
+                ),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: mainColor,
+                shadowColor: PageColors.mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Mathematics"),
-                  onTap: () {
-
-                  },
+                  onTap: () {},
                 ),
               ),
               Card(
@@ -58,7 +56,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: mainColor,
+                shadowColor: PageColors.mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Physics"),
@@ -72,7 +70,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: mainColor,
+                shadowColor: PageColors.mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Chemistry"),
@@ -86,7 +84,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: mainColor,
+                shadowColor: PageColors.mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Biology"),
@@ -100,7 +98,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: mainColor,
+                shadowColor: PageColors.mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Literature"),
@@ -114,7 +112,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: mainColor,
+                shadowColor: PageColors.mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("History"),
@@ -128,7 +126,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: mainColor,
+                shadowColor: PageColors.mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("German"),
@@ -142,7 +140,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: mainColor,
+                shadowColor: PageColors.mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Geography"),
@@ -156,7 +154,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: mainColor,
+                shadowColor: PageColors.mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("English"),
@@ -170,7 +168,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: mainColor,
+                shadowColor: PageColors.mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Turkish"),
