@@ -11,6 +11,7 @@ class StudentGradePage extends StatefulWidget {
 }
 
 class _StudentGradePage extends State<StudentGradePage> {
+  final Color mainColor= Color.fromRGBO(28, 88, 140, 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,18 +21,14 @@ class _StudentGradePage extends State<StudentGradePage> {
           'Grades',
           style: TextStyle(color: Colors.black),
         ),
-        toolbarHeight: 100.0,
+
         elevation: 0.0,
         automaticallyImplyLeading: true,
-        backgroundColor: Colors.deepOrange[300],
-        actions: <Widget>[
-          Image.asset('assets/logo.png', alignment: Alignment.centerRight,
-              height: 150,
-              width: 150),
-        ],
+        backgroundColor: mainColor,
+
       ),
       body: Container(
-        color: Colors.deepOrange[300],
+        color: Colors.white,
         alignment: Alignment.center,
         padding: EdgeInsets.all(16.0),
         child: ListView(
@@ -43,9 +40,9 @@ class _StudentGradePage extends State<StudentGradePage> {
                 shape: Border.all(
                     width: 2,
                     color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside),
+                    strokeAlign: BorderSide.strokeAlignInside,),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: Colors.black,
+                shadowColor: mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Mathematics"),
@@ -61,7 +58,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: Colors.black,
+                shadowColor: mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Physics"),
@@ -75,7 +72,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: Colors.black,
+                shadowColor: mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Chemistry"),
@@ -89,7 +86,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: Colors.black,
+                shadowColor: mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Biology"),
@@ -103,7 +100,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: Colors.black,
+                shadowColor: mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Literature"),
@@ -117,7 +114,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: Colors.black,
+                shadowColor: mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("History"),
@@ -131,7 +128,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: Colors.black,
+                shadowColor: mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("German"),
@@ -145,7 +142,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: Colors.black,
+                shadowColor: mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Geography"),
@@ -159,7 +156,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: Colors.black,
+                shadowColor: mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("English"),
@@ -173,7 +170,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                     color: Colors.black54,
                     strokeAlign: BorderSide.strokeAlignInside),
                 margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: Colors.black,
+                shadowColor: mainColor,
                 child: ListTile(
                   trailing: Icon(Icons.grade_sharp, color: Colors.pink),
                   title: Text("Turkish"),

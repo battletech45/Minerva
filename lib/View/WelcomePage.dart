@@ -11,7 +11,7 @@ class _MainPage extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepOrange[300],
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -52,6 +52,7 @@ class _MainPage extends State<MainPage> {
               decoration: BoxDecoration(
                   color: Colors.black, borderRadius: BorderRadius.circular(50)),
               child: TextButton(
+
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> LoginPage()));
                 },

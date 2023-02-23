@@ -13,11 +13,13 @@ class _RegisterPage extends State<RegisterPage> {
  final registrationNumberController= TextEditingController();
  final TCController= TextEditingController();
  final schoolNumberController= TextEditingController();
+ final Color mainColor= Color.fromRGBO(28, 88, 140, 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepOrange[300],
+      backgroundColor: Colors.white,
       appBar: AppBar(
+
         leading: IconButton(
           icon: Icon(Icons.arrow_back_sharp),
           onPressed: () {
@@ -25,7 +27,8 @@ class _RegisterPage extends State<RegisterPage> {
           },
         ),
         elevation: 0,
-        backgroundColor: Colors.deepOrange[300],
+        centerTitle: true,
+        backgroundColor: Color.fromRGBO(28, 88, 140, 1),
       ),
       body: Center(
         child: Column(
@@ -38,19 +41,27 @@ class _RegisterPage extends State<RegisterPage> {
             ),
              SizedBox(
               width:  MediaQuery.of(context).size.width*0.9,
+
               child: TextField(
                 controller: TCController,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
+                    suffixIcon: Icon(Icons.perm_identity),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
                       labelText: 'TC',
                       labelStyle: TextStyle(
                         fontStyle: FontStyle.italic,
                         color: Colors.black,
                       ))),
+            ),
+            SizedBox(
+              height: 5,
             ),
             SizedBox( 
               width:  MediaQuery.of(context).size.width*0.9,
@@ -58,10 +69,14 @@ class _RegisterPage extends State<RegisterPage> {
                   controller: schoolNumberController,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.school),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
                       labelText: 'School Number',
                       labelStyle: TextStyle(
                         fontStyle: FontStyle.italic,
@@ -69,15 +84,22 @@ class _RegisterPage extends State<RegisterPage> {
                       ))),
             ),
             SizedBox(
+              height: 5,
+            ),
+            SizedBox(
               width:  MediaQuery.of(context).size.width*0.9,
               child: TextField(
                   controller: emailController,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.email_outlined),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
                       labelText: 'Email',
                       labelStyle: TextStyle(
                         fontStyle: FontStyle.italic,
@@ -85,15 +107,22 @@ class _RegisterPage extends State<RegisterPage> {
                       ))),
             ),
             SizedBox(
+              height: 5,
+            ),
+            SizedBox(
                width:  MediaQuery.of(context).size.width*0.9,
               child: TextField(
                   controller: passwordController,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.password),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
                       labelText: 'Password',
                       labelStyle: TextStyle(
                         fontStyle: FontStyle.italic,
@@ -101,26 +130,37 @@ class _RegisterPage extends State<RegisterPage> {
                       ))),
             ),
             SizedBox(
+              height: 5,
+            ),
+            SizedBox(
                width:  MediaQuery.of(context).size.width*0.9,
               child: TextField(
                   controller: registrationNumberController,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.app_registration),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
                       labelText: 'Registration Number',
                       labelStyle: TextStyle(
                         fontStyle: FontStyle.italic,
                         color: Colors.black,
                       ))),
             ),
+            SizedBox(
+              height: 15,
+            ),
             Container(
-             height:MediaQuery.of(context).size.width*0.13,
-              width:  MediaQuery.of(context).size.width*0.35,
+              height:MediaQuery.of(context).size.width*0.13,
+              width:  MediaQuery.of(context).size.width*0.5,
               decoration: BoxDecoration(
-                  color: Colors.black, borderRadius: BorderRadius.circular(10)),
+              color: mainColor, borderRadius: BorderRadius.circular(10)),
+
               child: TextButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ProfilePage()));

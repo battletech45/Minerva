@@ -14,20 +14,27 @@ class customDrawer extends StatefulWidget {
 }
 
 class _customDrawerState extends State<customDrawer> {
+  final Color mainColor= Color.fromRGBO(28, 88, 140, 1);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       width: 300,
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.white,
       child: ListView(
         children: <Widget>[
           DrawerHeader(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Icon(Icons.person, size: 50.0),
-                Text('Metin Baybars Arslan', style: TextStyle(color: Colors.white,fontSize: 20))
-              ],
+            padding: EdgeInsets.all(0),
+            child: Container(
+              color: mainColor,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+
+                  Icon(Icons.person, size: 50.0),
+                  Text('Metin Baybars Arslan', style: TextStyle(color: Colors.black,fontSize: 20))
+                ],
+              ),
             ),
           ),
           ListTile(
