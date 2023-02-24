@@ -5,7 +5,7 @@ class AnnouncementStudentPage extends StatefulWidget {
   @override
   State<AnnouncementStudentPage> createState() => _AnnouncementStudentPageState();
 }
-
+// merhabalar
 class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
   @override
   Widget build(BuildContext context) {
