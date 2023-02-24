@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Model/ColorPlates.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
 class AnnouncementStudentPage extends StatefulWidget {
@@ -11,27 +12,23 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 150.0,
         elevation: 0.0,
         automaticallyImplyLeading: true,
-        backgroundColor: Colors.deepOrange[300],
-        actions: <Widget>[
-          Image.asset('assets/logo.png', alignment: Alignment.centerRight, height: 150, width: 150),
-        ],
+        backgroundColor: PageColors.mainColor,
+        centerTitle: true,
+        title: Text("ANNOUNCEMENTS", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ),
       body: Container(
         alignment: Alignment.center,
-        color: Colors.deepOrange[300],
         child: ListView(
-          //Listview hareketleri ve appBar durusu tam hosuma gitmedi Ona bakalim
           shrinkWrap: true,
           physics: BouncingScrollPhysics(),
           children: <Widget>[
-            Text('Announcements', textAlign: TextAlign.center, style: TextStyle(fontSize: 25.0, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold)),
             SizedBox(height: 30.0),
             Card(
+              color: PageColors.secondaryColor,
+              elevation: 10.0,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -43,8 +40,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
+              elevation: 10.0,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -56,8 +54,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
+              elevation: 10.0,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -69,8 +68,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
+              elevation: 10.0,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -82,8 +82,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
+              elevation: 10.0,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -95,8 +96,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
+              elevation: 10.0,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -108,8 +110,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
+              elevation: 10.0,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -121,8 +124,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
+              elevation: 10.0,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -134,8 +138,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
+              elevation: 10.0,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -147,8 +152,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
+              elevation: 10.0,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -160,8 +166,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
+              elevation: 10.0,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -173,8 +180,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
+              elevation: 10.0,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -186,8 +194,9 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
                 ],
               ),
             ),Card(
+              color: PageColors.secondaryColor,
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.deepOrange[400],
+              elevation: 10.0,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
