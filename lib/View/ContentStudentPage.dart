@@ -21,139 +21,246 @@ class _ContentStudentState extends State<ContentStudent> {
           title: Text("MATERIALS",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
-        body: Container(
-          alignment: Alignment.center,
-          child: ListView(
-            shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
-            children: [
-              SizedBox(height: 15.0),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: ListTile(
-                  leading: Icon(Icons.class_),
-                  title: Text("Math",
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-                  onTap: () {},
-                ),
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: ListTile(
-                  leading: Icon(Icons.class_),
-                  title: Text(
-                    "Chemistry",
+        body: GridView.count(
+          crossAxisCount: 2,
+          padding: EdgeInsets.all(15),
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          physics: BouncingScrollPhysics(),
+          shrinkWrap: true,
+          children: [
+            Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: ListTile(
+                //leading: Icon(Icons.class_),
+                title: Text("MATH",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                onTap: () {},
               ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: ListTile(
-                  leading: Icon(Icons.class_),
-                  title: Text(
-                    "Physics",
+            ),
+             Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: ListTile(
+                //leading: Icon(Icons.class_),
+                title: Text("BIOLOGY",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                onTap: () {},
               ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: ListTile(
-                  leading: Icon(Icons.class_),
-                  title: Text(
-                    "History",
+            ),
+             Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: ListTile(
+                //leading: Icon(Icons.class_),
+                title: Text("PHYSICS",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                onTap: () {},
               ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: ListTile(
-                  leading: Icon(Icons.class_),
-                  title: Text(
-                    "Biology",
+            ),
+             Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: ListTile(
+                //leading: Icon(Icons.class_),
+                title: Text("TURKISH",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                onTap: () {},
               ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: ListTile(
-                  leading: Icon(Icons.class_),
-                  title: Text(
-                    "Turkish",
+            ),
+             Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: ListTile(
+                //leading: Icon(Icons.class_),
+                title: Text("ENGLISH",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                onTap: () {},
               ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: ListTile(
-                  leading: Icon(Icons.class_),
-                  title: Text(
-                    "English",
+            ),
+             Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: ListTile(
+                //leading: Icon(Icons.class_),
+                title: Text("GERMAN",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                onTap: () {},
               ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: ListTile(
-                  leading: Icon(Icons.class_),
-                  title: Text(
-                    "German",
+            ),
+             Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: ListTile(
+                //leading: Icon(Icons.class_),
+                title: Text("CHEMISTRY",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                onTap: () {},
               ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: ListTile(
-                  leading: Icon(Icons.class_),
-                  title: Text(
-                    "Literature",
+            ),
+             Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: ListTile(
+                //leading: Icon(Icons.class_),
+                title: Text("LITERATURE",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                onTap: () {},
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         drawer: customDrawer());
+  }
+}
+//Eski Content sayfası görünmü
+class MaterialList extends StatelessWidget {
+  const MaterialList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      child: ListView(
+        shrinkWrap: true,
+        physics: BouncingScrollPhysics(),
+        children: [
+          SizedBox(height: 15.0),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: ListTile(
+              leading: Icon(Icons.class_),
+              title: Text("Math",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+              onTap: () {},
+            ),
+          ),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: ListTile(
+              leading: Icon(Icons.class_),
+              title: Text(
+                "Chemistry",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: ListTile(
+              leading: Icon(Icons.class_),
+              title: Text(
+                "Physics",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: ListTile(
+              leading: Icon(Icons.class_),
+              title: Text(
+                "History",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: ListTile(
+              leading: Icon(Icons.class_),
+              title: Text(
+                "Biology",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: ListTile(
+              leading: Icon(Icons.class_),
+              title: Text(
+                "Turkish",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: ListTile(
+              leading: Icon(Icons.class_),
+              title: Text(
+                "English",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: ListTile(
+              leading: Icon(Icons.class_),
+              title: Text(
+                "German",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: ListTile(
+              leading: Icon(Icons.class_),
+              title: Text(
+                "Literature",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
