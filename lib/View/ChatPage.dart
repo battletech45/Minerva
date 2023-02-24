@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Model/ColorPlates.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
 class ChatPage extends StatefulWidget {
@@ -12,31 +13,20 @@ class _ChatPageState extends State<ChatPage> {
   List<BubbleMessage> _message = [];
   TextEditingController _textEditingController = TextEditingController();
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Chats', style: TextStyle(
-          fontSize: 24, color: Colors.black, fontStyle: FontStyle.italic,),
-        ),
-        toolbarHeight: 150.0,
+        title: Text('CHATS', style: TextStyle(fontSize: 24, fontStyle: FontStyle.italic)),
         elevation: 0.0,
         automaticallyImplyLeading: true,
-        backgroundColor: Colors.deepOrange[300],
-        actions: <Widget>[
-          Image.asset('assets/logo.png', alignment: Alignment.centerRight,
-              height: 150,
-              width: 150),
-        ],
+        backgroundColor: PageColors.mainColor,
       ),
       body: Container(
         alignment: Alignment.center,
-        color: Colors.deepOrange[300],
         child: Column(
-          children: [
+          children: <Widget>[
             Expanded(
               child: ListView.builder(
                 itemCount: _message.length,
@@ -52,8 +42,7 @@ class _ChatPageState extends State<ChatPage> {
                   Expanded(
                     child: TextField(
                       controller: _textEditingController,
-                      decoration: InputDecoration(
-                          hintText: 'Type your message...'),
+                      decoration: InputDecoration(hintText: 'Type your message...'),
                     ),
                   ),
                   IconButton(icon: Icon(Icons.send),
