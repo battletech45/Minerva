@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Model/ColorPlates.dart';
 
 import '../Model/CustomWidgets.dart';
 
@@ -15,23 +16,13 @@ class _HomePage extends State<HomePage> {
         appBar: AppBar(
           elevation: 0.0,
           automaticallyImplyLeading: true,
-          backgroundColor: Colors.deepOrange[300],
+          backgroundColor: PageColors.mainColor,
+          centerTitle: true,
+          title: Text("HOME", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
-        backgroundColor: Colors.deepOrange[300],
         body: Center(
           child: Column(
-
             children: <Widget> [
-              Align(
-                alignment: Alignment.topRight,
-                child:SizedBox(
-                  child:Image.asset('assets/logo.png') ,
-
-                  height: 150,
-                  width: 150,
-                ),
-              )
-
             ],
           ),
         ),
