@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Model/ColorPlates.dart';
 import 'ProfilePage.dart';
 import 'WelcomePage.dart';
 
@@ -13,13 +14,12 @@ class _RegisterPage extends State<RegisterPage> {
  final registrationNumberController= TextEditingController();
  final TCController= TextEditingController();
  final schoolNumberController= TextEditingController();
- final Color mainColor= Color.fromRGBO(28, 88, 140, 1);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-
         leading: IconButton(
           icon: Icon(Icons.arrow_back_sharp),
           onPressed: () {
@@ -28,20 +28,17 @@ class _RegisterPage extends State<RegisterPage> {
         ),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(28, 88, 140, 1),
+        backgroundColor: PageColors.mainColor,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 80.0),
           children: <Widget>[
             Image.asset(
               'assets/logo.png',
-              width: 200,
-              height: 200,
             ),
              SizedBox(
               width:  MediaQuery.of(context).size.width*0.9,
-
               child: TextField(
                 controller: TCController,
                   textAlign: TextAlign.center,
@@ -60,9 +57,7 @@ class _RegisterPage extends State<RegisterPage> {
                         color: Colors.black,
                       ))),
             ),
-            SizedBox(
-              height: 5,
-            ),
+            SizedBox(height: 20.0),
             SizedBox( 
               width:  MediaQuery.of(context).size.width*0.9,
               child: TextField(
@@ -83,9 +78,7 @@ class _RegisterPage extends State<RegisterPage> {
                         color: Colors.black,
                       ))),
             ),
-            SizedBox(
-              height: 5,
-            ),
+            SizedBox(height: 20.0),
             SizedBox(
               width:  MediaQuery.of(context).size.width*0.9,
               child: TextField(
@@ -106,9 +99,7 @@ class _RegisterPage extends State<RegisterPage> {
                         color: Colors.black,
                       ))),
             ),
-            SizedBox(
-              height: 5,
-            ),
+            SizedBox(height: 20.0),
             SizedBox(
                width:  MediaQuery.of(context).size.width*0.9,
               child: TextField(
@@ -129,9 +120,7 @@ class _RegisterPage extends State<RegisterPage> {
                         color: Colors.black,
                       ))),
             ),
-            SizedBox(
-              height: 5,
-            ),
+            SizedBox(height: 20.0),
             SizedBox(
                width:  MediaQuery.of(context).size.width*0.9,
               child: TextField(
@@ -152,14 +141,12 @@ class _RegisterPage extends State<RegisterPage> {
                         color: Colors.black,
                       ))),
             ),
-            SizedBox(
-              height: 15,
-            ),
+            SizedBox(height: 20.0),
             Container(
               height:MediaQuery.of(context).size.width*0.13,
               width:  MediaQuery.of(context).size.width*0.5,
               decoration: BoxDecoration(
-              color: mainColor, borderRadius: BorderRadius.circular(10)),
+              color: PageColors.mainColor, borderRadius: BorderRadius.circular(10)),
 
               child: TextButton(
                 onPressed: () {

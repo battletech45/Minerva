@@ -9,7 +9,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  //final Color mainColor = Color.fromRGBO(28, 88, 140, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +18,13 @@ class _ProfilePageState extends State<ProfilePage> {
           automaticallyImplyLeading: true,
           backgroundColor: PageColors.mainColor,
           centerTitle: true,
-          title: Text("PROFILE",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          title: Text("PROFILE", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
         body: Container(
-          // color: Colors.deepOrange[300],
           alignment: Alignment.center,
-          child: Column(children: [
-            SizedBox(
-              height: 20,
-            ),
+          child: Column(
+              children: <Widget>[
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -77,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Container(
                         height: 65,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Icon(Icons.person_2),
                             Text(
@@ -103,7 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Container(
                           height: 65,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Icon(Icons.numbers_rounded),
                               Text(
@@ -128,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Container(
                           height: 65,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Icon(Icons.cabin_rounded),
                               Text(
@@ -153,7 +149,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Container(
                           height: 65,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Icon(Icons.school_rounded),
                               Text(
@@ -178,13 +174,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Container(
                           height: 65,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Icon(Icons.email_rounded),
                               Text(
                                 "Email",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                               Text(
                                 "student@example.com",
