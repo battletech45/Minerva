@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/ColorPlates.dart';
 import 'package:minerva/View/AnnouncementStudentPage.dart';
+import 'package:minerva/View/AnnouncementTeacherPage.dart';
 import 'package:minerva/View/AttendanceStudentPage.dart';
 import 'package:minerva/View/ChatPage.dart';
 import 'package:minerva/View/HomePage.dart';
 import 'package:minerva/View/ProfilePage.dart';
 import 'package:minerva/View/StudentGradePage.dart';
 
+import '../View/AttendanceTeacherPage.dart';
 import '../View/ContentStudentPage.dart';
 
 class customDrawer extends StatefulWidget {
@@ -15,7 +17,6 @@ class customDrawer extends StatefulWidget {
 }
 
 class _customDrawerState extends State<customDrawer> {
-  final Color mainColor= Color.fromRGBO(28, 88, 140, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +28,10 @@ class _customDrawerState extends State<customDrawer> {
           DrawerHeader(
             padding: EdgeInsets.all(0),
             child: Container(
-              color: mainColor,
+              color: PageColors.thirdColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-
                   Icon(Icons.person, size: 50.0),
                   Text('Metin Baybars Arslan', style: TextStyle(color: Colors.black,fontSize: 20))
                 ],
@@ -60,7 +60,7 @@ class _customDrawerState extends State<customDrawer> {
           ListTile(
             title: Text('ATTENDANCE',style: TextStyle(fontSize: 24),textAlign: TextAlign.center),
             onTap: (){
-               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> AttendanceStudentPage()));
+               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> AttendanceTeacherPage()));
             },
           ),
           ListTile(
@@ -72,7 +72,7 @@ class _customDrawerState extends State<customDrawer> {
           ListTile(
             title: Text('ANNOUNCEMENTS',style: TextStyle(fontSize: 24),textAlign: TextAlign.center),
             onTap: (){
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> AnnouncementStudentPage()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> AnnouncementTeacherPage()));
             },
           ),
           ListTile(
