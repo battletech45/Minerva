@@ -21,6 +21,7 @@ class _customDrawerState extends State<customDrawer> {
     return Drawer(
       width: 300,
       backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       child: ListView(
         children: <Widget>[
           DrawerHeader(
