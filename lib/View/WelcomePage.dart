@@ -16,7 +16,7 @@ class _MainPage extends State<MainPage> {
         child: Column(
           children: <Widget>[
             Padding(
-                padding: EdgeInsets.only(top: 60.0),
+                padding: EdgeInsets.only(top: 110.0),
                 child: Center(
                     child: Container(
                         width: 300,
@@ -32,7 +32,7 @@ class _MainPage extends State<MainPage> {
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.black, borderRadius: BorderRadius.circular(50)),
+                  color: Colors.black, borderRadius: BorderRadius.circular(10)),
               child: TextButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> RegisterPage()));
@@ -50,7 +50,7 @@ class _MainPage extends State<MainPage> {
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.black, borderRadius: BorderRadius.circular(50)),
+                  color: Colors.black, borderRadius: BorderRadius.circular(10)),
               child: TextButton(
 
                 onPressed: () {

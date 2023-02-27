@@ -36,8 +36,8 @@ class _RegisterPage extends State<RegisterPage> {
           children: <Widget>[
             Image.asset(
               'assets/logo.png',
-              width:150 ,
-              height:150 ,
+              width:120 ,
+              height:120 ,
             ),
              SizedBox(
               width:  MediaQuery.of(context).size.width*0.9,

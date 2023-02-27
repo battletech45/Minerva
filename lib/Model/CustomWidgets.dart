@@ -110,10 +110,12 @@ class _customDrawerState extends State<customDrawer> {
                   MaterialPageRoute(builder: (context) => ContentStudent()));
             },
           ),
+          SizedBox(height:15),
+          Divider(color: PageColors.secondaryColor,),
           ListTile(
-            leading: Icon(Icons.logout, size: 20, color: Colors.black54),
+            leading: Icon(Icons.logout, size: 30, color: Colors.black54),
             title: Text('SIGN OUT',
-                style: TextStyle(fontSize: 18), textAlign: TextAlign.justify),
+                style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {},
           ),
         ],
