@@ -30,7 +30,9 @@ class _ContentStudentState extends State<ContentStudent> {
           shrinkWrap: true,
           children: [
             Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              elevation: 6,
+              shape: PageColors.mainBorder,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
                 //leading: Icon(Icons.class_),
                 title: Text("MATH",
@@ -40,8 +42,10 @@ class _ContentStudentState extends State<ContentStudent> {
                 onTap: () {},
               ),
             ),
-             Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            Card(
+              shape: PageColors.mainBorder,
+              elevation: 6,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
                 //leading: Icon(Icons.class_),
                 title: Text("BIOLOGY",
@@ -51,8 +55,10 @@ class _ContentStudentState extends State<ContentStudent> {
                 onTap: () {},
               ),
             ),
-             Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            Card(
+              shape: PageColors.mainBorder,
+              elevation: 6,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
                 //leading: Icon(Icons.class_),
                 title: Text("PHYSICS",
@@ -62,8 +68,10 @@ class _ContentStudentState extends State<ContentStudent> {
                 onTap: () {},
               ),
             ),
-             Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            Card(
+              shape: PageColors.mainBorder,
+              elevation: 6,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
                 //leading: Icon(Icons.class_),
                 title: Text("TURKISH",
@@ -73,8 +81,10 @@ class _ContentStudentState extends State<ContentStudent> {
                 onTap: () {},
               ),
             ),
-             Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            Card(
+              shape: PageColors.mainBorder,
+              elevation: 6,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
                 //leading: Icon(Icons.class_),
                 title: Text("ENGLISH",
@@ -84,8 +94,10 @@ class _ContentStudentState extends State<ContentStudent> {
                 onTap: () {},
               ),
             ),
-             Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            Card(
+              shape: PageColors.mainBorder,
+              elevation: 6,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
                 //leading: Icon(Icons.class_),
                 title: Text("GERMAN",
@@ -95,8 +107,10 @@ class _ContentStudentState extends State<ContentStudent> {
                 onTap: () {},
               ),
             ),
-             Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            Card(
+              shape: PageColors.mainBorder,
+              elevation: 6,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
                 //leading: Icon(Icons.class_),
                 title: Text("CHEMISTRY",
@@ -106,8 +120,10 @@ class _ContentStudentState extends State<ContentStudent> {
                 onTap: () {},
               ),
             ),
-             Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            Card(
+              shape: PageColors.mainBorder,
+              elevation: 6,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
                 //leading: Icon(Icons.class_),
                 title: Text("LITERATURE",
@@ -122,6 +138,7 @@ class _ContentStudentState extends State<ContentStudent> {
         drawer: customDrawer());
   }
 }
+
 //Eski Content sayfası görünmü
 class MaterialList extends StatelessWidget {
   const MaterialList({
