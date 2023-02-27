@@ -32,10 +32,12 @@ class _RegisterPage extends State<RegisterPage> {
       ),
       body: Center(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 80.0),
+          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
           children: <Widget>[
             Image.asset(
               'assets/logo.png',
+              width:150 ,
+              height:150 ,
             ),
              SizedBox(
               width:  MediaQuery.of(context).size.width*0.9,
