@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'ProfilePage.dart';
 import 'WelcomePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,6 +13,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final schoolNumberController = TextEditingController();
   final passwordController = TextEditingController();
+  FirebaseAuth authLog = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +97,9 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                     color: Color.fromRGBO(28, 88, 140, 1), borderRadius: BorderRadius.circular(10)),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    signIn();
+                  },
                   child: const Text(
                     'Sign in',
                     style: TextStyle(color: Colors.white, fontSize: 25),
@@ -102,6 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
               TextButton(
+
                 onPressed: () {},
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -125,4 +134,22 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+  Future signIn() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email:schoolNumberController.text.trim(),
+          password:passwordController.text.trim(),
+      );
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ProfilePage()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+
+  }
 }
+
+

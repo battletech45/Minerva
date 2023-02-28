@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'ProfilePage.dart';
 import 'WelcomePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _RegisterPage extends State<RegisterPage> {
  final registrationNumberController= TextEditingController();
  final TCController= TextEditingController();
  final schoolNumberController= TextEditingController();
+ FirebaseAuth authReg = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -105,10 +107,12 @@ class _RegisterPage extends State<RegisterPage> {
             SizedBox(
                width:  MediaQuery.of(context).size.width*0.9,
               child: TextField(
+                obscureText: true,
                   controller: passwordController,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                       suffixIcon: Icon(Icons.password),
+
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
@@ -117,6 +121,7 @@ class _RegisterPage extends State<RegisterPage> {
                           borderSide: BorderSide(
                               width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
                       labelText: 'Password',
+
                       labelStyle: TextStyle(
                         fontStyle: FontStyle.italic,
                         color: Colors.black,
@@ -152,7 +157,8 @@ class _RegisterPage extends State<RegisterPage> {
 
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ProfilePage()));
+                  register();
+
                 },
                 child: const Text(
                   'Register',
@@ -165,4 +171,23 @@ class _RegisterPage extends State<RegisterPage> {
       ),
     );
   }
+  Future register () async{
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+      );
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ProfilePage()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }
+
+

@@ -11,6 +11,7 @@ import 'package:minerva/View/StudentGradePage.dart';
 import 'package:minerva/View/WelcomePage.dart';
 import '../View/AttendanceTeacherPage.dart';
 import '../View/ContentStudentPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class customDrawer extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class customDrawer extends StatefulWidget {
 }
 
 class _customDrawerState extends State<customDrawer> {
+  FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -119,13 +121,19 @@ class _customDrawerState extends State<customDrawer> {
             title: Text('Sign Out',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => MainPage()));
+              signout();
+
             },
           ),
         ],
       ),
     );
+  }
+  Future signout() async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => MainPage()));
+
   }
 }
 
