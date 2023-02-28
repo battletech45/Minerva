@@ -6,7 +6,9 @@ import 'package:minerva/View/AttendanceStudentPage.dart';
 import 'package:minerva/View/ChatPage.dart';
 import 'package:minerva/View/HomePage.dart';
 import 'package:minerva/View/ProfilePage.dart';
+import 'package:minerva/View/RegisterPage.dart';
 import 'package:minerva/View/StudentGradePage.dart';
+import 'package:minerva/View/WelcomePage.dart';
 import '../View/AttendanceTeacherPage.dart';
 import '../View/ContentStudentPage.dart';
 
@@ -26,7 +28,7 @@ class _customDrawerState extends State<customDrawer> {
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-              color: PageColors.mainColor,
+              color: PageColors.thirdColor,
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(30)),
             ),
             child: Column(
@@ -116,7 +118,10 @@ class _customDrawerState extends State<customDrawer> {
             leading: Icon(Icons.logout, size: 30, color: Colors.black54),
             title: Text('Sign Out',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => MainPage()));
+            },
           ),
         ],
       ),
