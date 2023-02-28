@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/View/ForgotPassword.dart';
 import 'ProfilePage.dart';
 import 'WelcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -111,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextButton(
 
-                onPressed: () {},
+                onPressed: () {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ForgotPassword()));},
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: const [
