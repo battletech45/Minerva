@@ -39,7 +39,7 @@ class _ContentStudentState extends State<ContentStudent> {
                 title: Text("MATH",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {},
               ),
             ),
@@ -52,7 +52,7 @@ class _ContentStudentState extends State<ContentStudent> {
                 title: Text("BIOLOGY",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {},
               ),
             ),
@@ -65,7 +65,7 @@ class _ContentStudentState extends State<ContentStudent> {
                 title: Text("PHYSICS",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {},
               ),
             ),
@@ -78,7 +78,7 @@ class _ContentStudentState extends State<ContentStudent> {
                 title: Text("TURKISH",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {},
               ),
             ),
@@ -91,7 +91,7 @@ class _ContentStudentState extends State<ContentStudent> {
                 title: Text("ENGLISH",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {},
               ),
             ),
@@ -104,7 +104,7 @@ class _ContentStudentState extends State<ContentStudent> {
                 title: Text("GERMAN",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {},
               ),
             ),
@@ -117,7 +117,7 @@ class _ContentStudentState extends State<ContentStudent> {
                 title: Text("CHEMISTRY",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {},
               ),
             ),
@@ -130,7 +130,33 @@ class _ContentStudentState extends State<ContentStudent> {
                 title: Text("LITERATURE",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+                onTap: () {},
+              ),
+            ),
+            Card(
+              shape: CustomBorders.mainBorder,
+              elevation: 6,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: ListTile(
+                //leading: Icon(Icons.class_),
+                title: Text("HISTORY",
+                    textAlign: TextAlign.center,
+                    style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+                onTap: () {},
+              ),
+            ),
+            Card(
+              shape: CustomBorders.mainBorder,
+              elevation: 6,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              child: ListTile(
+                //leading: Icon(Icons.class_),
+                title: Text("GEOGRAPHY",
+                    textAlign: TextAlign.center,
+                    style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {},
               ),
             ),
