@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minerva/Model/ColorPlates.dart';
+import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
 class AttendanceTeacherPage extends StatefulWidget {

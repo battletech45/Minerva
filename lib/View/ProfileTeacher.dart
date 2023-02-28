@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
-import '../Model/ColorPlates.dart';
+import '../Model/WidgetProperties.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

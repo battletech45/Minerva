@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
-import 'package:minerva/Model/ColorPlates.dart';
+import '../Model/WidgetProperties.dart';
+
 
 class ContentStudent extends StatefulWidget {
   @override

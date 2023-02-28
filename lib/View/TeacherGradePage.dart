@@ -2,7 +2,7 @@
 
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:flutter/material.dart';
-import '../Model/ColorPlates.dart';
+import '../Model/WidgetProperties.dart';
 
 class TeacherGradePage extends StatefulWidget {
   const TeacherGradePage({Key? key}) : super(key: key);

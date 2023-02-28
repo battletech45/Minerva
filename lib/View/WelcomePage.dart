@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Model/WidgetProperties.dart';
 import 'LoginPage.dart';
 import 'RegisterPage.dart';
 
@@ -32,7 +33,7 @@ class _MainPage extends State<MainPage> {
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.black, borderRadius: BorderRadius.circular(10)),
+                  color: PageColors.mainColor, borderRadius: BorderRadius.circular(10)),
               child: TextButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> RegisterPage()));
@@ -50,7 +51,7 @@ class _MainPage extends State<MainPage> {
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.black, borderRadius: BorderRadius.circular(10)),
+                  color: PageColors.mainColor, borderRadius: BorderRadius.circular(10)),
               child: TextButton(
 
                 onPressed: () {

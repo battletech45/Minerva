@@ -1,9 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
-import '../Model/ColorPlates.dart';
 
 class StudentGradePage extends StatefulWidget {
   const StudentGradePage({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minerva/Model/ColorPlates.dart';
+import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/AnnouncementStudentPage.dart';
 import 'package:minerva/View/AnnouncementTeacherPage.dart';
 import 'package:minerva/View/AttendanceStudentPage.dart';
@@ -26,7 +26,7 @@ class _customDrawerState extends State<customDrawer> {
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-              color: PageColors.thirdColor,
+              color: PageColors.mainColor,
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(30)),
             ),
             child: Column(
