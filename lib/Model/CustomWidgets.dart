@@ -48,7 +48,7 @@ class _customDrawerState extends State<customDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.house, size: 30, color: Colors.black54),
-            title: Text('HOME',
+            title: Text('Home',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
@@ -57,7 +57,7 @@ class _customDrawerState extends State<customDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.person_2, size: 30, color: Colors.black54),
-            title: Text('PROFILE',
+            title: Text('Profile',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
@@ -66,7 +66,7 @@ class _customDrawerState extends State<customDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.grade_sharp, size: 30, color: Colors.black54),
-            title: Text('GRADES',
+            title: Text('Grades',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
@@ -76,7 +76,7 @@ class _customDrawerState extends State<customDrawer> {
           ListTile(
             leading: Icon(Icons.fact_check_outlined,
                 size: 30, color: Colors.black54),
-            title: Text('ATTENDANCE',
+            title: Text('Attendance',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -85,7 +85,7 @@ class _customDrawerState extends State<customDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.chat, size: 30, color: Colors.black54),
-            title: Text('CHAT',
+            title: Text('Chat',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
@@ -94,7 +94,7 @@ class _customDrawerState extends State<customDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.announcement, size: 30, color: Colors.black54),
-            title: Text('ANNOUNCEMENTS',
+            title: Text('Announcement',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -103,7 +103,7 @@ class _customDrawerState extends State<customDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.content_copy, size: 30, color: Colors.black54),
-            title: Text('CONTENT',
+            title: Text('Content',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
@@ -114,7 +114,7 @@ class _customDrawerState extends State<customDrawer> {
           Divider(color: PageColors.secondaryColor,),
           ListTile(
             leading: Icon(Icons.logout, size: 30, color: Colors.black54),
-            title: Text('SIGN OUT',
+            title: Text('Sign Out',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {},
           ),
