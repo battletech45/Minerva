@@ -31,7 +31,7 @@ class _ContentStudentState extends State<ContentStudent> {
           children: [
             Card(
               elevation: 6,
-              shape: PageColors.mainBorder,
+              shape: CustomBorders.mainBorder,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
                 //leading: Icon(Icons.class_),
@@ -43,7 +43,7 @@ class _ContentStudentState extends State<ContentStudent> {
               ),
             ),
             Card(
-              shape: PageColors.mainBorder,
+              shape: CustomBorders.mainBorder,
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
@@ -56,7 +56,7 @@ class _ContentStudentState extends State<ContentStudent> {
               ),
             ),
             Card(
-              shape: PageColors.mainBorder,
+              shape: CustomBorders.mainBorder,
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
@@ -69,7 +69,7 @@ class _ContentStudentState extends State<ContentStudent> {
               ),
             ),
             Card(
-              shape: PageColors.mainBorder,
+              shape: CustomBorders.mainBorder,
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
@@ -82,7 +82,7 @@ class _ContentStudentState extends State<ContentStudent> {
               ),
             ),
             Card(
-              shape: PageColors.mainBorder,
+              shape: CustomBorders.mainBorder,
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
@@ -95,7 +95,7 @@ class _ContentStudentState extends State<ContentStudent> {
               ),
             ),
             Card(
-              shape: PageColors.mainBorder,
+              shape: CustomBorders.mainBorder,
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
@@ -108,7 +108,7 @@ class _ContentStudentState extends State<ContentStudent> {
               ),
             ),
             Card(
-              shape: PageColors.mainBorder,
+              shape: CustomBorders.mainBorder,
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
@@ -121,7 +121,7 @@ class _ContentStudentState extends State<ContentStudent> {
               ),
             ),
             Card(
-              shape: PageColors.mainBorder,
+              shape: CustomBorders.mainBorder,
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
