@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/LoginPage.dart';
 import '../Model/CustomWidgets.dart';
+import 'ResetPassword.dart';
 
 
 
@@ -100,7 +101,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         borderRadius: BorderRadius.circular(10),
                         ),
                     child: TextButton(
-                      onPressed: () {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ForgotPassword()));},
+                      onPressed: () {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ResetPassword()));},
                       child: Text(
                         'Send Link',
                         style: TextStyle(
