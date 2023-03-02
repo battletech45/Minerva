@@ -150,6 +150,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     );
   }
   void passCheck () {
+    // Fieldlar boş olunca da doğru diyor. Önce Fieldların dolu olup olmadığına bakıp(eğer boşsa hata dönmeliyiz), doluysa karşılaştırma yapmalıyız
     if (passwordController.text.trim()!= confirmPasswordController.text.trim()) {
       print("Password does not match");
     }
