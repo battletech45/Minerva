@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
+import '../Control/FirebaseFunctions.dart';
 import 'ProfilePage.dart';
 import 'WelcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,6 +17,27 @@ class _RegisterPage extends State<RegisterPage> {
  final TCController= TextEditingController();
  final schoolNumberController= TextEditingController();
  FirebaseAuth authReg = FirebaseAuth.instance;
+
+ Future register () async {
+   try {
+     UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+       email: emailController.text.trim(),
+       password: passwordController.text.trim(),
+     );
+     User? user = userCredential.user;
+     print(user!.uid);
+     await FirebaseFunctions(userID: user!.uid).createStudent('test', passwordController.text, emailController.text);
+     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ProfilePage()));
+   } on FirebaseAuthException catch (e) {
+     if (e.code == 'weak-password') {
+       print('The password provided is too weak.');
+     } else if (e.code == 'email-already-in-use') {
+       print('The account already exists for that email.');
+     }
+   } catch (e) {
+     print(e);
+   }
+ }
 
   @override
   Widget build(BuildContext context) {
@@ -170,23 +192,6 @@ class _RegisterPage extends State<RegisterPage> {
         ),
       ),
     );
-  }
-  Future register () async{
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-      );
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ProfilePage()));
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-    } catch (e) {
-      print(e);
-    }
   }
 }
 
