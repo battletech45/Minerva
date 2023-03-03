@@ -3,16 +3,12 @@ import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/LoginPage.dart';
 import '../Model/CustomWidgets.dart';
 
-
-
 class ResetPassword extends StatefulWidget {
   @override
   _ResetPasswordState createState() => _ResetPasswordState();
-
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
-
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
@@ -38,7 +34,6 @@ class _ResetPasswordState extends State<ResetPassword> {
           textAlign: TextAlign.center,
         ),
       ),
-
       body: Stack(
         children: [
           Container(
@@ -49,8 +44,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50),
                     topRight: Radius.circular(50))),
-
-
             child: ListView(
               children: [
                 Container(
@@ -59,14 +52,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                     child: Image.asset(
                       'assets/logo.png',
                       scale: 0.1,
-                    )
-                ),
-
+                    )),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: width * 0.05),
-                  child:
-                  SizedBox(
-                    width:  MediaQuery.of(context).size.width*0.9,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
                     child: TextField(
                       controller: passwordController,
                       textAlign: TextAlign.center,
@@ -80,7 +70,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
+                                  width: 2,
+                                  color: Color.fromRGBO(28, 88, 140, 1))),
                           labelText: 'Password',
                           labelStyle: TextStyle(
                             fontStyle: FontStyle.italic,
@@ -89,14 +80,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                     ),
                   ),
                 ),
-
-                SizedBox(height: 10,),
-
+                SizedBox(
+                  height: 10,
+                ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: width * 0.05),
-                  child:
-                  SizedBox(
-                    width:  MediaQuery.of(context).size.width*0.9,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
                     child: TextField(
                       controller: confirmPasswordController,
                       textAlign: TextAlign.center,
@@ -110,7 +100,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
+                                  width: 2,
+                                  color: Color.fromRGBO(28, 88, 140, 1))),
                           labelText: 'Confirm Password',
                           labelStyle: TextStyle(
                             fontStyle: FontStyle.italic,
@@ -124,20 +115,19 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 Center(
                   child: Container(
-                    padding:
-                    EdgeInsets.symmetric(horizontal: 30, vertical: 3),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 3),
                     decoration: BoxDecoration(
                       // Gradient neden var (altayla bakilacak - Bertan)
                       color: PageColors.mainColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextButton(
-                      onPressed: () { passCheck(); },
+                      onPressed: () {
+                        passCheck();
+                      },
                       child: Text(
                         'Change Password',
-                        style: TextStyle(
-                            color: Colors.white,fontSize: 20
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                   ),
@@ -149,14 +139,15 @@ class _ResetPasswordState extends State<ResetPassword> {
       ),
     );
   }
-  void passCheck () {
-    // Fieldlar boş olunca da doğru diyor. Önce Fieldların dolu olup olmadığına bakıp(eğer boşsa hata dönmeliyiz), doluysa karşılaştırma yapmalıyız
-    if (passwordController.text.trim()!= confirmPasswordController.text.trim()) {
+
+  void passCheck() {
+    if (passwordController.text.trim().isEmpty ||
+        confirmPasswordController.text.trim().isEmpty) {
+      print("Inputboxes should not be empty");
+    } else if (passwordController.text != confirmPasswordController.text) {
       print("Password does not match");
-    }
-      else {
-        print("Passwords are succesfully matched");
+    } else {
+      print("Passwords are succesfully matched");
     }
   }
-
 }
