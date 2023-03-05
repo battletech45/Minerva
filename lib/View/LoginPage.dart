@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/View/ForgotPassword.dart';
 import 'ProfilePage.dart';
 import 'WelcomePage.dart';
@@ -136,8 +137,12 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
   Future signIn() async {
+    var data = await FirebaseFunctions().getStudentData(schoolNumberController.text);
+    print(data.docs[0].get('email'));
+    print(data.docs[0].get('studentName'));
+    print(data.docs[0].get('password'));
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await authLog.signInWithEmailAndPassword(
           email:schoolNumberController.text.trim(),
           password:passwordController.text.trim(),
       );
