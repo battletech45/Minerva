@@ -8,6 +8,7 @@ import 'package:minerva/View/HomePage.dart';
 import 'package:minerva/View/ProfilePage.dart';
 import 'package:minerva/View/RegisterPage.dart';
 import 'package:minerva/View/StudentGradePage.dart';
+import 'package:minerva/View/TeacherGradePage.dart';
 import 'package:minerva/View/WelcomePage.dart';
 import '../View/AttendanceTeacherPage.dart';
 import '../View/ContentStudentPage.dart';
