@@ -19,7 +19,8 @@ class FirebaseFunctions {
       'courses': [],
       'schoolNumber': ''
     });
-  }Future createTeacher(String teacherName, String password, String email) async {
+  }
+  Future createTeacher(String teacherName, String password, String email) async {
     await teacherCollection.add({
       'studentName': teacherName,
       'password': password,
@@ -27,7 +28,8 @@ class FirebaseFunctions {
       'courses': [],
       'teacherID': ''
     });
-  }Future createSchool(String schoolName, String password, String email, String principalName) async {
+  }
+  Future createSchool(String schoolName, String password, String email, String principalName) async {
     await schoolCollection.add({
       'studentName': schoolName,
       'password': password,
@@ -35,5 +37,17 @@ class FirebaseFunctions {
       'principleName': principalName,
       'schoolNumber': ''
     });
+  }
+  Future<QuerySnapshot> getStudentData(String email) async {
+    QuerySnapshot snapshot = await studentCollection.where('email', isEqualTo: email).get();
+    return snapshot;
+  }
+  Future<QuerySnapshot> getTeacherData(String email) async {
+    QuerySnapshot snapshot = await teacherCollection.where('email', isEqualTo: email).get();
+    return snapshot;
+  }
+  Future<QuerySnapshot> getSchoolData(String email) async {
+    QuerySnapshot snapshot = await schoolCollection.where('email', isEqualTo: email).get();
+    return snapshot;
   }
 }
