@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
 import '../Model/WidgetProperties.dart';
@@ -9,6 +11,26 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  String email = '';
+  String userName = '';
+
+  _getUserData() async {
+    var val = await SharedFunctions.getUserEmailSharedPreference();
+    setState(() {
+      email = val!;
+    });
+    val = await SharedFunctions.getUserNameSharedPreference();
+    setState(() {
+      userName = val!;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
             SizedBox(height: 10.0),
-            Text("Bertan Silleli", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+            Text("$userName", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
             SizedBox(height: 8.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Text("Name Surname", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
                               ],
                             ),
-                            Text("Bertan Silleli", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+                            Text("$userName", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
                           ],
                         ),
                       ),
@@ -152,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ],
                               ),
                               Text(
-                                "student@example.com",
+                                "$email",
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w400),
                               ),
