@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       userName = user.docs[0].get('studentName');
       tc = user.docs[0].get('tc');
-      schoolNumber = user.docs[0].get('studentNumber');
+      schoolNumber = user.docs[0].get('schoolNumber');
     });
   }
 
@@ -67,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: <Widget>[
                 Text("11-A", style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400)),
                 SizedBox(width: 15.0),
-                Text("20180601036", style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400)),
+                Text("$schoolNumber", style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400)),
               ],
             ),
             SizedBox(height: 23.0),
