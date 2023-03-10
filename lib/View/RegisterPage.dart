@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import '../Control/FirebaseFunctions.dart';
+import '../Control/SharedFunctions.dart';
 import 'ProfilePage.dart';
 import 'WelcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,7 +27,10 @@ class _RegisterPage extends State<RegisterPage> {
      );
      User? user = userCredential.user;
      print(user!.uid);
+     var data = await FirebaseFunctions().getStudentData(emailController.text);
      await FirebaseFunctions(userID: user!.uid).createStudent('test', passwordController.text, emailController.text,TCController.text,schoolNumberController.text);
+     await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
+      await SharedFunctions.saveUserNameSharedPreference(data.docs[0].get('studentName'));
      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ProfilePage()));
    } on FirebaseAuthException catch (e) {
      if (e.code == 'weak-password') {
