@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
@@ -14,15 +15,20 @@ class _ProfilePageState extends State<ProfilePage> {
 
   String email = '';
   String userName = '';
+  String tc = '';
+  String schoolNumber = '';
 
   _getUserData() async {
     var val = await SharedFunctions.getUserEmailSharedPreference();
     setState(() {
       email = val!;
     });
-    val = await SharedFunctions.getUserNameSharedPreference();
+    print(email);
+    var user = await FirebaseFunctions().getStudentData(email);
     setState(() {
-      userName = val!;
+      userName = user.docs[0].get('studentName');
+      tc = user.docs[0].get('tc');
+      schoolNumber = user.docs[0].get('studentNumber');
     });
   }
 
@@ -105,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Text("Student Number", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
                                 ],
                               ),
-                              Text("2010601001", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+                              Text("$schoolNumber", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
                             ],
                           ),
                         )),
