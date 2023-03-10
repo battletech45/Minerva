@@ -26,7 +26,7 @@ class _RegisterPage extends State<RegisterPage> {
      );
      User? user = userCredential.user;
      print(user!.uid);
-     await FirebaseFunctions(userID: user!.uid).createStudent('test', passwordController.text, emailController.text);
+     await FirebaseFunctions(userID: user!.uid).createStudent('test', passwordController.text, emailController.text,TCController.text,schoolNumberController.text);
      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ProfilePage()));
    } on FirebaseAuthException catch (e) {
      if (e.code == 'weak-password') {

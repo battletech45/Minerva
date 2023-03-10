@@ -11,13 +11,14 @@ class FirebaseFunctions {
   final CollectionReference teacherCollection = FirebaseFirestore.instance.collection('teachers');
   final CollectionReference schoolCollection = FirebaseFirestore.instance.collection('schools');
 
-  Future createStudent(String studentName, String password, String email) async {
+  Future createStudent(String studentName, String password, String email, String tc, String studentNumber) async {
     await studentCollection.add({
       'studentName': studentName,
       'password': password,
       'email': email,
       'courses': [],
-      'schoolNumber': ''
+      'schoolNumber': studentNumber,
+      'tc':tc,
     });
   }
   Future createTeacher(String teacherName, String password, String email) async {
