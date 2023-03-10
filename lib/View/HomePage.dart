@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-  bool click=true;
+  bool click = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class _HomePage extends State<HomePage> {
             children: <Widget> [
              // SizedBox(height: 20),
               Row(
-                children: [
+                children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                     child: CircleAvatar(
@@ -54,7 +54,13 @@ class _HomePage extends State<HomePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
-                      child:Icon(Icons.check,size: 38,)
+                      child:IconButton(
+                        icon: click ? Icon(Icons.check_circle,size: 38.0, color: Colors.red,) : Icon(Icons.check,size: 38.0),
+                        onPressed: () {
+                          setState(() {
+                            click =! click;
+                          });
+                        })
                     ),
                   ],
               ),
