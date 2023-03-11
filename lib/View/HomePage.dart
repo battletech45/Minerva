@@ -162,6 +162,7 @@ class _HomePage extends State<HomePage> {
                     ),
                   ],
               ),
+              customContentFeed(userName: 'Altay')
             ],
           ),
         ),

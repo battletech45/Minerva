@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/AnnouncementStudentPage.dart';
 import 'package:minerva/View/AnnouncementTeacherPage.dart';
@@ -178,4 +179,63 @@ class customAttendanceCard extends StatelessWidget {
   }
 
   customAttendanceCard(this.teacherName);
+}
+
+class customContentFeed extends StatefulWidget {
+  final String userName;
+
+  const customContentFeed({Key? key, required this.userName}) : super(key: key);
+  @override
+  State<customContentFeed> createState() => _customContentFeedState();
+}
+
+class _customContentFeedState extends State<customContentFeed> {
+
+  bool click = false;
+  @override
+  Widget build(BuildContext context) {
+    String name = widget.userName;
+    return Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+              child: CircleAvatar(
+                radius: 25,
+              ),
+            ),
+            SizedBox(width: 5),
+            Text("$name",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
+          ],
+        ),
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Container(
+            height: 300,
+            width: 400,
+            decoration: BoxDecoration(
+                color: PageColors.secondaryColor,
+                borderRadius: BorderRadius.circular(8)
+            ),
+          ),
+        ),
+        Row(
+          children: [
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
+                child:IconButton(
+                    icon: click ? Icon(FontAwesomeIcons.solidHeart,size: 38,color: Colors.red,) : Icon(FontAwesomeIcons.heart,size: 38),
+                    onPressed: () {
+                      setState(() {
+                        click =! click;
+                      });
+                    })
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 }
