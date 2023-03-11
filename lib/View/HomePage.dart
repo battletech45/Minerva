@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
-
 import '../Model/CustomWidgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,7 +55,7 @@ class _HomePage extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
                       child:IconButton(
-                        icon: click ? Icon(Icons.check_circle,size: 38.0, color: Colors.red,) : Icon(Icons.check,size: 38.0),
+                        icon: click ? Icon(FontAwesomeIcons.solidHeart,size: 38,color: Colors.red,) : Icon(FontAwesomeIcons.heart,size: 38),
                         onPressed: () {
                           setState(() {
                             click =! click;
@@ -92,7 +92,13 @@ class _HomePage extends State<HomePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
-                      child:Icon(Icons.check,size: 38,)
+                     child:IconButton(
+                        icon: click ? Icon(FontAwesomeIcons.solidHeart,size: 38,color: Colors.red,) : Icon(FontAwesomeIcons.heart,size: 38),
+                        onPressed: () {
+                          setState(() {
+                            click =! click;
+                          });
+                        })
                     ),
                   ],
               ),
@@ -124,7 +130,13 @@ class _HomePage extends State<HomePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
-                      child:Icon(Icons.check,size: 38,)
+                     child:IconButton(
+                        icon: click ? Icon(FontAwesomeIcons.solidHeart,size: 38,color: Colors.red,) : Icon(FontAwesomeIcons.heart,size: 38),
+                        onPressed: () {
+                          setState(() {
+                            click =! click;
+                          });
+                        })
                     ),
                   ],
               ),
