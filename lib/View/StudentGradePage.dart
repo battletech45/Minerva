@@ -47,11 +47,15 @@ class _StudentGradePage extends State<StudentGradePage> {
                     expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
                     children: [
                       ListTile(
-                        leading: Text("Midterm: "),
+                        leading: Text("Exam: "),
                         trailing: Text("100"),
                       ),
                       ListTile(
-                        leading: Text("Final: "),
+                        leading: Text("Project: "),
+                          trailing: Text("100"),
+                      ),
+                      ListTile(
+                        leading: Text("Quiz: "),
                           trailing: Text("100"),
                       )
                     ],
@@ -60,150 +64,321 @@ class _StudentGradePage extends State<StudentGradePage> {
                     },
                   ),
               ),
-              
-              
-              /*
-              Card(
-                elevation: 10.0,
-                shape: Border.all(
-                  width: 2,
-                  color: Colors.black54,
-                  strokeAlign: BorderSide.strokeAlignInside,
-                ),
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: PageColors.mainColor,
-                child: ListTile(
-                  trailing: Icon(Icons.grade_sharp, color: Colors.pink),
-                  title: Text("Mathematics"),
-                  onTap: () {},
-                ),
-              ), */
-              Card(
-                elevation: 10.0,
-                shape: Border.all(
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                // color: PageColors.mainColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
                     width: 2,
                     color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside),
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: PageColors.mainColor,
-                child: ListTile(
-                  trailing: Icon(Icons.grade_sharp, color: Colors.pink),
+                    strokeAlign: BorderSide.strokeAlignInside,
+                  ),),
+                child: ExpansionTile(
                   title: Text("Physics"),
-                  onTap: () {},
+                  trailing: Icon(
+                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+                  children: [
+                    ListTile(
+                      leading: Text("Exam: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Project: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Quiz: "),
+                      trailing: Text("100"),
+                    )
+                  ],
+                  onExpansionChanged: (bool expanded){
+                    setState(()=> expansionIcon=expanded);
+                  },
                 ),
               ),
-              Card(
-                elevation: 10.0,
-                shape: Border.all(
+
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                // color: PageColors.mainColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
                     width: 2,
                     color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside),
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: PageColors.mainColor,
-                child: ListTile(
-                  trailing: Icon(Icons.grade_sharp, color: Colors.pink),
+                    strokeAlign: BorderSide.strokeAlignInside,
+                  ),),
+                child: ExpansionTile(
                   title: Text("Chemistry"),
-                  onTap: () {},
+                  trailing: Icon(
+                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+                  children: [
+                    ListTile(
+                      leading: Text("Exam: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Project: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Quiz: "),
+                      trailing: Text("100"),
+                    )
+                  ],
+                  onExpansionChanged: (bool expanded){
+                    setState(()=> expansionIcon=expanded);
+                  },
                 ),
               ),
-              Card(
-                elevation: 10.0,
-                shape: Border.all(
+
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                // color: PageColors.mainColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
                     width: 2,
                     color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside),
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: PageColors.mainColor,
-                child: ListTile(
-                  trailing: Icon(Icons.grade_sharp, color: Colors.pink),
+                    strokeAlign: BorderSide.strokeAlignInside,
+                  ),),
+                child: ExpansionTile(
                   title: Text("Biology"),
-                  onTap: () {},
+                  trailing: Icon(
+                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+                  children: [
+                    ListTile(
+                      leading: Text("Exam: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Project: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Quiz: "),
+                      trailing: Text("100"),
+                    )
+                  ],
+                  onExpansionChanged: (bool expanded){
+                    setState(()=> expansionIcon=expanded);
+                  },
                 ),
               ),
-              Card(
-                elevation: 10.0,
-                shape: Border.all(
+
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                // color: PageColors.mainColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
                     width: 2,
                     color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside),
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: PageColors.mainColor,
-                child: ListTile(
-                  trailing: Icon(Icons.grade_sharp, color: Colors.pink),
+                    strokeAlign: BorderSide.strokeAlignInside,
+                  ),),
+                child: ExpansionTile(
                   title: Text("Literature"),
-                  onTap: () {},
+                  trailing: Icon(
+                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+                  children: [
+                    ListTile(
+                      leading: Text("Exam: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Project: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Quiz: "),
+                      trailing: Text("100"),
+                    )
+                  ],
+                  onExpansionChanged: (bool expanded){
+                    setState(()=> expansionIcon=expanded);
+                  },
                 ),
               ),
-              Card(
-                elevation: 10.0,
-                shape: Border.all(
+
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                // color: PageColors.mainColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
                     width: 2,
                     color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside),
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: PageColors.mainColor,
-                child: ListTile(
-                  trailing: Icon(Icons.grade_sharp, color: Colors.pink),
+                    strokeAlign: BorderSide.strokeAlignInside,
+                  ),),
+                child: ExpansionTile(
                   title: Text("History"),
-                  onTap: () {},
+                  trailing: Icon(
+                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+                  children: [
+                    ListTile(
+                      leading: Text("Exam: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Project: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Quiz: "),
+                      trailing: Text("100"),
+                    )
+                  ],
+                  onExpansionChanged: (bool expanded){
+                    setState(()=> expansionIcon=expanded);
+                  },
                 ),
               ),
-              Card(
-                elevation: 10.0,
-                shape: Border.all(
+
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                // color: PageColors.mainColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
                     width: 2,
                     color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside),
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: PageColors.mainColor,
-                child: ListTile(
-                  trailing: Icon(Icons.grade_sharp, color: Colors.pink),
+                    strokeAlign: BorderSide.strokeAlignInside,
+                  ),),
+                child: ExpansionTile(
                   title: Text("German"),
-                  onTap: () {},
+                  trailing: Icon(
+                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+                  children: [
+                    ListTile(
+                      leading: Text("Exam: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Project: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Quiz: "),
+                      trailing: Text("100"),
+                    )
+                  ],
+                  onExpansionChanged: (bool expanded){
+                    setState(()=> expansionIcon=expanded);
+                  },
                 ),
               ),
-              Card(
-                elevation: 10.0,
-                shape: Border.all(
+
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                // color: PageColors.mainColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
                     width: 2,
                     color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside),
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: PageColors.mainColor,
-                child: ListTile(
-                  trailing: Icon(Icons.grade_sharp, color: Colors.pink),
+                    strokeAlign: BorderSide.strokeAlignInside,
+                  ),),
+                child: ExpansionTile(
                   title: Text("Geography"),
-                  onTap: () {},
+                  trailing: Icon(
+                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+                  children: [
+                    ListTile(
+                      leading: Text("Exam: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Project: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Quiz: "),
+                      trailing: Text("100"),
+                    )
+                  ],
+                  onExpansionChanged: (bool expanded){
+                    setState(()=> expansionIcon=expanded);
+                  },
                 ),
               ),
-              Card(
-                elevation: 10.0,
-                shape: Border.all(
+
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                // color: PageColors.mainColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
                     width: 2,
                     color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside),
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: PageColors.mainColor,
-                child: ListTile(
-                  trailing: Icon(Icons.grade_sharp, color: Colors.pink),
+                    strokeAlign: BorderSide.strokeAlignInside,
+                  ),),
+                child: ExpansionTile(
                   title: Text("English"),
-                  onTap: () {},
+                  trailing: Icon(
+                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+                  children: [
+                    ListTile(
+                      leading: Text("Exam: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Project: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Quiz: "),
+                      trailing: Text("100"),
+                    )
+                  ],
+                  onExpansionChanged: (bool expanded){
+                    setState(()=> expansionIcon=expanded);
+                  },
                 ),
               ),
-              Card(
-                elevation: 10.0,
-                shape: Border.all(
+
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                // color: PageColors.mainColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
                     width: 2,
                     color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside),
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 15.0),
-                shadowColor: PageColors.mainColor,
-                child: ListTile(
-                  trailing: Icon(Icons.grade_sharp, color: Colors.pink),
+                    strokeAlign: BorderSide.strokeAlignInside,
+                  ),),
+                child: ExpansionTile(
                   title: Text("Turkish"),
-                  onTap: () {},
+                  trailing: Icon(
+                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+                  children: [
+                    ListTile(
+                      leading: Text("Exam: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Project: "),
+                      trailing: Text("100"),
+                    ),
+                    ListTile(
+                      leading: Text("Quiz: "),
+                      trailing: Text("100"),
+                    )
+                  ],
+                  onExpansionChanged: (bool expanded){
+                    setState(()=> expansionIcon=expanded);
+                  },
                 ),
               ),
+
             ]),
       ),
       drawer: customDrawer(),
