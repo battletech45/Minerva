@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
+import '../Control/FirebaseFunctions.dart';
+import '../Control/SharedFunctions.dart';
 import '../Model/CustomWidgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +12,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   bool click = false;
+  String userName="";
+  String email="";
+
+  _getUserData() async {
+    var val = await SharedFunctions.getUserEmailSharedPreference();
+    setState(() {
+      email = val!;
+    });
+    print(email);
+    var user = await FirebaseFunctions().getStudentData(email);
+    setState(() {
+      userName = user.docs[0].get('studentName');
+     
+    });
+  }
+  @override void initState() {
+   _getUserData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +57,7 @@ class _HomePage extends State<HomePage> {
                     ),
                   ),
                   SizedBox(width: 5),
-                  Text("Yarkın Ata",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
+                  Text("$userName",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
                 ],
               ),
               
@@ -74,7 +96,7 @@ class _HomePage extends State<HomePage> {
                     ),
                   ),
                   SizedBox(width: 5),
-                  Text("Yarkın Ata",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
+                  Text("$userName",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
                 ],
               ),
               Padding(
@@ -112,7 +134,7 @@ class _HomePage extends State<HomePage> {
                     ),
                   ),
                   SizedBox(width: 5),
-                  Text("Yarkın Ata",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
+                  Text("$userName",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
                 ],
               ),
               Padding(
