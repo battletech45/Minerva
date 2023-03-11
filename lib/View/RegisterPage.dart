@@ -80,7 +80,7 @@ class _RegisterPage extends State<RegisterPage> {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
+                              width: 2, color: PageColors.mainColor)),
                       labelText: 'TC',
                       labelStyle: TextStyle(
                         fontStyle: FontStyle.italic,
@@ -101,7 +101,7 @@ class _RegisterPage extends State<RegisterPage> {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
+                              width: 2, color: PageColors.mainColor)),
                       labelText: 'School Number',
                       labelStyle: TextStyle(
                         fontStyle: FontStyle.italic,
@@ -122,7 +122,7 @@ class _RegisterPage extends State<RegisterPage> {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
+                              width: 2, color: PageColors.mainColor)),
                       labelText: 'Email',
                       labelStyle: TextStyle(
                         fontStyle: FontStyle.italic,
@@ -145,7 +145,7 @@ class _RegisterPage extends State<RegisterPage> {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
+                              width: 2, color: PageColors.mainColor)),
                       labelText: 'Password',
 
                       labelStyle: TextStyle(
@@ -167,7 +167,7 @@ class _RegisterPage extends State<RegisterPage> {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
+                              width: 2, color: PageColors.mainColor)),
                       labelText: 'Registration Number',
                       labelStyle: TextStyle(
                         fontStyle: FontStyle.italic,
