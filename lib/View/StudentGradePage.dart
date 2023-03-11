@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
@@ -11,7 +12,7 @@ class StudentGradePage extends StatefulWidget {
 }
 
 class _StudentGradePage extends State<StudentGradePage> {
-  //final Color mainColor= Color.fromRGBO(28, 88, 140, 1);
+  bool expansionIcon=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,37 @@ class _StudentGradePage extends State<StudentGradePage> {
         child: ListView(
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
-            children: [
+            children: [   
+              Container(
+               // color: PageColors.mainColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                  width: 2,
+                  color: Colors.black54,
+                  strokeAlign: BorderSide.strokeAlignInside,
+                ),),
+                child: ExpansionTile(
+                  title: Text("Mathematics"),
+                  trailing: Icon(
+                    expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+                    children: [
+                      ListTile(
+                        leading: Text("Midterm: "),
+                        trailing: Text("100"),
+                      ),
+                      ListTile(
+                        leading: Text("Final: "),
+                          trailing: Text("100"),
+                      )
+                    ],
+                    onExpansionChanged: (bool expanded){
+                      setState(()=> expansionIcon=expanded);
+                    },
+                  ),
+              ),
+              
+              
+              /*
               Card(
                 elevation: 10.0,
                 shape: Border.all(
@@ -46,7 +77,7 @@ class _StudentGradePage extends State<StudentGradePage> {
                   title: Text("Mathematics"),
                   onTap: () {},
                 ),
-              ),
+              ), */
               Card(
                 elevation: 10.0,
                 shape: Border.all(
