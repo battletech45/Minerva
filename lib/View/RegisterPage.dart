@@ -27,7 +27,7 @@ class _RegisterPage extends State<RegisterPage> {
      );
      User? user = userCredential.user;
      print(user!.uid);
-     await FirebaseFunctions(userID: user!.uid).createStudent('test', passwordController.text, emailController.text,TCController.text,schoolNumberController.text);
+     await FirebaseFunctions(userID: user.uid).createStudent('test', passwordController.text, emailController.text,TCController.text,schoolNumberController.text);
      var data = await FirebaseFunctions().getStudentData(emailController.text);
      await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
       await SharedFunctions.saveUserNameSharedPreference(data.docs[0].get('studentName'));
