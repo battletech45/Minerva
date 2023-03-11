@@ -47,122 +47,15 @@ class _HomePage extends State<HomePage> {
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
             children: <Widget> [
-             // SizedBox(height: 20),
-              Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                    child: CircleAvatar(
-                      radius: 25,
-                    ),
-                  ),
-                  SizedBox(width: 5),
-                  Text("$userName",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
-                ],
-              ),
-              
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
-                  height: 300,
-                  width: 400,
-                  decoration: BoxDecoration(
-                     color: PageColors.secondaryColor,
-                    borderRadius: BorderRadius.circular(8)
-                  ),
-                ),
-              ),
-              Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
-                      child:IconButton(
-                        icon: click ? Icon(FontAwesomeIcons.solidHeart,size: 38,color: Colors.red,) : Icon(FontAwesomeIcons.heart,size: 38),
-                        onPressed: () {
-                          setState(() {
-                            click =! click;
-                          });
-                        })
-                    ),
-                  ],
-              ),
-              SizedBox(height: 30),
-              Row(
-                children: [
-                  Padding(
-                   padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                    child: CircleAvatar(
-                      radius: 25,
-                    ),
-                  ),
-                  SizedBox(width: 5),
-                  Text("$userName",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
-                  height: 300,
-                  width: 400,
-                  decoration: BoxDecoration(
-                     color: PageColors.secondaryColor,
-                    borderRadius: BorderRadius.circular(8)
-                  ),
-                ),
-              ),
-               Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
-                     child:IconButton(
-                        icon: click ? Icon(FontAwesomeIcons.solidHeart,size: 38,color: Colors.red,) : Icon(FontAwesomeIcons.heart,size: 38),
-                        onPressed: () {
-                          setState(() {
-                            click =! click;
-                          });
-                        })
-                    ),
-                  ],
-              ),
-              SizedBox(height: 30),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                    child: CircleAvatar(
-                      radius: 25,
-                    ),
-                  ),
-                  SizedBox(width: 5),
-                  Text("$userName",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
-                  height: 300,
-                  width: 400,
-                  decoration: BoxDecoration(
-                     color: PageColors.secondaryColor,
-                    borderRadius: BorderRadius.circular(8)
-                  ),
-                ),
-              ),
-               Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
-                     child:IconButton(
-                        icon: click ? Icon(FontAwesomeIcons.solidHeart,size: 38,color: Colors.red,) : Icon(FontAwesomeIcons.heart,size: 38),
-                        onPressed: () {
-                          setState(() {
-                            click =! click;
-                          });
-                        })
-                    ),
-                  ],
-              ),
-              customContentFeed(userName: 'Altay')
+                SizedBox(height: 10),
+                // Likeler yukarı veya aşağı kaydırılınca kayboluyor
+                customContentFeed(userName: 'Yarkın Ata'),
+                SizedBox(height: 30),
+                customContentFeed(userName: 'Yarkın Ata'),
+                SizedBox(height: 30),
+                customContentFeed(userName: 'Yarkın Ata'),
+                SizedBox(height: 30),
+                customContentFeed(userName: 'Yarkın Ata'),
             ],
           ),
         ),
