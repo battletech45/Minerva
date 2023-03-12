@@ -241,6 +241,12 @@ class _customContentFeedState extends State<customContentFeed> {
 }
 
 class customExpansionPanel extends StatefulWidget {
+  final String courseName;
+  final int examPoint;
+  final int projectPoint;
+  final int quizPoint;
+
+  const customExpansionPanel({Key? key, required this.courseName, required this.examPoint, required this.projectPoint, required this.quizPoint}) : super(key: key);
   @override
   State<customExpansionPanel> createState() => _customExpansionPanelState();
 }
@@ -249,6 +255,10 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
   bool expansionIcon = false;
   @override
   Widget build(BuildContext context) {
+    String course = widget.courseName;
+    int exam = widget.examPoint;
+    int project = widget.projectPoint;
+    int quiz = widget.quizPoint;
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -257,21 +267,21 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
           strokeAlign: BorderSide.strokeAlignInside,
         ),),
       child: ExpansionTile(
-        title: Text("Mathematics"),
+        title: Text("$course"),
         trailing: Icon(
             expansionIcon ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
         children: <Widget>[
           ListTile(
             leading: Text("Exam: "),
-            trailing: Text("100"),
+            trailing: Text('$exam'),
           ),
           ListTile(
             leading: Text("Project: "),
-            trailing: Text("100"),
+            trailing: Text("$project"),
           ),
           ListTile(
             leading: Text("Quiz: "),
-            trailing: Text("100"),
+            trailing: Text("$quiz"),
           )
         ],
         onExpansionChanged: (bool expanded){
