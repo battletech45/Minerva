@@ -43,10 +43,10 @@ class _HomePage extends State<HomePage> {
           title: Text("HOME", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
         body: Center(
-          child: ListView(
-            shrinkWrap: true,
+          child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            children: <Widget> [
+            child: Column(
+              children: <Widget>[
                 SizedBox(height: 10),
                 // Likeler yukarı veya aşağı kaydırılınca kayboluyor
                 customContentFeed(userName: 'Yarkın Ata'),
@@ -56,7 +56,8 @@ class _HomePage extends State<HomePage> {
                 customContentFeed(userName: 'Yarkın Ata'),
                 SizedBox(height: 30),
                 customContentFeed(userName: 'Yarkın Ata'),
-            ],
+              ],
+            ),
           ),
         ),
         drawer: customDrawer(),
