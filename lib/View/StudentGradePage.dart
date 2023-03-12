@@ -13,14 +13,13 @@ class StudentGradePage extends StatefulWidget {
 
 class _StudentGradePage extends State<StudentGradePage> {
   bool expansionIcon=false;
+  ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          'Grades',
-        ),
+        title: Text('Grades'),
         elevation: 0.0,
         automaticallyImplyLeading: true,
         backgroundColor: PageColors.mainColor,
@@ -29,216 +28,24 @@ class _StudentGradePage extends State<StudentGradePage> {
         color: Colors.white,
         alignment: Alignment.center,
         padding: EdgeInsets.all(16.0),
-        child: ListView(
-            shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
-            children: [   
-              Container(
-               // color: PageColors.mainColor,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                  width: 2,
-                  color: Colors.black54,
-                  strokeAlign: BorderSide.strokeAlignInside,
-                ),),
-                child: ExpansionTile(
-                  title: Text("Mathematics"),
-                  trailing: Icon(
-                    expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
-                    children: [
-                      ListTile(
-                        leading: Text("Exam: "),
-                        trailing: Text("100"),
-                      ),
-                      ListTile(
-                        leading: Text("Project: "),
-                          trailing: Text("100"),
-                      ),
-                      ListTile(
-                        leading: Text("Quiz: "),
-                          trailing: Text("100"),
-                      )
-                    ],
-                    onExpansionChanged: (bool expanded){
-                      setState(()=> expansionIcon=expanded);
-                    },
-                  ),
-              ),
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: <Widget>[
+              customExpansionPanel(courseName: "Mathematics", examPoint: 24, quizPoint: 67, projectPoint: 89),
+              SizedBox(height: 15.0),
+              customExpansionPanel(courseName: "Biology", examPoint: 54, quizPoint: 23, projectPoint: 78),
+              SizedBox(height: 15.0),
+              customExpansionPanel(courseName: "Mathematics", examPoint: 24, quizPoint: 67, projectPoint: 89),
+
+              SizedBox(height: 15.0),
+              customExpansionPanel(courseName: "Mathematics", examPoint: 24, quizPoint: 67, projectPoint: 89),
+              SizedBox(height: 15.0),
+              customExpansionPanel(courseName: "Mathematics", examPoint: 24, quizPoint: 67, projectPoint: 89),
               SizedBox(
                 height: 15,
               ),
-              Container(
-                // color: PageColors.mainColor,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside,
-                  ),),
-                child: ExpansionTile(
-                  title: Text("Physics"),
-                  trailing: Icon(
-                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
-                  children: [
-                    ListTile(
-                      leading: Text("Exam: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Project: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Quiz: "),
-                      trailing: Text("100"),
-                    )
-                  ],
-                  onExpansionChanged: (bool expanded){
-                    setState(()=> expansionIcon=expanded);
-                  },
-                ),
-              ),
-
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                // color: PageColors.mainColor,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside,
-                  ),),
-                child: ExpansionTile(
-                  title: Text("Chemistry"),
-                  trailing: Icon(
-                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
-                  children: [
-                    ListTile(
-                      leading: Text("Exam: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Project: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Quiz: "),
-                      trailing: Text("100"),
-                    )
-                  ],
-                  onExpansionChanged: (bool expanded){
-                    setState(()=> expansionIcon=expanded);
-                  },
-                ),
-              ),
-
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                // color: PageColors.mainColor,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside,
-                  ),),
-                child: ExpansionTile(
-                  title: Text("Biology"),
-                  trailing: Icon(
-                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
-                  children: [
-                    ListTile(
-                      leading: Text("Exam: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Project: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Quiz: "),
-                      trailing: Text("100"),
-                    )
-                  ],
-                  onExpansionChanged: (bool expanded){
-                    setState(()=> expansionIcon=expanded);
-                  },
-                ),
-              ),
-
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                // color: PageColors.mainColor,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside,
-                  ),),
-                child: ExpansionTile(
-                  title: Text("Literature"),
-                  trailing: Icon(
-                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
-                  children: [
-                    ListTile(
-                      leading: Text("Exam: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Project: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Quiz: "),
-                      trailing: Text("100"),
-                    )
-                  ],
-                  onExpansionChanged: (bool expanded){
-                    setState(()=> expansionIcon=expanded);
-                  },
-                ),
-              ),
-
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                // color: PageColors.mainColor,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside,
-                  ),),
-                child: ExpansionTile(
-                  title: Text("History"),
-                  trailing: Icon(
-                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
-                  children: [
-                    ListTile(
-                      leading: Text("Exam: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Project: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Quiz: "),
-                      trailing: Text("100"),
-                    )
-                  ],
-                  onExpansionChanged: (bool expanded){
-                    setState(()=> expansionIcon=expanded);
-                  },
-                ),
-              ),
-
+              customExpansionPanel(courseName: "Mathematics", examPoint: 24, quizPoint: 67, projectPoint: 89),
               SizedBox(
                 height: 15,
               ),
@@ -273,7 +80,6 @@ class _StudentGradePage extends State<StudentGradePage> {
                   },
                 ),
               ),
-
               SizedBox(
                 height: 15,
               ),
@@ -378,8 +184,9 @@ class _StudentGradePage extends State<StudentGradePage> {
                   },
                 ),
               ),
-
-            ]),
+            ],
+          ),
+        ),
       ),
       drawer: customDrawer(),
     );
