@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
+import 'package:minerva/View/StudentFilePage.dart';
 import '../Model/WidgetProperties.dart';
 
 
@@ -40,7 +41,10 @@ class _ContentStudentState extends State<ContentStudent> {
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => UploadFile()));
+                },
               ),
             ),
             Card(
@@ -53,7 +57,10 @@ class _ContentStudentState extends State<ContentStudent> {
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => UploadFile()));
+                },
               ),
             ),
             Card(
@@ -66,7 +73,10 @@ class _ContentStudentState extends State<ContentStudent> {
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => UploadFile()));
+                },
               ),
             ),
             Card(
@@ -79,7 +89,10 @@ class _ContentStudentState extends State<ContentStudent> {
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => UploadFile()));
+                },
               ),
             ),
             Card(
@@ -92,7 +105,10 @@ class _ContentStudentState extends State<ContentStudent> {
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => UploadFile()));
+                },
               ),
             ),
             Card(
@@ -105,7 +121,10 @@ class _ContentStudentState extends State<ContentStudent> {
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => UploadFile()));
+                },
               ),
             ),
             Card(
@@ -118,7 +137,10 @@ class _ContentStudentState extends State<ContentStudent> {
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => UploadFile()));
+                },
               ),
             ),
             Card(
@@ -131,7 +153,10 @@ class _ContentStudentState extends State<ContentStudent> {
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => UploadFile()));
+                },
               ),
             ),
             Card(
@@ -144,7 +169,10 @@ class _ContentStudentState extends State<ContentStudent> {
                     textAlign: TextAlign.center,
                     style:
                     TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => UploadFile()));
+                },
               ),
             ),
             Card(
@@ -157,7 +185,10 @@ class _ContentStudentState extends State<ContentStudent> {
                     textAlign: TextAlign.center,
                     style:
                     TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => UploadFile()));
+                },
               ),
             ),
           ],
@@ -188,7 +219,9 @@ class MaterialList extends StatelessWidget {
               title: Text("Math",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-              onTap: () {},
+              onTap: () {
+
+              },
             ),
           ),
           Card(
