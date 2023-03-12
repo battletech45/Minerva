@@ -239,3 +239,47 @@ class _customContentFeedState extends State<customContentFeed> {
     );
   }
 }
+
+class customExpansionPanel extends StatefulWidget {
+  @override
+  State<customExpansionPanel> createState() => _customExpansionPanelState();
+}
+
+class _customExpansionPanelState extends State<customExpansionPanel> {
+  bool expansionIcon = false;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 2,
+          color: Colors.black54,
+          strokeAlign: BorderSide.strokeAlignInside,
+        ),),
+      child: ExpansionTile(
+        title: Text("Mathematics"),
+        trailing: Icon(
+            expansionIcon ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+        children: <Widget>[
+          ListTile(
+            leading: Text("Exam: "),
+            trailing: Text("100"),
+          ),
+          ListTile(
+            leading: Text("Project: "),
+            trailing: Text("100"),
+          ),
+          ListTile(
+            leading: Text("Quiz: "),
+            trailing: Text("100"),
+          )
+        ],
+        onExpansionChanged: (bool expanded){
+          setState(() {
+            expansionIcon = expanded;
+          });
+        },
+      ),
+    );
+  }
+}
