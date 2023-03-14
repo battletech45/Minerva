@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:minerva/View/StudentFilePage.dart';
 import '../Model/WidgetProperties.dart';
+import 'TeacherUploadHomework.dart';
 
 
 class ContentStudent extends StatefulWidget {
@@ -59,7 +60,7 @@ class _ContentStudentState extends State<ContentStudent> {
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => UploadFile()));
+                      MaterialPageRoute(builder: (context) => UploadHomework()));
                 },
               ),
             ),
