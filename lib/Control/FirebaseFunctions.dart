@@ -18,17 +18,19 @@ class FirebaseFunctions {
       'password': password,
       'email': email,
       'courses': [],
-      'schoolNumber': studentNumber,
+      'studentNumber': studentNumber,
       'tc':tc,
     });
   }
-  Future createTeacher(String teacherName, String password, String email) async {
+  Future createTeacher(String teacherName, String password, String email, String tc, String teacherNumber) async {
     await teacherCollection.add({
-      'studentName': teacherName,
+      'teacherName': teacherName,
       'password': password,
       'email': email,
       'courses': [],
-      'teacherID': ''
+      'teacherID': '',
+      'teacherNumber': teacherNumber,
+      'tc': tc
     });
   }
   Future createSchool(String schoolName, String password, String email, String principalName) async {
