@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       userName = user.docs[0].get('studentName');
       tc = user.docs[0].get('tc');
-      schoolNumber = user.docs[0].get('schoolNumber');
+      schoolNumber = user.docs[0].get('studentNumber');
     });
   }
 
