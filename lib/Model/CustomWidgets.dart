@@ -95,7 +95,7 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => ChatPage()));
+                  MaterialPageRoute(builder: (context) => ChatPage(chatID: 'BtR70Ef4e6xyVPDsr6CW', userName: auth.currentUser!.uid)));
             },
           ),
           ListTile(
