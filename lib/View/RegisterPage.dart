@@ -23,7 +23,7 @@ class _RegisterPage extends State<RegisterPage> {
 
   Future register() async {
     if(formKey.currentState!.validate()) return;
-    formKey.currentState!.save();
+   // formKey.currentState!.save();
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -88,7 +88,7 @@ class _RegisterPage extends State<RegisterPage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
                     controller: TCController,
-                     validator: Validators.checkEmptyFields,
+                     validator: Validators.checkTC,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                         suffixIcon: Icon(Icons.perm_identity),

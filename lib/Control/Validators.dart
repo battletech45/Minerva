@@ -21,4 +21,11 @@ class Validators{
     }
     return null;
   }
+  static String? checkTC(String? value){
+
+    if(value?.length != 11){
+      return "TC should have 11 characters";
+    }
+    return null;
+  }
 }
