@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Control/Validators.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import '../Control/FirebaseFunctions.dart';
 import '../Control/SharedFunctions.dart';
@@ -21,9 +22,9 @@ class _RegisterPage extends State<RegisterPage> {
   FirebaseAuth authReg = FirebaseAuth.instance;
 
   Future register() async {
-    final isValid= formKey.currentState!.validate();
-    if(!isValid){
-      try {
+    if(formKey.currentState!.validate()) return;
+    formKey.currentState!.save();
+    try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
@@ -52,7 +53,6 @@ class _RegisterPage extends State<RegisterPage> {
       } */
     } catch (e) {
       print(e);
-    }
     }
   }
 
@@ -88,6 +88,7 @@ class _RegisterPage extends State<RegisterPage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
                     controller: TCController,
+                     validator: Validators.checkEmptyFields,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                         suffixIcon: Icon(Icons.perm_identity),
@@ -109,6 +110,7 @@ class _RegisterPage extends State<RegisterPage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
                     controller: schoolNumberController,
+                     validator: Validators.checkEmptyFields,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                         suffixIcon: Icon(Icons.school),
@@ -130,9 +132,7 @@ class _RegisterPage extends State<RegisterPage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
                     controller: emailController,
-                    validator: (val) {
-                      val!.isEmpty ? 'Email cannot be blank' : null;
-                    },
+                    validator: Validators.checkEmptyFields,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                         suffixIcon: Icon(Icons.email_outlined),
@@ -154,10 +154,7 @@ class _RegisterPage extends State<RegisterPage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
                     obscureText: true,
-                    validator: (val) {
-                      val!.isEmpty ? 'Password cannot be blank' : null;
-                      val.length < 7 ? "Enter minimum 7 characters" : null;
-                    },
+                    validator: Validators.validatePassword,
                     controller: passwordController,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
@@ -180,6 +177,7 @@ class _RegisterPage extends State<RegisterPage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
                     controller: registrationNumberController,
+                     validator: Validators.checkEmptyFields,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                         suffixIcon: Icon(Icons.app_registration),
