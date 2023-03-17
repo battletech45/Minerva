@@ -15,6 +15,15 @@ class Validators{
     }
     return null;
   }
+  static String? checkEmail(String? value){
+    if(value!.trim().isEmpty){
+      return "This field cannot be empty";
+    }
+    if(!RegExp(r'\S+@\S+\.\S+').hasMatch(value)){
+          return "Please enter a valid email";
+        }
+        return null;
+  }
   static String? checkEmptyFields(String? value){
      if(value!.trim().isEmpty){
       return "This field cannot be empty";

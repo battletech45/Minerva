@@ -132,7 +132,7 @@ class _RegisterPage extends State<RegisterPage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
                     controller: emailController,
-                    validator: Validators.checkEmptyFields,
+                    validator: Validators.checkEmail,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                         suffixIcon: Icon(Icons.email_outlined),

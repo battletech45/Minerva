@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
                   controller: schoolNumberController,
-                  validator: Validators.checkEmptyFields,
+                  validator: Validators.checkEmail,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.school),
