@@ -36,19 +36,33 @@ class _StudentGradePage extends State<StudentGradePage> {
               SizedBox(height: 15.0),
               customExpansionPanel(courseName: "Biology", examPoint: 54, quizPoint: 23, projectPoint: 78),
               SizedBox(height: 15.0),
-              customExpansionPanel(courseName: "Mathematics", examPoint: 24, quizPoint: 67, projectPoint: 89),
+              customExpansionPanel(courseName: "Physics", examPoint: 24, quizPoint: 67, projectPoint: 89),
 
               SizedBox(height: 15.0),
-              customExpansionPanel(courseName: "Mathematics", examPoint: 24, quizPoint: 67, projectPoint: 89),
+              customExpansionPanel(courseName: "Chemistry", examPoint: 80, quizPoint: 55, projectPoint: 95),
               SizedBox(height: 15.0),
-              customExpansionPanel(courseName: "Mathematics", examPoint: 24, quizPoint: 67, projectPoint: 89),
+              customExpansionPanel(courseName: "Literature", examPoint: 10, quizPoint: 35, projectPoint: 89),
               SizedBox(
                 height: 15,
               ),
-              customExpansionPanel(courseName: "Mathematics", examPoint: 24, quizPoint: 67, projectPoint: 89),
+              customExpansionPanel(courseName: "Turkish", examPoint: 24, quizPoint: 67, projectPoint: 89),
+              SizedBox(
+                height: 15,
+              ),customExpansionPanel(courseName: "English", examPoint: 24, quizPoint: 67, projectPoint: 89),
+              SizedBox(
+                height: 15,
+              ),customExpansionPanel(courseName: "German", examPoint: 24, quizPoint: 67, projectPoint: 89),
+              SizedBox(
+                height: 15,
+              ),customExpansionPanel(courseName: "Geography", examPoint: 24, quizPoint: 67, projectPoint: 89),
+              SizedBox(
+                height: 15,
+              ),customExpansionPanel(courseName: "History", examPoint: 24, quizPoint: 67, projectPoint: 89),
               SizedBox(
                 height: 15,
               ),
+
+
               Container(
                 // color: PageColors.mainColor,
                 decoration: BoxDecoration(

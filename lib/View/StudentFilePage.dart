@@ -30,7 +30,19 @@ class _UploadFileState extends State<UploadFile> {
     final file=File(pickedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
-    uploadTask =ref.putFile(file);
+    setState(() {
+      uploadTask =ref.putFile(file);
+
+    });
+
+
+    final snapshot = await uploadTask!.whenComplete(() {});
+    final urlDownload = await snapshot.ref.getDownloadURL();
+    print('Download Link: $urlDownload');
+
+    setState(() {
+      uploadTask =null;
+    });
 
   }
   @override
@@ -79,12 +91,50 @@ class _UploadFileState extends State<UploadFile> {
                 onPressed: uploadFile,
               ),
             ),
+            SizedBox(
+              height: 32,
+            ),
+            buildProgress(),
+
           ],
         ),
       ),
       drawer: customDrawer(),
     );
+
   }
+  Widget buildProgress ()=> StreamBuilder<TaskSnapshot>(
+      stream: uploadTask?.snapshotEvents,
+      builder: (context,snapshot) {
+        if (snapshot.hasData) {
+          final data = snapshot.data!;
+          double progress = data.bytesTransferred / data.totalBytes;
+          return SizedBox(
+            height: 50,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                LinearProgressIndicator(
+                  value: progress,
+                  backgroundColor: Colors.grey,
+                  color: Colors.green,
+                ),
+                Center(
+                  child: Text('${100 * progress.roundToDouble()} %',
+                    style: TextStyle(color: Colors.white),),
+                ),
+              ],
+            ),
+          );
+        }
+        else {
+          return SizedBox(height: 50,);
+
+        }
+      }
+
+
+  );
 
 }
 
