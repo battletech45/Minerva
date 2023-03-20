@@ -61,9 +61,9 @@ class _UploadFileState extends State<UploadFile> {
               Container(
                 height: 300,
                 color: Colors.blue[100],
-                child: Center(
-                  child: Text(pickedFile!.name),
-                ),
+                child: Image.file(File(pickedFile!.path!),
+                width: double.infinity,
+                fit: BoxFit.cover,),
               ),
             SizedBox(
               height: 32,
