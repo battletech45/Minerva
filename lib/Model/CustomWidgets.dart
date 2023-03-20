@@ -40,7 +40,7 @@ class _customDrawerState extends State<customDrawer> {
               children: [
                 ListTile(
                   leading: CircleAvatar(
-                    radius: 43,
+                    radius: 45,
                     backgroundColor: PageColors.secondaryColor,
                     child: Icon(Icons.person, size: 50.0),
                   ),
@@ -53,7 +53,7 @@ class _customDrawerState extends State<customDrawer> {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.house, size: 30, color: Colors.black54),
+            leading: Icon(FontAwesomeIcons.house, size: 25, color: Colors.black54),
             title: Text('Home',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
@@ -71,7 +71,7 @@ class _customDrawerState extends State<customDrawer> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.grade_sharp, size: 30, color: Colors.black54),
+            leading: Icon(FontAwesomeIcons.star, size: 30, color: Colors.black54),
             title: Text('Grades',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
@@ -90,7 +90,7 @@ class _customDrawerState extends State<customDrawer> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.chat, size: 30, color: Colors.black54),
+            leading: Icon(FontAwesomeIcons.solidMessage, size: 30, color: Colors.black54),
             title: Text('Chat',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
@@ -99,7 +99,7 @@ class _customDrawerState extends State<customDrawer> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.announcement, size: 30, color: Colors.black54),
+            leading: Icon(FontAwesomeIcons.solidNewspaper, size: 30, color: Colors.black54),
             title: Text('Announcement',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
@@ -108,7 +108,7 @@ class _customDrawerState extends State<customDrawer> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.content_copy, size: 30, color: Colors.black54),
+            leading: Icon(FontAwesomeIcons.book, size: 30, color: Colors.black54),
             title: Text('Content',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
@@ -119,7 +119,7 @@ class _customDrawerState extends State<customDrawer> {
           SizedBox(height:15),
           Divider(color: PageColors.secondaryColor,),
           ListTile(
-            leading: Icon(Icons.logout, size: 30, color: Colors.black54),
+            leading: Icon(FontAwesomeIcons.arrowRightFromBracket, size: 30, color: Colors.black54),
             title: Text('Sign Out',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {

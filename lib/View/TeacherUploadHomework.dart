@@ -36,24 +36,21 @@ class _UploadHomeworkState extends State<UploadHomework> {
   }
 
   Future uploadFile() async {
-    final path ='sampleFile/${pickedFile!.name}';
-    final file=File(pickedFile!.path!);
+    final path = 'sampleFile/${pickedFile!.name}';
+    final file = File(pickedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
     setState(() {
-      uploadTask =ref.putFile(file);
-
+      uploadTask = ref.putFile(file);
     });
-
 
     final snapshot = await uploadTask!.whenComplete(() {});
     final urlDownload = await snapshot.ref.getDownloadURL();
     print('Download Link: $urlDownload');
 
     setState(() {
-      uploadTask =null;
+      uploadTask = null;
     });
-
   }
 
   @override
@@ -81,18 +78,32 @@ class _UploadHomeworkState extends State<UploadHomework> {
                 child: Text(pickedFile!.name),       ),
               ],
             ), */
-            
+            if (pickedFile != null)
+              Container(
+                height: 120,
+                width: 120,
+                color: Colors.blue[100],
+                child: Image.file(
+                  File(pickedFile!.path!),
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+              ),
+
+            SizedBox(
+              height: 10,
+            ),
             //Birini seçince hepisi işaretleniyor!!!
             Container(
               height: 400,
-              margin: EdgeInsets.symmetric(horizontal:10),
+              margin: EdgeInsets.symmetric(horizontal: 10),
               child: SingleChildScrollView(
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  childAspectRatio: 3,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10),
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 3,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
                   itemCount: classes.length,
@@ -167,9 +178,9 @@ class _UploadHomeworkState extends State<UploadHomework> {
   }
 
   //Bu buildProgress çalışmıyo sonra bakalım
-  Widget buildProgress ()=> StreamBuilder<TaskSnapshot>(
+  Widget buildProgress() => StreamBuilder<TaskSnapshot>(
       stream: uploadTask?.snapshotEvents,
-      builder: (context,snapshot) {
+      builder: (context, snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data!;
           double progress = data.bytesTransferred / data.totalBytes;
@@ -184,19 +195,18 @@ class _UploadHomeworkState extends State<UploadHomework> {
                   color: Colors.green,
                 ),
                 Center(
-                  child: Text('${100 * progress.roundToDouble()} %',
-                    style: TextStyle(color: Colors.white),),
+                  child: Text(
+                    '${100 * progress.roundToDouble()} %',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
           );
+        } else {
+          return SizedBox(
+            height: 10,
+          );
         }
-        else {
-          return SizedBox(height: 10,);
-
-        }
-      }
-
-
-  );
+      });
 }
