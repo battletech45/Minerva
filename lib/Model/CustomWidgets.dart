@@ -12,6 +12,7 @@ import 'package:minerva/View/StudentGradePage.dart';
 import 'package:minerva/View/TeacherGradePage.dart';
 import 'package:minerva/View/WelcomePage.dart';
 import '../View/AttendanceTeacherPage.dart';
+import '../View/ChatsListPage.dart';
 import '../View/ContentStudentPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -95,7 +96,7 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => ChatPage(chatID: 'BtR70Ef4e6xyVPDsr6CW', userName: auth.currentUser!.uid)));
+                  MaterialPageRoute(builder: (context) => ChatsListPage()));
             },
           ),
           ListTile(
