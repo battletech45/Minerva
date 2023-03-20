@@ -94,15 +94,7 @@ class _ChatPageState extends State<ChatPage> {
                   IconButton(icon: Icon(Icons.send),
                     onPressed: () {
                       _sendMessage();
-                    }/*
-                      if (_textEditingController.text.isNotEmpty) {
-                        setState(() {
-                          _message.add(ChatTile(message: _textEditingController.text, sentByMe: testSender, sender: 'Altay'),
-                          );
-                          _textEditingController.clear();
-                          testSender =! testSender;
-                        });
-                      }*/
+                    }
                   )
                 ],
               ),
