@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Model/CustomWidgets.dart';
 import '../Model/WidgetProperties.dart';
 import 'ChatPage.dart';
 
@@ -39,12 +40,13 @@ class _ChatsListPageState extends State<ChatsListPage> {
       body: StreamBuilder<QuerySnapshot>(
         stream: allChatsSnapshot,
         builder: (context, snapshot) {
-          return ListView.builder(
+          return snapshot.hasData ? ListView.builder(
               physics: BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  leading: CircleAvatar(child: Icon(Icons.person)),
                   title: Text(snapshot.data!.docs[index].get('chatID')),
                   subtitle: Text(snapshot.data!.docs[index].get('recentMessage')),
                   onTap: () {
@@ -53,9 +55,10 @@ class _ChatsListPageState extends State<ChatsListPage> {
                   },
                 );
               }
-          );
+          ) : CircularProgressIndicator();
         }
       ),
+      drawer: customDrawer(),
     );
   }
 }
