@@ -61,38 +61,88 @@ class _UploadHomeworkState extends State<UploadHomework> {
           automaticallyImplyLeading: true,
           backgroundColor: PageColors.mainColor,
           centerTitle: true,
-          title: Text("HOME",
+          title: Text("Upload Homework",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /*
-            ListView(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              children: [
-                Container(
-                color: Colors.blue[100],
-                child: Text(pickedFile!.name),       ),
-              ],
-            ), */
-            if (pickedFile != null)
-              Container(
-                height: 120,
-                width: 120,
-                color: Colors.blue[100],
-                child: Image.file(
-                  File(pickedFile!.path!),
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+            Container(
+              height: 200,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                children: [
+                  SizedBox(width: 10),
+                  if (pickedFile != null)
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: PageColors.mainColor,
+                      ),
+                      width: 200,
+                      height: 200,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          File(pickedFile!.path!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  SizedBox(width: 10),
+                  if (pickedFile != null)
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: PageColors.mainColor,
+                      ),
+                      width: 200,
+                      height: 200,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          File(pickedFile!.path!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  SizedBox(width: 10),
+                  if (pickedFile != null)
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: PageColors.mainColor,
+                      ),
+                      width: 200,
+                      height: 200,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          File(pickedFile!.path!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  SizedBox(width: 10),
+                  /*
+                  if (pickedFile != null)
+                    Container(
+                      height: 190,
+                      child: Image.file(
+                        File(pickedFile!.path!),
+                        fit: BoxFit.cover,
+                      ), 
+                    ),*/
+                ],
               ),
+            ),
 
             SizedBox(
               height: 10,
             ),
+
             //Birini seçince hepisi işaretleniyor!!!
             Container(
               height: 400,
@@ -138,41 +188,44 @@ class _UploadHomeworkState extends State<UploadHomework> {
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: PageColors.mainColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      minimumSize: Size(50, 45)),
-                  child: Text(
-                    'Select File',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  onPressed: selectFile,
-                ),
-                SizedBox(
-                  width: 50,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: PageColors.mainColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      minimumSize: Size(50, 45)),
-                  child: Text(
-                    'Upload File',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  onPressed: uploadFile,
-                ),
-                SizedBox(height: 32),
-                buildProgress(),
-              ],
-            ),
           ],
+        ),
+        bottomSheet: Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: PageColors.mainColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    minimumSize: Size(50, 50)),
+                child: Text(
+                  'Select File',
+                  style: TextStyle(fontSize: 17),
+                ),
+                onPressed: selectFile,
+              ),
+              SizedBox(
+                width: 60,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: PageColors.mainColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    minimumSize: Size(50, 50)),
+                child: Text(
+                  'Upload File',
+                  style: TextStyle(fontSize: 17),
+                ),
+                onPressed: uploadFile,
+              ),
+              SizedBox(height: 32),
+              buildProgress(),
+            ],
+          ),
         ),
         drawer: customDrawer());
   }
