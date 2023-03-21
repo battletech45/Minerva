@@ -147,42 +147,25 @@ class _UploadHomeworkState extends State<UploadHomework> {
             Container(
               height: 400,
               margin: EdgeInsets.symmetric(horizontal: 10),
-              child: SingleChildScrollView(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      childAspectRatio: 3,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10),
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  itemCount: classes.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      margin: EdgeInsets.symmetric(vertical: 5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: PageColors.secondaryColor,
-                      ),
-                      child: CheckboxListTile(
-                          title: Text(
-                            classes[index],
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                                letterSpacing: 0.5),
-                          ),
-                          value: isSelected,
-                          selected: !isSelected,
-                          onChanged: (bool? selectedValue) {
-                            setState(() {
-                              isSelected = selectedValue!;
-                            });
-                          }),
-                    );
-                  },
-                ),
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    childAspectRatio: 3,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemCount: classes.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: PageColors.secondaryColor,
+                    ),
+                    child: customCheckBoxListTile(classes: classes, index: index)
+                  );
+                },
               ),
             ),
             SizedBox(
