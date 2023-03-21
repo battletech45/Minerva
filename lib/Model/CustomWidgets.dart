@@ -266,7 +266,8 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
           width: 2,
           color: Colors.black54,
           strokeAlign: BorderSide.strokeAlignInside,
-        ),),
+        ),
+      ),
       child: ExpansionTile(
         title: Text("$course"),
         trailing: Icon(
@@ -291,6 +292,39 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
           });
         },
       ),
+    );
+  }
+}
+
+class customCheckBoxListTile extends StatefulWidget {
+  final List<String> classes;
+  final int index;
+
+  const customCheckBoxListTile({Key? key, required this.classes, required this.index}) : super(key: key);
+  @override
+  State<customCheckBoxListTile> createState() => _customCheckBoxListTileState();
+}
+
+class _customCheckBoxListTileState extends State<customCheckBoxListTile> {
+  bool isSelected = false;
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+      title: Text(
+        widget.classes[widget.index],
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: Colors.black,
+          letterSpacing: 0.5)
+      ),
+      value: isSelected,
+      selected: !isSelected,
+      onChanged: (val) {
+        setState(() {
+          isSelected = val!;
+        });
+      },
     );
   }
 }
