@@ -11,6 +11,7 @@ class FirebaseFunctions {
   final CollectionReference teacherCollection = FirebaseFirestore.instance.collection('teachers');
   final CollectionReference schoolCollection = FirebaseFirestore.instance.collection('schools');
   final CollectionReference chatsCollection = FirebaseFirestore.instance.collection('chats');
+  final CollectionReference modelCollection = FirebaseFirestore.instance.collection('model');
 
   Future createStudent(String studentName, String password, String email, String tc, String studentNumber, String registerNumber) async {
     await studentCollection.add({
@@ -85,5 +86,15 @@ class FirebaseFunctions {
     await chatDocRef.update({
       'members': FieldValue.arrayUnion([teacherID + '_' + teacherName])
     });
+  }
+
+  Future<List<String>> getTokens() async{
+    List<String> data = [];
+    var val = await modelCollection.doc('n3sugofTvAvEJEoxjcip').get();
+    if(val.exists) {
+      data.add(val.get('studentToken'));
+      data.add(val.get('teacherToken'));
+    }
+    return data;
   }
 }
