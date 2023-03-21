@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import '../Model/WidgetProperties.dart';
 import 'ChatPage.dart';
@@ -14,11 +15,16 @@ class ChatsListPage extends StatefulWidget {
 class _ChatsListPageState extends State<ChatsListPage> {
   Stream<QuerySnapshot>? allChatsSnapshot;
   FirebaseAuth auth = FirebaseAuth.instance;
+  String userName = '';
 
   _getChats() async {
     var val = await FirebaseFunctions().getAllChats();
     setState(() {
       allChatsSnapshot = val;
+    });
+    var name = await SharedFunctions.getUserNameSharedPreference();
+    setState(() {
+      userName = name!;
     });
   }
 
@@ -51,7 +57,7 @@ class _ChatsListPageState extends State<ChatsListPage> {
                   subtitle: Text(snapshot.data!.docs[index].get('recentMessage')),
                   onTap: () {
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => ChatPage(chatID: snapshot.data!.docs[index].get('chatID'), userName: auth.currentUser!.uid)));
+                        MaterialPageRoute(builder: (context) => ChatPage(chatID: snapshot.data!.docs[index].get('chatID'), userName: userName)));
                   },
                 );
               }
