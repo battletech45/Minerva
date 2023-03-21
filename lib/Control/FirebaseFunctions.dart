@@ -12,7 +12,7 @@ class FirebaseFunctions {
   final CollectionReference schoolCollection = FirebaseFirestore.instance.collection('schools');
   final CollectionReference chatsCollection = FirebaseFirestore.instance.collection('chats');
 
-  Future createStudent(String studentName, String password, String email, String tc, String studentNumber) async {
+  Future createStudent(String studentName, String password, String email, String tc, String studentNumber, String registerNumber) async {
     await studentCollection.add({
       'studentName': studentName,
       'password': password,
@@ -20,9 +20,10 @@ class FirebaseFunctions {
       'courses': [],
       'studentNumber': studentNumber,
       'tc':tc,
+      'registerNumber': registerNumber
     });
   }
-  Future createTeacher(String teacherName, String password, String email, String tc, String teacherNumber) async {
+  Future createTeacher(String teacherName, String password, String email, String tc, String teacherNumber, String registerNumber) async {
     await teacherCollection.add({
       'teacherName': teacherName,
       'password': password,
@@ -30,7 +31,8 @@ class FirebaseFunctions {
       'courses': [],
       'teacherID': '',
       'teacherNumber': teacherNumber,
-      'tc': tc
+      'tc': tc,
+      'registerNumber': registerNumber
     });
   }
   Future createSchool(String schoolName, String password, String email, String principalName) async {
