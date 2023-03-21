@@ -51,20 +51,87 @@ class _UploadFileState extends State<UploadFile> {
       appBar: AppBar(
         backgroundColor:PageColors.mainColor,
         centerTitle: true,
-        title: Text('File'),
+        title: Text('File',
+        style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (pickedFile != null)
-              Container(
-                height: 300,
-                color: Colors.blue[100],
-                child: Image.file(File(pickedFile!.path!),
-                width: double.infinity,
-                fit: BoxFit.cover,),
+            Container(
+              height: 200,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                children: [
+                  SizedBox(width: 10),
+                  if (pickedFile != null)
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: PageColors.mainColor,
+                      ),
+                      width: 200,
+                      height: 200,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          File(pickedFile!.path!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  SizedBox(width: 10),
+                  if (pickedFile != null)
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: PageColors.mainColor,
+                      ),
+                      width: 200,
+                      height: 200,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          File(pickedFile!.path!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  SizedBox(width: 10),
+                  if (pickedFile != null)
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: PageColors.mainColor,
+                      ),
+                      width: 200,
+                      height: 200,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          File(pickedFile!.path!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  SizedBox(width: 10),
+                  /*
+                  if (pickedFile != null)
+                    Container(
+                      height: 190,
+                      child: Image.file(
+                        File(pickedFile!.path!),
+                        fit: BoxFit.cover,
+                      ),
+                    ),*/
+                ],
               ),
+            ),
+            SizedBox(width: 10),
+
             SizedBox(
               height: 32,
             ),
