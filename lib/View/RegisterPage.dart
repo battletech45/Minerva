@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Control/Validators.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
@@ -13,48 +14,92 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPage extends State<RegisterPage> {
+
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
   final registrationNumberController = TextEditingController();
   final TCController = TextEditingController();
   final schoolNumberController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  FirebaseAuth authReg = FirebaseAuth.instance;
+  List<String> tokens = [];
 
   Future register() async {
-    if(formKey.currentState!.validate()) return;
-   // formKey.currentState!.save();
+    if(formKey.currentState!.validate()) {}
+   formKey.currentState!.save();
     try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-      User? user = userCredential.user;
-      print(user!.uid);
-      await FirebaseFunctions(userID: user.uid).createStudent(
-          'test',
-          passwordController.text,
-          emailController.text,
-          TCController.text,
-          schoolNumberController.text);
-      var data = await FirebaseFunctions().getStudentData(emailController.text);
-      await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
-      await SharedFunctions.saveUserNameSharedPreference(
-          data.docs[0].get('studentName'));
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => ProfilePage()));
-    } on FirebaseAuthException catch (e) {
-      /*
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      } */
+      print(registrationNumberController.text.isEmpty);
+      if(registrationNumberController.text.isNotEmpty) {
+        print('here2');
+        if(tokens.contains(registrationNumberController.text)) {
+          print("here");
+          if(registrationNumberController.text == tokens[0]) {
+            UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim(),
+            );
+            User? user = userCredential.user;
+            print(user!.uid);
+            await FirebaseFunctions(userID: user.uid).createStudent(
+                'test',
+                passwordController.text,
+                emailController.text,
+                TCController.text,
+                schoolNumberController.text,
+                registrationNumberController.text
+            );
+            var data = await FirebaseFunctions().getStudentData(emailController.text);
+            await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
+            await SharedFunctions.saveUserNameSharedPreference(
+                data.docs[0].get('studentName'));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => ProfilePage()));
+          }
+          if(registrationNumberController.text == tokens[1]) {
+            UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim(),
+            );
+            User? user = userCredential.user;
+            print(user!.uid);
+            await FirebaseFunctions(userID: user.uid).createTeacher(
+                'test',
+                passwordController.text,
+                emailController.text,
+                TCController.text,
+                schoolNumberController.text,
+                registrationNumberController.text
+            );
+            var data = await FirebaseFunctions().getTeacherData(emailController.text);
+            await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
+            await SharedFunctions.saveUserNameSharedPreference(
+                data.docs[0].get('teacherName'));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => ProfilePage()));
+          }
+        }
+        else {print('token not matched');}
+      }
+      else {print('register number cannot be empty');}
     } catch (e) {
       print(e);
     }
   }
+
+  storeTokens() async {
+    var val = await FirebaseFunctions().getTokens();
+    tokens = val;
+    print(tokens[0]);
+    print(tokens[1]);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    storeTokens();
+  }
+
 
   @override
   Widget build(BuildContext context) {
