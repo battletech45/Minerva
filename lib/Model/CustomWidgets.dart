@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/AnnouncementStudentPage.dart';
 import 'package:minerva/View/AnnouncementTeacherPage.dart';
 import 'package:minerva/View/AttendanceStudentPage.dart';
 import 'package:minerva/View/ChatPage.dart';
+import 'package:minerva/View/ContentTeacherPage.dart';
 import 'package:minerva/View/GradePage.dart';
 import 'package:minerva/View/HomePage.dart';
 import 'package:minerva/View/ProfilePage.dart';
+import 'package:minerva/View/ProfileTeacher.dart';
 import 'package:minerva/View/RegisterPage.dart';
 import 'package:minerva/View/StudentGradePage.dart';
 import 'package:minerva/View/TeacherGradePage.dart';
@@ -23,7 +26,23 @@ class customDrawer extends StatefulWidget {
 }
 
 class _customDrawerState extends State<customDrawer> {
-  FirebaseAuth auth = FirebaseAuth.instance;
+  String userName = '';
+  bool isStudent = false;
+
+  getUserInfos() async {
+    var name = await SharedFunctions.getUserNameSharedPreference();
+    var check = await SharedFunctions.getUserStudentSharedPreferences();
+    setState(() {
+      userName = name!;
+      isStudent = check!;
+    });
+    print(userName);
+  }
+  @override
+  void initState() {
+    super.initState();
+    getUserInfos();
+  }
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -46,7 +65,7 @@ class _customDrawerState extends State<customDrawer> {
                     backgroundColor: PageColors.secondaryColor,
                     child: Icon(Icons.person, size: 50.0),
                   ),
-                  title: Text('Metin Baybars Arslan',
+                  title: Text('$userName',
                       style: TextStyle(color: Colors.black, fontSize: 20)),
                   subtitle: Text('School Number',
                       style: TextStyle(color: Colors.black)),
@@ -69,7 +88,7 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
+                  MaterialPageRoute(builder: (context) => isStudent ? ProfilePage() : ProfileTeacherPage()));
             },
           ),
           ListTile(
@@ -78,7 +97,7 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => TeacherGradePage()));
+                  MaterialPageRoute(builder: (context) => isStudent ? StudentGradePage() : TeacherGradePage()));
             },
           ),
           ListTile(
@@ -88,7 +107,7 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => AttendanceTeacherPage()));
+                  builder: (context) => isStudent ? AttendanceStudentPage() : AttendanceTeacherPage()));
             },
           ),
           ListTile(
@@ -106,7 +125,7 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => AnnouncementTeacherPage()));
+                  builder: (context) => isStudent ? AnnouncementStudentPage() : AnnouncementTeacherPage()));
             },
           ),
           ListTile(
@@ -115,7 +134,7 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => ContentStudent()));
+                  MaterialPageRoute(builder: (context) => isStudent ? ContentStudent() : ContentTeacherPage()));
             },
           ),
           SizedBox(height:15),
