@@ -5,6 +5,7 @@ import 'package:minerva/View/AnnouncementStudentPage.dart';
 import 'package:minerva/View/AnnouncementTeacherPage.dart';
 import 'package:minerva/View/AttendanceStudentPage.dart';
 import 'package:minerva/View/ChatPage.dart';
+import 'package:minerva/View/GradePage.dart';
 import 'package:minerva/View/HomePage.dart';
 import 'package:minerva/View/ProfilePage.dart';
 import 'package:minerva/View/RegisterPage.dart';
@@ -77,7 +78,7 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => StudentGradePage()));
+                  MaterialPageRoute(builder: (context) => TeacherGradePage()));
             },
           ),
           ListTile(
