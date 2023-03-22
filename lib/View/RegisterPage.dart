@@ -124,7 +124,7 @@ class _RegisterPage extends State<RegisterPage> {
       ),
       body: Center(
         child: Form(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          
           key: formKey,
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
@@ -137,6 +137,7 @@ class _RegisterPage extends State<RegisterPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
+                   autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: TCController,
                      validator: Validators.checkTC,
                     textAlign: TextAlign.center,
@@ -159,6 +160,7 @@ class _RegisterPage extends State<RegisterPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
+                   autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: schoolNumberController,
                      validator: Validators.checkEmptyFields,
                     textAlign: TextAlign.center,
@@ -181,6 +183,7 @@ class _RegisterPage extends State<RegisterPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
+                   autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: emailController,
                     validator: Validators.checkEmail,
                     textAlign: TextAlign.center,
@@ -203,6 +206,7 @@ class _RegisterPage extends State<RegisterPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
+                   autovalidateMode: AutovalidateMode.onUserInteraction,
                     obscureText: true,
                     validator: Validators.validatePassword,
                     controller: passwordController,
@@ -226,6 +230,7 @@ class _RegisterPage extends State<RegisterPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
+                   autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: registrationNumberController,
                      validator: Validators.checkEmptyFields,
                     textAlign: TextAlign.center,

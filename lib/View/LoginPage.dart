@@ -35,7 +35,6 @@ class _LoginPageState extends State<LoginPage> {
           )),
       body: Center(
         child: Form(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           key: formKey,
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 80.0),
@@ -51,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: schoolNumberController,
                   validator: Validators.checkEmail,
                   textAlign: TextAlign.center,
@@ -76,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: passwordController,
                   validator: Validators.validatePassword,
                   textAlign: TextAlign.center,

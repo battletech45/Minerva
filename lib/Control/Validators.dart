@@ -1,18 +1,14 @@
 class Validators{
-  /*
-  static String? validateEmail(String? value){
-    if(value!.trim().isEmpty){
-      return "Field cannot be empty";
-    }
-    return null;
-  } */
   static String? validatePassword(String? value){
     if(value!.trim().isEmpty){
       return "Please provide a password";
     }
-    if(value.length<6){
+    if(value.length<8){
        return "Password has minimum 7 characters";
     }
+    if(!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(value)){
+         return "Password should contain upper,lower,digit and Special character ";
+        }
     return null;
   }
   static String? checkEmail(String? value){
