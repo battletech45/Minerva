@@ -157,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
         if(data.docs[0].get('registerNumber') == 'GA1G#nE1#8GNBKn2zJOU') {
           await SharedFunctions.saveUserStudentSharedPreference(true);
         }
-        if(data.docs[0].get('registerNumber') == 'PJDRa#52TsrN3f7E69K&'){
+        else {
           await SharedFunctions.saveUserStudentSharedPreference(false);
         }
         await SharedFunctions.saveUserEmailSharedPreference(
