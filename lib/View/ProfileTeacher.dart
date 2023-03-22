@@ -3,12 +3,12 @@ import 'package:minerva/Model/CustomWidgets.dart';
 
 import '../Model/WidgetProperties.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfileTeacherPage extends StatefulWidget {
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ProfileTeacherPage> createState() => _ProfileTeacherPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfileTeacherPageState extends State<ProfileTeacherPage> {
   //final Color mainColor = Color.fromRGBO(28, 88, 140, 1);
   @override
   Widget build(BuildContext context) {
