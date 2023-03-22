@@ -21,18 +21,21 @@ class _RegisterPage extends State<RegisterPage> {
   final TCController = TextEditingController();
   final schoolNumberController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  bool isStudent = false;
   List<String> tokens = [];
 
   Future register() async {
     if(formKey.currentState!.validate()) {}
    formKey.currentState!.save();
     try {
-      print(registrationNumberController.text.isEmpty);
       if(registrationNumberController.text.isNotEmpty) {
         print('here2');
         if(tokens.contains(registrationNumberController.text)) {
           print("here");
           if(registrationNumberController.text == tokens[0]) {
+            setState(() {
+              isStudent = true;
+            });
             UserCredential userCredential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
               email: emailController.text.trim(),
@@ -50,6 +53,7 @@ class _RegisterPage extends State<RegisterPage> {
             );
             var data = await FirebaseFunctions().getStudentData(emailController.text);
             await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
+            await SharedFunctions.saveUserStudentSharedPreference(isStudent);
             await SharedFunctions.saveUserNameSharedPreference(
                 data.docs[0].get('studentName'));
             Navigator.of(context).pushReplacement(
@@ -73,6 +77,7 @@ class _RegisterPage extends State<RegisterPage> {
             );
             var data = await FirebaseFunctions().getTeacherData(emailController.text);
             await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
+            await SharedFunctions.saveUserStudentSharedPreference(isStudent);
             await SharedFunctions.saveUserNameSharedPreference(
                 data.docs[0].get('teacherName'));
             Navigator.of(context).pushReplacement(
