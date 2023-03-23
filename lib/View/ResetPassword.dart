@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/LoginPage.dart';
@@ -140,7 +141,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     );
   }
 
-  void passCheck() {
+  Future passCheck() async{
     if (passwordController.text.trim().isEmpty ||
         confirmPasswordController.text.trim().isEmpty) {
       print("Inputboxes should not be empty");
@@ -148,6 +149,8 @@ class _ResetPasswordState extends State<ResetPassword> {
       print("Password does not match");
     } else {
       print("Passwords are succesfully matched");
+      await FirebaseAuth.instance
+    .sendPasswordResetEmail(email: "user@example.com");
     }
   }
 }
