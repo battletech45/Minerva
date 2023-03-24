@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:flutter/material.dart';
 import '../Model/WidgetProperties.dart';
@@ -12,6 +14,30 @@ class TeacherGradePage extends StatefulWidget {
 }
 
 class _TeacherGradePageState extends State<TeacherGradePage> {
+  final _formKey = GlobalKey<FormState>();
+  late String _grade;
+
+
+  TextEditingController? _homeworkController;
+   TextEditingController? _quizController;
+   TextEditingController? _examController;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _homeworkController = TextEditingController();
+    _quizController = TextEditingController();
+    _examController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _homeworkController?.dispose();
+    _quizController?.dispose();
+    _examController?.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,261 +50,150 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
           automaticallyImplyLeading: true,
           backgroundColor: PageColors.mainColor,
       ),
-      body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(30.0),
-        decoration: BoxDecoration(
-            border: Border(bottom: BorderSide()), color: Colors.white),
-        child: ListView(
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              child: Card(
-                shadowColor: Color.fromRGBO(165, 187, 210, 1),
-                color: Colors.white60,
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+
+      body: Padding(
+        padding: const EdgeInsets.only(top: 25.0),
+        child: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(40.0),
+          decoration: BoxDecoration(
+              border: Border(bottom: BorderSide()), color: Colors.white),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text('Homework', style: TextStyle(fontSize: 18)),
+                TextFormField(
+                  controller: _homeworkController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: InputDecoration(
+                    hintText: 'Enter your homework grade',
                   ),
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.grade_sharp),
-                  ),
-                  title: Row(
-                    children: <Widget>[
-                      Text(
-                        'Homework1',
-                        style: TextStyle(fontSize: 24),
-                        textAlign: TextAlign.start,
-                      ),
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.only(left: 18.0),
-                        child: TextFormField(
-                          style: TextStyle(fontSize: 22),
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 2.0,
-                              ),
-                            ),
-                            labelText: ('Score'),
-                            labelStyle:
-                                TextStyle(color: Colors.grey, fontSize: 24),
-                          ),
-                        ),
-                      )),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 1.0),
-                        child: IconButton(
-                            icon: Icon(
-                              Icons.check_circle,
-                              size: 40,
-                              color: Colors.green,
-                            ),
-                            onPressed: () {}),
-                      ),
-                    ],
-                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a grade';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _grade = value!;
+                  },
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              child: Card(
-                shadowColor: Color.fromRGBO(165, 187, 210, 1),
-                color: Colors.white60,
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.grade_sharp),
-                  ),
-                  title: Row(
-                    children: <Widget>[
-                      Text(
-                        'Homework2',
-                        style: TextStyle(fontSize: 24),
-                        textAlign: TextAlign.start,
-                      ),
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.only(left: 18.0),
-                        child: TextFormField(
-                          style: TextStyle(fontSize: 22),
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 2.0,
-                              ),
-                            ),
-                            labelText: ('Score'),
-                            labelStyle:
-                                TextStyle(color: Colors.grey, fontSize: 24),
-                          ),
-                        ),
-                      )),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 1.0),
-                        child: IconButton(
-                            icon: Icon(
-                              Icons.check_circle,
-                              size: 40,
-                              color: Colors.green,
-                            ),
-                            onPressed: () {}),
-                      ),
-                    ],
-                  ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: PageColors.thirdColor),
+                  onPressed: () {
+                    if(_formKey.currentState!.validate()){
+                      _formKey.currentState!.save();
+                      _gradeTask();
+                    }
+
+                  },
+                  child: Text('Submit'),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              child: Card(
-                shadowColor: Color.fromRGBO(165, 187, 210, 1),
-                color: Colors.white60,
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                SizedBox(height: 16),
+                Text('Quiz', style: TextStyle(fontSize: 18)),
+                TextFormField(
+                  controller: _quizController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: InputDecoration(
+                    hintText: 'Enter your quiz grade',
                   ),
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.grade_sharp),
-                  ),
-                  title: Row(
-                    children: <Widget>[
-                      Text(
-                        'Exam',
-                        style: TextStyle(fontSize: 24),
-                        textAlign: TextAlign.start,
-                      ),
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.only(left: 85.0),
-                        child: TextFormField(
-                          style: TextStyle(fontSize: 22),
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 2.0,
-                              ),
-                            ),
-                            labelText: ('Score'),
-                            labelStyle:
-                                TextStyle(color: Colors.grey, fontSize: 24),
-                          ),
-                        ),
-                      )),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 1.0),
-                        child: IconButton(
-                            icon: Icon(
-                              Icons.check_circle,
-                              size: 40,
-                              color: Colors.green,
-                            ),
-                            onPressed: () {}),
-                      ),
-                    ],
-                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a grade';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _grade = value!;
+                  },
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              child: Card(
-                shadowColor: Color.fromRGBO(165, 187, 210, 1),
-                color: Colors.white60,
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.grade_sharp),
-                  ),
-                  title: Row(
-                    children: <Widget>[
-                      Text(
-                        'Project',
-                        style: TextStyle(fontSize: 24),
-                        textAlign: TextAlign.start,
-                      ),
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.only(left: 65.0),
-                        child: TextFormField(
-                          style: TextStyle(fontSize: 22),
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 2.0,
-                              ),
-                            ),
-                            labelText: ('Score'),
-                            labelStyle:
-                                TextStyle(color: Colors.grey, fontSize: 24),
-                          ),
-                        ),
-                      )),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 1.0),
-                        child: IconButton(
-                            icon: Icon(
-                              Icons.check_circle,
-                              size: 40,
-                              color: Colors.green,
-                            ),
-                            onPressed: () {}),
-                      ),
-                    ],
-                  ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: PageColors.thirdColor),
+                  onPressed: () {
+                    if(_formKey.currentState!.validate()){
+                      _formKey.currentState!.save();
+                      _gradeTask();
+                    }
+                    // Quiz notu kaydetme işlemleri burada yapılacak.
+                  },
+                  child: Text('Submit'),
                 ),
-              ),
-            ),
-            SizedBox(height: 30),
-            SizedBox(
-              height: 30,
-              width: 2,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromRGBO(100, 136, 174, 1),
+                SizedBox(height: 16),
+                Text('Exam', style: TextStyle(fontSize: 18)),
+                TextFormField(
+                  controller: _examController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: InputDecoration(
+                    hintText: 'Enter your exam grade',
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a grade';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _grade = value!;
+                  },
                 ),
-                child: Text('Save All'),
-                onPressed: () {},
-              ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: PageColors.thirdColor),
+                  onPressed: () {
+                    if(_formKey.currentState!.validate()){
+                      _formKey.currentState!.save();
+                      _gradeTask();
+                    }
+                    // Exam notu kaydetme işlemleri burada yapılacak.
+                  },
+                  child: Text('Submit'),
+                ),
+
+              ],
+
             ),
+          ),
+        ),
+
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children:<Widget> [
+            IconButton( icon: Icon(Icons.arrow_back),onPressed: (){
+
+            },)
           ],
         ),
-      ),
+      ) ,
       drawer: customDrawer(),
     );
+  }
+  void _gradeTask() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('students');
+      //.doc(widget.studentId)
+      //.update({'grade': _grade});
+
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Grade saved')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to save grade')),
+      );
+    }
   }
 }
