@@ -38,54 +38,30 @@ class _EditAttendanceState extends State<EditAttendance> {
       body: Container(
         child: ListView.builder(
           itemCount: students.length,
-          itemBuilder: (context, index) => ExpansionTile(
-            title: Text(students[index]),
+          itemBuilder: (context, index){ return ExpansionTile(
+            title: Text(students[index],style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              letterSpacing: 0.5),),
             trailing: Icon(
                 expansionIcon
                     ? FontAwesomeIcons.sortUp
                     : FontAwesomeIcons.sortDown,
                 color: Colors.pink),
             children: <Widget>[
-              ListTile(
-                leading: Text("One Hour: "),
-                trailing: Checkbox(
-                  value: isSelected,
-                  onChanged: (val) {
-                    setState(() {
-                      isSelected = val!;
-                    });
-                  },
-                ),
-              ),
-              ListTile(
-                leading: Text("Two Hour: "),
-                trailing: Checkbox(
-                  value: isSelected,
-                  onChanged: (val) {
-                    setState(() {
-                      isSelected = val!;
-                    });
-                  },
-                ),
-              ),
-              ListTile(
-                leading: Text("Three Hour: "),
-                trailing: Checkbox(
-                  value: isSelected,
-                  onChanged: (val) {
-                    setState(() {
-                      isSelected = val!;
-                    });
-                  },
-                ),
-              )
+          
+              customEditCheckBoxListTile(hours: "One Hour"),
+              customEditCheckBoxListTile(hours: "Two Hour"),
+             customEditCheckBoxListTile(hours: "Three Hour"),
             ],
             onExpansionChanged: (bool expanded) {
               setState(() {
                 expansionIcon = expanded;
               });
             },
-          ),
+          );
+          }
         ),
       ),
       drawer: customDrawer(),

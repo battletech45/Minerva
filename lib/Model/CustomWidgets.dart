@@ -38,11 +38,13 @@ class _customDrawerState extends State<customDrawer> {
     });
     print(userName);
   }
+
   @override
   void initState() {
     super.initState();
     getUserInfos();
   }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -74,7 +76,8 @@ class _customDrawerState extends State<customDrawer> {
             ),
           ),
           ListTile(
-            leading: Icon(FontAwesomeIcons.house, size: 25, color: Colors.black54),
+            leading:
+                Icon(FontAwesomeIcons.house, size: 25, color: Colors.black54),
             title: Text('Home',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
@@ -87,17 +90,20 @@ class _customDrawerState extends State<customDrawer> {
             title: Text('Profile',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => isStudent ? ProfilePage() : ProfileTeacherPage()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) =>
+                      isStudent ? ProfilePage() : ProfileTeacherPage()));
             },
           ),
           ListTile(
-            leading: Icon(FontAwesomeIcons.star, size: 30, color: Colors.black54),
+            leading:
+                Icon(FontAwesomeIcons.star, size: 30, color: Colors.black54),
             title: Text('Grades',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => isStudent ? StudentGradePage() : TeacherGradePage()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) =>
+                      isStudent ? StudentGradePage() : TeacherGradePage()));
             },
           ),
           ListTile(
@@ -107,11 +113,14 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => isStudent ? AttendanceStudentPage() : AttendanceTeacherPage()));
+                  builder: (context) => isStudent
+                      ? AttendanceStudentPage()
+                      : AttendanceTeacherPage()));
             },
           ),
           ListTile(
-            leading: Icon(FontAwesomeIcons.solidMessage, size: 30, color: Colors.black54),
+            leading: Icon(FontAwesomeIcons.solidMessage,
+                size: 30, color: Colors.black54),
             title: Text('Chat',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
@@ -120,43 +129,50 @@ class _customDrawerState extends State<customDrawer> {
             },
           ),
           ListTile(
-            leading: Icon(FontAwesomeIcons.solidNewspaper, size: 30, color: Colors.black54),
+            leading: Icon(FontAwesomeIcons.solidNewspaper,
+                size: 30, color: Colors.black54),
             title: Text('Announcement',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => isStudent ? AnnouncementStudentPage() : AnnouncementTeacherPage()));
+                  builder: (context) => isStudent
+                      ? AnnouncementStudentPage()
+                      : AnnouncementTeacherPage()));
             },
           ),
           ListTile(
-            leading: Icon(FontAwesomeIcons.book, size: 30, color: Colors.black54),
+            leading:
+                Icon(FontAwesomeIcons.book, size: 30, color: Colors.black54),
             title: Text('Content',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => isStudent ? ContentStudent() : ContentTeacherPage()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) =>
+                      isStudent ? ContentStudent() : ContentTeacherPage()));
             },
           ),
-          SizedBox(height:15),
-          Divider(color: PageColors.secondaryColor,),
+          SizedBox(height: 15),
+          Divider(
+            color: PageColors.secondaryColor,
+          ),
           ListTile(
-            leading: Icon(FontAwesomeIcons.arrowRightFromBracket, size: 30, color: Colors.black54),
+            leading: Icon(FontAwesomeIcons.arrowRightFromBracket,
+                size: 30, color: Colors.black54),
             title: Text('Sign Out',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               signout();
-
             },
           ),
         ],
       ),
     );
   }
-  Future signout() async{
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => MainPage()));
 
+  Future signout() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => MainPage()));
   }
 }
 
@@ -211,7 +227,6 @@ class customContentFeed extends StatefulWidget {
 }
 
 class _customContentFeedState extends State<customContentFeed> {
-
   bool click = false;
   @override
   Widget build(BuildContext context) {
@@ -221,16 +236,18 @@ class _customContentFeedState extends State<customContentFeed> {
         Row(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: CircleAvatar(
                 radius: 25,
               ),
             ),
             SizedBox(width: 5),
-            Text("$name",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),)
+            Text(
+              "$name",
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            )
           ],
         ),
-
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Container(
@@ -238,22 +255,27 @@ class _customContentFeedState extends State<customContentFeed> {
             width: 400,
             decoration: BoxDecoration(
                 color: PageColors.secondaryColor,
-                borderRadius: BorderRadius.circular(8)
-            ),
+                borderRadius: BorderRadius.circular(8)),
           ),
         ),
         Row(
           children: [
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
-                child:IconButton(
-                    icon: click ? Icon(FontAwesomeIcons.solidHeart,size: 38,color: Colors.red,) : Icon(FontAwesomeIcons.heart,size: 38),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                child: IconButton(
+                    icon: click
+                        ? Icon(
+                            FontAwesomeIcons.solidHeart,
+                            size: 38,
+                            color: Colors.red,
+                          )
+                        : Icon(FontAwesomeIcons.heart, size: 38),
                     onPressed: () {
                       setState(() {
-                        click =! click;
+                        click = !click;
                       });
-                    })
-            ),
+                    })),
           ],
         ),
       ],
@@ -267,7 +289,13 @@ class customExpansionPanel extends StatefulWidget {
   final int projectPoint;
   final int quizPoint;
 
-  const customExpansionPanel({Key? key, required this.courseName, required this.examPoint, required this.projectPoint, required this.quizPoint}) : super(key: key);
+  const customExpansionPanel(
+      {Key? key,
+      required this.courseName,
+      required this.examPoint,
+      required this.projectPoint,
+      required this.quizPoint})
+      : super(key: key);
   @override
   State<customExpansionPanel> createState() => _customExpansionPanelState();
 }
@@ -291,7 +319,8 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
       child: ExpansionTile(
         title: Text("$course"),
         trailing: Icon(
-            expansionIcon ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+            expansionIcon ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown,
+            color: Colors.pink),
         children: <Widget>[
           ListTile(
             leading: Text("Exam: "),
@@ -306,7 +335,7 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
             trailing: Text("$quiz"),
           )
         ],
-        onExpansionChanged: (bool expanded){
+        onExpansionChanged: (bool expanded) {
           setState(() {
             expansionIcon = expanded;
           });
@@ -320,7 +349,9 @@ class customCheckBoxListTile extends StatefulWidget {
   final List<String> classes;
   final int index;
 
-  const customCheckBoxListTile({Key? key, required this.classes, required this.index}) : super(key: key);
+  const customCheckBoxListTile(
+      {Key? key, required this.classes, required this.index})
+      : super(key: key);
   @override
   State<customCheckBoxListTile> createState() => _customCheckBoxListTileState();
 }
@@ -330,14 +361,46 @@ class _customCheckBoxListTileState extends State<customCheckBoxListTile> {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-      title: Text(
-        widget.classes[widget.index],
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
-          letterSpacing: 0.5)
-      ),
+      title: Text(widget.classes[widget.index],
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              letterSpacing: 0.5)),
+      value: isSelected,
+      selected: !isSelected,
+      onChanged: (val) {
+        setState(() {
+          isSelected = val!;
+        });
+      },
+    );
+  }
+}
+
+class customEditCheckBoxListTile extends StatefulWidget {
+  final String hours;
+
+  const customEditCheckBoxListTile(
+      {Key? key, required this.hours})
+      : super(key: key);
+  @override
+  State<customEditCheckBoxListTile> createState() =>
+      _customEditCheckBoxListTileState();
+}
+
+class _customEditCheckBoxListTileState extends State<customEditCheckBoxListTile> {
+  bool isSelected = false;
+  @override
+  Widget build(BuildContext context) {
+    final String hours=widget.hours;
+    return CheckboxListTile(
+      title: Text("$hours",
+          style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              letterSpacing: 0.5)),
       value: isSelected,
       selected: !isSelected,
       onChanged: (val) {
