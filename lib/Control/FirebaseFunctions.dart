@@ -14,18 +14,22 @@ class FirebaseFunctions {
   final CollectionReference modelCollection = FirebaseFirestore.instance.collection('model');
 
   Future createStudent(String studentName, String password, String email, String tc, String studentNumber, String registerNumber) async {
-    await studentCollection.add({
+    DocumentReference docRef = await studentCollection.add({
       'studentName': studentName,
       'password': password,
       'email': email,
       'courses': [],
       'studentNumber': studentNumber,
       'tc':tc,
-      'registerNumber': registerNumber
+      'registerNumber': registerNumber,
+      'studentID': ''
+    });
+    await docRef.update({
+      'studentID': docRef.id
     });
   }
   Future createTeacher(String teacherName, String password, String email, String tc, String teacherNumber, String registerNumber) async {
-    await teacherCollection.add({
+    DocumentReference docRef = await teacherCollection.add({
       'teacherName': teacherName,
       'password': password,
       'email': email,
@@ -34,6 +38,9 @@ class FirebaseFunctions {
       'teacherNumber': teacherNumber,
       'tc': tc,
       'registerNumber': registerNumber
+    });
+    await docRef.update({
+      'teacherID': docRef.id
     });
   }
   Future createSchool(String schoolName, String password, String email, String principalName) async {
@@ -60,8 +67,11 @@ class FirebaseFunctions {
   Future<Stream<QuerySnapshot>> getChats(String chatID) async {
     return FirebaseFirestore.instance.collection('chats').doc(chatID).collection('messages').orderBy('time').snapshots();
   }
-  Future<Stream<QuerySnapshot>> getAllChats() async {
-    return chatsCollection.snapshots();
+  Future<Stream<QuerySnapshot>> getAllTeachers() async {
+    return teacherCollection.snapshots();
+
+  }Future<QuerySnapshot> getAllChats() async {
+    return chatsCollection.get();
   }
   void sendMessage(String chatID, chatMessageData) {
     FirebaseFirestore.instance.collection('chats').doc(chatID).collection('messages').add(chatMessageData);
@@ -71,7 +81,7 @@ class FirebaseFunctions {
       'recentMessageTime': chatMessageData['time'].toString()
     });
   }
-  Future createChat(String studentID, String studentName, String teacherID, String teacherName) async {
+  Future createChat(String studentID, String teacherID) async {
     DocumentReference chatDocRef = await chatsCollection.add({
       'members': [],
       'chatID': '',
@@ -80,12 +90,13 @@ class FirebaseFunctions {
     });
 
     await chatDocRef.update({
-      'members': FieldValue.arrayUnion([studentID + '_' + studentName]),
+      'members': studentID,
       'chatID': chatDocRef.id
     });
     await chatDocRef.update({
-      'members': FieldValue.arrayUnion([teacherID + '_' + teacherName])
+      'members': teacherID
     });
+    return chatDocRef.id;
   }
 
   Future<List<String>> getTokens() async{
