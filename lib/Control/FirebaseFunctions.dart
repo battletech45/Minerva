@@ -69,8 +69,11 @@ class FirebaseFunctions {
   }
   Future<Stream<QuerySnapshot>> getAllTeachers() async {
     return teacherCollection.snapshots();
-
-  }Future<QuerySnapshot> getAllChats() async {
+  }
+  Future<Stream<QuerySnapshot>> getAllStudents() async {
+    return studentCollection.snapshots();
+  }
+  Future<QuerySnapshot> getAllChats() async {
     return chatsCollection.get();
   }
   void sendMessage(String chatID, chatMessageData) {
