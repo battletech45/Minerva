@@ -90,11 +90,8 @@ class FirebaseFunctions {
     });
 
     await chatDocRef.update({
-      'members': studentID,
+      'members': [studentID, teacherID],
       'chatID': chatDocRef.id
-    });
-    await chatDocRef.update({
-      'members': teacherID
     });
     return chatDocRef.id;
   }
