@@ -147,23 +147,24 @@ class _LoginPageState extends State<LoginPage> {
 
   Future signIn() async {
     if (formKey.currentState!.validate()) {
-      var data =
-          await FirebaseFunctions().getStudentData(schoolNumberController.text);
+      var studentData = await FirebaseFunctions().getStudentData(schoolNumberController.text);
       try {
         await authLog.signInWithEmailAndPassword(
           email: schoolNumberController.text.trim(),
           password: passwordController.text.trim(),
         );
-        if(data.docs[0].get('registerNumber') == 'GA1G#nE1#8GNBKn2zJOU') {
+        if(studentData.docs.isNotEmpty) {
           await SharedFunctions.saveUserStudentSharedPreference(true);
+          await SharedFunctions.saveUserEmailSharedPreference(schoolNumberController.text);
+          await SharedFunctions.saveUserNameSharedPreference(studentData.docs[0].get('studentName'));
         }
         else {
+          var teacherData = await FirebaseFunctions().getTeacherData(schoolNumberController.text);
           await SharedFunctions.saveUserStudentSharedPreference(false);
+          await SharedFunctions.saveUserEmailSharedPreference(schoolNumberController.text);
+          await SharedFunctions.saveUserNameSharedPreference(teacherData.docs[0].get('teacherName'));
         }
-        await SharedFunctions.saveUserEmailSharedPreference(
-            schoolNumberController.text);
-        await SharedFunctions.saveUserNameSharedPreference(
-            data.docs[0].get('studentName'));
+
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => ProfilePage()));
       } on FirebaseAuthException catch (e) {

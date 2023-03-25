@@ -34,7 +34,7 @@ class SharedFunctions {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return await preferences.getBool(sharedPreferencesUserLoggedInKey);
   }
-  static Future<bool?> getUserStudentSharedPreferences() async {
+  static Future<bool?> getUserStudentSharedPreference() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return await preferences.getBool(sharedPreferencesUserStudentKey);
   }

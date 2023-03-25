@@ -31,7 +31,7 @@ class _customDrawerState extends State<customDrawer> {
 
   getUserInfos() async {
     var name = await SharedFunctions.getUserNameSharedPreference();
-    var check = await SharedFunctions.getUserStudentSharedPreferences();
+    var check = await SharedFunctions.getUserStudentSharedPreference();
     setState(() {
       userName = name!;
       isStudent = check!;
