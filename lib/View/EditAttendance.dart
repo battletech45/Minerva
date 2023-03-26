@@ -37,32 +37,37 @@ class _EditAttendanceState extends State<EditAttendance> {
       ),
       body: Container(
         child: ListView.builder(
-          itemCount: students.length,
-          itemBuilder: (context, index){ return ExpansionTile(
-            title: Text(students[index],style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-              letterSpacing: 0.5),),
-            trailing: Icon(
-                expansionIcon
-                    ? FontAwesomeIcons.sortUp
-                    : FontAwesomeIcons.sortDown,
-                color: Colors.pink),
-            children: <Widget>[
-          
-              customEditCheckBoxListTile(hours: "One Hour"),
-              customEditCheckBoxListTile(hours: "Two Hour"),
-             customEditCheckBoxListTile(hours: "Three Hour"),
-            ],
-            onExpansionChanged: (bool expanded) {
-              setState(() {
-                expansionIcon = expanded;
-              });
-            },
-          );
-          }
-        ),
+            itemCount: students.length,
+            itemBuilder: (context, index) {
+              return Container(
+                decoration: BoxDecoration(border:Border(bottom: BorderSide(color: PageColors.secondaryColor,width:2))),
+                child: ExpansionTile(
+                  title: Text(
+                    students[index],
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                        letterSpacing: 0.5),
+                  ),
+                  trailing: Icon(
+                      expansionIcon
+                          ? FontAwesomeIcons.sortUp
+                          : FontAwesomeIcons.sortDown,
+                      color: Colors.pink),
+                  children: <Widget>[
+                    customEditCheckBoxListTile(hours: "One Hour  "),
+                    customEditCheckBoxListTile(hours: "Two Hour  "),
+                    customEditCheckBoxListTile(hours: "Three Hour"),
+                  ],
+                  onExpansionChanged: (bool expanded) {
+                    setState(() {
+                      expansionIcon = expanded;
+                    });
+                  },
+                ),
+              );
+            }),
       ),
       drawer: customDrawer(),
     );
