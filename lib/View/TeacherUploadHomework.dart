@@ -67,107 +67,11 @@ class _UploadHomeworkState extends State<UploadHomework> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: 200,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                children: [
-                  SizedBox(width: 10),
-                  if (pickedFile != null)
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: PageColors.mainColor,
-                      ),
-                      width: 200,
-                      height: 200,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.file(
-                          File(pickedFile!.path!),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  SizedBox(width: 10),
-                  if (pickedFile != null)
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: PageColors.mainColor,
-                      ),
-                      width: 200,
-                      height: 200,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.file(
-                          File(pickedFile!.path!),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  SizedBox(width: 10),
-                  if (pickedFile != null)
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: PageColors.mainColor,
-                      ),
-                      width: 200,
-                      height: 200,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.file(
-                          File(pickedFile!.path!),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  SizedBox(width: 10),
-                  /*
-                  if (pickedFile != null)
-                    Container(
-                      height: 190,
-                      child: Image.file(
-                        File(pickedFile!.path!),
-                        fit: BoxFit.cover,
-                      ), 
-                    ),*/
-                ],
-              ),
-            ),
-
+            selectedFileList(pickedFile: pickedFile),
             SizedBox(
               height: 10,
             ),
-
-            //Birini seçince hepisi işaretleniyor!!!
-            Container(
-              height: 400,
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    childAspectRatio: 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10),
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                itemCount: classes.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: PageColors.secondaryColor,
-                    ),
-                    child: customCheckBoxListTile(classes: classes, index: index)
-                  );
-                },
-              ),
-            ),
+            classListChekboxBuilder(classes: classes),
             SizedBox(
               height: 10,
             ),
