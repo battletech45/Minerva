@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
@@ -344,7 +347,7 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
     );
   }
 }
-
+//Sınıf Listesi Checkbox design
 class customCheckBoxListTile extends StatefulWidget {
   final List<String> classes;
   final int index;
@@ -378,6 +381,120 @@ class _customCheckBoxListTileState extends State<customCheckBoxListTile> {
   }
 }
 
+//Seçilen dosyaları ListView içinde bize gösteren component
+class selectedFileList extends StatelessWidget {
+  const selectedFileList({
+    super.key,
+    required this.pickedFile,
+  });
+
+  final PlatformFile? pickedFile;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        physics: BouncingScrollPhysics(),
+        children: [
+          SizedBox(width: 10),
+          if (pickedFile != null)
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: PageColors.mainColor,
+              ),
+              width: 200,
+              height: 200,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.file(
+                  File(pickedFile!.path!),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          SizedBox(width: 10),
+          if (pickedFile != null)
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: PageColors.mainColor,
+              ),
+              width: 200,
+              height: 200,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.file(
+                  File(pickedFile!.path!),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          SizedBox(width: 10),
+          if (pickedFile != null)
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: PageColors.mainColor,
+              ),
+              width: 200,
+              height: 200,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.file(
+                  File(pickedFile!.path!),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          SizedBox(width: 10),
+        ],
+      ),
+    );
+  }
+}
+//Upload sayfalarında kullanılabilir sınıf sayısı kadar checkbox oluşturan sistem
+class classListChekboxBuilder extends StatelessWidget {
+  const classListChekboxBuilder({
+    super.key,
+    required this.classes,
+  });
+
+  final List<String> classes;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 400,
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 3,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10),
+        shrinkWrap: true,
+        physics: BouncingScrollPhysics(),
+        itemCount: classes.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+              margin: EdgeInsets.symmetric(vertical: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: PageColors.secondaryColor,
+              ),
+              child: customCheckBoxListTile(
+                  classes: classes, index: index));
+        },
+      ),
+    );
+  }
+}
+
+//Manuel yoklama için kullanılan öğrencinin kaç saat yok yazılacağnı seçtiğimiz checkboxlar
 class customEditCheckBoxListTile extends StatefulWidget {
   final String hours;
 
