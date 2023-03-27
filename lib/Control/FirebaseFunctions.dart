@@ -84,6 +84,11 @@ class FirebaseFunctions {
       'recentMessageTime': chatMessageData['time'].toString()
     });
   }
+  Future gradeTask(String studentID, String courseName, String gradeType, String grade) async {
+    studentCollection.doc(studentID).update({
+      'courses.$courseName.$gradeType': grade
+    });
+  }
   Future createChat(String studentID, String teacherID) async {
     DocumentReference chatDocRef = await chatsCollection.add({
       'members': [],
