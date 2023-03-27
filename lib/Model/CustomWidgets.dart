@@ -106,7 +106,7 @@ class _customDrawerState extends State<customDrawer> {
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) =>
-                      isStudent ? StudentGradePage() : TeacherGradePage()));
+                      isStudent ? StudentGradePage() : TeacherGradePage(studentID: 'skIaAFi6EbtaTEKSMymx')));
             },
           ),
           ListTile(
