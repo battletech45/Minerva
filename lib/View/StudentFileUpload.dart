@@ -52,7 +52,7 @@ class _StudentUploadHomeworkState extends State<StudentUploadHomework> {
           automaticallyImplyLeading: true,
           backgroundColor: PageColors.mainColor,
           centerTitle: true,
-          title: Text("Upload Homework",
+          title: Text("Student Upload Homework",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
         body: Column(
@@ -82,7 +82,7 @@ class _StudentUploadHomeworkState extends State<StudentUploadHomework> {
                   'Select File',
                   style: TextStyle(fontSize: 17),
                 ),
-                onPressed: selectFile,
+                onPressed:() async{ _showMyDialog('Are you sure to select a file?');},
               ),
               SizedBox(
                 width: 60,
@@ -97,7 +97,7 @@ class _StudentUploadHomeworkState extends State<StudentUploadHomework> {
                   'Upload File',
                   style: TextStyle(fontSize: 17),
                 ),
-                onPressed: _showMyDialog, //uploadFile,
+                onPressed  :() async{_showMyDialog('Are you sure to upload this file?');}, //} //uploadFile,
               ),
               SizedBox(height: 32),
             ],
@@ -105,8 +105,9 @@ class _StudentUploadHomeworkState extends State<StudentUploadHomework> {
         ),
         drawer: customDrawer());
   }
-  Future<void> _showMyDialog() async {
-  return showDialog<void>(
+
+  Future _showMyDialog(String dialogContent) async {
+  return showDialog(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
@@ -117,8 +118,8 @@ class _StudentUploadHomeworkState extends State<StudentUploadHomework> {
         title: const Text('Warning',style:TextStyle(fontSize: 22)),
         content: SingleChildScrollView(
           child: ListBody(
-            children: const <Widget>[
-              Text('Are you sure to upload this file?',style:TextStyle(fontSize: 20)),
+            children:  <Widget>[
+              Text(dialogContent,style:TextStyle(fontSize: 20)),
             ],
           ),
         ),
@@ -126,9 +127,10 @@ class _StudentUploadHomeworkState extends State<StudentUploadHomework> {
           TextButton(
             child: const Text('Yes',style:TextStyle(fontSize: 20),),
             onPressed: () {
-              Navigator.of(context).pop();
+             selectFile();
             },
           ),
+          SizedBox(width: 120),
           TextButton(
             child: const Text('No',style:TextStyle(fontSize: 20),),
             onPressed: () {
