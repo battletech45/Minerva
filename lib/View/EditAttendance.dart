@@ -12,7 +12,6 @@ class EditAttendance extends StatefulWidget {
 
 class _EditAttendanceState extends State<EditAttendance> {
   final searchController = TextEditingController();
-  bool isSelected = false;
   bool expansionIcon = false;
   List students = [
     "ALTAY",
