@@ -528,3 +528,38 @@ class _customEditCheckBoxListTileState extends State<customEditCheckBoxListTile>
     );
   }
 }
+
+class customEditExpansionPanel extends StatefulWidget {
+  final String name;
+
+  const customEditExpansionPanel({super.key, required this.name});
+  @override
+  State<customEditExpansionPanel> createState() => _customEditExpansionPanelState();
+}
+
+class _customEditExpansionPanelState extends State<customEditExpansionPanel> {
+  bool isSelected = false;
+  @override
+  Widget build(BuildContext context) {
+    String name = widget.name;
+    return ExpansionTile(
+        title: Text(name, style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+            letterSpacing: 0.5)
+        ),
+      trailing: Icon(isSelected ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+      children: <Widget>[
+        customEditCheckBoxListTile(hours: "One Hour  "),
+        customEditCheckBoxListTile(hours: "Two Hour  "),
+        customEditCheckBoxListTile(hours: "Three Hour"),
+      ],
+      onExpansionChanged: (bool val) {
+          setState(() {
+            isSelected = val;
+          });
+      },
+    );
+  }
+}
