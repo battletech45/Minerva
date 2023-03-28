@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../Model/CustomWidgets.dart';
 import '../Model/WidgetProperties.dart';
 
@@ -36,6 +35,7 @@ class _EditAttendanceState extends State<EditAttendance> {
       ),
       body: Container(
         child: ListView.builder(
+          physics: BouncingScrollPhysics(),
             itemCount: students.length,
             itemBuilder: (context, index) {
               return Container(
