@@ -178,9 +178,18 @@ class _customDrawerState extends State<customDrawer> {
   }
 }
 
-class customAttendanceCard extends StatelessWidget {
-  String teacherName;
+class customAttendanceCard extends StatefulWidget {
+  final String teacherName;
+  final String courseName;
+  final String attendance;
 
+  @override
+  State<customAttendanceCard> createState() => _customAttendanceCardState();
+
+  const customAttendanceCard({Key? key, required this.teacherName, required this.courseName, required this.attendance}) : super(key: key);
+}
+
+class _customAttendanceCardState extends State<customAttendanceCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -192,7 +201,7 @@ class customAttendanceCard extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: Icon(Icons.person),
-            title: Text(teacherName, textAlign: TextAlign.center),
+            title: Text(widget.teacherName, textAlign: TextAlign.center),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -209,15 +218,13 @@ class customAttendanceCard extends StatelessWidget {
           SizedBox(height: 10.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[Text('01/03/2023'), Text('2 Hours')],
+            children: <Widget>[Text(widget.courseName), Text(widget.attendance + ' Hours')],
           ),
           SizedBox(height: 10.0)
         ],
       ),
     );
   }
-
-  customAttendanceCard(this.teacherName);
 }
 
 class customContentFeed extends StatefulWidget {
