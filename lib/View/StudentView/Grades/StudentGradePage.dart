@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
@@ -12,8 +13,28 @@ class StudentGradePage extends StatefulWidget {
 }
 
 class _StudentGradePage extends State<StudentGradePage> {
-  bool expansionIcon=false;
-  ScrollController _controller = ScrollController();
+
+  bool expansionIcon = false;
+  String studentID = '';
+  Map<String, dynamic> courses = {};
+
+  _getCourses() async {
+    var email = await SharedFunctions.getUserEmailSharedPreference();
+    var val = await FirebaseFunctions().getStudentData(email!);
+    setState(() {
+      print(val.docs[0].get('studentID'));
+      studentID = val.docs[0].get('studentID');
+    });
+    var map = await FirebaseFunctions().getStudentCourses(studentID);
+    setState(() {
+      courses = map;
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    _getCourses();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,185 +45,15 @@ class _StudentGradePage extends State<StudentGradePage> {
         automaticallyImplyLeading: true,
         backgroundColor: PageColors.mainColor,
       ),
-      body: Container(
-        color: Colors.white,
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            children: <Widget>[
-              customExpansionPanel(courseName: "Mathematics", examPoint: 24, quizPoint: 67, projectPoint: 89),
-              SizedBox(height: 15.0),
-              customExpansionPanel(courseName: "Biology", examPoint: 54, quizPoint: 23, projectPoint: 78),
-              SizedBox(height: 15.0),
-              customExpansionPanel(courseName: "Physics", examPoint: 24, quizPoint: 67, projectPoint: 89),
-
-              SizedBox(height: 15.0),
-              customExpansionPanel(courseName: "Chemistry", examPoint: 80, quizPoint: 55, projectPoint: 95),
-              SizedBox(height: 15.0),
-              customExpansionPanel(courseName: "Literature", examPoint: 10, quizPoint: 35, projectPoint: 89),
-              SizedBox(
-                height: 15,
-              ),
-              customExpansionPanel(courseName: "Turkish", examPoint: 24, quizPoint: 67, projectPoint: 89),
-              SizedBox(
-                height: 15,
-              ),customExpansionPanel(courseName: "English", examPoint: 24, quizPoint: 67, projectPoint: 89),
-              SizedBox(
-                height: 15,
-              ),customExpansionPanel(courseName: "German", examPoint: 24, quizPoint: 67, projectPoint: 89),
-              SizedBox(
-                height: 15,
-              ),customExpansionPanel(courseName: "Geography", examPoint: 24, quizPoint: 67, projectPoint: 89),
-              SizedBox(
-                height: 15,
-              ),customExpansionPanel(courseName: "History", examPoint: 24, quizPoint: 67, projectPoint: 89),
-              SizedBox(
-                height: 15,
-              ),
-
-
-              Container(
-                // color: PageColors.mainColor,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside,
-                  ),),
-                child: ExpansionTile(
-                  title: Text("German"),
-                  trailing: Icon(
-                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
-                  children: [
-                    ListTile(
-                      leading: Text("Exam: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Project: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Quiz: "),
-                      trailing: Text("100"),
-                    )
-                  ],
-                  onExpansionChanged: (bool expanded){
-                    setState(()=> expansionIcon=expanded);
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                // color: PageColors.mainColor,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside,
-                  ),),
-                child: ExpansionTile(
-                  title: Text("Geography"),
-                  trailing: Icon(
-                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
-                  children: [
-                    ListTile(
-                      leading: Text("Exam: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Project: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Quiz: "),
-                      trailing: Text("100"),
-                    )
-                  ],
-                  onExpansionChanged: (bool expanded){
-                    setState(()=> expansionIcon=expanded);
-                  },
-                ),
-              ),
-
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                // color: PageColors.mainColor,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside,
-                  ),),
-                child: ExpansionTile(
-                  title: Text("English"),
-                  trailing: Icon(
-                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
-                  children: [
-                    ListTile(
-                      leading: Text("Exam: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Project: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Quiz: "),
-                      trailing: Text("100"),
-                    )
-                  ],
-                  onExpansionChanged: (bool expanded){
-                    setState(()=> expansionIcon=expanded);
-                  },
-                ),
-              ),
-
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                // color: PageColors.mainColor,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black54,
-                    strokeAlign: BorderSide.strokeAlignInside,
-                  ),),
-                child: ExpansionTile(
-                  title: Text("Turkish"),
-                  trailing: Icon(
-                      expansionIcon? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
-                  children: [
-                    ListTile(
-                      leading: Text("Exam: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Project: "),
-                      trailing: Text("100"),
-                    ),
-                    ListTile(
-                      leading: Text("Quiz: "),
-                      trailing: Text("100"),
-                    )
-                  ],
-                  onExpansionChanged: (bool expanded){
-                    setState(()=> expansionIcon=expanded);
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
+      body: ListView.builder(
+        physics: BouncingScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: courses.length,
+          itemBuilder: (context, index) {
+          return customExpansionPanel(courseName: courses.keys.elementAt(index), examPoint: courses[courses.keys.elementAt(index)]['exam'], projectPoint: courses[courses.keys.elementAt(index)]['project'], quizPoint: courses[courses.keys.elementAt(index)]['quiz']);
+          }
       ),
-      drawer: customDrawer(),
+        drawer: customDrawer(),
     );
   }
 }
