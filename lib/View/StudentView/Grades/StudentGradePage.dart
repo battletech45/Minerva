@@ -52,9 +52,9 @@ class _StudentGradePage extends State<StudentGradePage> {
           itemBuilder: (context, index) {
           return Column(
             children: <Widget>[
-              SizedBox(height: 10.0),
+              SizedBox(height: 5.0),
               customExpansionPanel(courseName: courses.keys.elementAt(index), examPoint: courses[courses.keys.elementAt(index)]['exam'], projectPoint: courses[courses.keys.elementAt(index)]['project'], quizPoint: courses[courses.keys.elementAt(index)]['quiz']),
-              SizedBox(height: 10.0),
+              SizedBox(height: 5.0),
             ],
           );
           }
