@@ -89,6 +89,10 @@ class FirebaseFunctions {
       'courses.$courseName.$gradeType': grade
     });
   }
+  Future<Map<String, dynamic>> getStudentCourses(String studentID) async {
+    DocumentSnapshot snapshot = await studentCollection.doc(studentID).get();
+    return snapshot.get('courses');
+  }
   Future createChat(String studentID, String teacherID) async {
     DocumentReference chatDocRef = await chatsCollection.add({
       'members': [],
