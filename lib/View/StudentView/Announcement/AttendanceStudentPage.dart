@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
@@ -8,6 +10,26 @@ class AttendanceStudentPage extends StatefulWidget {
 }
 
 class _AttendanceStudentPageState extends State<AttendanceStudentPage> {
+
+  String studentID = '';
+  Map<String, dynamic> courseAttendance = {};
+
+  _getCourses() async {
+    var email = await SharedFunctions.getUserEmailSharedPreference();
+    var val = await FirebaseFunctions().getStudentData(email!);
+    setState(() {
+      studentID = val.docs[0].get('studentID');
+    });
+    var map = await FirebaseFunctions().getStudentCourses(studentID);
+    setState(() {
+      courseAttendance = map;
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    _getCourses();
+  }
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -18,24 +40,18 @@ class _AttendanceStudentPageState extends State<AttendanceStudentPage> {
        centerTitle: true,
        title: Text("ATTENDANCE", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
      ),
-      body: Container(
-        alignment: Alignment.center,
-        child: ListView(
-          shrinkWrap: true,
-          physics: BouncingScrollPhysics(),
-          children: <Widget>[
-            SizedBox(height: 30.0),
-            customAttendanceCard('Teacher Tom'),
-            customAttendanceCard('Teacher Tom'),
-            customAttendanceCard('Teacher Tom'),
-            customAttendanceCard('Teacher Tom'),
-            customAttendanceCard('Teacher Tom'),
-            customAttendanceCard('Teacher Tom'),
-            customAttendanceCard('Teacher Tom'),
-            customAttendanceCard('Teacher Tom'),
-            customAttendanceCard('Teacher Tom'),
-          ],
-        ),
+      body: ListView.builder(
+        shrinkWrap: true,
+        physics: BouncingScrollPhysics(),
+        itemCount: courseAttendance.length,
+        itemBuilder: (context, index) {
+          return Column(
+            children: <Widget>[
+              SizedBox(height: 15.0),
+              customAttendanceCard(teacherName: 'teacherName', courseName: courseAttendance.keys.elementAt(index), attendance: courseAttendance[courseAttendance.keys.elementAt(index)]['attendance'])
+            ],
+          );
+        },
       ),
       drawer: customDrawer()
    );
