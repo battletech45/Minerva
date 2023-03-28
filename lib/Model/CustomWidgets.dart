@@ -16,6 +16,7 @@ import 'package:minerva/View/RegisterPage.dart';
 import 'package:minerva/View/StudentView/Grades/StudentGradePage.dart';
 import 'package:minerva/View/TeacherView/GradesView/TeacherGradePage.dart';
 import 'package:minerva/View/WelcomePage.dart';
+import '../View/TeacherView/AnnouncementView/AnnouncementTeacherPage.dart';
 import '../View/TeacherView/AttendanceView/AttendanceTeacherPage.dart';
 import '../View/ChatsListPage.dart';
 import '../View/StudentView/Content/ContentStudentPage.dart';
