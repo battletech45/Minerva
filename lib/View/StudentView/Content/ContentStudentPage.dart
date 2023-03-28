@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
-import 'package:minerva/View/EditAttendance.dart';
+import 'package:minerva/View/TeacherView/AttendanceView/EditAttendance.dart';
 import 'package:minerva/View/StudentFilePage.dart';
-import 'package:minerva/View/StudentFileUpload.dart';
+import 'package:minerva/View/StudentView/HomeworksView/StudentFileUpload.dart';
 import 'package:minerva/View/TeacherGradePage.dart';
-import '../Model/WidgetProperties.dart';
-import 'TeacherUploadHomework.dart';
+import '../../../Model/WidgetProperties.dart';
+import '../../TeacherView/HomeworksView/TeacherUploadHomework.dart';
 
 
 class ContentStudent extends StatefulWidget {
@@ -111,7 +111,7 @@ class _ContentStudentState extends State<ContentStudent> {
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => TeacherGradePage()));
+                      MaterialPageRoute(builder: (context) => TeacherGradePage(studentID:"ZxxEST8BdDBnLrzffT4W")));
                 },
               ),
             ),

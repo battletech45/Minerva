@@ -5,22 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
-import 'package:minerva/View/AnnouncementStudentPage.dart';
-import 'package:minerva/View/AnnouncementTeacherPage.dart';
-import 'package:minerva/View/AttendanceStudentPage.dart';
+import 'package:minerva/View/StudentView/Announcement/AnnouncementStudentPage.dart';
+import 'package:minerva/View/StudentView/Announcement/AttendanceStudentPage.dart';
 import 'package:minerva/View/ChatPage.dart';
-import 'package:minerva/View/ContentTeacherPage.dart';
-import 'package:minerva/View/GradePage.dart';
+import 'package:minerva/View/TeacherView/ContentView/ContentTeacherPage.dart';
 import 'package:minerva/View/HomePage.dart';
-import 'package:minerva/View/ProfilePage.dart';
-import 'package:minerva/View/ProfileTeacher.dart';
+import 'package:minerva/View/StudentView/ProfileView/ProfilePage.dart';
+import 'package:minerva/View/TeacherView/ProfileView/ProfileTeacher.dart';
 import 'package:minerva/View/RegisterPage.dart';
 import 'package:minerva/View/StudentGradePage.dart';
 import 'package:minerva/View/TeacherGradePage.dart';
 import 'package:minerva/View/WelcomePage.dart';
 import '../View/AttendanceTeacherPage.dart';
 import '../View/ChatsListPage.dart';
-import '../View/ContentStudentPage.dart';
+import '../View/StudentView/Content/ContentStudentPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class customDrawer extends StatefulWidget {
