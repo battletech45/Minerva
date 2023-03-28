@@ -287,9 +287,9 @@ class _customContentFeedState extends State<customContentFeed> {
 
 class customExpansionPanel extends StatefulWidget {
   final String courseName;
-  final int examPoint;
-  final int projectPoint;
-  final int quizPoint;
+  final String examPoint;
+  final String projectPoint;
+  final String quizPoint;
 
   const customExpansionPanel(
       {Key? key,
@@ -307,9 +307,9 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
   @override
   Widget build(BuildContext context) {
     String course = widget.courseName;
-    int exam = widget.examPoint;
-    int project = widget.projectPoint;
-    int quiz = widget.quizPoint;
+    String exam = widget.examPoint;
+    String project = widget.projectPoint;
+    String quiz = widget.quizPoint;
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
