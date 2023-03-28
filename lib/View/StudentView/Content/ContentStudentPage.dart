@@ -3,7 +3,7 @@ import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:minerva/View/TeacherView/AttendanceView/EditAttendance.dart';
 import 'package:minerva/View/StudentFilePage.dart';
 import 'package:minerva/View/StudentView/HomeworksView/StudentFileUpload.dart';
-import 'package:minerva/View/TeacherGradePage.dart';
+import 'package:minerva/View/TeacherView/GradesView/TeacherGradePage.dart';
 import '../../../Model/WidgetProperties.dart';
 import '../../TeacherView/HomeworksView/TeacherUploadHomework.dart';
 

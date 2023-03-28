@@ -3,7 +3,7 @@ import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/View/ForgotPassword.dart';
 import '../Control/Validators.dart';
-import 'ProfilePage.dart';
+import 'StudentView/ProfileView/ProfilePage.dart';
 import 'WelcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
-import '../Model/WidgetProperties.dart';
+import '../../../Model/WidgetProperties.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class UploadHomework extends StatefulWidget {

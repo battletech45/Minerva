@@ -4,8 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../Model/CustomWidgets.dart';
-import '../Model/WidgetProperties.dart';
+import '../../../Model/CustomWidgets.dart';
+import '../../../Model/WidgetProperties.dart';
 
 class StudentUploadHomework extends StatefulWidget {
   const StudentUploadHomework({super.key});

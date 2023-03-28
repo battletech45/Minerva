@@ -4,7 +4,7 @@ import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
-import '../Model/WidgetProperties.dart';
+import '../../../Model/WidgetProperties.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:flutter/material.dart';
-import '../Model/WidgetProperties.dart';
+import '../../../Model/WidgetProperties.dart';
 
 class TeacherGradePage extends StatefulWidget {
   final String studentID;

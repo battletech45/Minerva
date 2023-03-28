@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../Model/CustomWidgets.dart';
-import '../Model/WidgetProperties.dart';
+import '../../../Model/CustomWidgets.dart';
+import '../../../Model/WidgetProperties.dart';
 
 class EditAttendance extends StatefulWidget {
   const EditAttendance({super.key});

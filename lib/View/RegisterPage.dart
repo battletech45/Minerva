@@ -4,7 +4,7 @@ import 'package:minerva/Control/Validators.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import '../Control/FirebaseFunctions.dart';
 import '../Control/SharedFunctions.dart';
-import 'ProfilePage.dart';
+import 'StudentView/ProfileView/ProfilePage.dart';
 import 'WelcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
