@@ -7,7 +7,7 @@ import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/StudentView/Announcement/AnnouncementStudentPage.dart';
-import 'package:minerva/View/StudentView/Announcement/AttendanceStudentPage.dart';
+import 'package:minerva/View/StudentView/Attendance/AttendanceStudentPage.dart';
 import 'package:minerva/View/ChatPage.dart';
 import 'package:minerva/View/TeacherView/ContentView/ContentTeacherPage.dart';
 import 'package:minerva/View/HomePage.dart';
