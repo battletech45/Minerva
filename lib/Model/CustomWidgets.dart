@@ -187,6 +187,10 @@ class _customDrawerState extends State<customDrawer> {
 
   Future signout() async {
     await FirebaseAuth.instance.signOut();
+    await SharedFunctions.saveUserStudentSharedPreference(false);
+    await SharedFunctions.saveUserEmailSharedPreference('');
+    await SharedFunctions.saveUserLoggedInSharedPreference(false);
+    await SharedFunctions.saveUserNameSharedPreference('');
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => MainPage()));
   }
