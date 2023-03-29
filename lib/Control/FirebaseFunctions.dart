@@ -93,6 +93,16 @@ class FirebaseFunctions {
     DocumentSnapshot snapshot = await studentCollection.doc(studentID).get();
     return snapshot.get('courses');
   }
+  updateStudentPassword(String password, String uid) async {
+    return await studentCollection.doc(uid).update({
+      'password': password
+    });
+  }
+  updateTeacherPassword(String password, String uid) async {
+    return await teacherCollection.doc(uid).update({
+      'password': password
+    });
+  }
   Future createChat(String studentID, String teacherID) async {
     DocumentReference chatDocRef = await chatsCollection.add({
       'members': [],
