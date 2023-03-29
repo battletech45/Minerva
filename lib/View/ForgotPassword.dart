@@ -1,8 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/LoginPage.dart';
-import '../Model/CustomWidgets.dart';
-import 'ResetPassword.dart';
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -11,6 +10,7 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final emailController = TextEditingController();
+  bool isVisible = false;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -44,7 +44,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     topLeft: Radius.circular(50),
                     topRight: Radius.circular(50))),
             child: ListView(
-              children: [
+              children: <Widget>[
                 Container(
                     width: 200,
                     height: 200,
@@ -84,14 +84,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 3),
                     decoration: BoxDecoration(
-                      // Gradient neden var (altayla bakilacak - Bertan)
                       color: PageColors.mainColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => ResetPassword()));
+                        if(emailController.text.isNotEmpty) {
+                          FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
+                          setState(() {
+                            isVisible = true;
+                          });
+                        }
                       },
                       child: Text(
                         'Send Link',
@@ -100,6 +103,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
                   ),
                 ),
+                SizedBox(height: 30.0),
+                Visibility(
+                    visible: isVisible,
+                    child: Text('Please check your email box !', textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 20))
+                )
               ],
             ),
           )
