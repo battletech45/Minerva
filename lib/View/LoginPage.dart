@@ -154,6 +154,7 @@ class _LoginPageState extends State<LoginPage> {
           password: passwordController.text.trim(),
         );
         if(studentData.docs.isNotEmpty) {
+          await SharedFunctions.saveUserLoggedInSharedPreference(true);
           await SharedFunctions.saveUserStudentSharedPreference(true);
           await SharedFunctions.saveUserEmailSharedPreference(schoolNumberController.text);
           await SharedFunctions.saveUserNameSharedPreference(studentData.docs[0].get('studentName'));
@@ -161,6 +162,7 @@ class _LoginPageState extends State<LoginPage> {
         else {
           var teacherData = await FirebaseFunctions().getTeacherData(schoolNumberController.text);
           await SharedFunctions.saveUserStudentSharedPreference(false);
+          await SharedFunctions.saveUserLoggedInSharedPreference(true);
           await SharedFunctions.saveUserEmailSharedPreference(schoolNumberController.text);
           await SharedFunctions.saveUserNameSharedPreference(teacherData.docs[0].get('teacherName'));
         }
