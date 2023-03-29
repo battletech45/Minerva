@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/StudentView/Announcement/AnnouncementStudentPage.dart';
@@ -29,16 +30,29 @@ class customDrawer extends StatefulWidget {
 
 class _customDrawerState extends State<customDrawer> {
   String userName = '';
+  String userNumber = '';
   bool isStudent = false;
 
   getUserInfos() async {
     var name = await SharedFunctions.getUserNameSharedPreference();
     var check = await SharedFunctions.getUserStudentSharedPreference();
+    var mail = await SharedFunctions.getUserEmailSharedPreference();
     setState(() {
       userName = name!;
       isStudent = check!;
     });
-    print(userName);
+    if(isStudent) {
+      var student = await FirebaseFunctions().getStudentData(mail!);
+      setState(() {
+        userNumber = student.docs[0].get('studentNumber');
+      });
+    }
+    else {
+      var teacher = await FirebaseFunctions().getTeacherData(mail!);
+      setState(() {
+        userNumber = teacher.docs[0].get('teacherNumber');
+      });
+    }
   }
 
   @override
@@ -71,7 +85,7 @@ class _customDrawerState extends State<customDrawer> {
                   ),
                   title: Text('$userName',
                       style: TextStyle(color: Colors.black, fontSize: 20)),
-                  subtitle: Text('School Number',
+                  subtitle: Text('$userNumber',
                       style: TextStyle(color: Colors.black)),
                 ),
               ],
