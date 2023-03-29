@@ -158,6 +158,9 @@ class _LoginPageState extends State<LoginPage> {
           await SharedFunctions.saveUserStudentSharedPreference(true);
           await SharedFunctions.saveUserEmailSharedPreference(schoolNumberController.text);
           await SharedFunctions.saveUserNameSharedPreference(studentData.docs[0].get('studentName'));
+          if(studentData.docs[0].get('password') != passwordController.text) {
+            await FirebaseFunctions().updateStudentPassword(passwordController.text, studentData.docs[0].get('studentID'));
+          }
         }
         else {
           var teacherData = await FirebaseFunctions().getTeacherData(schoolNumberController.text);
@@ -165,6 +168,9 @@ class _LoginPageState extends State<LoginPage> {
           await SharedFunctions.saveUserLoggedInSharedPreference(true);
           await SharedFunctions.saveUserEmailSharedPreference(schoolNumberController.text);
           await SharedFunctions.saveUserNameSharedPreference(teacherData.docs[0].get('teacherName'));
+          if(teacherData.docs[0].get('password') != passwordController.text) {
+            await FirebaseFunctions().updateStudentPassword(passwordController.text, teacherData.docs[0].get('teacherID'));
+          }
         }
 
         Navigator.of(context).pushReplacement(
