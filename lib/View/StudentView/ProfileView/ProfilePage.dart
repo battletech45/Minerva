@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
-
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -17,8 +16,12 @@ class _ProfilePageState extends State<ProfilePage> {
   String userName = '';
   String tc = '';
   String schoolNumber = '';
+  bool isLoading = false;
 
   _getUserData() async {
+    setState(() {
+      isLoading = true;
+    });
     var val = await SharedFunctions.getUserEmailSharedPreference();
     setState(() {
       email = val!;
@@ -29,6 +32,9 @@ class _ProfilePageState extends State<ProfilePage> {
       userName = user.docs[0].get('studentName');
       tc = user.docs[0].get('tc');
       schoolNumber = user.docs[0].get('studentNumber');
+    });
+    setState(() {
+      isLoading = false;
     });
   }
 
@@ -48,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
           centerTitle: true,
           title: Text("PROFILE", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
-        body: Container(
+        body: isLoading ? AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: ProfilePage()) : Container(
           alignment: Alignment.center,
           child: Column(
               children: <Widget>[
