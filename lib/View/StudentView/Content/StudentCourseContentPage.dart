@@ -6,7 +6,8 @@ import 'package:minerva/View/StudentView/HomeworksView/StudentFileUpload.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class CourseContent extends StatefulWidget {
-  const CourseContent({Key? key}) : super(key: key);
+  final String courseName;
+  const CourseContent({Key? key, required this.courseName}) : super(key: key);
 
   @override
   State<CourseContent> createState() => _CourseContentState();
@@ -25,16 +26,14 @@ class _CourseContentState extends State<CourseContent> {
         automaticallyImplyLeading: true,
         backgroundColor: PageColors.mainColor,
         centerTitle: true,
-
+        title: Text(widget.courseName,
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(top: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 20.0),
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 20)),
-            SizedBox(height: 20),
+          children: <Widget>[
             ExpansionPanelList(
               expansionCallback: (int index, bool isExpanded) {
                 setState(() {

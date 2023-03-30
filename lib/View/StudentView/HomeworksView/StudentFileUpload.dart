@@ -110,7 +110,7 @@ class _StudentUploadHomeworkState extends State<StudentUploadHomework> {
             children:<Widget> [
               IconButton( icon: Icon(Icons.arrow_back),onPressed: (){
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => CourseContent()));
+                    MaterialPageRoute(builder: (context) => CourseContent(courseName: 'TEST')));
               })
             ],
           ),
