@@ -81,12 +81,12 @@ class _customDrawerState extends State<customDrawer> {
                   leading: CircleAvatar(
                     radius: 45,
                     backgroundColor: PageColors.secondaryColor,
-                    child: Icon(Icons.person, size: 50.0),
+                    child: Icon(Icons.person, size: 55.0),
                   ),
                   title: Text('$userName',
-                      style: TextStyle(color: Colors.black, fontSize: 20)),
+                      style: TextStyle(color: Colors.black, fontSize: 25)),
                   subtitle: Text('$userNumber',
-                      style: TextStyle(color: Colors.black)),
+                      style: TextStyle(color: Colors.black,fontSize: 18)),
                 ),
               ],
             ),
@@ -255,6 +255,7 @@ class customContentFeed extends StatefulWidget {
 
 class _customContentFeedState extends State<customContentFeed> {
   bool click = false;
+  int likeCounter=0;
   @override
   Widget build(BuildContext context) {
     String name = widget.userName;
@@ -290,7 +291,9 @@ class _customContentFeedState extends State<customContentFeed> {
             Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                child: IconButton(
+                child: Row(
+                  children: [
+                    IconButton(
                     icon: click
                         ? Icon(
                             FontAwesomeIcons.solidHeart,
@@ -301,8 +304,20 @@ class _customContentFeedState extends State<customContentFeed> {
                     onPressed: () {
                       setState(() {
                         click = !click;
+                        if(click==true){
+                          likeCounter++;
+                        }
+                        else{
+                          likeCounter--;
+                        }
                       });
-                    })),
+                    }),
+                     SizedBox(width: 10,),
+                     Container(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Text("$likeCounter",style: TextStyle(fontSize: 30),)),
+                  ],
+                )),
           ],
         ),
       ],
