@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/View/StudentView/Content/StudentCourseContentPage.dart';
 import '../../../Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
 
@@ -103,6 +104,17 @@ class _StudentUploadHomeworkState extends State<StudentUploadHomework> {
             ],
           ),
         ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children:<Widget> [
+              IconButton( icon: Icon(Icons.arrow_back),onPressed: (){
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => CourseContent()));
+              })
+            ],
+          ),
+        ), 
         drawer: customDrawer());
   }
 
