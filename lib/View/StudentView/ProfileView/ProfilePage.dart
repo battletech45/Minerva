@@ -54,7 +54,10 @@ class _ProfilePageState extends State<ProfilePage> {
           centerTitle: true,
           title: Text("PROFILE", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
-        body: isLoading ? AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: ProfilePage()) : Container(
+        body: isLoading ?
+        AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: ProfilePage(), splashTransition: SplashTransition.fadeTransition)
+            :
+        Container(
           alignment: Alignment.center,
           child: Column(
               children: <Widget>[
