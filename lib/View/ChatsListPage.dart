@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,12 @@ class _ChatsListPageState extends State<ChatsListPage> {
   String chatID = '';
   String userID = '';
   bool isStudent = false;
+  bool isLoading = false;
 
   _getChats() async {
+    setState(() {
+      isLoading = true;
+    });
     isStudent = (await SharedFunctions.getUserStudentSharedPreference())!;
     if(isStudent) {
       _getStudentID();
@@ -39,6 +44,7 @@ class _ChatsListPageState extends State<ChatsListPage> {
     var name = await SharedFunctions.getUserNameSharedPreference();
     setState(() {
       userName = name!;
+      isLoading = false;
     });
   }
 
@@ -101,7 +107,9 @@ class _ChatsListPageState extends State<ChatsListPage> {
         centerTitle: true,
         title: Text("CHATS", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ),
-      body: StreamBuilder<QuerySnapshot>(
+      body: isLoading ? AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: ChatsListPage(), splashTransition: SplashTransition.fadeTransition)
+      :
+      StreamBuilder<QuerySnapshot>(
         stream: allChatsSnapshot,
         builder: (context, snapshot) {
           return snapshot.hasData ? ListView.builder(

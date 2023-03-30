@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
@@ -15,10 +16,14 @@ class StudentGradePage extends StatefulWidget {
 class _StudentGradePage extends State<StudentGradePage> {
 
   bool expansionIcon = false;
+  bool isLoading = false;
   String studentID = '';
   Map<String, dynamic> courses = {};
 
   _getCourses() async {
+    setState(() {
+      isLoading = true;
+    });
     var email = await SharedFunctions.getUserEmailSharedPreference();
     var val = await FirebaseFunctions().getStudentData(email!);
     setState(() {
@@ -28,6 +33,7 @@ class _StudentGradePage extends State<StudentGradePage> {
     var map = await FirebaseFunctions().getStudentCourses(studentID);
     setState(() {
       courses = map;
+      isLoading = false;
     });
   }
   @override
@@ -45,7 +51,9 @@ class _StudentGradePage extends State<StudentGradePage> {
         automaticallyImplyLeading: true,
         backgroundColor: PageColors.mainColor,
       ),
-      body: ListView.builder(
+      body: isLoading ? AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: StudentGradePage(), splashTransition: SplashTransition.fadeTransition)
+      :
+      ListView.builder(
         physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           itemCount: courses.length,

@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
@@ -12,9 +13,13 @@ class AttendanceStudentPage extends StatefulWidget {
 class _AttendanceStudentPageState extends State<AttendanceStudentPage> {
 
   String studentID = '';
+  bool isLoading = false;
   Map<String, dynamic> courseAttendance = {};
 
   _getCourses() async {
+    setState(() {
+      isLoading = true;
+    });
     var email = await SharedFunctions.getUserEmailSharedPreference();
     var val = await FirebaseFunctions().getStudentData(email!);
     setState(() {
@@ -23,6 +28,7 @@ class _AttendanceStudentPageState extends State<AttendanceStudentPage> {
     var map = await FirebaseFunctions().getStudentCourses(studentID);
     setState(() {
       courseAttendance = map;
+      isLoading = false;
     });
   }
   @override
@@ -40,7 +46,9 @@ class _AttendanceStudentPageState extends State<AttendanceStudentPage> {
        centerTitle: true,
        title: Text("ATTENDANCE", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
      ),
-      body: ListView.builder(
+      body: isLoading ? AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: AttendanceStudentPage(), splashTransition: SplashTransition.fadeTransition)
+      :
+      ListView.builder(
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
         itemCount: courseAttendance.length,
