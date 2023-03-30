@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
+import 'package:minerva/View/StudentHomeWorkViewPage.dart';
 import 'package:minerva/View/StudentView/Content/StudentCourseContentPage.dart';
 import 'package:minerva/View/TeacherView/AttendanceView/EditAttendance.dart';
 import 'package:minerva/View/StudentFilePage.dart';
 import 'package:minerva/View/StudentView/HomeworksView/StudentFileUpload.dart';
 import 'package:minerva/View/TeacherView/GradesView/TeacherGradePage.dart';
 import '../../../Model/WidgetProperties.dart';
-import '../../TeacherView/HomeworksView/TeacherUploadHomework.dart';
-
 
 class ContentStudent extends StatefulWidget {
   @override
@@ -15,17 +14,15 @@ class ContentStudent extends StatefulWidget {
 }
 
 class _ContentStudentState extends State<ContentStudent> {
-  // final Color mainColor = Color.fromRGBO(28, 88, 140, 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //   backgroundColor: Colors.deepOrange[300],
         appBar: AppBar(
           elevation: 0.0,
           automaticallyImplyLeading: true,
           backgroundColor: PageColors.mainColor,
           centerTitle: true,
-          title: Text("MATERIALS",
+          title: Text("CONTENTS",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
         body: GridView.count(
@@ -35,20 +32,19 @@ class _ContentStudentState extends State<ContentStudent> {
           mainAxisSpacing: 10,
           physics: BouncingScrollPhysics(),
           shrinkWrap: true,
-          children: [
+          children: <Widget>[
             Card(
               elevation: 6,
               shape: CustomBorders.mainBorder,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
-                //leading: Icon(Icons.class_),
                 title: Text("MATH",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => CourseContent()));
+                      MaterialPageRoute(builder: (context) => CourseContent(courseName: 'MATH')));
                 },
               ),
             ),
@@ -57,14 +53,13 @@ class _ContentStudentState extends State<ContentStudent> {
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
-                //leading: Icon(Icons.class_),
                 title: Text("BIOLOGY",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => UploadHomework()));
+                      MaterialPageRoute(builder: (context) => StudentHomeWorkViewPage()));
                 },
               ),
             ),
@@ -73,7 +68,6 @@ class _ContentStudentState extends State<ContentStudent> {
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
-                //leading: Icon(Icons.class_),
                 title: Text("PHYSICS",
                     textAlign: TextAlign.center,
                     style:
@@ -89,7 +83,6 @@ class _ContentStudentState extends State<ContentStudent> {
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
-                //leading: Icon(Icons.class_),
                 title: Text("TURKISH",
                     textAlign: TextAlign.center,
                     style:
@@ -105,7 +98,6 @@ class _ContentStudentState extends State<ContentStudent> {
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
-                //leading: Icon(Icons.class_),
                 title: Text("ENGLISH",
                     textAlign: TextAlign.center,
                     style:
@@ -121,7 +113,6 @@ class _ContentStudentState extends State<ContentStudent> {
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
-                //leading: Icon(Icons.class_),
                 title: Text("GERMAN",
                     textAlign: TextAlign.center,
                     style:
@@ -137,7 +128,6 @@ class _ContentStudentState extends State<ContentStudent> {
               elevation: 6,
               margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               child: ListTile(
-                //leading: Icon(Icons.class_),
                 title: Text("CHEMISTRY",
                     textAlign: TextAlign.center,
                     style:
