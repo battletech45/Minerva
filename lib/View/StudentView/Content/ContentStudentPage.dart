@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
+import 'package:minerva/View/StudentView/Content/StudentCourseContentPage.dart';
 import 'package:minerva/View/TeacherView/AttendanceView/EditAttendance.dart';
 import 'package:minerva/View/StudentFilePage.dart';
 import 'package:minerva/View/StudentView/HomeworksView/StudentFileUpload.dart';
@@ -47,7 +48,7 @@ class _ContentStudentState extends State<ContentStudent> {
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => UploadFile()));
+                      MaterialPageRoute(builder: (context) => CourseContent()));
                 },
               ),
             ),
