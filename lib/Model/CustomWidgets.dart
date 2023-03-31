@@ -17,6 +17,7 @@ import 'package:minerva/View/RegisterPage.dart';
 import 'package:minerva/View/StudentView/Grades/StudentGradePage.dart';
 import 'package:minerva/View/TeacherView/GradesView/TeacherGradePage.dart';
 import 'package:minerva/View/WelcomePage.dart';
+import '../View/ResetPassword.dart';
 import '../View/TeacherView/AnnouncementView/AnnouncementTeacherPage.dart';
 import '../View/TeacherView/AttendanceView/AttendanceTeacherPage.dart';
 import '../View/ChatsListPage.dart';
@@ -31,6 +32,7 @@ class customDrawer extends StatefulWidget {
 class _customDrawerState extends State<customDrawer> {
   String userName = '';
   String userNumber = '';
+  String userID = '';
   bool isStudent = false;
 
   getUserInfos() async {
@@ -68,6 +70,7 @@ class _customDrawerState extends State<customDrawer> {
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       child: ListView(
+        physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
@@ -167,9 +170,18 @@ class _customDrawerState extends State<customDrawer> {
                       isStudent ? ContentStudent() : ContentTeacherPage()));
             },
           ),
-          SizedBox(height: 15),
           Divider(
+            thickness: 2.0,
             color: PageColors.secondaryColor,
+          ),
+          ListTile(
+            leading: Icon(FontAwesomeIcons.key,
+                size: 30, color: Colors.black54),
+            title: Text('Reset Password',
+                style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
+            onTap: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ResetPassword()));
+            },
           ),
           ListTile(
             leading: Icon(FontAwesomeIcons.arrowRightFromBracket,
