@@ -5,6 +5,7 @@ import 'package:minerva/Model/WidgetProperties.dart';
 import '../Control/FirebaseFunctions.dart';
 import '../Control/SharedFunctions.dart';
 import 'StudentView/ProfileView/ProfilePage.dart';
+import 'TeacherView/ProfileView/ProfileTeacher.dart';
 import 'WelcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -81,7 +82,7 @@ class _RegisterPage extends State<RegisterPage> {
             await SharedFunctions.saveUserNameSharedPreference(
                 data.docs[0].get('teacherName'));
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => ProfilePage()));
+                MaterialPageRoute(builder: (context) => ProfileTeacherPage()));
           }
         }
         else {print('token not matched');}

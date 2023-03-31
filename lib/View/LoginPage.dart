@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/View/ForgotPassword.dart';
+import 'package:minerva/View/TeacherView/ProfileView/ProfileTeacher.dart';
 import '../Control/Validators.dart';
 import 'StudentView/ProfileView/ProfilePage.dart';
 import 'WelcomePage.dart';
@@ -172,9 +173,9 @@ class _LoginPageState extends State<LoginPage> {
             await FirebaseFunctions().updateStudentPassword(passwordController.text, teacherData.docs[0].get('teacherID'));
           }
         }
-
+        var isStudent = await SharedFunctions.getUserStudentSharedPreference();
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => ProfilePage()));
+            MaterialPageRoute(builder: (context) => isStudent! ? ProfilePage() : ProfileTeacherPage()));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           print('No user found for that email.');
