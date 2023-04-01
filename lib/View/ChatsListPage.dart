@@ -2,6 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
@@ -117,13 +118,35 @@ class _ChatsListPageState extends State<ChatsListPage> {
               shrinkWrap: true,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(child: Icon(Icons.person)),
-                  title: Text(snapshot.data!.docs[index].get(isStudent ? 'teacherName' : 'studentName')),
-                  subtitle: Text('Click to start conversation !'),
-                  onTap: () {
-                    _findChat(userID, snapshot.data!.docs[index].get(isStudent ? 'teacherID' : 'studentID'));
-                  },
+                return Card(
+                  elevation: 1,
+                  margin: EdgeInsets.all(9),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(color: PageColors.mainColor)),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.all(10),
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Icon(Icons.person,size: 40,)),
+                    title: Padding(
+                      padding: const EdgeInsets.only(top:8.0, left:6),
+                      child: Text(snapshot.data!.docs[index].get(isStudent ? 'teacherName' : 'studentName'),style:
+                       TextStyle(
+                        fontSize: 19,
+                        fontWeight: FontWeight.w500,
+                       ),),
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top:5,left:6),
+                      child: Text('Click to start conversation !',style: TextStyle(
+                        fontSize: 16,
+                      ),),
+                    ),
+                    onTap: () {
+                      _findChat(userID, snapshot.data!.docs[index].get(isStudent ? 'teacherID' : 'studentID'));
+                    },
+                  ),
                 );
               }
           ) : CircularProgressIndicator();
