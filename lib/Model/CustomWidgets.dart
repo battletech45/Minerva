@@ -614,3 +614,34 @@ class _customEditExpansionPanelState extends State<customEditExpansionPanel> {
     );
   }
 }
+
+class customAnnouncementCard extends StatefulWidget {
+  final String teacherName;
+  final String announcementContent;
+
+  const customAnnouncementCard({Key? key, required this.teacherName, required this.announcementContent}) : super(key: key);
+
+  @override
+  State<customAnnouncementCard> createState() => _customAnnouncementCardState();
+}
+
+class _customAnnouncementCardState extends State<customAnnouncementCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: PageColors.secondaryColor,
+      elevation: 10.0,
+      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.person),
+            title: Text(widget.teacherName),
+            subtitle: Text(widget.announcementContent),
+          )
+        ],
+      ),
+    );
+  }
+}
