@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:minerva/View/StudentView/Content/ContentStudentPage.dart';
+import 'package:minerva/View/StudentView/Content/StudentWeeklySchedule.dart';
 import 'package:minerva/View/StudentView/HomeworksView/StudentFileUpload.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class CourseContent extends StatefulWidget {
   final String courseName;
+
   const CourseContent({Key? key, required this.courseName}) : super(key: key);
 
   @override
@@ -14,9 +16,11 @@ class CourseContent extends StatefulWidget {
 }
 
 class _CourseContentState extends State<CourseContent> {
-  bool _announcementsExpanded= false;
+  DateTime _focusedDay = DateTime.now();
+  bool _announcementsExpanded = false;
   bool _materialsExpanded = false;
   bool _assesmentsExpanded = false;
+  bool _scheduleExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class _CourseContentState extends State<CourseContent> {
         backgroundColor: PageColors.mainColor,
         centerTitle: true,
         title: Text(widget.courseName,
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(top: 20.0),
@@ -41,9 +45,10 @@ class _CourseContentState extends State<CourseContent> {
                     _announcementsExpanded = !isExpanded;
                   } else if (index == 1) {
                     _materialsExpanded = !isExpanded;
-                  }
-                  else if (index == 2){
-                    _assesmentsExpanded=!isExpanded;
+                  } else if (index == 2) {
+                    _assesmentsExpanded = !isExpanded;
+                  } else if (index == 3) {
+                    _scheduleExpanded = !isExpanded;
                   }
                 });
               },
@@ -51,17 +56,20 @@ class _CourseContentState extends State<CourseContent> {
                 ExpansionPanel(
                   isExpanded: _announcementsExpanded,
                   headerBuilder: (BuildContext context, bool isExpanded) {
-
                     return ListTile(
                       leading: Icon(Icons.announcement_outlined),
-
-                      title: Text('Announcements',style: TextStyle(fontWeight: FontWeight.bold),),
+                      title: Text(
+                        'Announcements',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     );
                   },
                   body: SingleChildScrollView(
                     child: Container(
                       padding: EdgeInsets.all(16),
-                      child: Text('Announcements',),
+                      child: Text(
+                        'Announcements',
+                      ),
                     ),
                   ),
                 ),
@@ -70,7 +78,10 @@ class _CourseContentState extends State<CourseContent> {
                   headerBuilder: (BuildContext context, bool isExpanded) {
                     return ListTile(
                       leading: Icon(Icons.content_copy_outlined),
-                      title: Text('Materials',style: TextStyle(fontWeight: FontWeight.bold),),
+                      title: Text(
+                        'Materials',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     );
                   },
                   body: SingleChildScrollView(
@@ -80,13 +91,15 @@ class _CourseContentState extends State<CourseContent> {
                     ),
                   ),
                 ),
-
                 ExpansionPanel(
                   isExpanded: _assesmentsExpanded,
                   headerBuilder: (BuildContext context, bool isExpanded) {
                     return ListTile(
                       leading: Icon(Icons.assignment_outlined),
-                      title: Text('Assesments',style: TextStyle(fontWeight: FontWeight.bold),),
+                      title: Text(
+                        'Assesments',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     );
                   },
                   body: SingleChildScrollView(
@@ -96,33 +109,73 @@ class _CourseContentState extends State<CourseContent> {
                     ),
                   ),
                 ),
+                ExpansionPanel(
+                  isExpanded: _scheduleExpanded,
+                  headerBuilder: (BuildContext context, bool isExpanded) {
+                    return ListTile(
+                      leading: Icon(Icons.schedule),
+                      title: Text(
+                        'Weekly Schedule',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    );
+                  },
+                  body: SingleChildScrollView(
+                    child: Container(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(' Weekly Schedule',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                          SizedBox(height: 16),
+                          Padding(padding:const EdgeInsets.all(16.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: PageColors.thirdColor),
+                              child: Text('Schedule'),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                    builder: (context) => StudentWeeklySchedule()));
+                              },
+                            ), )
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
-            SizedBox(height: 30.0,),
+            SizedBox(
+              height: 30.0,
+            ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
-                style:ElevatedButton.styleFrom(backgroundColor: PageColors.thirdColor),
-                child: Text('Upload File'),onPressed: (){
-              Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => StudentUploadHomework()));
-    }
-
-              ,),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: PageColors.thirdColor),
+                child: Text('Upload File'),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => StudentUploadHomework()));
+                },
+              ),
             )
-
           ],
         ),
-
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children:<Widget> [
-            IconButton( icon: Icon(Icons.arrow_back),onPressed: (){
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => ContentStudent()));
-            })
+          children: <Widget>[
+            IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => ContentStudent()));
+                })
           ],
         ),
       ),
