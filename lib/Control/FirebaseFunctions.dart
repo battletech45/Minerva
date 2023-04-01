@@ -97,7 +97,7 @@ class FirebaseFunctions {
   Future sendNewAnnouncement(String className, announcement) async {
     QuerySnapshot querySnapshot = await classCollection.where('className', isEqualTo: className).get();
     await classCollection.doc(querySnapshot.docs[0].id).update({
-      'announcements': announcement
+      'announcements': FieldValue.arrayUnion(announcement)
     });
   }
   Future<Map<String, dynamic>> getStudentCourses(String studentID) async {
