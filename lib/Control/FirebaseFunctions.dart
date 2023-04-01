@@ -12,6 +12,7 @@ class FirebaseFunctions {
   final CollectionReference schoolCollection = FirebaseFirestore.instance.collection('schools');
   final CollectionReference chatsCollection = FirebaseFirestore.instance.collection('chats');
   final CollectionReference modelCollection = FirebaseFirestore.instance.collection('model');
+  final CollectionReference classCollection = FirebaseFirestore.instance.collection('classes');
 
   Future createStudent(String studentName, String password, String email, String tc, String studentNumber, String registerNumber) async {
     DocumentReference docRef = await studentCollection.add({
@@ -54,6 +55,10 @@ class FirebaseFunctions {
   }
   Future<QuerySnapshot> getStudentData(String email) async {
     QuerySnapshot snapshot = await studentCollection.where('email', isEqualTo: email).get();
+    return snapshot;
+  }
+  Future<QuerySnapshot> getClassAnnouncements(String className) async {
+    QuerySnapshot snapshot = await classCollection.where('className', isEqualTo: className).get();
     return snapshot;
   }
   Future<QuerySnapshot> getTeacherData(String email) async {
