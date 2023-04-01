@@ -1,4 +1,7 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
@@ -6,8 +9,29 @@ class AnnouncementStudentPage extends StatefulWidget {
   @override
   State<AnnouncementStudentPage> createState() => _AnnouncementStudentPageState();
 }
-// merhabalar
+
 class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
+
+  bool isLoading = false;
+  int counter = 0;
+  List<dynamic>? announcements;
+
+  _getAnnouncements() async {
+    setState(() {
+      isLoading = true;
+    });
+    var val = await FirebaseFunctions().getClassAnnouncements('11-A');
+    setState(() {
+      isLoading = false;
+      announcements = val.docs[0].get('announcements');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getAnnouncements();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,23 +42,15 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
         centerTitle: true,
         title: Text("ANNOUNCEMENTS", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ),
-      body: Container(
-        alignment: Alignment.center,
-        child: ListView(
-          shrinkWrap: true,
+      body: isLoading ? AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: AnnouncementStudentPage(), splashTransition: SplashTransition.fadeTransition)
+      :
+      ListView.builder(
           physics: BouncingScrollPhysics(),
-          children: <Widget>[
-            SizedBox(height: 30.0),
-            customAnnouncementCard(teacherName: 'Teacher Melis', announcementContent: 'fkljlerjglkregjelkşjglegjegrjlgkrgjerlgjrlge'),
-            customAnnouncementCard(teacherName: 'Teacher Melis', announcementContent: 'fkljlerjglkregjelkşjglegjegrjlgkrgjerlgjrlge'),
-            customAnnouncementCard(teacherName: 'Teacher Melis', announcementContent: 'fkljlerjglkregjelkşjglegjegrjlgkrgjerlgjrlge'),
-            customAnnouncementCard(teacherName: 'Teacher Melis', announcementContent: 'fkljlerjglkregjelkşjglegjegrjlgkrgjerlgjrlge'),
-            customAnnouncementCard(teacherName: 'Teacher Melis', announcementContent: 'fkljlerjglkregjelkşjglegjegrjlgkrgjerlgjrlge'),
-            customAnnouncementCard(teacherName: 'Teacher Melis', announcementContent: 'fkljlerjglkregjelkşjglegjegrjlgkrgjerlgjrlge'),
-            customAnnouncementCard(teacherName: 'Teacher Melis', announcementContent: 'fkljlerjglkregjelkşjglegjegrjlgkrgjerlgjrlge'),
-            customAnnouncementCard(teacherName: 'Teacher Melis', announcementContent: 'fkljlerjglkregjelkşjglegjegrjlgkrgjerlgjrlge'),
-          ],
-        ),
+          shrinkWrap: true,
+          itemCount: announcements!.length,
+          itemBuilder: (context, index) {
+            return customAnnouncementCard(teacherName: announcements![index]['sender'], announcementContent: announcements![index]['content']);
+          }
       ),
       drawer: customDrawer()
     );
