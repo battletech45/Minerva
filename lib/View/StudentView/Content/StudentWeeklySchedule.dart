@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../../Model/WidgetProperties.dart';
@@ -11,43 +12,7 @@ class StudentWeeklySchedule extends StatefulWidget {
 }
 
 class _StudentWeeklyScheduleState extends State<StudentWeeklySchedule> {
-  CalendarFormat _calendarFormat = CalendarFormat.week;
-  DateTime _focusedDay = DateTime.now();
-  DateTime _selectedDay = DateTime.now();
-
-  Map<DateTime, List<Lesson>> _events = {
-    DateTime.now(): [
-      Lesson('Math', Colors.blue, TimeOfDay(hour: 12, minute: 0),
-          TimeOfDay(hour: 12, minute: 40)),
-      Lesson('Physics', Colors.green, TimeOfDay(hour: 12, minute: 50),
-          TimeOfDay(hour: 15, minute: 30))
-    ],
-    DateTime.now().add(Duration(days: 1)): [
-      Lesson('Chemistry', Colors.red, TimeOfDay(hour: 10, minute: 0),
-          TimeOfDay(hour: 11, minute: 30)),
-      Lesson('Biology', Colors.orange, TimeOfDay(hour: 12, minute: 0),
-          TimeOfDay(hour: 13, minute: 30))
-    ],
-    DateTime.now().add(Duration(days: 2)): [
-      Lesson('History', Colors.purple, TimeOfDay(hour: 9, minute: 0),
-          TimeOfDay(hour: 10, minute: 30)),
-      Lesson('Geography', Colors.brown, TimeOfDay(hour: 11, minute: 0),
-          TimeOfDay(hour: 12, minute: 30))
-    ],
-    DateTime.now().add(Duration(days: 3)): [
-      Lesson('English', Colors.teal, TimeOfDay(hour: 8, minute: 30),
-          TimeOfDay(hour: 9, minute: 45)),
-      Lesson('German', Colors.blueGrey, TimeOfDay(hour: 10, minute: 0),
-          TimeOfDay(hour: 11, minute: 15)),
-      Lesson('Literature', Colors.amber, TimeOfDay(hour: 14, minute: 0),
-          TimeOfDay(hour: 15, minute: 30))
-    ],
-    DateTime.now().add(Duration(days: 4)): [
-      Lesson('Turkish', Colors.deepPurple, TimeOfDay(hour: 11, minute: 0),
-          TimeOfDay(hour: 12, minute: 30))
-    ],
-  };
-
+  bool _examSchedule = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,92 +25,427 @@ class _StudentWeeklyScheduleState extends State<StudentWeeklySchedule> {
       ),
       body: Column(
         children: [
-          TableCalendar(
-            firstDay: DateTime.now().subtract(Duration(days: 365)),
-            lastDay: DateTime.now().add(Duration(days: 365)),
-            focusedDay: _focusedDay,
-            calendarFormat: _calendarFormat,
-            eventLoader: _getEventsForDay,
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            onFormatChanged: (format) {
-              setState(() {
-                _calendarFormat = format;
-              });
-            },
-            onDaySelected: (selectedDay, focusedDay) {
-              setState(() {
-                _selectedDay = selectedDay;
-                _focusedDay = focusedDay; // update `_focusedDay` here as well
-              });
-            },
-            calendarStyle: CalendarStyle(
-              weekendTextStyle: TextStyle(color: Colors.red),
-              holidayTextStyle: TextStyle(color: Colors.green),
+          Padding(padding: EdgeInsets.only(top: 5.0)),
+          Table(
+          border: TableBorder.all(),
+      children: [
+        TableRow(
+          children: [
+
+            TableCell(
+              child: Container(
+                  height: 40,
+                  child: Text('')),
             ),
-            headerStyle: HeaderStyle(
-              formatButtonVisible: false,
+            TableCell(
+              child: Text('Monday'),
             ),
-            daysOfWeekStyle: DaysOfWeekStyle(
-              weekendStyle: TextStyle(color: Colors.red),
+            TableCell(
+              child: Text('Tuesday'),
             ),
-            headerVisible: true,
-            calendarBuilders:
-                CalendarBuilders(markerBuilder: (context, date, events) {
-              final children = <Widget>[];
-              if (events.isNotEmpty) {
-                children.add(
-                  Positioned(
-                    right: 1,
-                    bottom: 1,
-                    child: _buildEventsMarker(date, events),
-                  ),
-                );
-              }
-            }),
+            TableCell(
+              child: Text('Wednesday'),
+            ),
+            TableCell(
+              child: Text('Thursday'),
+            ),
+            TableCell(
+              child: Text('Friday'),
+            ),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableCell(
+              child: Text('08:00 - 08:40'),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.blue,
+                child: Text('Math'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.green,
+                child: Text('Physics'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.red,
+                child: Text('History'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.yellow,
+                child: Text('Chemistry'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.orange,
+                child: Text('English'),
+              ),
+            ),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableCell(
+              child: Text('08:50 - 09.30'),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.blue,
+                child: Text('Math'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.green,
+                child: Text('Physics'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.red,
+                child: Text('History'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.yellow,
+                child: Text('Chemistry'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.orange,
+                child: Text('English'),
+              ),
+            ),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableCell(
+              child: Text('09:40 - 10:20'),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.pink,
+                child: Text('Turkish'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.pink,
+                child: Text('Turkish'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.deepPurple,
+                child: Text('Geography'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.orange,
+                child: Text('English'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.yellow,
+                child: Text('Chemistry'),
+              ),
+            ),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableCell(
+              child: Text('10:30 - 11.10'),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.pink,
+                child: Text('Turkish'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.pink,
+                child: Text('Turkish'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.deepPurple,
+                child: Text('Geography'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.orange,
+                child: Text('English'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.yellow,
+                child: Text('Chemistry'),
+              ),
+            ),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableCell(
+              child: Text('11:20 - 12:00'),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.red,
+                child: Text('History'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.blue,
+                child: Text('Math'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.green,
+                child: Text('Physics'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.deepPurple,
+                child: Text('Geography'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.tealAccent,
+                child: Text('Literature'),
+              ),
+            ),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableCell(
+              child: Text('12:10 - 12:50'),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.red,
+                child: Text('History'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.blue,
+                child: Text('Math'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.green,
+                child: Text('Physics'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.deepPurple,
+                child: Text('Geography'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.tealAccent,
+                child: Text('Literature'),
+              ),
+            ),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableCell(
+              child: Text('12.50 - 13.30'),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.grey,
+                child: Text('Break'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.grey,
+                child: Text('Break'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.grey,
+                child: Text('Break'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.grey,
+                child: Text('Break'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.grey,
+                child: Text('Break'),
+              ),
+            ),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableCell(
+              child: Text('13:40 - 14:20'),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.lightGreenAccent,
+                child: Text('German'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.yellow,
+                child: Text('Chemistry'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.lightGreenAccent,
+                child: Text('German'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.blue,
+                child: Text('Math'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.tealAccent,
+                child: Text('Literature'),
+              ),
+            ),
+          ],
+        ),
+        TableRow(
+          children: [
+            TableCell(
+              child: Text('14:30 - 15:10'),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.lightGreenAccent,
+                child: Text('German'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.yellow,
+                child: Text('Chemistry'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.lightGreenAccent,
+                child: Text('German'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.blue,
+                child: Text('Math'),
+              ),
+            ),
+            TableCell(
+              child: Container(
+                color: Colors.tealAccent,
+                child: Text('Literature'),
+              ),
+            ),
+          ],
+        ),
+
+      ],
+    ),
+          SingleChildScrollView(
+            padding: EdgeInsets.only(top:20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                ExpansionPanelList(
+                  expansionCallback: (int index, bool isExpanded){
+                    setState(() {
+                      if(index == 0){
+                        _examSchedule = !isExpanded;
+                      }
+                    });
+                  },
+                  children: [
+                    ExpansionPanel(
+                      isExpanded: _examSchedule,
+                      headerBuilder: (BuildContext context, bool isExpanded) {
+                        return ListTile(
+                          leading: Icon(Icons.date_range),
+                          title: Text(
+                            'Exam Dates',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        );
+                      },
+                      body: SingleChildScrollView(
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          child: Text(
+                            'Exams',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+
+                ),
+              ],
+            ),
           ),
 
         ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
 
+                })
+          ],
+        ),
       ),
       drawer: customDrawer(),
     );
   }
-  List<Lesson> _getEventsForDay(DateTime date) {
-    // Get the lessons for the given `date` (only weekdays)
-    if (date.weekday >= 1 && date.weekday <= 5) {
-      final lessons = _events[date];
-      return lessons ?? [];
-    }
-    return [];
-  }
-
-  Widget _buildEventsMarker(DateTime date, List events) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.blue[400]!,
-      ),
-      width: 16.0,
-      height: 16.0,
-      child: Center(
-        child: Text(
-          '${events.length}',
-          style: TextStyle().copyWith(
-            color: Colors.white,
-            fontSize: 12.0,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Lesson {
-  final String name;
-  final Color color;
-  final TimeOfDay startTime;
-  final TimeOfDay endTime;
-
-  const Lesson(this.name, this.color, this.startTime, this.endTime);
 }
