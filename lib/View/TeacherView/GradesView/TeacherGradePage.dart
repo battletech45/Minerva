@@ -18,8 +18,8 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
   String _grade = '';
 
   TextEditingController? _homeworkController;
-   TextEditingController? _quizController;
-   TextEditingController? _examController;
+  TextEditingController? _quizController;
+  TextEditingController? _examController;
 
   @override
   void initState() {
@@ -36,125 +36,141 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
     _examController?.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     String studentID = widget.studentID;
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,
-          title: Text('Grades'),
-          elevation: 0.0,
-          automaticallyImplyLeading: true,
-          backgroundColor: PageColors.mainColor,
+        centerTitle: true,
+        title: Text('Enter Grade Page'),
+        elevation: 0.0,
+        automaticallyImplyLeading: true,
+        backgroundColor: PageColors.mainColor,
       ),
-
-      body: Padding(
-        padding: const EdgeInsets.only(top: 25.0),
-        child: SingleChildScrollView(
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(40.0),
-            decoration: BoxDecoration(
-                border: Border(bottom: BorderSide()), color: Colors.white),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text('Project', style: TextStyle(fontSize: 18)),
-                  TextFormField(
-                    controller: _homeworkController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    decoration: InputDecoration(
-                      hintText: 'Enter your project grade',
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter a grade';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _grade = value!;
-                    },
+      body: SingleChildScrollView(
+        child: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(20.0),
+          decoration: BoxDecoration(
+              border: Border(bottom: BorderSide()), color: Colors.white),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                 SizedBox(height: 15),
+                Text('Project', style: TextStyle(fontSize: 22)),
+                TextFormField(
+                  controller: _homeworkController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: InputDecoration(
+                    hintText: 'Enter your project grade',
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: PageColors.thirdColor),
-                    onPressed: () {
-                      if(_formKey.currentState!.validate()){
-                        _formKey.currentState!.save();
-                        _gradeTask(studentID, 'English', 'project', _homeworkController!.text);
-                      }
-                    },
-                    child: Text('Submit'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a grade';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _grade = value!;
+                  },
+                ),
+                SizedBox(height: 5),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: PageColors.thirdColor),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      _gradeTask(studentID, 'English', 'project',
+                          _homeworkController!.text);
+                    }
+                  },
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(fontSize: 20),
                   ),
-                  SizedBox(height: 16),
-                  Text('Quiz', style: TextStyle(fontSize: 18)),
-                  TextFormField(
-                    controller: _quizController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    decoration: InputDecoration(
-                      hintText: 'Enter your quiz grade',
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter a grade';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _grade = value!;
-                    },
+                ),
+                SizedBox(height: 25),
+                Text('Quiz', style: TextStyle(fontSize: 22)),
+                TextFormField(
+                  controller: _quizController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: InputDecoration(
+                    hintText: 'Enter your quiz grade',
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: PageColors.thirdColor),
-                    onPressed: () {
-                      if(_formKey.currentState!.validate()){
-                        _formKey.currentState!.save();
-                        _gradeTask(studentID, 'English', 'quiz', _quizController!.text);
-                      }
-                    },
-                    child: Text('Submit'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a grade';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _grade = value!;
+                  },
+                ),
+                SizedBox(height: 5),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: PageColors.thirdColor),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      _gradeTask(
+                          studentID, 'English', 'quiz', _quizController!.text);
+                    }
+                  },
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(fontSize: 20),
                   ),
-                  SizedBox(height: 16),
-                  Text('Exam', style: TextStyle(fontSize: 18)),
-                  TextFormField(
-                    controller: _examController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    decoration: InputDecoration(
-                      hintText: 'Enter your exam grade',
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter a grade';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _grade = value!;
-                    },
+                ),
+                SizedBox(height: 25),
+                Text('Exam', style: TextStyle(fontSize: 22)),
+                TextFormField(
+                  controller: _examController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: InputDecoration(
+                    hintText: 'Enter your exam grade',
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: PageColors.thirdColor),
-                    onPressed: () {
-                      if(_formKey.currentState!.validate()){
-                        _formKey.currentState!.save();
-                        _gradeTask(studentID, 'English', 'exam', _examController!.text);
-                      }
-                    },
-                    child: Text('Submit'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a grade';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _grade = value!;
+                  },
+                ),
+                SizedBox(height: 5),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: PageColors.thirdColor),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      _gradeTask(
+                          studentID, 'English', 'exam', _examController!.text);
+                    }
+                  },
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(fontSize: 20),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -162,19 +178,23 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children:<Widget> [
-            IconButton( icon: Icon(Icons.arrow_back),onPressed: (){
-
-            },)
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {},
+            )
           ],
         ),
-      ) ,
+      ),
       drawer: customDrawer(),
     );
   }
-  void _gradeTask(String studentID, String courseName, String gradeType, String grade) async {
+
+  void _gradeTask(String studentID, String courseName, String gradeType,
+      String grade) async {
     try {
-      await FirebaseFunctions().gradeTask(studentID, courseName, gradeType, grade);
+      await FirebaseFunctions()
+          .gradeTask(studentID, courseName, gradeType, grade);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Grade saved')),
       );
