@@ -17,11 +17,22 @@ class CourseContent extends StatefulWidget {
 
 class _CourseContentState extends State<CourseContent> {
   DateTime _focusedDay = DateTime.now();
-  bool _announcementsExpanded = false;
-  bool _materialsExpanded = false;
-  bool _assesmentsExpanded = false;
-  bool _scheduleExpanded = false;
-
+  int _selectedIndex=0;
+static const List<Widget> _widgetOptions = <Widget>[
+  Text(
+      'Index 0: Back',
+     
+    ),
+    Text(
+      'Index 1: Business',
+     
+    ),
+    Text(
+      'Index 2: School',
+     
+    ),
+    StudentWeeklySchedule(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,153 +44,39 @@ class _CourseContentState extends State<CourseContent> {
         title: Text(widget.courseName,
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ExpansionPanelList(
-              expansionCallback: (int index, bool isExpanded) {
-                setState(() {
-                  if (index == 0) {
-                    _announcementsExpanded = !isExpanded;
-                  } else if (index == 1) {
-                    _materialsExpanded = !isExpanded;
-                  } else if (index == 2) {
-                    _assesmentsExpanded = !isExpanded;
-                  } else if (index == 3) {
-                    _scheduleExpanded = !isExpanded;
-                  }
-                });
-              },
-              children: [
-                ExpansionPanel(
-                  isExpanded: _announcementsExpanded,
-                  headerBuilder: (BuildContext context, bool isExpanded) {
-                    return ListTile(
-                      leading: Icon(Icons.announcement_outlined),
-                      title: Text(
-                        'Announcements',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    );
-                  },
-                  body: SingleChildScrollView(
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      child: Text(
-                        'Announcements',
-                      ),
-                    ),
-                  ),
-                ),
-                ExpansionPanel(
-                  isExpanded: _materialsExpanded,
-                  headerBuilder: (BuildContext context, bool isExpanded) {
-                    return ListTile(
-                      leading: Icon(Icons.content_copy_outlined),
-                      title: Text(
-                        'Materials',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    );
-                  },
-                  body: SingleChildScrollView(
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      child: Text(' Materials '),
-                    ),
-                  ),
-                ),
-                ExpansionPanel(
-                  isExpanded: _assesmentsExpanded,
-                  headerBuilder: (BuildContext context, bool isExpanded) {
-                    return ListTile(
-                      leading: Icon(Icons.assignment_outlined),
-                      title: Text(
-                        'Assesments',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    );
-                  },
-                  body: SingleChildScrollView(
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      child: Text(' Assesments '),
-                    ),
-                  ),
-                ),
-                ExpansionPanel(
-                  isExpanded: _scheduleExpanded,
-                  headerBuilder: (BuildContext context, bool isExpanded) {
-                    return ListTile(
-                      leading: Icon(Icons.schedule),
-                      title: Text(
-                        'Weekly Schedule',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    );
-                  },
-                  body: SingleChildScrollView(
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(' Weekly Schedule',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          SizedBox(height: 16),
-                          Padding(padding:const EdgeInsets.all(16.0),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: PageColors.thirdColor),
-                              child: Text('Schedule'),
-                              onPressed: () {
-                                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                    builder: (context) => StudentWeeklySchedule()));
-                              },
-                            ), )
-
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: PageColors.thirdColor),
-                child: Text('Upload File'),
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => StudentUploadHomework()));
-                },
-              ),
-            )
-          ],
-        ),
+       body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => ContentStudent()));
-                })
-          ],
-        ),
-      ),
+       bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: PageColors.mainColor,
+       items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.arrowLeft),
+            label: 'Back',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.listCheck),
+            label: 'Assessments',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.noteSticky),
+            label: 'Materials',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.calendar),
+            label: 'Schedule',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+    ),
       drawer: customDrawer(),
     );
+  }
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }

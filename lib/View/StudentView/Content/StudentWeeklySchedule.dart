@@ -16,13 +16,6 @@ class _StudentWeeklyScheduleState extends State<StudentWeeklySchedule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        automaticallyImplyLeading: true,
-        backgroundColor: PageColors.mainColor,
-        centerTitle: true,
-        title: Text("Weekly Schedule"),
-      ),
       body: Column(
         children: [
           Padding(padding: EdgeInsets.only(top: 5.0)),
@@ -31,7 +24,6 @@ class _StudentWeeklyScheduleState extends State<StudentWeeklySchedule> {
       children: [
         TableRow(
           children: [
-
             TableCell(
               child: Container(
                   height: 40,
@@ -416,11 +408,19 @@ class _StudentWeeklyScheduleState extends State<StudentWeeklySchedule> {
                         );
                       },
                       body: SingleChildScrollView(
-                        child: Container(
-                          padding: EdgeInsets.all(16),
-                          child: Text(
-                            'Exams',
-                          ),
+                        child: ListView(
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                          children: [
+                            Expanded(
+                              child: Container(
+                              //padding: EdgeInsets.all(16),
+                              child: Text(
+                                'Exams',
+                              ),
+                                                      ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -433,6 +433,7 @@ class _StudentWeeklyScheduleState extends State<StudentWeeklySchedule> {
 
         ],
       ),
+      /*
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -440,12 +441,13 @@ class _StudentWeeklyScheduleState extends State<StudentWeeklySchedule> {
             IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: () {
-
+                Navigator.pop(context); 
                 })
           ],
         ),
       ),
       drawer: customDrawer(),
+      */
     );
   }
 }
