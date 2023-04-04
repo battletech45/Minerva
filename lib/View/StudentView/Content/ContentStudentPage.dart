@@ -43,7 +43,7 @@ class _ContentStudentState extends State<ContentStudent> {
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
+                  Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => CourseContent(courseName: 'MATH')));
                 },
               ),
