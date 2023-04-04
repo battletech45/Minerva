@@ -17,7 +17,7 @@ class _HomePage extends State<HomePage> {
   String email = "";
   String link = '';
   bool isLoading = false;
-  Image? photo;
+  dynamic data;
 
   _getUserData() async {
     var val = await SharedFunctions.getUserEmailSharedPreference();
@@ -37,7 +37,7 @@ class _HomePage extends State<HomePage> {
     final ref = await FirebaseStorage.instance.ref('sampleFile').child('images.jpeg');
     link = await ref.getDownloadURL();
     setState(() {
-      photo = Image.network('http://' + link);
+      data = Image.network('http://' + link);
       isLoading = false;
     });
   }
@@ -65,9 +65,9 @@ class _HomePage extends State<HomePage> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 10),
-                isLoading ? CircularProgressIndicator() : customContentFeed(userName: 'Yarkın Ata', content: 'Hello world Yarkin Metin Altay'),
+                isLoading ? CircularProgressIndicator() : customContentFeed(userName: 'Yarkın Ata', content: data),
                 SizedBox(height: 30),
-                //customContentFeed(userName: 'Yarkın Ata'),
+                customContentFeed(userName: 'Yarkın Ata', content: 'hello world teacher now'),
                 SizedBox(height: 30),
                 //customContentFeed(userName: 'Yarkın Ata'),
                 SizedBox(height: 30),
