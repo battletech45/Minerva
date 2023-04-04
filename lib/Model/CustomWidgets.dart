@@ -259,18 +259,44 @@ class _customAttendanceCardState extends State<customAttendanceCard> {
 
 class customContentFeed extends StatefulWidget {
   final String userName;
+  final dynamic content;
 
-  const customContentFeed({Key? key, required this.userName}) : super(key: key);
+  const customContentFeed({Key? key, required this.userName, required this.content}) : super(key: key);
   @override
   State<customContentFeed> createState() => _customContentFeedState();
 }
 
 class _customContentFeedState extends State<customContentFeed> {
+
   bool click = false;
-  int likeCounter=0;
+  int likeCounter = 0;
+
+  _defineContentsType(dynamic content) {
+    if(content is String) {
+      //Stringi doncebilecek sekilde bir widget yapisi kurulabilir
+      return Container(
+        color: Colors.teal,
+        child: Text(content.toString())
+      );
+    }
+    if(content is Image) {
+      print(content.toString());
+    }
+    if(content is Widget) {
+      print(content.toString());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _defineContentsType(widget.content);
+  }
+
   @override
   Widget build(BuildContext context) {
     String name = widget.userName;
+    // yukaridaki fonksiyon burada return ile cagiralacak ve icleri contenti dondurebilecek sekilde olacak
     return Column(
       children: <Widget>[
         Row(
