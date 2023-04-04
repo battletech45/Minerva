@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minerva/Model/CustomWidgets.dart';
-
-import '../Model/WidgetProperties.dart';
-
-
 
 class StudentHomeWorkViewPage extends StatefulWidget {
   @override
@@ -41,14 +36,6 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        automaticallyImplyLeading: true,
-        backgroundColor: PageColors.mainColor,
-        centerTitle: true,
-        title: Text("Homeworks", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-      ),
-      drawer: customDrawer(),
       body: ListView.builder(
         itemCount: homeworkItems.length,
         itemBuilder: (BuildContext context, int index) {
