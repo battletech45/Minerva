@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
+import 'package:minerva/View/StudentHomeWorkViewPage.dart';
 import 'package:minerva/View/StudentView/Content/ContentStudentPage.dart';
 import 'package:minerva/View/StudentView/Content/StudentWeeklySchedule.dart';
 import 'package:minerva/View/StudentView/HomeworksView/StudentFileUpload.dart';
@@ -16,23 +17,16 @@ class CourseContent extends StatefulWidget {
 }
 
 class _CourseContentState extends State<CourseContent> {
-  DateTime _focusedDay = DateTime.now();
-  int _selectedIndex=0;
-static const List<Widget> _widgetOptions = <Widget>[
-  Text(
-      'Index 0: Back',
-     
-    ),
-    Text(
-      'Index 1: Business',
-     
-    ),
-    Text(
-      'Index 2: School',
-     
-    ),
+
+  int _selectedIndex = 1;
+
+  List<Widget> _widgetOptions = <Widget>[
+    Text('Index 0: Back'),
+    StudentHomeWorkViewPage(),
+    Text('Index 2: School'),
     StudentWeeklySchedule(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,22 +43,42 @@ static const List<Widget> _widgetOptions = <Widget>[
       ),
        bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: PageColors.mainColor,
-       items: const <BottomNavigationBarItem>[
+       items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.arrowLeft),
+            icon: Column(
+              children: <Widget>[
+                Icon(FontAwesomeIcons.arrowLeft),
+                Text('Back', style: TextStyle(fontWeight: FontWeight.bold))
+              ],
+            ),
             label: 'Back',
           ),
           BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.listCheck),
-            label: 'Assessments',
+            icon: Column(
+              children: <Widget>[
+                Icon(FontAwesomeIcons.listCheck),
+                Text('Assesments', style: TextStyle(fontWeight: FontWeight.bold))
+              ],
+            ),
+            label: ''
           ),
           BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.noteSticky),
-            label: 'Materials',
+            icon: Column(
+              children: <Widget>[
+                Icon(FontAwesomeIcons.noteSticky),
+                Text('Materials', style: TextStyle(fontWeight: FontWeight.bold))
+              ],
+            ),
+              label: ''
           ),
           BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.calendar),
-            label: 'Schedule',
+            icon: Column(
+              children: <Widget>[
+                Icon(FontAwesomeIcons.calendar),
+                Text('Schedule', style: TextStyle(fontWeight: FontWeight.bold))
+              ],
+            ),
+              label: ''
           ),
         ],
         currentIndex: _selectedIndex,
@@ -75,8 +89,14 @@ static const List<Widget> _widgetOptions = <Widget>[
     );
   }
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if(index == 0) {
+      print('exit');
+      Navigator.pop(context);
+    }
+    else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 }
