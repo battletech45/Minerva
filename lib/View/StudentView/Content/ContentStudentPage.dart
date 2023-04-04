@@ -58,8 +58,8 @@ class _ContentStudentState extends State<ContentStudent> {
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => StudentHomeWorkViewPage()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CourseContent(courseName: 'BIOLOGY')));
                 },
               ),
             ),
@@ -73,8 +73,8 @@ class _ContentStudentState extends State<ContentStudent> {
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => EditAttendance()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CourseContent(courseName: 'PHYSICS')));
                 },
               ),
             ),
@@ -88,8 +88,8 @@ class _ContentStudentState extends State<ContentStudent> {
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => UploadFile()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CourseContent(courseName: 'TURKISH')));
                 },
               ),
             ),
@@ -103,8 +103,8 @@ class _ContentStudentState extends State<ContentStudent> {
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => TeacherGradePage(studentID:"ZxxEST8BdDBnLrzffT4W")));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CourseContent(courseName: 'ENGLISH')));
                 },
               ),
             ),
@@ -118,8 +118,8 @@ class _ContentStudentState extends State<ContentStudent> {
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => StudentUploadHomework()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CourseContent(courseName: 'GERMAN')));
                 },
               ),
             ),
@@ -133,8 +133,8 @@ class _ContentStudentState extends State<ContentStudent> {
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => UploadFile()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CourseContent(courseName: 'CHEMISTRY')));
                 },
               ),
             ),
@@ -149,8 +149,8 @@ class _ContentStudentState extends State<ContentStudent> {
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => UploadFile()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CourseContent(courseName: 'LITERATURE')));
                 },
               ),
             ),
@@ -165,8 +165,8 @@ class _ContentStudentState extends State<ContentStudent> {
                     style:
                     TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => UploadFile()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CourseContent(courseName: 'HISTORY')));
                 },
               ),
             ),
@@ -181,158 +181,13 @@ class _ContentStudentState extends State<ContentStudent> {
                     style:
                     TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => UploadFile()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CourseContent(courseName: 'GEOGRAPHY')));
                 },
               ),
             ),
           ],
         ),
         drawer: customDrawer());
-  }
-}
-
-//Eski Content sayfası görünmü
-class MaterialList extends StatelessWidget {
-  const MaterialList({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: ListView(
-        shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
-        children: [
-          SizedBox(height: 15.0),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            child: ListTile(
-              leading: Icon(Icons.class_),
-              title: Text("Math",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-              onTap: () {
-
-              },
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            child: ListTile(
-              leading: Icon(Icons.class_),
-              title: Text(
-                "Chemistry",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            child: ListTile(
-              leading: Icon(Icons.class_),
-              title: Text(
-                "Physics",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            child: ListTile(
-              leading: Icon(Icons.class_),
-              title: Text(
-                "History",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            child: ListTile(
-              leading: Icon(Icons.class_),
-              title: Text(
-                "Biology",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            child: ListTile(
-              leading: Icon(Icons.class_),
-              title: Text(
-                "Turkish",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            child: ListTile(
-              leading: Icon(Icons.class_),
-              title: Text(
-                "English",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            child: ListTile(
-              leading: Icon(Icons.class_),
-              title: Text(
-                "German",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            child: ListTile(
-              leading: Icon(Icons.class_),
-              title: Text(
-                "Literature",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }
