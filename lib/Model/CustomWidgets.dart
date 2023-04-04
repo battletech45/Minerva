@@ -18,6 +18,7 @@ import 'package:minerva/View/StudentView/Grades/StudentGradePage.dart';
 import 'package:minerva/View/TeacherView/GradesView/TeacherGradePage.dart';
 import 'package:minerva/View/WelcomePage.dart';
 import '../View/ResetPassword.dart';
+import '../View/StudentView/Content/StudentCourseContentPage.dart';
 import '../View/TeacherView/AnnouncementView/AnnouncementTeacherPage.dart';
 import '../View/TeacherView/AttendanceView/AttendanceTeacherPage.dart';
 import '../View/ChatsListPage.dart';
@@ -667,6 +668,41 @@ class _customAnnouncementCardState extends State<customAnnouncementCard> {
             subtitle: Text(widget.announcementContent),
           )
         ],
+      ),
+    );
+  }
+}
+
+class customCourseGrid extends StatefulWidget {
+  final String courseName;
+
+  const customCourseGrid({super.key, required this.courseName});
+  @override
+  State<customCourseGrid> createState() => _customCourseGridState();
+}
+
+class _customCourseGridState extends State<customCourseGrid> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => CourseContent(courseName: widget.courseName)));
+        },
+      child: Card(
+        elevation: 6,
+        shape: CustomBorders.mainBorder,
+        margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 25.0),
+            Text(widget.courseName,
+                  textAlign: TextAlign.center,
+                  style:
+                  TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+            SizedBox(height: 20.0),
+            Icon(FontAwesomeIcons.bookOpen, color: PageColors.thirdColor, size: 50.0)
+          ],
+        ),
       ),
     );
   }
