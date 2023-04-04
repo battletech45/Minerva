@@ -20,7 +20,7 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
     setState(() {
       isLoading = true;
     });
-    var val = await FirebaseFunctions().getClassAnnouncements('11-A');
+    var val = await FirebaseFunctions().getClassData('11-A');
     setState(() {
       isLoading = false;
       announcements = val.docs[0].get('announcements');
