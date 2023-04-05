@@ -17,7 +17,7 @@ class _HomePage extends State<HomePage> {
   String email = "";
   String link = '';
   bool isLoading = false;
-  dynamic data;
+  Image? data;
 
   _getUserData() async {
     var val = await SharedFunctions.getUserEmailSharedPreference();
@@ -37,7 +37,10 @@ class _HomePage extends State<HomePage> {
     final ref = await FirebaseStorage.instance.ref('sampleFile').child('images.jpeg');
     link = await ref.getDownloadURL();
     setState(() {
-      data = Image.network('http://' + link);
+      data = Image.network(
+        link,
+        fit: BoxFit.cover,
+       );
       isLoading = false;
     });
   }
