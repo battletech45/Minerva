@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey/flutter_survey.dart';
@@ -10,6 +9,7 @@ import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/StudentView/Announcement/AnnouncementStudentPage.dart';
 import 'package:minerva/View/StudentView/Attendance/AttendanceStudentPage.dart';
 import 'package:minerva/View/ChatPage.dart';
+import 'package:minerva/View/TeacherView/AttendanceView/EditAttendance.dart';
 import 'package:minerva/View/TeacherView/ContentView/ContentTeacherPage.dart';
 import 'package:minerva/View/HomePage.dart';
 import 'package:minerva/View/StudentView/ProfileView/ProfilePage.dart';
@@ -136,7 +136,7 @@ class _customDrawerState extends State<customDrawer> {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => isStudent
                       ? AttendanceStudentPage()
-                      : AttendanceTeacherPage()));
+                      : EditAttendance()));
             },
           ),
           ListTile(
