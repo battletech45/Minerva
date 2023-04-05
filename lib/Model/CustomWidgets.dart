@@ -276,8 +276,35 @@ class _customContentFeedState extends State<customContentFeed> {
     if(content is String) {
       //Stringi doncebilecek sekilde bir widget yapisi kurulabilir
       return Container(
-        color: Colors.teal,
-        child: Text(content.toString())
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Card(
+          elevation: 2,
+          shadowColor: PageColors.mainColor,
+          shape: CustomBorders.mainBorder,
+          margin: EdgeInsets.all(0),
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Text(
+                    content.toString(),
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       );
     }
     if(content is Image) {

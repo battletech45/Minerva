@@ -71,6 +71,7 @@ class _HomePage extends State<HomePage> {
                 isLoading ? CircularProgressIndicator() : customContentFeed(userName: 'Yarkın Ata', content: data),
                 SizedBox(height: 30),
                 customContentFeed(userName: 'Yarkın Ata', content: 'hello world teacher now'),
+                customContentFeed(userName: 'Metin Baybars Arslan', content: 'İzmir Ekonomi Üniversitesi’nin (İEÜ) 25 öğrencisi, deprem sonrası oluşturulan barınma alanlarına yönelik alternatif projeler geliştirmek üzere 5 gün süren atölye çalışmasında bir araya geldi. Konteyner kent başta olmak üzere depremzedeler için en iyi yaşam alanlarını oluşturmak üzerine yoğunlaşan gençler, hızlı ve düşük maliyetle uygulanabilecek fikirler geliştirdi. Dörder ve beşer kişilik gruplar halinde çalışan öğrenciler, konteyner kentlerde ortak yaşam alanlarının çoğaltılabileceğine vurgu yaptı, çocukların oyun oynayabileceği ve film izleyebileceği özel bölümlerin de yer aldığı tasarımlar hazırladı. Öğrenciler, atölye sonunda İEÜ Rektörü Prof. Dr. Murat Aşkar’ın elinden sertifikalarını aldı.'),
                 SizedBox(height: 30),
                 //customContentFeed(userName: 'Yarkın Ata'),
                 SizedBox(height: 30),
