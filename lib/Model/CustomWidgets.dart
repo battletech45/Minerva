@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_survey/flutter_survey.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
@@ -322,7 +323,23 @@ class _customContentFeedState extends State<customContentFeed> {
         );
     }
     if(content is Widget) {
-      print(content.toString());
+      return Container(
+        height: 300,
+        width: 400,
+        color: PageColors.thirdColor,
+        alignment: Alignment.bottomCenter,
+        child: Survey(
+          initialData: [
+            Question(
+                question: 'why are you running ?',
+                answerChoices: {
+                  'Yes': null,
+                  'Yes but another yes': null,
+                  'No': null,
+                }
+            )],
+        ),
+      );
     }
   }
 
