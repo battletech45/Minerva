@@ -51,7 +51,7 @@ class _CourseContentState extends State<CourseContent> {
                 Text('Back', style: TextStyle(fontWeight: FontWeight.bold))
               ],
             ),
-            label: 'Back',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Column(
@@ -67,15 +67,6 @@ class _CourseContentState extends State<CourseContent> {
               children: <Widget>[
                 Icon(FontAwesomeIcons.noteSticky),
                 Text('Materials', style: TextStyle(fontWeight: FontWeight.bold))
-              ],
-            ),
-              label: ''
-          ),
-          BottomNavigationBarItem(
-            icon: Column(
-              children: <Widget>[
-                Icon(FontAwesomeIcons.calendar),
-                Text('Schedule', style: TextStyle(fontWeight: FontWeight.bold))
               ],
             ),
               label: ''

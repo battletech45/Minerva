@@ -16,6 +16,14 @@ class _StudentWeeklyScheduleState extends State<StudentWeeklySchedule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          elevation: 0.0,
+          automaticallyImplyLeading: true,
+          backgroundColor: PageColors.mainColor,
+          centerTitle: true,
+          title: Text("Weekly Schedule",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+        ),
       body: Column(
         children: [
           Padding(padding: EdgeInsets.only(top: 5.0)),
