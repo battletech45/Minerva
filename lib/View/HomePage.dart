@@ -34,12 +34,12 @@ class _HomePage extends State<HomePage> {
     setState(() {
       isLoading = true;
     });
-    final ref = await FirebaseStorage.instance.ref('sampleFile').child('images.jpeg');
+    final ref = await FirebaseStorage.instance.ref('sampleFile').child('samplePicture.png');
     link = await ref.getDownloadURL();
     setState(() {
       data = Image.network(
-        link,
-        fit: BoxFit.cover,
+      link,
+      fit: BoxFit.fill,
        );
       isLoading = false;
     });

@@ -281,7 +281,18 @@ class _customContentFeedState extends State<customContentFeed> {
       );
     }
     if(content is Image) {
-      print(content.toString());
+    // return widget.content;
+    return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Container(
+            height: 400,
+            width: 400,
+            decoration: BoxDecoration(
+                color: PageColors.secondaryColor,
+                borderRadius: BorderRadius.circular(8),),
+              child: widget.content,
+              ),
+        );
     }
     if(content is Widget) {
       print(content.toString());
@@ -291,7 +302,6 @@ class _customContentFeedState extends State<customContentFeed> {
   @override
   void initState() {
     super.initState();
-    _defineContentsType(widget.content);
   }
 
   @override
@@ -315,16 +325,10 @@ class _customContentFeedState extends State<customContentFeed> {
             )
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Container(
-            height: 300,
-            width: 400,
-            decoration: BoxDecoration(
-                color: PageColors.secondaryColor,
-                borderRadius: BorderRadius.circular(8)),
-          ),
-        ),
+        _defineContentsType(widget.content),
+        /*
+        
+        */
         Row(
           children: [
             Padding(
