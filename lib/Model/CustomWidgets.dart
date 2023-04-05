@@ -308,38 +308,40 @@ class _customContentFeedState extends State<customContentFeed> {
         ),
       );
     }
-    if(content is Image) {
-    // return widget.content;
-    return Padding(
+    if(content is Widget) {
+      if(content is Image) {
+        // return widget.content;
+        return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Container(
             height: 400,
             width: 400,
             decoration: BoxDecoration(
-                color: PageColors.secondaryColor,
-                borderRadius: BorderRadius.circular(8),),
-              child: widget.content,
-              ),
+              color: PageColors.secondaryColor,
+              borderRadius: BorderRadius.circular(8),),
+            child: widget.content,
+          ),
         );
-    }
-    if(content is Widget) {
-      return Container(
-        height: 300,
-        width: 400,
-        color: PageColors.thirdColor,
-        alignment: Alignment.bottomCenter,
-        child: Survey(
-          initialData: [
-            Question(
-                question: 'why are you running ?',
-                answerChoices: {
-                  'Yes': null,
-                  'Yes but another yes': null,
-                  'No': null,
-                }
-            )],
-        ),
-      );
+      }
+      else {
+        return Container(
+          height: 300,
+          width: 400,
+          color: PageColors.thirdColor,
+          alignment: Alignment.bottomCenter,
+          child: Survey(
+            initialData: [
+              Question(
+                  question: 'why are you running ?',
+                  answerChoices: {
+                    'Yes': null,
+                    'Yes but another yes': null,
+                    'No': null,
+                  }
+              )],
+          ),
+        );
+      }
     }
   }
 
