@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
+import 'package:minerva/View/TeacherView/AnnouncementView/AnnouncementCreateTeacherPage.dart';
 
 class AnnouncementTeacherPage extends StatefulWidget {
   @override
@@ -48,7 +49,9 @@ class _AnnouncementTeacherPageState extends State<AnnouncementTeacherPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.comment, size: 40.0)),
+              IconButton(onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AnnouncementCreateTeacherPage()));
+              }, icon: Icon(FontAwesomeIcons.comment, size: 40.0)),
               IconButton(onPressed: () {}, icon: Icon(Icons.add_box_outlined, size: 40.0)),
             ],
           ),
