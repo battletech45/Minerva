@@ -13,7 +13,6 @@ class AnnouncementStudentPage extends StatefulWidget {
 class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
 
   bool isLoading = false;
-  int counter = 0;
   List<dynamic>? announcements;
 
   _getAnnouncements() async {
