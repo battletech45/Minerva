@@ -1,4 +1,7 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
@@ -8,6 +11,27 @@ class AnnouncementTeacherPage extends StatefulWidget {
 }
 
 class _AnnouncementTeacherPageState extends State<AnnouncementTeacherPage> {
+
+  bool isLoading = false;
+  List<dynamic>? announcements;
+
+  _getAnnouncements() async {
+    setState(() {
+      isLoading = true;
+    });
+    var val = await FirebaseFunctions().getClassData('11-A');
+    setState(() {
+      isLoading = false;
+      announcements = val.docs[0].get('announcements');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getAnnouncements();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,164 +42,26 @@ class _AnnouncementTeacherPageState extends State<AnnouncementTeacherPage> {
         centerTitle: true,
         title: Text("ANNOUNCEMENTS", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ),
-      body: Container(
-        alignment: Alignment.center,
-        child: ListView(
-          shrinkWrap: true,
-          physics: BouncingScrollPhysics(),
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                IconButton(onPressed: () {}, icon: Icon(Icons.add_comment_outlined, size: 40.0)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.add_box_outlined, size: 40.0)),
-              ],
-            ),
-            SizedBox(height: 20.0),
-            Card(
-              color: PageColors.secondaryColor,
-              elevation: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Teacher Tom'),
-                    subtitle: Text('Announcement content for course XXXX.'),
-                  )
-                ],
-              ),
-            ),Card(
-              color: PageColors.secondaryColor,
-              elevation: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Teacher Tom'),
-                    subtitle: Text('Announcement content for course XXXX.'),
-                  )
-                ],
-              ),
-            ),Card(
-              color: PageColors.secondaryColor,
-              elevation: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Teacher Tom'),
-                    subtitle: Text('Announcement content for course XXXX.'),
-                  )
-                ],
-              ),
-            ),Card(
-              color: PageColors.secondaryColor,
-              elevation: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Teacher Tom'),
-                    subtitle: Text('Announcement content for course XXXX.'),
-                  )
-                ],
-              ),
-            ),Card(
-              color: PageColors.secondaryColor,
-              elevation: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Teacher Tom'),
-                    subtitle: Text('Announcement content for course XXXX.'),
-                  )
-                ],
-              ),
-            ),Card(
-              color: PageColors.secondaryColor,
-              elevation: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Teacher Tom'),
-                    subtitle: Text('Announcement content for course XXXX.'),
-                  )
-                ],
-              ),
-            ),Card(
-              color: PageColors.secondaryColor,
-              elevation: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Teacher Tom'),
-                    subtitle: Text('Announcement content for course XXXX.'),
-                  )
-                ],
-              ),
-            ),Card(
-              color: PageColors.secondaryColor,
-              elevation: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Teacher Tom'),
-                    subtitle: Text('Announcement content for course XXXX.'),
-                  )
-                ],
-              ),
-            ),Card(
-              color: PageColors.secondaryColor,
-              elevation: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Teacher Tom'),
-                    subtitle: Text('Announcement content for course XXXX.'),
-                  )
-                ],
-              ),
-            ),Card(
-              color: PageColors.secondaryColor,
-              elevation: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Teacher Tom'),
-                    subtitle: Text('Announcement content for course XXXX.'),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+      body: isLoading ? AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: AnnouncementTeacherPage(), splashTransition: SplashTransition.fadeTransition) : Column(
+        children: <Widget>[
+          SizedBox(height: 20.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.comment, size: 40.0)),
+              IconButton(onPressed: () {}, icon: Icon(Icons.add_box_outlined, size: 40.0)),
+            ],
+          ),
+          SizedBox(height: 20.0),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
+            itemCount: announcements!.length,
+            itemBuilder: (context, index) {
+              return customAnnouncementCard(teacherName: announcements![index]['sender'], announcementContent: announcements![index]['content']);
+              },
+          )
+        ],
       ),
       drawer: customDrawer()
     );
