@@ -81,6 +81,9 @@ class FirebaseFunctions {
   Future<QuerySnapshot> getAllChats() async {
     return chatsCollection.get();
   }
+  Future<QuerySnapshot> getAllClasses() async {
+    return classCollection.get();
+  }
   void sendMessage(String chatID, chatMessageData) {
     FirebaseFirestore.instance.collection('chats').doc(chatID).collection('messages').add(chatMessageData);
     FirebaseFirestore.instance.collection('chats').doc(chatID).update({
