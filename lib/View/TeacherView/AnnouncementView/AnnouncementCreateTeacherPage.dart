@@ -12,14 +12,27 @@ class AnnouncementCreateTeacherPage extends StatefulWidget {
 class _AnnouncementCreateTeacherPageState extends State<AnnouncementCreateTeacherPage> {
 
   List<String> classes = [];
+  List<String> selectedClasses = [];
 
   _getClasses() async {
     var val = await FirebaseFunctions().getAllClasses();
     var size = val.size;
     for(int i = 0; i<size; i++) {
-      print(val.docs[i].get('className'));
-      classes.add(val.docs[i].get('className'));
-      print(classes.length);
+      setState(() {
+        classes.add(val.docs[i].get('className'));
+      });
+    }
+  }
+   _toggleClassesCheck(List<String> selectedClasses, String className) {
+    print('here');
+    if(selectedClasses.contains(className)) {
+        selectedClasses.remove(className);
+    }
+    else {
+        selectedClasses.add(className);
+    }
+    if(selectedClasses.isNotEmpty) {
+      print(selectedClasses[0]);
     }
   }
 
@@ -40,9 +53,12 @@ class _AnnouncementCreateTeacherPageState extends State<AnnouncementCreateTeache
       ),
       drawer: customDrawer(),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          classListChekboxBuilder(classes: classes)
+          SizedBox(height: 30.0),
+          Text('Please select target class', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, fontStyle: FontStyle.italic, color: PageColors.thirdColor)),
+          SizedBox(height: 20.0),
+          customClassListCheckboxBuilder(function: () => _toggleClassesCheck(selectedClasses, '11-A'), classes: classes)
         ],
       ),
     );
