@@ -480,8 +480,9 @@ class customCheckBoxListTile extends StatefulWidget {
   final List<String> classes;
   final int index;
   final Function function;
+  String? selectedClass;
 
-  const customCheckBoxListTile(
+  customCheckBoxListTile(
       {Key? key, required this.classes, required this.index, required this.function})
       : super(key: key);
   @override
@@ -502,10 +503,11 @@ class _customCheckBoxListTileState extends State<customCheckBoxListTile> {
       value: isSelected,
       selected: !isSelected,
       onChanged: (val) {
-        widget.function();
         setState(() {
+          widget.selectedClass = widget.classes[widget.index];
           isSelected = val!;
         });
+        widget.function(widget.selectedClass);
       },
     );
   }
