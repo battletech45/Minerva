@@ -32,7 +32,7 @@ class _AnnouncementCreateTeacherPageState extends State<AnnouncementCreateTeache
         selectedClasses.add(className);
     }
     if(selectedClasses.isNotEmpty) {
-      print(selectedClasses[0]);
+      selectedClasses.forEach((element) {print(element);});
     }
   }
 
@@ -58,7 +58,7 @@ class _AnnouncementCreateTeacherPageState extends State<AnnouncementCreateTeache
           SizedBox(height: 30.0),
           Text('Please select target class', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, fontStyle: FontStyle.italic, color: PageColors.thirdColor)),
           SizedBox(height: 20.0),
-          customClassListCheckboxBuilder(function: () => _toggleClassesCheck(selectedClasses, '11-A'), classes: classes)
+          customClassListCheckboxBuilder(function: (String val) => _toggleClassesCheck(selectedClasses, val), classes: classes)
         ],
       ),
     );
