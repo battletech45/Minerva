@@ -479,9 +479,10 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
 class customCheckBoxListTile extends StatefulWidget {
   final List<String> classes;
   final int index;
+  final Function function;
 
   const customCheckBoxListTile(
-      {Key? key, required this.classes, required this.index})
+      {Key? key, required this.classes, required this.index, required this.function})
       : super(key: key);
   @override
   State<customCheckBoxListTile> createState() => _customCheckBoxListTileState();
@@ -501,6 +502,7 @@ class _customCheckBoxListTileState extends State<customCheckBoxListTile> {
       value: isSelected,
       selected: !isSelected,
       onChanged: (val) {
+        widget.function();
         setState(() {
           isSelected = val!;
         });
@@ -585,14 +587,16 @@ class selectedFileList extends StatelessWidget {
   }
 }
 //Upload sayfalarında kullanılabilir sınıf sayısı kadar checkbox oluşturan sistem
-class classListChekboxBuilder extends StatelessWidget {
-  const classListChekboxBuilder({
-    super.key,
-    required this.classes,
-  });
-
+class customClassListCheckboxBuilder extends StatefulWidget {
+  final Function function;
   final List<String> classes;
 
+  const customClassListCheckboxBuilder({super.key, required this.function, required this.classes});
+  @override
+  State<customClassListCheckboxBuilder> createState() => _customClassListCheckboxBuilderState();
+}
+
+class _customClassListCheckboxBuilderState extends State<customClassListCheckboxBuilder> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -606,7 +610,7 @@ class classListChekboxBuilder extends StatelessWidget {
             mainAxisSpacing: 10),
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
-        itemCount: classes.length,
+        itemCount: widget.classes.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
               margin: EdgeInsets.symmetric(vertical: 5),
@@ -614,8 +618,7 @@ class classListChekboxBuilder extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 color: PageColors.secondaryColor,
               ),
-              child: customCheckBoxListTile(
-                  classes: classes, index: index));
+              child: customCheckBoxListTile(classes: widget.classes, index: index, function: widget.function));
         },
       ),
     );
