@@ -101,6 +101,11 @@ class FirebaseFunctions {
       'courses.$courseName.$gradeType': grade
     });
   }
+  Future changeAttendance(String course, String attendance, String studentID) async {
+    studentCollection.doc(studentID).update({
+      'courses.$course.attendance': attendance
+    });
+  }
   Future sendNewAnnouncement(String className, announcement) async {
     QuerySnapshot querySnapshot = await classCollection.where('className', isEqualTo: className).get();
     await classCollection.doc(querySnapshot.docs[0].id).update({
