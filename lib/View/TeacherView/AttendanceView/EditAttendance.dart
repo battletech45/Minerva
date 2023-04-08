@@ -40,6 +40,11 @@ class _EditAttendanceState extends State<EditAttendance> {
     }
   }
 
+  _saveStudentAttendance(String name, String attendance) {
+    print(name);
+    print(attendance);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -94,7 +99,7 @@ class _EditAttendanceState extends State<EditAttendance> {
                   itemBuilder: (context, index) {
                     return Container(
                       decoration: BoxDecoration(border:Border(bottom: BorderSide(color: PageColors.secondaryColor,width:2))),
-                      child: customEditExpansionPanel(name: students[index])
+                      child: customEditExpansionPanel(name: students[index], function: (String val) => _saveStudentAttendance(students[index], val))
                     );
                   }),
             ),

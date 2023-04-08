@@ -96,7 +96,7 @@ class _GradeStudentList extends State<GradeStudentList> {
                                 bottom: BorderSide(
                                     color: PageColors.secondaryColor,
                                     width: 2))),
-                        child: customEditExpansionPanel(name: students[index]));
+                        child: customEditExpansionPanel(name: students[index], function: () => {}));
                   }),
             ),
           ),
