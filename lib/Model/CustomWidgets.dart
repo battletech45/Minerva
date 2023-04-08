@@ -627,13 +627,11 @@ class _customClassListCheckboxBuilderState extends State<customClassListCheckbox
 //Manuel yoklama için kullanılan öğrencinin kaç saat yok yazılacağnı seçtiğimiz checkboxlar
 class customEditCheckBoxListTile extends StatefulWidget {
   final String hours;
+  final Function function;
 
-  const customEditCheckBoxListTile(
-      {Key? key, required this.hours})
-      : super(key: key);
+  const customEditCheckBoxListTile({Key? key, required this.hours, required this.function}) : super(key: key);
   @override
-  State<customEditCheckBoxListTile> createState() =>
-      _customEditCheckBoxListTileState();
+  State<customEditCheckBoxListTile> createState() => _customEditCheckBoxListTileState();
 }
 
 class _customEditCheckBoxListTileState extends State<customEditCheckBoxListTile> {
@@ -651,6 +649,7 @@ class _customEditCheckBoxListTileState extends State<customEditCheckBoxListTile>
       value: isSelected,
       selected: !isSelected,
       onChanged: (val) {
+        widget.function(hours);
         setState(() {
           isSelected = val!;
         });
@@ -661,8 +660,9 @@ class _customEditCheckBoxListTileState extends State<customEditCheckBoxListTile>
 
 class customEditExpansionPanel extends StatefulWidget {
   final String name;
+  final Function function;
 
-  const customEditExpansionPanel({super.key, required this.name});
+  const customEditExpansionPanel({super.key, required this.name, required this.function});
   @override
   State<customEditExpansionPanel> createState() => _customEditExpansionPanelState();
 }
@@ -671,9 +671,8 @@ class _customEditExpansionPanelState extends State<customEditExpansionPanel> {
   bool isSelected = false;
   @override
   Widget build(BuildContext context) {
-    String name = widget.name;
     return ExpansionTile(
-        title: Text(name, style: TextStyle(
+        title: Text(widget.name, style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
             color: Colors.black,
@@ -681,9 +680,9 @@ class _customEditExpansionPanelState extends State<customEditExpansionPanel> {
         ),
       trailing: Icon(isSelected ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
       children: <Widget>[
-        customEditCheckBoxListTile(hours: "One Hour  "),
-        customEditCheckBoxListTile(hours: "Two Hour  "),
-        customEditCheckBoxListTile(hours: "Three Hour"),
+        customEditCheckBoxListTile(hours: "One Hour  ", function: widget.function),
+        customEditCheckBoxListTile(hours: "Two Hour  ", function: widget.function),
+        customEditCheckBoxListTile(hours: "Three Hour", function: widget.function),
       ],
       onExpansionChanged: (bool val) {
           setState(() {
