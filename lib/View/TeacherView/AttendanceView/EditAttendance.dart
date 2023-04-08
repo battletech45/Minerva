@@ -16,6 +16,8 @@ class _EditAttendanceState extends State<EditAttendance> {
   bool expansionIcon = false;
   List students = [];
   List<String> classes = [];
+  List<String> studentIDs = [];
+  Map<String, dynamic> enteredAttendance = {};
   String? selectedValue;
 
   _getClasses() async {
@@ -34,15 +36,26 @@ class _EditAttendanceState extends State<EditAttendance> {
     for(int i = 0; i < studentList.length; i++) {
       var name = await FirebaseFunctions().getStudentDataViaID(studentList[i]);
       setState(() {
+        studentIDs.add(name.docs[0].get('studentID'));
         students.add(name.docs[0].get('studentName'));
       });
-      print(students[i]);
     }
   }
 
-  _saveStudentAttendance(String name, String attendance) {
-    print(name);
-    print(attendance);
+  _saveStudentAttendance(String ID, String attendance) {
+    if(enteredAttendance.containsKey(ID)) {
+      enteredAttendance.update(ID, (value) => attendance);
+    }
+    else {
+      enteredAttendance[ID] = attendance;
+    }
+    print(enteredAttendance);
+  }
+
+  _uploadAttendance() async {
+    enteredAttendance.forEach((key, value) {
+      FirebaseFunctions().changeAttendance('English', value, key);
+    });
   }
 
   @override
@@ -99,10 +112,17 @@ class _EditAttendanceState extends State<EditAttendance> {
                   itemBuilder: (context, index) {
                     return Container(
                       decoration: BoxDecoration(border:Border(bottom: BorderSide(color: PageColors.secondaryColor,width:2))),
-                      child: customEditExpansionPanel(name: students[index], function: (String val) => _saveStudentAttendance(students[index], val))
+                      child: customEditExpansionPanel(name: students[index], function: (String val) => _saveStudentAttendance(studentIDs[index], val))
                     );
                   }),
             ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: PageColors.mainColor),
+            onPressed: () {
+              _uploadAttendance();
+            },
+            child: Text('Submit', style: TextStyle(fontSize: 20)),
           ),
         ],
       ),
