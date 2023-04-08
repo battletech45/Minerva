@@ -45,17 +45,7 @@ class _AnnouncementTeacherPageState extends State<AnnouncementTeacherPage> {
       ),
       body: isLoading ? AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: AnnouncementTeacherPage(), splashTransition: SplashTransition.fadeTransition) : Column(
         children: <Widget>[
-          SizedBox(height: 20.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AnnouncementCreateTeacherPage()));
-              }, icon: Icon(FontAwesomeIcons.comment, size: 40.0)),
-              IconButton(onPressed: () {}, icon: Icon(Icons.add_box_outlined, size: 40.0)),
-            ],
-          ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 40.0),
           ListView.builder(
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
@@ -66,7 +56,17 @@ class _AnnouncementTeacherPageState extends State<AnnouncementTeacherPage> {
           )
         ],
       ),
-      drawer: customDrawer()
+      drawer: customDrawer(),
+      floatingActionButton: Transform.scale(
+        scale: 1.2,
+        child: FloatingActionButton(
+          backgroundColor: PageColors.mainColor,
+            onPressed: () {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AnnouncementCreateTeacherPage()));
+        },
+            child: Icon(FontAwesomeIcons.comment, size: 30.0)
+        ),
+      ),
     );
   }
 }
