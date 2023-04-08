@@ -181,7 +181,10 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
           children: <Widget>[
             IconButton(
               icon: Icon(Icons.arrow_back),
-              onPressed: () {},
+              onPressed: () {
+                //Navigator pop çalışmıyor.
+                Navigator.pop(context);
+                },
             )
           ],
         ),

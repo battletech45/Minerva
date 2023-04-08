@@ -17,6 +17,7 @@ import 'package:minerva/View/TeacherView/ProfileView/ProfileTeacher.dart';
 import 'package:minerva/View/RegisterPage.dart';
 import 'package:minerva/View/StudentView/Grades/StudentGradePage.dart';
 import 'package:minerva/View/TeacherView/GradesView/TeacherGradePage.dart';
+import 'package:minerva/View/TeacherView/GradesView/GradeStudentList.dart';
 import 'package:minerva/View/WelcomePage.dart';
 import '../View/ResetPassword.dart';
 import '../View/StudentView/Content/StudentCourseContentPage.dart';
@@ -124,7 +125,7 @@ class _customDrawerState extends State<customDrawer> {
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) =>
-                      isStudent ? StudentGradePage() : TeacherGradePage(studentID: 'skIaAFi6EbtaTEKSMymx')));
+                      isStudent ? StudentGradePage() : GradeStudentList() /* TeacherGradePage(studentID: 'skIaAFi6EbtaTEKSMymx')*/));
             },
           ),
           ListTile(
