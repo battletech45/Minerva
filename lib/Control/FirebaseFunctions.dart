@@ -57,6 +57,10 @@ class FirebaseFunctions {
     QuerySnapshot snapshot = await studentCollection.where('email', isEqualTo: email).get();
     return snapshot;
   }
+  Future<QuerySnapshot> getStudentDataViaID(String ID) async {
+    QuerySnapshot snapshot = await studentCollection.where('studentID', isEqualTo: ID).get();
+    return snapshot;
+  }
   Future<QuerySnapshot> getClassData(String className) async {
     QuerySnapshot snapshot = await classCollection.where('className', isEqualTo: className).get();
     return snapshot;
