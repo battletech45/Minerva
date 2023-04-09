@@ -13,6 +13,7 @@ class EditAttendance extends StatefulWidget {
 
 class _EditAttendanceState extends State<EditAttendance> {
   TextEditingController searchController = TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
   bool expansionIcon = false;
   List students = [];
   List<String> classes = [];
@@ -23,7 +24,7 @@ class _EditAttendanceState extends State<EditAttendance> {
   _getClasses() async {
     var val = await FirebaseFunctions().getAllClasses();
     var size = val.size;
-    for(int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
       setState(() {
         classes.add(val.docs[i].get('className'));
       });
@@ -33,7 +34,7 @@ class _EditAttendanceState extends State<EditAttendance> {
   _getStudents(String className) async {
     var val = await FirebaseFunctions().getClassData(className);
     List<dynamic> studentList = val.docs[0].get('students');
-    for(int i = 0; i < studentList.length; i++) {
+    for (int i = 0; i < studentList.length; i++) {
       var name = await FirebaseFunctions().getStudentDataViaID(studentList[i]);
       setState(() {
         studentIDs.add(name.docs[0].get('studentID'));
@@ -43,10 +44,9 @@ class _EditAttendanceState extends State<EditAttendance> {
   }
 
   _saveStudentAttendance(String ID, String attendance) {
-    if(enteredAttendance.containsKey(ID)) {
+    if (enteredAttendance.containsKey(ID)) {
       enteredAttendance.update(ID, (value) => attendance);
-    }
-    else {
+    } else {
       enteredAttendance[ID] = attendance;
     }
     print(enteredAttendance);
@@ -60,6 +60,7 @@ class _EditAttendanceState extends State<EditAttendance> {
 
   @override
   void initState() {
+    textEditingController.dispose();
     super.initState();
     _getClasses();
   }
@@ -80,50 +81,122 @@ class _EditAttendanceState extends State<EditAttendance> {
           SizedBox(height: 15),
           DropdownButtonHideUnderline(
             child: DropdownButton2(
-              hint: Text('Select Class',
+              hint: Text(
+                'Select Class',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20,
-                color: Theme.of(context).hintColor,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Theme.of(context).hintColor,
+                ),
+              ),
+              items: classes
+                  .map((item) => DropdownMenuItem<String>(
+                      onTap: () {
+                        students.clear();
+                        _getStudents(item);
+                      },
+                      value: item,
+                      child: Text(item,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 22))))
+                  .toList(),
+              value: selectedValue,
+              onChanged: (value) {
+                setState(() {
+                  selectedValue = value as String;
+                });
+              },
+              buttonStyleData: ButtonStyleData(
+                padding: EdgeInsets.all(10),
+                height: 50,
+                width: 250,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: PageColors.mainColor,
+                  ),
+                    borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              menuItemStyleData: const MenuItemStyleData(height: 50),
+              dropdownStyleData: DropdownStyleData(
+                maxHeight: 200,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                     color: PageColors.mainColor,
+                  ),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+              dropdownSearchData: DropdownSearchData(
+                searchController: textEditingController,
+                searchInnerWidgetHeight: 60,
+                searchInnerWidget: Container(
+                  height: 60,
+                  padding: const EdgeInsets.only(
+                    top: 8,
+                    bottom: 4,
+                    right: 8,
+                    left: 8,
+                  ),
+                  child: TextFormField(
+                    expands: true,
+                    maxLines: null,
+                    controller: textEditingController,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 8,
+                      ),
+                      hintText: 'Search for a class',
+                      hintStyle: const TextStyle(fontSize: 20),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                ),
+                searchMatchFn: (item, searchValue) {
+                  return (item.value.toString().contains(searchValue));
+                },
               ),
             ),
-            items: classes.map((item) => DropdownMenuItem<String>(
-              onTap: () {
-                students.clear();
-                _getStudents(item);
-              },
-              value: item,
-              child: Text(item, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20))
-            )).toList(),
-          value: selectedValue,
-          onChanged: (value) {
-            setState(() {
-              selectedValue = value as String;
-            });
-          },
-          buttonStyleData: const ButtonStyleData(height: 40, width: 200),
-          menuItemStyleData: const MenuItemStyleData(height: 50),
-        ),
-      ),
+          ),
           Expanded(
             child: Container(
               child: ListView.builder(
-                physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   itemCount: students.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      decoration: BoxDecoration(border:Border(bottom: BorderSide(color: PageColors.secondaryColor,width:2))),
-                      child: customEditExpansionPanel(name: students[index], function: (String val) => _saveStudentAttendance(studentIDs[index], val))
-                    );
+                        decoration: BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: PageColors.secondaryColor,
+                                    width: 2))),
+                        child: customEditExpansionPanel(
+                            name: students[index],
+                            function: (String val) => _saveStudentAttendance(
+                                studentIDs[index], val)));
                   }),
             ),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: PageColors.mainColor),
-            onPressed: () {
-              _uploadAttendance();
-            },
-            child: Text('Submit', style: TextStyle(fontSize: 20)),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              style:
+                  ElevatedButton.styleFrom(
+                    backgroundColor: PageColors.mainColor,
+                    padding: EdgeInsets.all(10),
+                    shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  ),
+              onPressed: () {
+                _uploadAttendance();
+              },
+              child: Text('Submit', style: TextStyle(fontSize: 25)),
+            ),
           ),
+          SizedBox(height: 20,)
         ],
       ),
       drawer: customDrawer(),

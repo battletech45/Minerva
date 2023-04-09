@@ -17,6 +17,7 @@ class TeacherGradeStudentList extends StatefulWidget {
 
 class _TeacherGradeStudentListState extends State<TeacherGradeStudentList> {
   TextEditingController searchController = TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
   bool expansionIcon = false;
   List students = [];
   List<String> classes = [];
@@ -87,7 +88,7 @@ class _TeacherGradeStudentListState extends State<TeacherGradeStudentList> {
                     });
                   },
                   value: item,
-                  child: Text(item, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20))
+                  child: Text(item, textAlign: TextAlign.center, style: const TextStyle(fontSize: 22))
               )).toList(),
               value: selectedValue,
               onChanged: (value) {
@@ -95,8 +96,60 @@ class _TeacherGradeStudentListState extends State<TeacherGradeStudentList> {
                   selectedValue = value as String;
                 });
               },
-              buttonStyleData: const ButtonStyleData(height: 40, width: 200),
-              menuItemStyleData: const MenuItemStyleData(height: 50),
+              buttonStyleData: ButtonStyleData(
+                padding: EdgeInsets.all(10),
+                height: 50,
+                width: 250,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: PageColors.mainColor,
+                  ),
+                    borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            menuItemStyleData: const MenuItemStyleData(height: 50),
+              dropdownStyleData: DropdownStyleData(
+                maxHeight: 200,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                     color: PageColors.mainColor,
+                  ),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+              dropdownSearchData: DropdownSearchData(
+                searchController: textEditingController,
+                searchInnerWidgetHeight: 60,
+                searchInnerWidget: Container(
+                  height: 60,
+                  padding: const EdgeInsets.only(
+                    top: 8,
+                    bottom: 4,
+                    right: 8,
+                    left: 8,
+                  ),
+                  child: TextFormField(
+                    expands: true,
+                    maxLines: null,
+                    controller: textEditingController,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 8,
+                      ),
+                      hintText: 'Search for a class',
+                      hintStyle: const TextStyle(fontSize: 20),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                ),
+                searchMatchFn: (item, searchValue) {
+                  return (item.value.toString().contains(searchValue));
+                },
+              ),
             ),
           ),
           Expanded(
