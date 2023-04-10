@@ -39,14 +39,16 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
 
   @override
   Widget build(BuildContext context) {
-    String studentID = widget.studentID;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Enter Grade Page'),
+        title: Text('Enter Grade'),
         elevation: 0.0,
         automaticallyImplyLeading: true,
         backgroundColor: PageColors.mainColor,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back), onPressed: () {Navigator.pop(context);},
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -87,7 +89,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      _gradeTask(studentID, 'English', 'project',
+                      _gradeTask(widget.studentID, 'English', 'project',
                           _homeworkController!.text);
                     }
                   },
@@ -125,7 +127,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       _gradeTask(
-                          studentID, 'English', 'quiz', _quizController!.text);
+                          widget.studentID, 'English', 'quiz', _quizController!.text);
                     }
                   },
                   child: Text(
@@ -162,7 +164,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       _gradeTask(
-                          studentID, 'English', 'exam', _examController!.text);
+                          widget.studentID, 'English', 'exam', _examController!.text);
                     }
                   },
                   child: Text(
@@ -175,26 +177,11 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                //Navigator pop çalışmıyor.
-                Navigator.pop(context);
-                },
-            )
-          ],
-        ),
-      ),
       drawer: customDrawer(),
     );
   }
 
-  void _gradeTask(String studentID, String courseName, String gradeType,
-      String grade) async {
+  void _gradeTask(String studentID, String courseName, String gradeType, String grade) async {
     try {
       await FirebaseFunctions()
           .gradeTask(studentID, courseName, gradeType, grade);

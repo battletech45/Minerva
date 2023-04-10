@@ -47,17 +47,12 @@ class _TeacherGradeStudentListState extends State<TeacherGradeStudentList> {
         students.add(name.docs[0].get('studentName'));
       });
     }
-    setState(() {
-
-    });
   }
   @override
   void initState() {
     super.initState();
     _getClasses();
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -178,19 +173,9 @@ class _TeacherGradeStudentListState extends State<TeacherGradeStudentList> {
                   }),
             ),
           ),
-
         ],
       ),
-
      drawer: customDrawer(),
     );
   }
-}
-
-class Student {
-  List students = [];
-  List<String> studentIDs = [];
-
-
-  Student({required this.students, required this.studentIDs});
 }
