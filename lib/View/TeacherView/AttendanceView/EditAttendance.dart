@@ -60,7 +60,6 @@ class _EditAttendanceState extends State<EditAttendance> {
 
   @override
   void initState() {
-    textEditingController.dispose();
     super.initState();
     _getClasses();
   }
