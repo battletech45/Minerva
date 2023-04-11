@@ -15,7 +15,6 @@ import 'package:minerva/View/StudentView/ProfileView/ProfilePage.dart';
 import 'package:minerva/View/TeacherView/GradesView/TeacherGradeStudentList.dart';
 import 'package:minerva/View/TeacherView/ProfileView/ProfileTeacher.dart';
 import 'package:minerva/View/StudentView/Grades/StudentGradePage.dart';
-import 'package:minerva/View/TeacherView/GradesView/GradeStudentList.dart';
 import 'package:minerva/View/WelcomePage.dart';
 import '../View/ResetPassword.dart';
 import '../View/StudentView/Content/StudentCourseContentPage.dart';
