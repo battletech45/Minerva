@@ -164,7 +164,7 @@ class _EditAttendanceState extends State<EditAttendance> {
           ),
           Expanded(
             child: Container(
-              child: ListView.builder(
+              child: !selected ? Image.asset('assets/logo.png') : ListView.builder(
                   physics: BouncingScrollPhysics(),
                   itemCount: students.length,
                   itemBuilder: (context, index) {
