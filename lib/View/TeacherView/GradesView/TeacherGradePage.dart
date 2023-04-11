@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
@@ -17,21 +16,21 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
   final _formKey = GlobalKey<FormState>();
   String _grade = '';
 
-  TextEditingController? _homeworkController;
+  TextEditingController? _projectController;
   TextEditingController? _quizController;
   TextEditingController? _examController;
 
   @override
   void initState() {
     super.initState();
-    _homeworkController = TextEditingController();
+    _projectController = TextEditingController();
     _quizController = TextEditingController();
     _examController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _homeworkController?.dispose();
+    _projectController?.dispose();
     _quizController?.dispose();
     _examController?.dispose();
     super.dispose();
@@ -51,6 +50,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
         child: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.all(20.0),
@@ -64,7 +64,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                  SizedBox(height: 15),
                 Text('Project', style: TextStyle(fontSize: 22)),
                 TextFormField(
-                  controller: _homeworkController,
+                  controller: _projectController,
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
@@ -90,11 +90,11 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       _gradeTask(widget.studentID, 'English', 'project',
-                          _homeworkController!.text);
+                          _projectController!.text);
                     }
                   },
                   child: Text(
-                    'Submit',
+                    'Submit Project',
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -131,7 +131,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                     }
                   },
                   child: Text(
-                    'Submit',
+                    'Submit Quiz',
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -168,8 +168,24 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                     }
                   },
                   child: Text(
-                    'Submit',
+                    'Submit Exam',
                     style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                SizedBox(height: 85.0),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    style:
+                    ElevatedButton.styleFrom(
+                      backgroundColor: PageColors.thirdColor,
+                      padding: EdgeInsets.all(10),
+                      shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
+                    onPressed: () {
+                      _gradeAllTasks(widget.studentID, 'English', _quizController!.text, _projectController!.text, _examController!.text);
+                    },
+                    child: Text('Submit All', style: TextStyle(fontSize: 25)),
                   ),
                 ),
               ],
@@ -185,6 +201,18 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
     try {
       await FirebaseFunctions()
           .gradeTask(studentID, courseName, gradeType, grade);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Grade saved')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to save grade')),
+      );
+    }
+  }
+  void _gradeAllTasks(String studentID, String courseName, String quiz, String project, exam) async {
+    try {
+      await FirebaseFunctions().gradeAllTasks(studentID, courseName, quiz, project, exam);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Grade saved')),
       );

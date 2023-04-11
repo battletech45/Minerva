@@ -101,6 +101,13 @@ class FirebaseFunctions {
       'courses.$courseName.$gradeType': grade
     });
   }
+  Future gradeAllTasks(String studentID, String courseName, String quizGrade, String projectGrade, String examGrade) async {
+    studentCollection.doc(studentID).update({
+      'courses.$courseName.quiz': quizGrade,
+      'courses.$courseName.project': projectGrade,
+      'courses.$courseName.exam': examGrade,
+    });
+  }
   Future changeAttendance(String course, String attendance, String studentID) async {
     studentCollection.doc(studentID).update({
       'courses.$course.attendance': attendance
