@@ -18,7 +18,7 @@ class TeacherGradeStudentList extends StatefulWidget {
 class _TeacherGradeStudentListState extends State<TeacherGradeStudentList> {
   TextEditingController searchController = TextEditingController();
   TextEditingController textEditingController = TextEditingController();
-  bool expansionIcon = false;
+  bool selected = false;
   List students = [];
   List<String> classes = [];
   List<String> studentIDs = [];
@@ -89,6 +89,7 @@ class _TeacherGradeStudentListState extends State<TeacherGradeStudentList> {
               onChanged: (value) {
                 setState(() {
                   selectedValue = value as String;
+                  selected = true;
                 });
               },
               buttonStyleData: ButtonStyleData(
@@ -149,7 +150,7 @@ class _TeacherGradeStudentListState extends State<TeacherGradeStudentList> {
           ),
           Expanded(
             child: Container(
-              child: ListView.builder(
+              child: !selected ? Image.asset('assets/logo.png') :  ListView.builder(
                   physics: BouncingScrollPhysics(),
                   itemCount: students.length,
                   itemBuilder: (context, index) {
