@@ -14,12 +14,12 @@ class EditAttendance extends StatefulWidget {
 class _EditAttendanceState extends State<EditAttendance> {
   TextEditingController searchController = TextEditingController();
   TextEditingController textEditingController = TextEditingController();
-  bool expansionIcon = false;
   List students = [];
   List<String> classes = [];
   List<String> studentIDs = [];
   Map<String, dynamic> enteredAttendance = {};
   String? selectedValue;
+  bool selected = false;
 
   _getClasses() async {
     var val = await FirebaseFunctions().getAllClasses();
@@ -103,6 +103,7 @@ class _EditAttendanceState extends State<EditAttendance> {
               onChanged: (value) {
                 setState(() {
                   selectedValue = value as String;
+                  selected = true;
                 });
               },
               buttonStyleData: ButtonStyleData(
@@ -180,22 +181,25 @@ class _EditAttendanceState extends State<EditAttendance> {
                   }),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              style:
-                  ElevatedButton.styleFrom(
-                    backgroundColor: PageColors.mainColor,
-                    padding: EdgeInsets.all(10),
-                    shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  ),
-              onPressed: () {
-                _uploadAttendance();
-              },
-              child: Text('Submit', style: TextStyle(fontSize: 25)),
+          Visibility(
+            visible: selected,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style:
+                    ElevatedButton.styleFrom(
+                      backgroundColor: PageColors.mainColor,
+                      padding: EdgeInsets.all(10),
+                      shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
+                onPressed: () {
+                  _uploadAttendance();
+                },
+                child: Text('Submit', style: TextStyle(fontSize: 25)),
+              ),
             ),
           ),
-          SizedBox(height: 20,)
+          SizedBox(height: 20.0)
         ],
       ),
       drawer: customDrawer(),
