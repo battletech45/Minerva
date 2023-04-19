@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:minerva/View/StudentHomeWorkViewPage.dart';
-import 'package:minerva/View/StudentView/Content/ContentStudentPage.dart';
+import 'package:minerva/View/StudentView/Content/StudentMaterialPage.dart';
 import 'package:minerva/View/StudentView/Content/StudentWeeklySchedule.dart';
-import 'package:minerva/View/StudentView/HomeworksView/StudentFileUpload.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class CourseContent extends StatefulWidget {
@@ -21,10 +20,9 @@ class _CourseContentState extends State<CourseContent> {
   int _selectedIndex = 1;
 
   List<Widget> _widgetOptions = <Widget>[
-    Text('Index 0: Back'),
+    Text('exit'),
     StudentHomeWorkViewPage(),
-    Text('Index 2: School'),
-    StudentWeeklySchedule(),
+    StudentMaterialPage()
   ];
 
   @override
