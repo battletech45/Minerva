@@ -1,10 +1,7 @@
-import 'dart:ui';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
-
+import 'package:minerva/View/TeacherView/HomeworksView/TeacherUploadHomework.dart';
 import '../../../Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
 
@@ -59,11 +56,10 @@ class _ContentTeacherPageState extends State<ContentTeacherPage> {
                       SizedBox(height: 25.0),
                       Text("Weekly Schedule",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500)),
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)
+                      ),
                       SizedBox(height: 20.0),
-                      Icon(FontAwesomeIcons.calendar,
-                          color: PageColors.thirdColor, size: 50.0),
+                      Icon(FontAwesomeIcons.calendar, color: PageColors.thirdColor, size: 50.0),
                       SizedBox(height: 20.0),
                     ],
                   ),
@@ -81,7 +77,7 @@ class _ContentTeacherPageState extends State<ContentTeacherPage> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      //    Navigator.of(context).push(MaterialPageRoute(builder: (context) => CourseContent(courseName: widget.courseName)));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => UploadHomework()));
                     },
                       child: Card(
                         elevation: 6,
@@ -92,8 +88,8 @@ class _ContentTeacherPageState extends State<ContentTeacherPage> {
                             SizedBox(height: 25.0),
                             Text(classes[index],
                                   textAlign: TextAlign.center,
-                                  style:
-                                  TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
+                                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)
+                            ),
                             SizedBox(height: 20.0),
                             Icon(FontAwesomeIcons.school, color: PageColors.thirdColor, size: 50.0)
                           ],
