@@ -1,5 +1,9 @@
+import 'dart:ui';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 
 import '../../../Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
@@ -12,14 +16,21 @@ class ContentTeacherPage extends StatefulWidget {
 }
 
 class _ContentTeacherPageState extends State<ContentTeacherPage> {
-  List<String> classes = <String>[
-    "9-D",
-    "11-A",
-    "11-C",
-    "10-B",
-    "10-C",
-    "12-A",
-  ];
+  List<String> classes = <String>[];
+
+  _getClasses() async {
+    var val = await FirebaseFunctions().getAllClasses();
+    for(int i = 0; i < val.size; i++) {
+      setState(() {
+        classes.add(val.docs[i].get('className'));
+      });
+    }
+  }
+  @override
+  void initState() {
+    super.initState();
+    _getClasses();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,26 +80,26 @@ class _ContentTeacherPageState extends State<ContentTeacherPage> {
                 itemCount: classes.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-      onTap: () {
-    //    Navigator.of(context).push(MaterialPageRoute(builder: (context) => CourseContent(courseName: widget.courseName)));
-        },
-      child: Card(
-        elevation: 6,
-        shape: CustomBorders.mainBorder,
-        margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 25.0),
-            Text(classes[index],
-                  textAlign: TextAlign.center,
-                  style:
-                  TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
-            SizedBox(height: 20.0),
-            Icon(FontAwesomeIcons.school, color: PageColors.thirdColor, size: 50.0)
-          ],
-        ),
-      ),
-    );
+                    onTap: () {
+                      //    Navigator.of(context).push(MaterialPageRoute(builder: (context) => CourseContent(courseName: widget.courseName)));
+                    },
+                      child: Card(
+                        elevation: 6,
+                        shape: CustomBorders.mainBorder,
+                        margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(height: 25.0),
+                            Text(classes[index],
+                                  textAlign: TextAlign.center,
+                                  style:
+                                  TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
+                            SizedBox(height: 20.0),
+                            Icon(FontAwesomeIcons.school, color: PageColors.thirdColor, size: 50.0)
+                          ],
+                        ),
+                      ),
+                    );
                 },
               ),
             ),
