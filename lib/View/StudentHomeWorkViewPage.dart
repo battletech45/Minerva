@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Model/WidgetProperties.dart';
+
 class StudentHomeWorkViewPage extends StatefulWidget {
   @override
   _StudentHomeWorkViewPageState createState() => _StudentHomeWorkViewPageState();
@@ -57,14 +59,27 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
       ) : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomSheet: _selectedIndex != -1 ? Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+          border: Border(
+              top: BorderSide(color: PageColors.mainColor, width: 3),
+              //right: BorderSide(color: PageColors.mainColor, width: 3),
+              //left: BorderSide(color: PageColors.mainColor, width: 3)
+          )
+        ),
         height: 150.0,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            homeworkItems[_selectedIndex].definition,
-            style: TextStyle(fontSize: 18.0),
-          ),
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: <Widget>[
+            Text(homeworkItems[_selectedIndex].name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, fontStyle: FontStyle.italic, color: PageColors.thirdColor)),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                homeworkItems[_selectedIndex].definition,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ),
+          ],
         ),
       ) : null,
     );
