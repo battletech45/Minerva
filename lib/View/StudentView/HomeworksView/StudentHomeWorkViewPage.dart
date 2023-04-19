@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Model/WidgetProperties.dart';
+import '../../../Model/WidgetProperties.dart';
 
 class StudentHomeWorkViewPage extends StatefulWidget {
   @override
@@ -62,8 +62,6 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
         decoration: BoxDecoration(
           border: Border(
               top: BorderSide(color: PageColors.mainColor, width: 3),
-              //right: BorderSide(color: PageColors.mainColor, width: 3),
-              //left: BorderSide(color: PageColors.mainColor, width: 3)
           )
         ),
         height: 150.0,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
-import 'package:minerva/View/StudentHomeWorkViewPage.dart';
+import 'package:minerva/View/StudentView/HomeworksView/StudentHomeWorkViewPage.dart';
 import 'package:minerva/View/StudentView/Content/StudentMaterialPage.dart';
 import 'package:minerva/View/StudentView/Content/StudentWeeklySchedule.dart';
 import '../../../Model/WidgetProperties.dart';
