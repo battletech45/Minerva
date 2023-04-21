@@ -13,21 +13,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   bool click = false;
+  bool isLoading = false;
+  bool isStudent = true;
   String userName = "";
   String email = "";
   String link = '';
-  bool isLoading = false;
   Image? data;
 
+
   _getUserData() async {
+    bool? isData = await SharedFunctions.getUserStudentSharedPreference();
     var val = await SharedFunctions.getUserEmailSharedPreference();
     setState(() {
+      isStudent = isData!;
       email = val!;
     });
     var user = await FirebaseFunctions().getStudentData(email);
+    print(isData!);
     setState(() {
       userName = user.docs[0].get('studentName');
-     
     });
   }
   _getImaage() async {
@@ -73,14 +77,24 @@ class _HomePage extends State<HomePage> {
                 customContentFeed(userName: 'Yarkın Ata', content: 'hello world teacher now'),
                 customContentFeed(userName: 'Metin Baybars Arslan', content: 'İzmir Ekonomi Üniversitesi’nin (İEÜ) 25 öğrencisi, deprem sonrası oluşturulan barınma alanlarına yönelik alternatif projeler geliştirmek üzere 5 gün süren atölye çalışmasında bir araya geldi. Konteyner kent başta olmak üzere depremzedeler için en iyi yaşam alanlarını oluşturmak üzerine yoğunlaşan gençler, hızlı ve düşük maliyetle uygulanabilecek fikirler geliştirdi. Dörder ve beşer kişilik gruplar halinde çalışan öğrenciler, konteyner kentlerde ortak yaşam alanlarının çoğaltılabileceğine vurgu yaptı, çocukların oyun oynayabileceği ve film izleyebileceği özel bölümlerin de yer aldığı tasarımlar hazırladı. Öğrenciler, atölye sonunda İEÜ Rektörü Prof. Dr. Murat Aşkar’ın elinden sertifikalarını aldı.'),
                 SizedBox(height: 30),
-                //customContentFeed(userName: 'Yarkın Ata'),
-                SizedBox(height: 30),
-                //customContentFeed(userName: 'Yarkın Ata'),
               ],
             ),
           ),
         ),
         drawer: customDrawer(),
+        floatingActionButton: Visibility(
+          visible: !isStudent,
+          child: Transform.scale(
+            scale: 1.2,
+            child: FloatingActionButton(
+                backgroundColor: PageColors.mainColor,
+                onPressed: () {
+
+                },
+                child: Icon(FontAwesomeIcons.paperPlane, size: 25.0)
+            ),
+          ),
+        ),
     );
   }
 }
