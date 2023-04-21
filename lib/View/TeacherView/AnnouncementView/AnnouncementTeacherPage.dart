@@ -43,18 +43,23 @@ class _AnnouncementTeacherPageState extends State<AnnouncementTeacherPage> {
         centerTitle: true,
         title: Text("ANNOUNCEMENTS", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ),
-      body: isLoading ? AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: AnnouncementTeacherPage(), splashTransition: SplashTransition.fadeTransition) : Column(
-        children: <Widget>[
-          SizedBox(height: 40.0),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
-            itemCount: announcements!.length,
-            itemBuilder: (context, index) {
-              return customAnnouncementCard(teacherName: announcements![index]['sender'], announcementContent: announcements![index]['content']);
-              },
-          )
-        ],
+      body: isLoading ? AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: AnnouncementTeacherPage(), splashTransition: SplashTransition.fadeTransition)
+          :
+      SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 20.0),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              itemCount: announcements!.length,
+              itemBuilder: (context, index) {
+                return customAnnouncementCard(teacherName: announcements![index]['sender'], announcementContent: announcements![index]['content']);
+                },
+            )
+          ],
+        ),
       ),
       drawer: customDrawer(),
       floatingActionButton: Transform.scale(
