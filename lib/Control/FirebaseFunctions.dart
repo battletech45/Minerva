@@ -9,10 +9,10 @@ class FirebaseFunctions {
 
   final CollectionReference studentCollection = FirebaseFirestore.instance.collection('students');
   final CollectionReference teacherCollection = FirebaseFirestore.instance.collection('teachers');
-  final CollectionReference schoolCollection = FirebaseFirestore.instance.collection('schools');
   final CollectionReference chatsCollection = FirebaseFirestore.instance.collection('chats');
   final CollectionReference modelCollection = FirebaseFirestore.instance.collection('model');
   final CollectionReference classCollection = FirebaseFirestore.instance.collection('classes');
+  final CollectionReference contentsCollection = FirebaseFirestore.instance.collection('contents');
 
   Future createStudent(String studentName, String password, String email, String tc, String studentNumber, String registerNumber) async {
     DocumentReference docRef = await studentCollection.add({
@@ -44,15 +44,6 @@ class FirebaseFunctions {
       'teacherID': docRef.id
     });
   }
-  Future createSchool(String schoolName, String password, String email, String principalName) async {
-    await schoolCollection.add({
-      'studentName': schoolName,
-      'password': password,
-      'email': email,
-      'principleName': principalName,
-      'schoolNumber': ''
-    });
-  }
   Future<QuerySnapshot> getStudentData(String email) async {
     QuerySnapshot snapshot = await studentCollection.where('email', isEqualTo: email).get();
     return snapshot;
@@ -67,10 +58,6 @@ class FirebaseFunctions {
   }
   Future<QuerySnapshot> getTeacherData(String email) async {
     QuerySnapshot snapshot = await teacherCollection.where('email', isEqualTo: email).get();
-    return snapshot;
-  }
-  Future<QuerySnapshot> getSchoolData(String email) async {
-    QuerySnapshot snapshot = await schoolCollection.where('email', isEqualTo: email).get();
     return snapshot;
   }
   Future<Stream<QuerySnapshot>> getChats(String chatID) async {
@@ -89,13 +76,24 @@ class FirebaseFunctions {
     return classCollection.get();
   }
   void sendMessage(String chatID, chatMessageData) {
-    FirebaseFirestore.instance.collection('chats').doc(chatID).collection('messages').add(chatMessageData);
-    FirebaseFirestore.instance.collection('chats').doc(chatID).update({
+    chatsCollection.doc(chatID).collection('messages').add(chatMessageData);
+    chatsCollection.doc(chatID).update({
       'recentMessage': chatMessageData['message'],
       'recentMessageSender': chatMessageData['sender'],
       'recentMessageTime': chatMessageData['time'].toString()
     });
   }
+  Future sendContent(contentData) async {
+    DocumentReference docRef = await contentsCollection.add({
+      'sender': contentData['sender'],
+      'content': contentData['content'],
+      'likeCount': 0
+    });
+    await docRef.update({
+      'contentID': docRef.id
+    });
+  }
+
   Future gradeTask(String studentID, String courseName, String gradeType, String grade) async {
     studentCollection.doc(studentID).update({
       'courses.$courseName.$gradeType': grade
