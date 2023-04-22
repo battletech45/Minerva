@@ -34,7 +34,7 @@ class _HomePage extends State<HomePage> {
       userName = user.docs[0].get('studentName');
     });
   }
-  _getImaage() async {
+  _getImage() async {
     setState(() {
       isLoading = true;
     });
@@ -53,7 +53,7 @@ class _HomePage extends State<HomePage> {
   void initState() {
     super.initState();
    _getUserData();
-   _getImaage();
+   _getImage();
   }
 
   @override
