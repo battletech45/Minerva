@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:minerva/Model/CustomWidgets.dart';
+import '../../../Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -16,16 +16,6 @@ class _UploadHomeworkState extends State<UploadHomework> {
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
   bool isSelected = false;
-  List<String> classes = [
-    "11-A",
-    "11-B",
-    "11-C",
-    "11-D",
-    "12-A",
-    "12-B",
-    "12-C",
-    "12-D",
-  ];
 
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles();
@@ -56,19 +46,13 @@ class _UploadHomeworkState extends State<UploadHomework> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            selectedFileList(pickedFile: pickedFile),
-            SizedBox(
-              height: 10,
-            ),
-            //classListChekboxBuilder(classes: classes),
-            SizedBox(
-              height: 10,
-            ),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              selectedFileList(pickedFile: pickedFile),
+            ],
+          ),
         ),
         bottomSheet: Padding(
           padding: const EdgeInsets.only(bottom: 20.0),
