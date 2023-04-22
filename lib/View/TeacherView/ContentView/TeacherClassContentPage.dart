@@ -7,7 +7,8 @@ import 'package:minerva/View/TeacherView/HomeworksView/TeacherUploadHomework.dar
 import '../../../Model/WidgetProperties.dart';
 
 class TeacherClassContentPage extends StatefulWidget {
-  const TeacherClassContentPage({Key? key}) : super(key: key);
+  final String className;
+  const TeacherClassContentPage({Key? key, required this.className}) : super(key: key);
 
   @override
   State<TeacherClassContentPage> createState() =>
@@ -21,7 +22,6 @@ class _TeacherClassContentPageState extends State<TeacherClassContentPage> {
     Text('exit'),
     UploadHomework(),
     TeacherSubmissions(),
-
   ];
 
   @override
@@ -32,6 +32,8 @@ class _TeacherClassContentPageState extends State<TeacherClassContentPage> {
         automaticallyImplyLeading: true,
         backgroundColor: PageColors.mainColor,
         centerTitle: true,
+        title: Text(widget.className,
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
