@@ -56,14 +56,7 @@ class _UploadHomeworkState extends State<UploadHomework> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          automaticallyImplyLeading: true,
-          backgroundColor: PageColors.mainColor,
-          centerTitle: true,
-          title: Text("Upload Homework",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        ),
+
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -114,7 +107,7 @@ class _UploadHomeworkState extends State<UploadHomework> {
             ],
           ),
         ),
-        drawer: customDrawer());
+        );
   }
 
   //Bu buildProgress çalışmıyo sonra bakalım
