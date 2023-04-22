@@ -78,7 +78,7 @@ class _ContentTeacherPageState extends State<ContentTeacherPage> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => TeacherClassContentPage()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => TeacherClassContentPage(className: classes.elementAt(index))));
                     },
                       child: Card(
                         elevation: 6,
