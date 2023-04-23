@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:minerva/View/TeacherView/ContentView/TeacherSubmissions.dart';
+import 'package:minerva/View/TeacherView/ContentView/UploadMaterial.dart';
 import 'package:minerva/View/TeacherView/HomeworksView/TeacherUploadHomework.dart';
 
 import '../../../Model/WidgetProperties.dart';
@@ -20,6 +21,7 @@ class _TeacherClassContentPageState extends State<TeacherClassContentPage> {
 
   List<Widget> _widgetOptions = <Widget>[
     Text('exit'),
+    UploadMaterial(),
     UploadHomework(),
     TeacherSubmissions(),
   ];
@@ -54,6 +56,17 @@ class _TeacherClassContentPageState extends State<TeacherClassContentPage> {
               ),
               label: '',
             ),
+            BottomNavigationBarItem(
+                icon: Column(
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.filePdf),
+                    Text(
+                      'Upload Material',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+                label: ''),
             BottomNavigationBarItem(
                 icon: Column(
                   children: <Widget>[
