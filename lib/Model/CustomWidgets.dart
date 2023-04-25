@@ -547,41 +547,6 @@ class selectedFileList extends StatelessWidget {
                 ),
               ),
             ),
-          SizedBox(width: 10),
-          if (pickedFile != null)
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: PageColors.mainColor,
-              ),
-              width: 200,
-              height: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.file(
-                  File(pickedFile!.path!),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          SizedBox(width: 10),
-          if (pickedFile != null)
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: PageColors.mainColor,
-              ),
-              width: 200,
-              height: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.file(
-                  File(pickedFile!.path!),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          SizedBox(width: 10),
         ],
       ),
     );
@@ -804,6 +769,39 @@ class _customAlertState extends State<customAlert> {
       },
     );
 
+    List<Widget> body = <Widget>[
+      Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 30.0),
+            Text('hello'),
+          ],
+        ),
+      ),
+      Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 30.0),
+            Text('hello2'),
+          ],
+        ),
+      ),
+      Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 30.0),
+            Text('Please enter you text here'),
+            TextFormField(
+
+            )
+          ],
+        ),
+      )
+    ];
+
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       title: Text("New Post", style: TextStyle(fontWeight: FontWeight.bold)),
@@ -826,12 +824,13 @@ class _customAlertState extends State<customAlert> {
                   currentIndex = index;
                 });
               },
-              destinations: [
+              destinations: <Widget>[
                 Transform.scale(scale: 1.4, child: NavigationDestination(icon: Icon(FontAwesomeIcons.book), label: 'Survey')),
                 Transform.scale(scale: 1.4,child: NavigationDestination(icon: Icon(FontAwesomeIcons.photoFilm), label: 'Image')),
                 Transform.scale(scale: 1.4,child: NavigationDestination(icon: Icon(FontAwesomeIcons.textSlash), label: 'text')),
               ],
             ),
+            body[currentIndex]
           ],
         ),
       ),
