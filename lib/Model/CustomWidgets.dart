@@ -6,6 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
+import 'package:minerva/View/LoginPage.dart';
+import 'package:minerva/View/RegisterPage.dart';
 import 'package:minerva/View/StudentView/Announcement/AnnouncementStudentPage.dart';
 import 'package:minerva/View/StudentView/Attendance/AttendanceStudentPage.dart';
 import 'package:minerva/View/TeacherView/AttendanceView/EditAttendance.dart';
@@ -769,4 +771,62 @@ class _customCourseGridState extends State<customCourseGrid> {
       ),
     );
   }
+}
+
+void customPostCreteAlert(BuildContext context) {
+  Widget cancelButton = MaterialButton(
+    child: Text("Cancel"),
+    elevation: 5.0,
+    color: PageColors.thirdColor,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+  Widget createButton = MaterialButton(
+    child: Text("Create"),
+    elevation: 5.0,
+    color: PageColors.thirdColor,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+    onPressed: () {
+
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+    title: Text("New Post", style: TextStyle(fontWeight: FontWeight.bold)),
+    actions: [
+      cancelButton,
+      SizedBox(width: 20.0),
+      createButton,
+    ],
+    actionsAlignment: MainAxisAlignment.center,
+    content: SizedBox(
+      height: MediaQuery.of(context).size.height * 0.90,
+      width: MediaQuery.of(context).size.width * 0.90,
+      child: Column(
+        children: <Widget>[
+          NavigationBar(
+            backgroundColor: Colors.white,
+            onDestinationSelected: (int index) {
+
+            },
+            destinations: [
+              Transform.scale(scale: 1.4, child: NavigationDestination(icon: Icon(FontAwesomeIcons.book), label: 'Survey')),
+              Transform.scale(scale: 1.4,child: NavigationDestination(icon: Icon(FontAwesomeIcons.photoFilm), label: 'Image')),
+              Transform.scale(scale: 1.4,child: NavigationDestination(icon: Icon(FontAwesomeIcons.textSlash), label: 'text')),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
