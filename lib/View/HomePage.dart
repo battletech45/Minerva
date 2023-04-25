@@ -48,7 +48,7 @@ class _HomePage extends State<HomePage> {
       isLoading = false;
     });
   }
-
+  
   @override
   void initState() {
     super.initState();
@@ -89,7 +89,7 @@ class _HomePage extends State<HomePage> {
             child: FloatingActionButton(
                 backgroundColor: PageColors.mainColor,
                 onPressed: () {
-
+                  customPostCreteAlert(context);
                 },
                 child: Icon(FontAwesomeIcons.paperPlane, size: 25.0)
             ),
