@@ -64,7 +64,7 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
               top: BorderSide(color: PageColors.mainColor, width: 3),
           )
         ),
-        height: 150.0,
+        height: 200.0,
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: <Widget>[
@@ -77,6 +77,8 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
                 style: TextStyle(fontSize: 18.0),
               ),
             ),
+            //homeworkItems[_selectedIndex].fileName!.isEmpty ? null : Text(homeworkItems[_selectedIndex].fileName!),
+            MaterialButton( child: Text('Submit'),onPressed: () {})
           ],
         ),
       ) : null,
@@ -87,6 +89,7 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
 class HomeworkItem {
   final String name;
   final String definition;
+  final String? fileName;
 
-  HomeworkItem({required this.name, required this.definition});
+  HomeworkItem({required this.name, required this.definition, this.fileName});
 }
