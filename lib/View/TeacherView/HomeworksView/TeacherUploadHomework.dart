@@ -50,6 +50,9 @@ class _UploadHomeworkState extends State<UploadHomework> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Text('PLease Enter Homework here'),
+              TextFormField(),
+              Checkbox(value: false, onChanged: (bool) {}),
               selectedFileList(pickedFile: pickedFile),
             ],
           ),
