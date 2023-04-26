@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey/flutter_survey.dart';
@@ -747,6 +748,9 @@ class _customAlertState extends State<customAlert> {
 
   int currentIndex = 0;
   int surveyOptionCount = 2;
+  TextEditingController surveyTitleController = TextEditingController();
+  List<String> controllerValues = [];
+  List<TextEditingController> controllers = List.generate(2, (index) => TextEditingController());
   @override
   Widget build(BuildContext context) {
 
@@ -765,8 +769,27 @@ class _customAlertState extends State<customAlert> {
       elevation: 5.0,
       color: PageColors.thirdColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-      onPressed: () {
+      onPressed: () async {
+        if(currentIndex == 0) {
+          var val = await SharedFunctions.getUserNameSharedPreference();
+          Map<String, dynamic> survey = {
+            'sender': val,
+            'contentType': 'Survey',
+            'surveyTitle': surveyTitleController.text,
+            'surveyOptions': []
+          };
+          for(int i = 0; i < controllers.length; i++) {
+            controllerValues.add(controllers[i].text);
+          }
+          survey.update('surveyOptions', (value) => FieldValue.arrayUnion(controllerValues));
+          FirebaseFunctions().sendContent(survey);
+        }
+        if(currentIndex == 1) {
 
+        }
+        if(currentIndex == 2) {
+
+        }
       },
     );
 
@@ -778,6 +801,7 @@ class _customAlertState extends State<customAlert> {
           children: <Widget>[
             SizedBox(height: 30.0),
             TextFormField(
+              controller: surveyTitleController,
               decoration: InputDecoration(
                   label: Text('Please Write Your Title Here ...'),
                   filled: true
@@ -795,6 +819,7 @@ class _customAlertState extends State<customAlert> {
                   children: <Widget>[
                     SizedBox(height: 10.0),
                     TextFormField(
+                      controller: controllers![index],
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(width: 2, color: PageColors.mainColor)
@@ -815,6 +840,7 @@ class _customAlertState extends State<customAlert> {
               onTap: () {
                 setState(() {
                   surveyOptionCount++;
+                  controllers.add(TextEditingController());
                 });
               },
               child: Row(
@@ -838,7 +864,7 @@ class _customAlertState extends State<customAlert> {
             SizedBox(height: 30.0),
             GestureDetector(
               onTap: () {
-                
+
               },
               child: Container(
                 width: 90,

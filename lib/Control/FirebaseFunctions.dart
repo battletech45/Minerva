@@ -83,10 +83,9 @@ class FirebaseFunctions {
       'recentMessageTime': chatMessageData['time'].toString()
     });
   }
-  Future sendContent(contentData) async {
+  Future sendContent(Map<String, dynamic> contentData) async {
     DocumentReference docRef = await contentsCollection.add({
-      'sender': contentData['sender'],
-      'content': contentData['content'],
+      ...contentData,
       'likeCount': 0
     });
     await docRef.update({
