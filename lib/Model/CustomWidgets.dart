@@ -788,6 +788,7 @@ class _customAlertState extends State<customAlert> {
   int currentIndex = 0;
   int surveyOptionCount = 2;
   TextEditingController surveyTitleController = TextEditingController();
+  TextEditingController paragraphController = TextEditingController();
   List<String> controllerValues = [];
   List<TextEditingController> controllers = List.generate(2, (index) => TextEditingController());
   @override
@@ -827,7 +828,13 @@ class _customAlertState extends State<customAlert> {
 
         }
         if(currentIndex == 2) {
-
+          var val = await SharedFunctions.getUserNameSharedPreference();
+          Map<String, dynamic> paragraph = {
+            'sender': val,
+            'contentType': 'Text',
+            'paragraph': paragraphController.text,
+          };
+          FirebaseFunctions().sendContent(paragraph);
         }
       },
     );
@@ -928,6 +935,7 @@ class _customAlertState extends State<customAlert> {
           children: <Widget>[
             SizedBox(height: 30.0),
             TextFormField(
+              controller: paragraphController,
               decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 2, color: PageColors.mainColor)
