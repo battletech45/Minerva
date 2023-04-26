@@ -746,6 +746,7 @@ class customAlert extends StatefulWidget {
 class _customAlertState extends State<customAlert> {
 
   int currentIndex = 0;
+  int surveyOptionCount = 2;
   @override
   Widget build(BuildContext context) {
 
@@ -775,7 +776,55 @@ class _customAlertState extends State<customAlert> {
         child: Column(
           children: <Widget>[
             SizedBox(height: 30.0),
-            Text('hello'),
+            TextFormField(
+              decoration: InputDecoration(
+                  label: Text('Please Write Your Title Here ...'),
+                  filled: true
+              ),
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+            ),
+            ListView.builder(
+              physics: BouncingScrollPhysics(),
+              itemCount: surveyOptionCount,
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(height: 10.0),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 2, color: PageColors.mainColor)
+                        ),
+                        label: Text('Please Write Your Option Here...'),
+                        filled: true
+                      ),
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                    ),
+                    SizedBox(height: 10.0)
+                  ],
+                );
+              },
+            ),
+            SizedBox(height: 30.0),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  surveyOptionCount++;
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(FontAwesomeIcons.plus),
+                  SizedBox(width: 20.0),
+                  Text('Add new option...')
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -795,7 +844,8 @@ class _customAlertState extends State<customAlert> {
             SizedBox(height: 30.0),
             Text('Please enter you text here'),
             TextFormField(
-
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
             )
           ],
         ),
@@ -812,26 +862,28 @@ class _customAlertState extends State<customAlert> {
       ],
       actionsAlignment: MainAxisAlignment.center,
       content: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.90,
+        height: MediaQuery.of(context).size.height * 0.70,
         width: MediaQuery.of(context).size.width * 0.90,
-        child: Column(
-          children: <Widget>[
-            NavigationBar(
-              selectedIndex: currentIndex,
-              backgroundColor: Colors.white,
-              onDestinationSelected: (int index) {
-                setState(() {
-                  currentIndex = index;
-                });
-              },
-              destinations: <Widget>[
-                Transform.scale(scale: 1.4, child: NavigationDestination(icon: Icon(FontAwesomeIcons.book), label: 'Survey')),
-                Transform.scale(scale: 1.4,child: NavigationDestination(icon: Icon(FontAwesomeIcons.photoFilm), label: 'Image')),
-                Transform.scale(scale: 1.4,child: NavigationDestination(icon: Icon(FontAwesomeIcons.textSlash), label: 'text')),
-              ],
-            ),
-            body[currentIndex]
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              NavigationBar(
+                selectedIndex: currentIndex,
+                backgroundColor: Colors.white,
+                onDestinationSelected: (int index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
+                destinations: <Widget>[
+                  Transform.scale(scale: 1.4, child: NavigationDestination(icon: Icon(FontAwesomeIcons.book), label: 'Survey')),
+                  Transform.scale(scale: 1.4,child: NavigationDestination(icon: Icon(FontAwesomeIcons.photoFilm), label: 'Image')),
+                  Transform.scale(scale: 1.4,child: NavigationDestination(icon: Icon(FontAwesomeIcons.textSlash), label: 'text')),
+                ],
+              ),
+              body[currentIndex]
+            ],
+          ),
         ),
       ),
     );
