@@ -771,6 +771,7 @@ class _customAlertState extends State<customAlert> {
     );
 
     List<Widget> body = <Widget>[
+      //Start of Survey Container
       Container(
         alignment: Alignment.center,
         child: Column(
@@ -828,22 +829,47 @@ class _customAlertState extends State<customAlert> {
           ],
         ),
       ),
+      // End of Survey Container
+      //Start of Image Container
       Container(
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
             SizedBox(height: 30.0),
-            Text('hello2'),
+            GestureDetector(
+              onTap: () {
+                
+              },
+              child: Container(
+                width: 90,
+                height: 90,
+                decoration: BoxDecoration(
+                    color: PageColors.secondaryColor,
+                  borderRadius: BorderRadius.all(Radius.circular(30.0))
+                ),
+                child: Icon(FontAwesomeIcons.plus),
+              ),
+            ),
+            SizedBox(height: 20.0),
+            Text('To Select Your Image Press Here ...', style: TextStyle(fontWeight: FontWeight.bold))
           ],
         ),
       ),
+      // End of Image Container
+      //Start of Text Container
       Container(
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
             SizedBox(height: 30.0),
-            Text('Please enter you text here'),
             TextFormField(
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: PageColors.mainColor)
+                  ),
+                  label: Text('Please Write Your Paragraph Here ...'),
+                  filled: true
+              ),
               keyboardType: TextInputType.multiline,
               maxLines: null,
             )
