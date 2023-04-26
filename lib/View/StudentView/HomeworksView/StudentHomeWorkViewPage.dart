@@ -78,7 +78,18 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
               ),
             ),
             //homeworkItems[_selectedIndex].fileName!.isEmpty ? null : Text(homeworkItems[_selectedIndex].fileName!),
-            MaterialButton( child: Text('Submit'),onPressed: () {})
+           SizedBox(height: 10,),
+            MaterialButton(
+              height: 45,
+              minWidth: 45,
+              onPressed: (){},
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              child: Text("Submit",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20
+              ),),
+              color: PageColors.thirdColor,)
           ],
         ),
       ) : null,
