@@ -346,17 +346,7 @@ class _customContentFeedState extends State<customContentFeed> {
           width: 400,
           color: PageColors.thirdColor,
           alignment: Alignment.bottomCenter,
-          child: Survey(
-            initialData: [
-              Question(
-                  question: 'why are you running ?',
-                  answerChoices: {
-                    'Yes': null,
-                    'Yes but another yes': null,
-                    'No': null,
-                  }
-              )],
-          ),
+          child: content
         );
       }
     }
