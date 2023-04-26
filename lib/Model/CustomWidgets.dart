@@ -228,31 +228,48 @@ class _customAttendanceCardState extends State<customAttendanceCard> {
       color: PageColors.secondaryColor,
       elevation: 10.0,
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+      shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text(widget.teacherName, textAlign: TextAlign.center),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: ListTile(
+              leading: Icon(Icons.person,
+              size: 35,
+              ),
+              title: Text(widget.teacherName, textAlign: TextAlign.center, style: TextStyle( fontSize: 20,)),
+            ),
           ),
+          SizedBox(height: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Text('Course Name',
                   style: TextStyle(
                       fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold)),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      )),
               Text('Attendance',
                   style: TextStyle(
-                      fontStyle: FontStyle.italic, fontWeight: FontWeight.bold))
+                      fontStyle: FontStyle.italic, 
+                      fontWeight: FontWeight.bold,
+                        fontSize: 16,))
             ],
           ),
           SizedBox(height: 10.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[Text(widget.courseName), Text(widget.attendance + ' Hours')],
+            children: <Widget>[
+              Text(widget.courseName,
+              style: TextStyle( fontSize: 16,),
+              ),
+               Text(widget.attendance + ' Hours',
+            style: TextStyle( fontSize: 16,))
+            ],
           ),
-          SizedBox(height: 10.0)
+          SizedBox(height: 15.0)
         ],
       ),
     );
@@ -441,6 +458,7 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
     String quiz = widget.quizPoint;
     return Container(
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(
           width: 2,
           color: Colors.black54,
@@ -448,22 +466,30 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
         ),
       ),
       child: ExpansionTile(
-        title: Text("$course"),
+        title: Text("$course",
+            style: TextStyle(fontSize: 21),),
         trailing: Icon(
             expansionIcon ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown,
             color: Colors.pink),
         children: <Widget>[
           ListTile(
-            leading: Text("Exam: "),
-            trailing: Text('$exam'),
+            leading: Text("Exam: ",
+            style: TextStyle(fontSize: 18),
+            ),
+            trailing: Text('$exam',
+            style: TextStyle(fontSize: 18),),
           ),
           ListTile(
-            leading: Text("Project: "),
-            trailing: Text("$project"),
+            leading: Text("Project: ",
+            style: TextStyle(fontSize: 18),),
+            trailing: Text("$project",
+            style: TextStyle(fontSize: 18),),
           ),
           ListTile(
-            leading: Text("Quiz: "),
-            trailing: Text("$quiz"),
+            leading: Text("Quiz: ",
+            style: TextStyle(fontSize: 18),),
+            trailing: Text("$quiz",
+            style: TextStyle(fontSize: 18),),
           )
         ],
         onExpansionChanged: (bool expanded) {
@@ -686,19 +712,32 @@ class customAnnouncementCard extends StatefulWidget {
 class _customAnnouncementCardState extends State<customAnnouncementCard> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: PageColors.secondaryColor,
-      elevation: 10.0,
-      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text(widget.teacherName),
-            subtitle: Text(widget.announcementContent),
-          )
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical:6.0),
+      child: Card(
+        color: PageColors.secondaryColor,
+        elevation: 10.0,
+        margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+        shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical:5.0),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical:5.0,horizontal: 5.0),
+                child: ListTile(
+                  leading: Icon(Icons.person,size: 35,),
+                  title: Text(widget.teacherName,style: TextStyle(fontSize: 20),),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top:8.0),
+                    child: Text(widget.announcementContent, style: TextStyle(fontSize: 17)),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
