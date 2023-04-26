@@ -46,7 +46,7 @@ class _StudentGradePage extends State<StudentGradePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Grades'),
+        title: Text('GRADES'),
         elevation: 0.0,
         automaticallyImplyLeading: true,
         backgroundColor: PageColors.mainColor,
@@ -61,7 +61,10 @@ class _StudentGradePage extends State<StudentGradePage> {
           return Column(
             children: <Widget>[
               SizedBox(height: 5.0),
-              customExpansionPanel(courseName: courses.keys.elementAt(index), examPoint: courses[courses.keys.elementAt(index)]['exam'], projectPoint: courses[courses.keys.elementAt(index)]['project'], quizPoint: courses[courses.keys.elementAt(index)]['quiz']),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical:10.0, horizontal: 12),
+                child: customExpansionPanel(courseName: courses.keys.elementAt(index), examPoint: courses[courses.keys.elementAt(index)]['exam'], projectPoint: courses[courses.keys.elementAt(index)]['project'], quizPoint: courses[courses.keys.elementAt(index)]['quiz']),
+              ),
               SizedBox(height: 5.0),
             ],
           );
