@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey/flutter_survey.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -327,7 +328,6 @@ class _customContentFeedState extends State<customContentFeed> {
     }
     if(content is Widget) {
       if(content is Image) {
-        // return widget.content;
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Container(
@@ -780,7 +780,37 @@ class _customAlertState extends State<customAlert> {
   TextEditingController surveyTitleController = TextEditingController();
   TextEditingController paragraphController = TextEditingController();
   List<String> controllerValues = [];
+  PlatformFile? pickedFile;
+  String link = '';
+  UploadTask? uploadTask;
   List<TextEditingController> controllers = List.generate(2, (index) => TextEditingController());
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+    setState(() {
+      pickedFile = result.files.first;
+    });
+  }
+
+  Future uploadFile() async {
+    final path = 'contents/${pickedFile!.name}';
+    final file = File(pickedFile!.path!);
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+    setState(() {
+      uploadTask = ref.putFile(file);
+    });
+
+    final snapshot = await uploadTask!.whenComplete(() {});
+    final urlDownload = await snapshot.ref.getDownloadURL();
+    print('Download Link: $urlDownload');
+    setState(() {
+      link = urlDownload;
+      uploadTask = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -813,9 +843,18 @@ class _customAlertState extends State<customAlert> {
           }
           survey.update('surveyOptions', (value) => FieldValue.arrayUnion(controllerValues));
           FirebaseFunctions().sendContent(survey);
+          Navigator.of(context).pop();
         }
         if(currentIndex == 1) {
-
+          print('this is link' + link);
+          var val = await SharedFunctions.getUserNameSharedPreference();
+          Map<String, dynamic> Image = {
+            'sender': val,
+            'contentType': 'Image',
+            'imageURL': link
+          };
+          FirebaseFunctions().sendContent(Image);
+          Navigator.of(context).pop();
         }
         if(currentIndex == 2) {
           var val = await SharedFunctions.getUserNameSharedPreference();
@@ -825,6 +864,7 @@ class _customAlertState extends State<customAlert> {
             'paragraph': paragraphController.text,
           };
           FirebaseFunctions().sendContent(paragraph);
+          Navigator.of(context).pop();
         }
       },
     );
@@ -855,7 +895,7 @@ class _customAlertState extends State<customAlert> {
                   children: <Widget>[
                     SizedBox(height: 10.0),
                     TextFormField(
-                      controller: controllers![index],
+                      controller: controllers[index],
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(width: 2, color: PageColors.mainColor)
@@ -899,8 +939,9 @@ class _customAlertState extends State<customAlert> {
           children: <Widget>[
             SizedBox(height: 30.0),
             GestureDetector(
-              onTap: () {
-
+              onTap: () async {
+                await selectFile();
+                await uploadFile();
               },
               child: Container(
                 width: 90,
