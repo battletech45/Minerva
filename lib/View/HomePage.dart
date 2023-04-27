@@ -20,24 +20,16 @@ class _HomePage extends State<HomePage> {
   bool isStudent = true;
   Map<String, List<Question>?> dummyMap = {};
   List<dynamic> dummyList = [];
-  QuerySnapshot? contents;
-  String userName = "";
+  Stream<QuerySnapshot>? contents;
   String email = "";
   String link = '';
   Image? data;
 
 
-  _getUserData() async {
+  _checkUserIsStudent() async {
     bool? isData = await SharedFunctions.getUserStudentSharedPreference();
-    var val = await SharedFunctions.getUserEmailSharedPreference();
     setState(() {
       isStudent = isData!;
-      email = val!;
-    });
-    var user = await FirebaseFunctions().getStudentData(email);
-    print(isData!);
-    setState(() {
-      userName = user.docs[0].get('studentName');
     });
   }
   _getImage() async {
@@ -70,7 +62,7 @@ class _HomePage extends State<HomePage> {
   void initState() {
     super.initState();
     _getAllContent();
-    _getUserData();
+    _checkUserIsStudent();
     _getImage();
   }
 
@@ -84,38 +76,44 @@ class _HomePage extends State<HomePage> {
           centerTitle: true,
           title: Text("HOME", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
-        body: !isLoading ? ListView.builder(
-          physics: BouncingScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: contents!.size,
-          itemBuilder: (context, index) {
-            if(contents!.docs[index].get('contentType') == 'Text') {
-              return customContentFeed(
-                  userName: contents!.docs[index].get('sender'),
-                  content: contents!.docs[index].get('paragraph')
-              );
-            }
-            if(contents!.docs[index].get('contentType') == 'Survey') {
-              dummyList.clear();
-              dummyList = contents!.docs[index].get('surveyOptions');
-              dummyMap.clear();
-                for(int i = 0; i < dummyList.length; i++) {
-                  dummyMap[dummyList[i]] = null;
+        body: !isLoading ? StreamBuilder<QuerySnapshot>(
+          stream: contents,
+          builder: (context, snapshot) {
+            return ListView.builder(
+              reverse: true,
+              physics: BouncingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                if(snapshot.data!.docs[index].get('contentType') == 'Text') {
+                  return customContentFeed(
+                      userName: snapshot.data!.docs[index].get('sender'),
+                      content: snapshot.data!.docs[index].get('paragraph')
+                  );
                 }
-              return customContentFeed(
-                  userName: contents!.docs[index].get('sender'),
-                  content: Survey(
-                    initialData: [
-                      Question(
-                        question: contents!.docs[index].get('surveyTitle'),
-                        answerChoices: dummyMap,
+                if(snapshot.data!.docs[index].get('contentType') == 'Survey') {
+                  dummyList.clear();
+                  dummyList = snapshot.data!.docs[index].get('surveyOptions');
+                  dummyMap.clear();
+                    for(int i = 0; i < dummyList.length; i++) {
+                      dummyMap[dummyList[i]] = null;
+                    }
+                  return customContentFeed(
+                      userName: snapshot.data!.docs[index].get('sender'),
+                      content: Survey(
+                        initialData: [
+                          Question(
+                            question: snapshot.data!.docs[index].get('surveyTitle'),
+                            answerChoices: dummyMap,
+                          )
+                        ],
                       )
-                    ],
-                  )
-              );
-            }
-            if(contents!.docs[index].get('contentType') == 'Image') {}
-          },
+                  );
+                }
+                if(snapshot.data!.docs[index].get('contentType') == 'Image') {}
+              },
+            );
+          }
         ) : AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: HomePage(), splashTransition: SplashTransition.fadeTransition),
         drawer: customDrawer(),
         floatingActionButton: Visibility(
