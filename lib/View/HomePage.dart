@@ -15,15 +15,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-  bool click = false;
   bool isLoading = false;
   bool isStudent = true;
   Map<String, List<Question>?> dummyMap = {};
   List<dynamic> dummyList = [];
+  List<Image> dummyImages = [];
   Stream<QuerySnapshot>? contents;
-  String email = "";
   String link = '';
   Image? data;
+  int imageCount = 0;
 
 
   _checkUserIsStudent() async {
@@ -36,13 +36,17 @@ class _HomePage extends State<HomePage> {
     setState(() {
       isLoading = true;
     });
-    final ref = await FirebaseStorage.instance.ref('sampleFile').child('samplePicture.png');
-    link = await ref.getDownloadURL();
+    List<String> dummyUrls = await FirebaseFunctions().getAllImageURLs();
+    dummyUrls.forEach((element) {
+      setState(() {
+        data = Image.network(
+          element,
+          fit: BoxFit.fill,
+        );
+        dummyImages.add(data!);
+      });
+    });
     setState(() {
-      data = Image.network(
-      link,
-      fit: BoxFit.fill,
-       );
       isLoading = false;
     });
   }
@@ -75,8 +79,7 @@ class _HomePage extends State<HomePage> {
         body: StreamBuilder<QuerySnapshot>(
           stream: contents,
           builder: (context, snapshot) {
-            return snapshot.hasData ?ListView.builder(
-              reverse: true,
+            return snapshot.hasData ? ListView.builder(
               physics: BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: snapshot.data!.docs.length,
@@ -106,7 +109,9 @@ class _HomePage extends State<HomePage> {
                       )
                   );
                 }
-                if(snapshot.data!.docs[index].get('contentType') == 'Image') {}
+                if(snapshot.data!.docs[index].get('contentType') == 'Image') {
+                  return isLoading ? CircularProgressIndicator() : customContentFeed(userName: snapshot.data!.docs[index].get('sender'), content: dummyImages[imageCount]);
+                }
               },
             ) : AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: HomePage(), splashTransition: SplashTransition.fadeTransition);
           }
