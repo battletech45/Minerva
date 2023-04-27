@@ -78,6 +78,16 @@ class FirebaseFunctions {
   Future<Stream<QuerySnapshot>> getAllContents() async {
     return contentsCollection.snapshots();
   }
+  Future<List<String>> getAllImageURLs() async {
+    var val = await contentsCollection.get();
+    List<String> urls = [];
+    for(int i = 0; i < val.docs.length; i++) {
+      if(val.docs[i].get('contentType') == 'Image') {
+        urls.add(val.docs[i].get('imageURL'));
+      }
+    }
+    return urls;
+  }
   void sendMessage(String chatID, chatMessageData) {
     chatsCollection.doc(chatID).collection('messages').add(chatMessageData);
     chatsCollection.doc(chatID).update({
