@@ -75,8 +75,8 @@ class FirebaseFunctions {
   Future<QuerySnapshot> getAllClasses() async {
     return classCollection.get();
   }
-  Future<QuerySnapshot> getAllContents() async {
-    return contentsCollection.get();
+  Future<Stream<QuerySnapshot>> getAllContents() async {
+    return contentsCollection.snapshots();
   }
   void sendMessage(String chatID, chatMessageData) {
     chatsCollection.doc(chatID).collection('messages').add(chatMessageData);
