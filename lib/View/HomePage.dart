@@ -48,13 +48,9 @@ class _HomePage extends State<HomePage> {
   }
   
   _getAllContent() async {
-    setState(() {
-      isLoading = true;
-    });
     var val = await FirebaseFunctions().getAllContents();
     setState(() {
       contents = val;
-      isLoading = false;
     });
   }
   
@@ -76,10 +72,10 @@ class _HomePage extends State<HomePage> {
           centerTitle: true,
           title: Text("HOME", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
-        body: !isLoading ? StreamBuilder<QuerySnapshot>(
+        body: StreamBuilder<QuerySnapshot>(
           stream: contents,
           builder: (context, snapshot) {
-            return ListView.builder(
+            return snapshot.hasData ?ListView.builder(
               reverse: true,
               physics: BouncingScrollPhysics(),
               shrinkWrap: true,
@@ -112,9 +108,9 @@ class _HomePage extends State<HomePage> {
                 }
                 if(snapshot.data!.docs[index].get('contentType') == 'Image') {}
               },
-            );
+            ) : AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: HomePage(), splashTransition: SplashTransition.fadeTransition);
           }
-        ) : AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: HomePage(), splashTransition: SplashTransition.fadeTransition),
+        ),
         drawer: customDrawer(),
         floatingActionButton: Visibility(
           visible: !isStudent,
