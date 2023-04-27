@@ -280,8 +280,9 @@ class _customAttendanceCardState extends State<customAttendanceCard> {
 class customContentFeed extends StatefulWidget {
   final String userName;
   final dynamic content;
+  Function? function;
 
-  const customContentFeed({Key? key, required this.userName, required this.content}) : super(key: key);
+  customContentFeed({Key? key, required this.userName, required this.content, this.function}) : super(key: key);
   @override
   State<customContentFeed> createState() => _customContentFeedState();
 }
@@ -328,6 +329,7 @@ class _customContentFeedState extends State<customContentFeed> {
     }
     if(content is Widget) {
       if(content is Image) {
+        widget.function!();
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Container(

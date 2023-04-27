@@ -32,6 +32,13 @@ class _HomePage extends State<HomePage> {
       isStudent = isData!;
     });
   }
+  _updateCounter() async {
+    if(imageCount < dummyImages.length - 1) {
+      setState(() {
+        imageCount = imageCount + 1;
+      });
+    }
+  }
   _getImage() async {
     setState(() {
       isLoading = true;
@@ -76,45 +83,47 @@ class _HomePage extends State<HomePage> {
           centerTitle: true,
           title: Text("HOME", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
-        body: StreamBuilder<QuerySnapshot>(
-          stream: contents,
-          builder: (context, snapshot) {
-            return snapshot.hasData ? ListView.builder(
-              physics: BouncingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (context, index) {
-                if(snapshot.data!.docs[index].get('contentType') == 'Text') {
-                  return customContentFeed(
-                      userName: snapshot.data!.docs[index].get('sender'),
-                      content: snapshot.data!.docs[index].get('paragraph')
-                  );
-                }
-                if(snapshot.data!.docs[index].get('contentType') == 'Survey') {
-                  dummyList.clear();
-                  dummyList = snapshot.data!.docs[index].get('surveyOptions');
-                  dummyMap.clear();
-                    for(int i = 0; i < dummyList.length; i++) {
-                      dummyMap[dummyList[i]] = null;
-                    }
-                  return customContentFeed(
-                      userName: snapshot.data!.docs[index].get('sender'),
-                      content: Survey(
-                        initialData: [
-                          Question(
-                            question: snapshot.data!.docs[index].get('surveyTitle'),
-                            answerChoices: dummyMap,
-                          )
-                        ],
-                      )
-                  );
-                }
-                if(snapshot.data!.docs[index].get('contentType') == 'Image') {
-                  return isLoading ? CircularProgressIndicator() : customContentFeed(userName: snapshot.data!.docs[index].get('sender'), content: dummyImages[imageCount]);
-                }
-              },
-            ) : AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: HomePage(), splashTransition: SplashTransition.fadeTransition);
-          }
+        body: SingleChildScrollView(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: contents,
+            builder: (context, snapshot) {
+              return snapshot.hasData ? ListView.builder(
+                physics: BouncingScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  if(snapshot.data!.docs[index].get('contentType') == 'Text') {
+                    return customContentFeed(
+                        userName: snapshot.data!.docs[index].get('sender'),
+                        content: snapshot.data!.docs[index].get('paragraph')
+                    );
+                  }
+                  if(snapshot.data!.docs[index].get('contentType') == 'Survey') {
+                    dummyList.clear();
+                    dummyList = snapshot.data!.docs[index].get('surveyOptions');
+                    dummyMap.clear();
+                      for(int i = 0; i < dummyList.length; i++) {
+                        dummyMap[dummyList[i]] = null;
+                      }
+                    return customContentFeed(
+                        userName: snapshot.data!.docs[index].get('sender'),
+                        content: Survey(
+                          initialData: [
+                            Question(
+                              question: snapshot.data!.docs[index].get('surveyTitle'),
+                              answerChoices: dummyMap,
+                            )
+                          ],
+                        )
+                    );
+                  }
+                  if(snapshot.data!.docs[index].get('contentType') == 'Image') {
+                    return isLoading ? CircularProgressIndicator() : customContentFeed(userName: snapshot.data!.docs[index].get('sender'), content: dummyImages[imageCount], function: () => _updateCounter());
+                  }
+                },
+              ) : AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: HomePage(), splashTransition: SplashTransition.fadeTransition);
+            }
+          ),
         ),
         drawer: customDrawer(),
         floatingActionButton: Visibility(
