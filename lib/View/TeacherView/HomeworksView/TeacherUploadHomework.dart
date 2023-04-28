@@ -6,15 +6,14 @@ import '../../../Model/WidgetProperties.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class UploadHomework extends StatefulWidget {
-  const UploadHomework({super.key});
 
   @override
   State<UploadHomework> createState() => _UploadHomeworkState();
 }
 
 class _UploadHomeworkState extends State<UploadHomework> {
-  bool isChecked = false;
 
+  bool isChecked = false;
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
   bool isSelected = false;
@@ -52,44 +51,42 @@ class _UploadHomeworkState extends State<UploadHomework> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(padding: EdgeInsets.only(top: 18)),
+            SizedBox(height: 20.0),
             Text(
               'Please Enter Homework Here',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            Padding(padding: EdgeInsets.only(top: 10)),
-            Padding(padding: EdgeInsets.symmetric(horizontal: 18)),
-
+            SizedBox(height: 20.0),
             TextFormField(
               onChanged: (value) {},
               validator: (value) {},
               decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: PageColors.mainColor)
+                ),
                 hintText: 'Enter homework content ...',
                 filled: true,
-                fillColor: Colors.grey[200],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                suffixIcon: Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Checkbox(value: isChecked,
-                      onChanged: (bool? value) {
-                    setState(() {
-                      isChecked =value ?? false;
-                    });
-                      },
-                    activeColor: Colors.green[300],
-                      ),
-                ),
-
               ),
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
             ),
-            SizedBox(
-              height: 10,
+            SizedBox(height: 10.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Checkbox(
+                    value: isChecked,
+                    onChanged: (value) {
+                  setState(() {
+                    isChecked = value ?? false;
+                  });}),
+                Text('Check here to create submission for this assignment...', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))
+              ],
             ),
             ElevatedButton(
               onPressed: () {},
