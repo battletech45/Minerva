@@ -14,19 +14,24 @@ class UploadHomework extends StatefulWidget {
 class _UploadHomeworkState extends State<UploadHomework> {
 
   bool isChecked = false;
+  bool isDocumentExist = false;
+  bool isLoading = false;
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
-  bool isSelected = false;
 
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles();
     if (result == null) return;
     setState(() {
       pickedFile = result.files.first;
+      isDocumentExist = true;
     });
   }
 
   Future uploadFile() async {
+    setState(() {
+      isLoading = true;
+    });
     final path = 'sampleFile/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
 
@@ -41,6 +46,7 @@ class _UploadHomeworkState extends State<UploadHomework> {
 
     setState(() {
       uploadTask = null;
+      isLoading = false;
     });
   }
 
@@ -88,21 +94,47 @@ class _UploadHomeworkState extends State<UploadHomework> {
                 Text('Check here to create submission for this assignment...', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))
               ],
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                'Send',
-                style: TextStyle(fontSize: 16),
-              ),
-              style: ElevatedButton.styleFrom(
-                  primary: PageColors.thirdColor,
-                  onPrimary: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: selectFile,
+                  child: Text(
+                    'Select File',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: PageColors.thirdColor,
+                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      )),
+                ),
+                ElevatedButton(
+                  onPressed: uploadFile,
+                  child: Text(
+                    isLoading ? 'Uploading...' : 'Upload File',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: PageColors.thirdColor,
+                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      )),
+                ),
+              ],
             ),
-            selectedFileList(pickedFile: pickedFile),
+            isDocumentExist ? selectedFileList(pickedFile: pickedFile) : Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 30.0),
+                  Image.asset('assets/logo.png', width: 150, height: 150),
+                  Text('No Such File...', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -118,25 +150,10 @@ class _UploadHomeworkState extends State<UploadHomework> {
                       borderRadius: BorderRadius.circular(10)),
                   minimumSize: Size(50, 50)),
               child: Text(
-                'Select File',
+                'Send Assignment',
                 style: TextStyle(fontSize: 17),
               ),
-              onPressed: selectFile,
-            ),
-            SizedBox(
-              width: 60,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: PageColors.mainColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  minimumSize: Size(50, 50)),
-              child: Text(
-                'Upload File',
-                style: TextStyle(fontSize: 17),
-              ),
-              onPressed: uploadFile,
+              onPressed: () {},
             ),
             SizedBox(height: 32),
             buildProgress(),

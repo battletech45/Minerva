@@ -551,10 +551,11 @@ class selectedFileList extends StatelessWidget {
         children: [
           SizedBox(width: 10),
           if (pickedFile != null)
-            Row(
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(FontAwesomeIcons.file),
-                Text(pickedFile!.name)
+                Icon(FontAwesomeIcons.file, size: 50.0),
+                Text(pickedFile!.name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
               ],
             ),
         ],
