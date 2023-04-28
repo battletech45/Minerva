@@ -84,6 +84,7 @@ class _HomePage extends State<HomePage> {
           title: Text("HOME", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: StreamBuilder<QuerySnapshot>(
             stream: contents,
             builder: (context, snapshot) {
@@ -121,7 +122,7 @@ class _HomePage extends State<HomePage> {
                     return isLoading ? CircularProgressIndicator() : customContentFeed(userName: snapshot.data!.docs[index].get('sender'), content: dummyImages[imageCount], function: () => _updateCounter());
                   }
                 },
-              ) : AnimatedSplashScreen(splash: 'assets/logo.png',splashIconSize: 200.0, disableNavigation: true, nextScreen: HomePage(), splashTransition: SplashTransition.fadeTransition);
+              ) : CircularProgressIndicator();
             }
           ),
         ),
