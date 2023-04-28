@@ -551,20 +551,11 @@ class selectedFileList extends StatelessWidget {
         children: [
           SizedBox(width: 10),
           if (pickedFile != null)
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: PageColors.mainColor,
-              ),
-              width: 200,
-              height: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.file(
-                  File(pickedFile!.path!),
-                  fit: BoxFit.cover,
-                ),
-              ),
+            Row(
+              children: <Widget>[
+                Icon(FontAwesomeIcons.file),
+                Text(pickedFile!.name)
+              ],
             ),
         ],
       ),
