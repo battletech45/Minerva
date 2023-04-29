@@ -50,6 +50,16 @@ class FirebaseFunctions {
       'Materials': FieldValue.arrayUnion([data]),
     });
   }
+  Future<String?> findStudentsClass(String studentID) async {
+    QuerySnapshot snapshot = await getAllClasses();
+    for(int i =  0; i < snapshot.size; i++) {
+      List val = snapshot.docs[i].get('students');
+      if(val.contains(studentID)) {
+        return snapshot.docs[i].get('className');
+      }
+    }
+    return null;
+  }
   Future<QuerySnapshot> getStudentData(String email) async {
     QuerySnapshot snapshot = await studentCollection.where('email', isEqualTo: email).get();
     return snapshot;
