@@ -64,7 +64,7 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
               top: BorderSide(color: PageColors.mainColor, width: 3),
           )
         ),
-        height: 200.0,
+        height: 300.0,
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: <Widget>[
