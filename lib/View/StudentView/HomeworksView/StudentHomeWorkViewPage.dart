@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../Control/FirebaseFunctions.dart';
+import '../../../Control/SharedFunctions.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class StudentHomeWorkViewPage extends StatefulWidget {
@@ -8,26 +10,10 @@ class StudentHomeWorkViewPage extends StatefulWidget {
 }
 
 class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
-  final List<HomeworkItem> homeworkItems = [
-    HomeworkItem(
-      name: 'Math homework',
-      definition: 'solve the given problems',
-    ),
-    HomeworkItem(
-      name: 'English essay',
-      definition: 'wrote an 2 paragraph essay about Izmir fhgdfhgkj fdhkjgdfhkjghkfdjgh kjdfhgkdfk',
-    ),
-    HomeworkItem(
-      name: 'Science project',
-      definition: 'Search an AI project.',
-    ),
-    HomeworkItem(
-      name: 'History reading',
-      definition: 'Read the articles in the page 22',
-    ),
-  ];
 
+  final List<HomeworkItem> homeworkItems = [];
   int _selectedIndex = -1;
+  bool isHomeWorkExist = false;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -35,10 +21,36 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
     });
   }
 
+  _getHomeworks() async {
+    var email = await SharedFunctions.getUserEmailSharedPreference();
+    var student = await FirebaseFunctions().getStudentData(email!);
+    String? className = await FirebaseFunctions().findStudentsClass(student.docs[0].get('studentID'));
+    var val = await FirebaseFunctions().getClassData(className!);
+    List data = val.docs[0].get('Materials');
+    data.forEach((element) {
+      homeworkItems.add(HomeworkItem(name: element['assignmentTitle'], definition: element['assignmentContent'], isSubmitable: element['submitOpen'], fileName: element['pickedFileName']));
+    });
+    if(homeworkItems.isEmpty) {
+      setState(() {
+        isHomeWorkExist = false;
+      });
+    }
+    else {
+      setState(() {
+        isHomeWorkExist = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getHomeworks();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
+      body: isHomeWorkExist ? ListView.builder(
         itemCount: homeworkItems.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
@@ -48,6 +60,12 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
             },
           );
         },
+      ) : Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.asset('assets/logo.png', width: 300, height: 300),
+          Text('There is no material for this course !', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, fontStyle: FontStyle.italic, color: PageColors.thirdColor))
+        ],
       ),
       floatingActionButton: _selectedIndex != -1 ? FloatingActionButton(
         onPressed: () {
@@ -79,17 +97,20 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
             ),
             //homeworkItems[_selectedIndex].fileName!.isEmpty ? null : Text(homeworkItems[_selectedIndex].fileName!),
            SizedBox(height: 10,),
-            MaterialButton(
-              height: 45,
-              minWidth: 45,
-              onPressed: (){},
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              child: Text("Submit",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20
-              ),),
-              color: PageColors.thirdColor,)
+            Visibility(
+              visible: homeworkItems[_selectedIndex].isSubmitable,
+              child: MaterialButton(
+                height: 45,
+                minWidth: 45,
+                onPressed: (){},
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                child: Text("Submit",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20
+                ),),
+                color: PageColors.thirdColor,),
+            )
           ],
         ),
       ) : null,
@@ -101,6 +122,7 @@ class HomeworkItem {
   final String name;
   final String definition;
   final String? fileName;
+  final bool isSubmitable;
 
-  HomeworkItem({required this.name, required this.definition, this.fileName});
+  HomeworkItem({required this.name, required this.definition, this.fileName, required this.isSubmitable});
 }

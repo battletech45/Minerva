@@ -187,7 +187,8 @@ class _UploadHomeworkState extends State<UploadHomework> {
                   'materialURL': url,
                   'assignmentTitle': titleController.text,
                   'assignmentContent': contentController.text,
-                  'submitOpen': isChecked
+                  'submitOpen': isChecked,
+                  'pickedFileName': isDocumentExist ? pickedFile!.name : ''
                 };
                 FirebaseFunctions().createClassMaterial(widget.className, assignment, url);
                 setState(() {
