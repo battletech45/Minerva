@@ -44,6 +44,12 @@ class FirebaseFunctions {
       'teacherID': docRef.id
     });
   }
+  Future createClassMaterial(String className, String url) async {
+    var val = await getClassData(className);
+    classCollection.doc(val.docs[0].get('classID')).update({
+      'Materials': FieldValue.arrayUnion([url])
+    });
+  }
   Future<QuerySnapshot> getStudentData(String email) async {
     QuerySnapshot snapshot = await studentCollection.where('email', isEqualTo: email).get();
     return snapshot;
