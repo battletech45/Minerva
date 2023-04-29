@@ -22,6 +22,9 @@ class _UploadHomeworkState extends State<UploadHomework> {
   bool isLoading = false;
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
+  String url = '';
+  TextEditingController titleController = TextEditingController();
+  TextEditingController contentController = TextEditingController();
 
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles();
@@ -51,8 +54,8 @@ class _UploadHomeworkState extends State<UploadHomework> {
     setState(() {
       uploadTask = null;
       isLoading = false;
+      url = urlDownload;
     });
-    FirebaseFunctions().createClassMaterial(widget.className, urlDownload);
   }
 
   @override
@@ -70,8 +73,25 @@ class _UploadHomeworkState extends State<UploadHomework> {
             ),
             SizedBox(height: 20.0),
             TextFormField(
-              onChanged: (value) {},
-              validator: (value) {},
+              controller: titleController,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        width: 2, color: PageColors.mainColor)
+                ),
+                hintText: 'Enter homework title ...',
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+            ),
+            SizedBox(height: 10.0),
+            TextFormField(
+              controller: contentController,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -87,7 +107,6 @@ class _UploadHomeworkState extends State<UploadHomework> {
               maxLines: null,
               keyboardType: TextInputType.multiline,
             ),
-            SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -139,8 +158,8 @@ class _UploadHomeworkState extends State<UploadHomework> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(height: 30.0),
-                      Image.asset('assets/logo.png', width: 150, height: 150),
+                      SizedBox(height: 15.0),
+                      Image.asset('assets/logo.png', width: 125, height: 125),
                       Text('No Such File...', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
                 ],
               ),
@@ -163,7 +182,15 @@ class _UploadHomeworkState extends State<UploadHomework> {
                 'Send Assignment',
                 style: TextStyle(fontSize: 17),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Map<String, dynamic> assignment = {
+                  'materialURL': url,
+                  'assignmentTitle': titleController.text,
+                  'assignmentContent': contentController.text,
+                  'submitOpen': isChecked
+                };
+                FirebaseFunctions().createClassMaterial(widget.className, assignment, url);
+              },
             ),
             SizedBox(height: 32),
           ],
