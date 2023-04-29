@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../Control/FirebaseFunctions.dart';
 import '../../../Control/SharedFunctions.dart';
@@ -95,14 +96,35 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
                 style: TextStyle(fontSize: 18.0),
               ),
             ),
-            //homeworkItems[_selectedIndex].fileName!.isEmpty ? null : Text(homeworkItems[_selectedIndex].fileName!),
-           SizedBox(height: 10,),
+            Visibility(
+              visible: homeworkItems[_selectedIndex].isSubmitable,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(width: 10.0),
+                  Text('Homework Material', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, fontStyle: FontStyle.italic, color: PageColors.thirdColor)),
+                  SizedBox(width: 15.0),
+                  Icon(FontAwesomeIcons.arrowTurnDown)
+                ],
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Visibility(
+              visible: homeworkItems[_selectedIndex].isSubmitable,
+              child: Container(
+                width: 300,
+                  child: Text(homeworkItems[_selectedIndex].fileName!)
+              ),
+            ),
+           SizedBox(height: 20.0),
             Visibility(
               visible: homeworkItems[_selectedIndex].isSubmitable,
               child: MaterialButton(
                 height: 45,
                 minWidth: 45,
-                onPressed: (){},
+                onPressed: () {
+
+                },
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 child: Text("Submit",
                 style: TextStyle(
