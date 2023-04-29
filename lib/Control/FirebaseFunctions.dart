@@ -44,10 +44,10 @@ class FirebaseFunctions {
       'teacherID': docRef.id
     });
   }
-  Future createClassMaterial(String className, String url) async {
+  Future createClassMaterial(String className, Map<String, dynamic> data, String url) async {
     var val = await getClassData(className);
     classCollection.doc(val.docs[0].get('classID')).update({
-      'Materials': FieldValue.arrayUnion([url])
+      'Materials': FieldValue.arrayUnion([data]),
     });
   }
   Future<QuerySnapshot> getStudentData(String email) async {
