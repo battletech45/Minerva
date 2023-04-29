@@ -545,18 +545,22 @@ class selectedFileList extends StatelessWidget {
     return Container(
       height: 200,
       child: ListView(
-        scrollDirection: Axis.horizontal,
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
         children: [
-          SizedBox(width: 10),
           if (pickedFile != null)
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(FontAwesomeIcons.file, size: 50.0),
-                Text(pickedFile!.name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
-              ],
+            Container(
+              alignment: Alignment.center,
+              width: 200,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 75.0),
+                  Icon(FontAwesomeIcons.file, size: 50.0),
+                  Text(pickedFile!.name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
+                ],
+              ),
             ),
         ],
       ),

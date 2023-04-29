@@ -22,6 +22,7 @@ class _UploadMaterialState extends State<UploadMaterial> {
     if (result == null) return;
     setState(() {
       pickedFile = result.files.first;
+      isSelected = true;
     });
   }
 
@@ -50,7 +51,16 @@ class _UploadMaterialState extends State<UploadMaterial> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              selectedFileList(pickedFile: pickedFile),
+              isSelected ? selectedFileList(pickedFile: pickedFile) : Container(
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(height: 30.0),
+                      Image.asset('assets/logo.png', width: 150, height: 150),
+                      Text('No Such File...', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
+                    ],
+                  ),
+              ),
             ],
           ),
         ),

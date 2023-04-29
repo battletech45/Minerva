@@ -69,7 +69,8 @@ class _UploadHomeworkState extends State<UploadHomework> {
               validator: (value) {},
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: PageColors.mainColor)
+                    borderSide: BorderSide(
+                        width: 2, color: PageColors.mainColor)
                 ),
                 hintText: 'Enter homework content ...',
                 filled: true,
@@ -88,10 +89,12 @@ class _UploadHomeworkState extends State<UploadHomework> {
                 Checkbox(
                     value: isChecked,
                     onChanged: (value) {
-                  setState(() {
-                    isChecked = value ?? false;
-                  });}),
-                Text('Check here to create submission for this assignment...', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))
+                      setState(() {
+                        isChecked = value ?? false;
+                      });
+                    }),
+                Text('Check here to create submission for this assignment...',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))
               ],
             ),
             Row(
@@ -125,13 +128,15 @@ class _UploadHomeworkState extends State<UploadHomework> {
                 ),
               ],
             ),
-            isDocumentExist ? selectedFileList(pickedFile: pickedFile) : Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: 30.0),
-                  Image.asset('assets/logo.png', width: 150, height: 150),
-                  Text('No Such File...', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
+            isDocumentExist
+                ? selectedFileList(pickedFile: pickedFile)
+                : Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(height: 30.0),
+                      Image.asset('assets/logo.png', width: 150, height: 150),
+                      Text('No Such File...', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
                 ],
               ),
             ),
@@ -156,43 +161,9 @@ class _UploadHomeworkState extends State<UploadHomework> {
               onPressed: () {},
             ),
             SizedBox(height: 32),
-            buildProgress(),
           ],
         ),
       ),
     );
   }
-
-  //Bu buildProgress çalışmıyo sonra bakalım
-  Widget buildProgress() => StreamBuilder<TaskSnapshot>(
-      stream: uploadTask?.snapshotEvents,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final data = snapshot.data!;
-          double progress = data.bytesTransferred / data.totalBytes;
-          return SizedBox(
-            height: 50,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                LinearProgressIndicator(
-                  value: progress,
-                  backgroundColor: Colors.grey,
-                  color: Colors.green,
-                ),
-                Center(
-                  child: Text(
-                    '${100 * progress.roundToDouble()} %',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          );
-        } else {
-          return SizedBox(
-            height: 10,
-          );
-        }
-      });
 }
