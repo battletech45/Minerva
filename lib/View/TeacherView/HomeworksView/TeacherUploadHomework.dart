@@ -1,11 +1,15 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 import '../../../Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class UploadHomework extends StatefulWidget {
+  final String className;
+
+  const UploadHomework({super.key, required this.className});
 
   @override
   State<UploadHomework> createState() => _UploadHomeworkState();
@@ -32,7 +36,7 @@ class _UploadHomeworkState extends State<UploadHomework> {
     setState(() {
       isLoading = true;
     });
-    final path = 'sampleFile/${pickedFile!.name}';
+    final path = '${widget.className}/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
@@ -48,6 +52,7 @@ class _UploadHomeworkState extends State<UploadHomework> {
       uploadTask = null;
       isLoading = false;
     });
+    FirebaseFunctions().createClassMaterial(widget.className, urlDownload);
   }
 
   @override
