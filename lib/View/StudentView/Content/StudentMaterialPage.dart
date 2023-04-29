@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Control/SharedFunctions.dart';
 
 import '../../../Model/WidgetProperties.dart';
 
@@ -8,12 +10,33 @@ class StudentMaterialPage extends StatefulWidget {
 }
 
 class _StudentMaterialPageState extends State<StudentMaterialPage> {
+  
+  bool isMaterialExist = false;
+  List<String> materialURLs = [];
+  
+  _getURLs() async {
+    var email = await SharedFunctions.getUserEmailSharedPreference();
+    var student = await FirebaseFunctions().getStudentData(email!);
+    String? className = await FirebaseFunctions().findStudentsClass(student.docs[0].get('studentID'));
+    var val = await FirebaseFunctions().getClassData(className!);
+    List data = val.docs[0].get('Materials');
+    data.forEach((element) {
+      materialURLs.add(element['materialURL']);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getURLs();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        child: Column(
+        child:
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset('assets/logo.png', width: 300, height: 300),
