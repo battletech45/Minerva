@@ -17,15 +17,27 @@ class TeacherClassContentPage extends StatefulWidget {
 }
 
 class _TeacherClassContentPageState extends State<TeacherClassContentPage> {
+
   int _selectedIndex = 1;
 
-  List<Widget> _widgetOptions = <Widget>[
+  List<Widget> _widgetOptions = [
     Text('exit'),
     UploadMaterial(),
-    UploadHomework(),
     TeacherSubmissions(),
   ];
 
+  _setUpload() {
+    UploadHomework uploadHomework = UploadHomework(className: widget.className);
+    setState(() {
+      _widgetOptions.insert(2, uploadHomework);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _setUpload();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
