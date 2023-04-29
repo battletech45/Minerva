@@ -190,6 +190,14 @@ class _UploadHomeworkState extends State<UploadHomework> {
                   'submitOpen': isChecked
                 };
                 FirebaseFunctions().createClassMaterial(widget.className, assignment, url);
+                setState(() {
+                  titleController.clear();
+                  contentController.clear();
+                  isChecked = false;
+                  pickedFile = null;
+                  url = '';
+                  isDocumentExist = false;
+                });
               },
             ),
             SizedBox(height: 32),
