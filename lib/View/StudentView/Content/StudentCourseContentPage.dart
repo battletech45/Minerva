@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:minerva/View/StudentView/HomeworksView/StudentHomeWorkViewPage.dart';
 import 'package:minerva/View/StudentView/Content/StudentMaterialPage.dart';
+import '../../../Control/SharedFunctions.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class CourseContent extends StatefulWidget {
@@ -21,8 +23,23 @@ class _CourseContentState extends State<CourseContent> {
   List<Widget> _widgetOptions = <Widget>[
     Text('exit'),
     StudentHomeWorkViewPage(),
-    StudentMaterialPage()
   ];
+
+  _setMaterial() async {
+    var email = await SharedFunctions.getUserEmailSharedPreference();
+    var student = await FirebaseFunctions().getStudentData(email!);
+    String? className = await FirebaseFunctions().findStudentsClass(student.docs[0].get('studentID'));
+    StudentMaterialPage materialPage = StudentMaterialPage(className: className!);
+    setState(() {
+      _widgetOptions.insert(2, materialPage);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _setMaterial();
+  }
 
   @override
   Widget build(BuildContext context) {

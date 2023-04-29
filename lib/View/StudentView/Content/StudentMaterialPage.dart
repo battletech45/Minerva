@@ -9,6 +9,9 @@ import 'package:path_provider/path_provider.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class StudentMaterialPage extends StatefulWidget {
+  final String className;
+
+  const StudentMaterialPage({super.key, required this.className});
   @override
   State<StudentMaterialPage> createState() => _StudentMaterialPageState();
 }
@@ -41,12 +44,12 @@ class _StudentMaterialPageState extends State<StudentMaterialPage> {
     }
   }
 
-  Future<void> _downloadFile(String name) async {
+  Future<void> _downloadFile(String name, String className) async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     print(appDocDir.toString());
     File downloadToFile = File('${appDocDir.path}/$name');
     try {
-      await FirebaseStorage.instance.ref('11-A/$name').writeToFile(downloadToFile);
+      await FirebaseStorage.instance.ref('$className/$name').writeToFile(downloadToFile);
       print('downloaded');
     } catch (e) {
       print(e);
@@ -70,7 +73,7 @@ class _StudentMaterialPageState extends State<StudentMaterialPage> {
               if (materialURLs[index].isNotEmpty) {
                 return InkWell(
                   onTap: () {
-                    _downloadFile(materialName[index]);
+                    _downloadFile(materialName[index], widget.className);
                   },
                   child: Card(
                     margin: EdgeInsets.symmetric(horizontal: 18, vertical: 5),
