@@ -142,7 +142,7 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
                 ),
               ),
               Visibility(
-                visible: homeworkItems[_selectedIndex].isSubmitable,
+                visible: homeworkItems[_selectedIndex].fileName!.isNotEmpty,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
@@ -155,7 +155,7 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
               ),
               SizedBox(height: 10.0),
               Visibility(
-                visible: homeworkItems[_selectedIndex].isSubmitable,
+                visible: homeworkItems[_selectedIndex].fileName!.isNotEmpty,
                 child: Container(
                   width: 300,
                     child: Text(homeworkItems[_selectedIndex].fileName!)
@@ -185,6 +185,17 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
                   onPressed: () async {
                     await selectFile();
                     await uploadFile();
+                    var name = await SharedFunctions.getUserNameSharedPreference();
+                    var email = await SharedFunctions.getUserEmailSharedPreference();
+                    var student = await FirebaseFunctions().getStudentData(email!);
+                    String? className = await FirebaseFunctions().findStudentsClass(student.docs[0].get('studentID'));
+                    Map<String, dynamic> data = {
+                      'studentName': name,
+                      'fileName': pickedFile!.name,
+                      'homeworkName': homeworkItems[_selectedIndex].name
+                    };
+                    await FirebaseFunctions().addStudentToSubmittedList(className!, data);
+                    print('finish');
                   },
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   child: Text(isSelected ? isLoading ? 'Uploading' : isLoaded ? 'Uploaded' : 'Upload File' : "Choose File",
