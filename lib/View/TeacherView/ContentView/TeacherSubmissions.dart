@@ -1,117 +1,86 @@
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dart:io';
 
-import '../../../Model/WidgetProperties.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:path_provider/path_provider.dart';
 
 class TeacherSubmissions extends StatefulWidget {
-  const TeacherSubmissions({Key? key}) : super(key: key);
+  final String className;
+  const TeacherSubmissions({Key? key, required this.className}) : super(key: key);
 
   @override
   State<TeacherSubmissions> createState() => _TeacherSubmissionsState();
 }
 
 class _TeacherSubmissionsState extends State<TeacherSubmissions> {
-  List<String> _students = ['Student1', 'Student 2', 'Student 3'];
-  String _feedback = '';
-  List <String> _files = [];
+  List _students = [];
 
-  void _addFile(String fileName) {
+  Future<void> _downloadFile(String name, String className) async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    print(appDocDir.toString());
+    File downloadToFile = File('${appDocDir.path}/$name');
+    try {
+      await FirebaseStorage.instance.ref('$className/submissions/$name').writeToFile(downloadToFile);
+      print('downloaded');
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  _getSubmissions() async {
+    var val = await FirebaseFunctions().getClassData(widget.className);
     setState(() {
-      _files.add(fileName);
+      _students = val.docs[0].get('submittedStudents');
     });
+    print(_students);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getSubmissions();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: _students.map((String student) {
-            return Card(
-              color: Colors.grey[100],
-              child: ExpansionTile(
-                title: Text(
-                  student,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                    color: Colors.blueGrey[800],
-                  ),
-                ),
-                children: <Widget>[
-                  ListTile(
+        child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: _students.length,
+            itemBuilder: (context, index) {
+                return Card(
+                  color: Colors.grey[100],
+                  child: ExpansionTile(
                     title: Text(
-                      'Homework',
+                      _students[index]['studentName'],
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        color: Colors.blueGrey[700],
+                        fontSize: 18.0,
+                        color: Colors.blueGrey[800],
                       ),
                     ),
-                    trailing: Icon(Icons.attach_file),
-                    onTap: (){
-                      FilePicker.platform.pickFiles().then((result) {
-                        if (result != null) {
-                          String fileName = result.files.single.name;
-                          _addFile(fileName);
-                        }
-                      });
-                    },
-                  ),
-                  ListTile(
-                    title: IconButton(
-                      icon: Icon(FontAwesomeIcons.comments),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              content: TextFormField(
-                                maxLines: null,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _feedback = value;
-                                  });
-                                },
-                                decoration: InputDecoration(
-                                  labelText: 'Feedback',
-                                  hintText: 'Type your feedback here...',
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: Text('Save',style: TextStyle(color: PageColors.mainColor),),
-                                  onPressed: () {
-
-                                    Navigator.of(context).pop();
-
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                  _feedback.isNotEmpty
-                      ? ListTile(
-                    title: Text(
-                      'Feedback: $_feedback',
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.blueGrey[400],
+                    children: <Widget>[
+                      ListTile(
+                        title: Text(
+                          _students[index]['homeworkName'],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                            color: Colors.blueGrey[700],
+                          ),
+                        ),
+                        trailing: Icon(Icons.attach_file),
+                        onTap: () async {
+                          _downloadFile(_students[index]['fileName'], widget.className);
+                        },
                       ),
-                    ),
-                  )
-                      : Container(),
-                ],
-              ),
-            );
-          }).toList(),
-        ),
+                    ],
+                  ),
+                );
+              }
+            )
       ),
     );
   }

@@ -23,13 +23,14 @@ class _TeacherClassContentPageState extends State<TeacherClassContentPage> {
   List<Widget> _widgetOptions = [
     Text('exit'),
     UploadMaterial(),
-    TeacherSubmissions(),
   ];
 
   _setUpload() {
     UploadHomework uploadHomework = UploadHomework(className: widget.className);
+    TeacherSubmissions teacherSubmissions = TeacherSubmissions(className: widget.className);
     setState(() {
       _widgetOptions.insert(2, uploadHomework);
+      _widgetOptions.insert(3, teacherSubmissions);
     });
   }
 
