@@ -45,10 +45,16 @@ class FirebaseFunctions {
       'teacherID': docRef.id
     });
   }
-  Future createClassMaterial(String className, Map<String, dynamic> data, String url) async {
+  Future createClassMaterial(String className, Map<String, dynamic> data) async {
     var val = await getClassData(className);
     classCollection.doc(val.docs[0].get('classID')).update({
       'Materials': FieldValue.arrayUnion([data]),
+    });
+  }
+  Future addStudentToSubmittedList(String className, Map<String, dynamic> data) async {
+    var val = await getClassData(className);
+    classCollection.doc(val.docs[0].get('classID')).update({
+      'submittedStudents': FieldValue.arrayUnion([data]),
     });
   }
   Future<String?> findStudentsClass(String studentID) async {
