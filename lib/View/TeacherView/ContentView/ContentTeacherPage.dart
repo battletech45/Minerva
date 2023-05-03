@@ -52,18 +52,6 @@ class _ContentTeacherPageState extends State<ContentTeacherPage> {
                   padding: const EdgeInsets.symmetric(
                     horizontal: 40.0,
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 25.0),
-                      Text("Weekly Schedule",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)
-                      ),
-                      SizedBox(height: 20.0),
-                      Icon(FontAwesomeIcons.calendar, color: PageColors.thirdColor, size: 50.0),
-                      SizedBox(height: 20.0),
-                    ],
-                  ),
                 ),
               ),
             ),
