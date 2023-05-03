@@ -131,8 +131,8 @@ class _UploadHomeworkState extends State<UploadHomework> {
                     style: TextStyle(fontSize: 16),
                   ),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: PageColors.thirdColor,
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                      backgroundColor: PageColors.mainColor,
+                     padding: EdgeInsets.symmetric(vertical:10,horizontal: 11),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       )),
@@ -144,8 +144,8 @@ class _UploadHomeworkState extends State<UploadHomework> {
                     style: TextStyle(fontSize: 16),
                   ),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: PageColors.thirdColor,
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                      backgroundColor: PageColors.mainColor,
+                     padding: EdgeInsets.symmetric(vertical:10,horizontal: 11),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       )),
