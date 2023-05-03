@@ -634,7 +634,7 @@ class _customEditCheckBoxListTileState extends State<customEditCheckBoxListTile>
       onChanged: (val) {
         widget.onPressed(hours);
         setState(() {
-          widget.selected = val!;
+          widget.selected = !widget.selected;
         });
         widget.onChange();
       },
@@ -653,13 +653,18 @@ class customEditExpansionPanel extends StatefulWidget {
 
 class _customEditExpansionPanelState extends State<customEditExpansionPanel> {
   bool isSelected = false;
+  int selectedCheckboxIndex =-1;
   List<bool> selections = [false, false, false];
 
   _deselectOthers(int index) {
     print('here');
       selections = List.filled(selections.length, false, growable: true);
       setState(() {
-        selections[index] = true;
+        if (selectedCheckboxIndex == index) {
+          selectedCheckboxIndex = -1;
+        } else {
+          selectedCheckboxIndex = index;
+        }
       });
       print(selections);
   }
@@ -674,9 +679,9 @@ class _customEditExpansionPanelState extends State<customEditExpansionPanel> {
         ),
       trailing: Icon(isSelected ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
       children: <Widget>[
-        customEditCheckBoxListTile(hours: "One Hour  ", onPressed: widget.function, selected: selections[0], onChange: () => _deselectOthers(0)),
-        customEditCheckBoxListTile(hours: "Two Hour  ", onPressed: widget.function, selected: selections[1], onChange: () =>_deselectOthers(1)),
-        customEditCheckBoxListTile(hours: "Three Hour", onPressed: widget.function, selected: selections[2], onChange: () => _deselectOthers(2)),
+        customEditCheckBoxListTile(hours: "One Hour  ", onPressed: widget.function, selected: selectedCheckboxIndex == 0, onChange: () => _deselectOthers(0)),
+        customEditCheckBoxListTile(hours: "Two Hour  ", onPressed: widget.function, selected: selectedCheckboxIndex == 1, onChange: () =>_deselectOthers(1)),
+        customEditCheckBoxListTile(hours: "Three Hour", onPressed: widget.function, selected: selectedCheckboxIndex == 2, onChange: () => _deselectOthers(2)),
       ],
       onExpansionChanged: (bool val) {
           setState(() {
