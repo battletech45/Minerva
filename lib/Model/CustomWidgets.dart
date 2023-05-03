@@ -780,23 +780,31 @@ class _customAlertState extends State<customAlert> {
 
   int currentIndex = 0;
   int surveyOptionCount = 2;
+  bool isHomeWorkExist = false;
+  bool isSelected = false;
+  bool isLoading = false;
+  bool isLoaded = false;
   TextEditingController surveyTitleController = TextEditingController();
   TextEditingController paragraphController = TextEditingController();
+  List<TextEditingController> controllers = List.generate(2, (index) => TextEditingController());
   List<String> controllerValues = [];
   PlatformFile? pickedFile;
   String link = '';
   UploadTask? uploadTask;
-  List<TextEditingController> controllers = List.generate(2, (index) => TextEditingController());
 
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles();
     if (result == null) return;
     setState(() {
       pickedFile = result.files.first;
+      isSelected = true;
     });
   }
 
   Future uploadFile() async {
+    setState(() {
+      isLoading = true;
+    });
     final path = 'contents/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
 
@@ -811,6 +819,8 @@ class _customAlertState extends State<customAlert> {
     setState(() {
       link = urlDownload;
       uploadTask = null;
+      isLoading = false;
+      isLoaded = true;
     });
   }
 
@@ -845,7 +855,7 @@ class _customAlertState extends State<customAlert> {
             controllerValues.add(controllers[i].text);
           }
           survey.update('surveyOptions', (value) => FieldValue.arrayUnion(controllerValues));
-          FirebaseFunctions().sendContent(survey);
+          await FirebaseFunctions().sendContent(survey);
           Navigator.of(context).pop();
         }
         if(currentIndex == 1) {
@@ -856,7 +866,7 @@ class _customAlertState extends State<customAlert> {
             'contentType': 'Image',
             'imageURL': link
           };
-          FirebaseFunctions().sendContent(Image);
+          await FirebaseFunctions().sendContent(Image);
           Navigator.of(context).pop();
         }
         if(currentIndex == 2) {
@@ -866,7 +876,7 @@ class _customAlertState extends State<customAlert> {
             'contentType': 'Text',
             'paragraph': paragraphController.text,
           };
-          FirebaseFunctions().sendContent(paragraph);
+          await FirebaseFunctions().sendContent(paragraph);
           Navigator.of(context).pop();
         }
       },
@@ -957,7 +967,7 @@ class _customAlertState extends State<customAlert> {
               ),
             ),
             SizedBox(height: 20.0),
-            Text('To Select Your Image Press Here ...', style: TextStyle(fontWeight: FontWeight.bold))
+            Text(isSelected ? isLoading ? isLoaded ? 'Loaded...' : 'Loading...' : 'Uploaded' : 'To Select Your Image Press Here ...', style: TextStyle(fontWeight: FontWeight.bold))
           ],
         ),
       ),
