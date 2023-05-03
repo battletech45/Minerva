@@ -828,20 +828,22 @@ class _customAlertState extends State<customAlert> {
   Widget build(BuildContext context) {
 
     Widget cancelButton = MaterialButton(
-      child: Text("Cancel"),
+      padding: EdgeInsets.symmetric(vertical:12,horizontal: 20),
+      child: Text("Cancel",style: TextStyle(fontSize: 16,color: Colors.white),),
       elevation: 5.0,
-      color: PageColors.thirdColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+      color: PageColors.mainColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       onPressed: () {
         Navigator.of(context).pop();
       },
     );
 
     Widget createButton = MaterialButton(
-      child: Text("Create"),
+      padding: EdgeInsets.symmetric(vertical:12,horizontal: 20),
+      child: Text("Create",style: TextStyle(fontSize: 16,color: Colors.white)),
       elevation: 5.0,
-      color: PageColors.thirdColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+      color: PageColors.mainColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       onPressed: () async {
         if(currentIndex == 0) {
           var val = await SharedFunctions.getUserNameSharedPreference();
