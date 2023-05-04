@@ -39,31 +39,6 @@ class _ContentStudentState extends State<ContentStudent> {
         ),
         body: Column(
           children: [
-            GestureDetector(
-              onTap: () =>   Navigator.of(context).push(MaterialPageRoute(builder: (context) => StudentWeeklySchedule())),
-              child: Card(
-                elevation: 6,
-                shape: CustomBorders.mainBorder,
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:40.0 ,),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 25.0),
-                      Text("Weekly Schedule",
-                          textAlign: TextAlign.center,
-                          style:
-                             TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                      SizedBox(height: 20.0),
-                      Icon(FontAwesomeIcons.calendar,
-                          color: PageColors.thirdColor, size: 50.0),
-                           SizedBox(height: 20.0),   
-                    ],
-                  ),
-                ),
-              ),
-            ),
-           
             GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
