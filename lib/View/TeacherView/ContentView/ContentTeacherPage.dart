@@ -42,19 +42,6 @@ class _ContentTeacherPageState extends State<ContentTeacherPage> {
         ),
         body: Column(
           children: [
-            GestureDetector(
-              // onTap: () =>   Navigator.of(context).push(MaterialPageRoute(builder: (context) => StudentWeeklySchedule())),
-              child: Card(
-                elevation: 6,
-                shape: CustomBorders.mainBorder,
-                margin: EdgeInsets.symmetric(horizontal: 18, vertical: 20),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                  ),
-                ),
-              ),
-            ),
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
