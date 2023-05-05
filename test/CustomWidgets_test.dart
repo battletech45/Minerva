@@ -202,9 +202,70 @@ void main() {
       });
 
 
+    //customCheckBoxListTile 
+testWidgets('checkbox should update selected class', (WidgetTester tester) async {
+      // Arrange
+      final classes = ['Class A', 'Class B', 'Class C'];
+      String? selectedClass;
+      Function callback = (String? value) => selectedClass = value;
 
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: customCheckBoxListTile(
+            classes: classes,
+            index: 1,
+            function: callback,
+          ),
+        ),
+      ));
 
+      // Act
+      await tester.tap(find.byType(CheckboxListTile));
+      await tester.pumpAndSettle();
 
+      // Assert
+      expect(selectedClass, classes[1]);
+    });
+
+    //customEditCheckBoxListTile
+testWidgets('customEditCheckBoxListTile widget should work', (WidgetTester tester) async {
+  // Define the widget under test
+  await tester.pumpWidget(MaterialApp(
+    home: Scaffold(
+      body: customEditCheckBoxListTile(
+        hours: '10:00 AM - 12:00 PM',
+        selected: false,
+        onPressed: (String hours) {},
+        onChange: () {},
+      ),
+    ),
+  ));
+
+  // Verify that the checkbox tile is displayed
+  expect(find.byType(CheckboxListTile), findsOneWidget);
+
+  // Verify that the hours are displayed
+  expect(find.text('10:00 AM - 12:00 PM'), findsOneWidget);
+
+  // Verify that the checkbox is unchecked initially
+  expect(tester.widget<CheckboxListTile>(find.byType(CheckboxListTile)).value, false);
+
+  // Tap the checkbox
+  await tester.tap(find.byType(CheckboxListTile));
+  await tester.pump();
+
+  // Verify that the onPressed and onChange functions are called and the checkbox is checked
+  expect(tester.widget<CheckboxListTile>(find.byType(CheckboxListTile)).value, true);
+});
+
+    //customCourseGrid
+testWidgets('customCourseGrid displays course name and book icon', (WidgetTester tester) async {
+  final String courseName = 'Mathematics';
+  await tester.pumpWidget(MaterialApp(home: customCourseGrid(courseName: courseName)));
+  
+  expect(find.text(courseName), findsOneWidget);
+  expect(find.byIcon(FontAwesomeIcons.bookOpen), findsOneWidget);
+});
 
 
 }
