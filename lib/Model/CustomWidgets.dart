@@ -859,6 +859,8 @@ class _customAlertState extends State<customAlert> {
           survey.update('surveyOptions', (value) => FieldValue.arrayUnion(controllerValues));
           await FirebaseFunctions().sendContent(survey);
           Navigator.of(context).pop();
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => HomePage()));
         }
         if(currentIndex == 1) {
           print('this is link' + link);
@@ -870,6 +872,8 @@ class _customAlertState extends State<customAlert> {
           };
           await FirebaseFunctions().sendContent(Image);
           Navigator.of(context).pop();
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => HomePage()));
         }
         if(currentIndex == 2) {
           var val = await SharedFunctions.getUserNameSharedPreference();
@@ -880,6 +884,8 @@ class _customAlertState extends State<customAlert> {
           };
           await FirebaseFunctions().sendContent(paragraph);
           Navigator.of(context).pop();
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => HomePage()));
         }
       },
     );
