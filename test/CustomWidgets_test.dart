@@ -441,6 +441,29 @@ testWidgets('customCourseGrid displays course name and book icon', (WidgetTester
     expect(find.byType(customAlert), findsNothing);
   });
 
+  //customEditExpansionPanel
+  testWidgets('customEditExpansionPanel test', (WidgetTester tester) async {
+    void _testFunction() {
+
+    }
+    await tester.pumpWidget(MaterialApp(home: Scaffold(
+      body: ListView(
+        children: [
+          customEditExpansionPanel(name: 'test', function: () => _testFunction())
+        ],
+      ),
+    )
+    )
+    );
+
+    final expansionTileFinder = find.widgetWithText(ExpansionTile, 'test');
+    expect(expansionTileFinder, findsOneWidget);
+
+    await tester.tap(expansionTileFinder);
+    await tester.pumpAndSettle();
+    expect(find.byType(customEditExpansionPanel), findsOneWidget);
+  });
+
   
 }
 

@@ -679,9 +679,9 @@ class _customEditExpansionPanelState extends State<customEditExpansionPanel> {
         ),
       trailing: Icon(isSelected ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
       children: <Widget>[
-        customEditCheckBoxListTile(hours: "One Hour  ", onPressed: widget.function, selected: selectedCheckboxIndex == 0, onChange: () => _deselectOthers(0)),
-        customEditCheckBoxListTile(hours: "Two Hour  ", onPressed: widget.function, selected: selectedCheckboxIndex == 1, onChange: () =>_deselectOthers(1)),
-        customEditCheckBoxListTile(hours: "Three Hour", onPressed: widget.function, selected: selectedCheckboxIndex == 2, onChange: () => _deselectOthers(2)),
+        customEditCheckBoxListTile(hours: "1  ", onPressed: widget.function, selected: selectedCheckboxIndex == 0, onChange: () => _deselectOthers(0)),
+        customEditCheckBoxListTile(hours: "2  ", onPressed: widget.function, selected: selectedCheckboxIndex == 1, onChange: () =>_deselectOthers(1)),
+        customEditCheckBoxListTile(hours: "3  ", onPressed: widget.function, selected: selectedCheckboxIndex == 2, onChange: () => _deselectOthers(2)),
       ],
       onExpansionChanged: (bool val) {
           setState(() {
