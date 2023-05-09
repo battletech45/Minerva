@@ -1,7 +1,12 @@
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
+import 'package:minerva/Model/WidgetProperties.dart';
+import 'package:minerva/View/HomePage.dart';
+
 
 void main() {
 
@@ -268,7 +273,179 @@ testWidgets('customCourseGrid displays course name and book icon', (WidgetTester
 });
 
 
+   // selectedFileList
+  testWidgets('should display file name when a file is selected', (WidgetTester tester) async {
+    // Arrange
+    final pickedFile = PlatformFile(
+      name: 'test_file.jpg',
+      size: 1024,
+      path: '/path/to/test_file.jpg',
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: selectedFileList(pickedFile: pickedFile),
+        ),
+      ),
+    );
+
+    // Act
+    final fileTextFinder = find.text('test_file.jpg');
+
+    // Assert
+    expect(fileTextFinder, findsOneWidget);
+  });
+
+  testWidgets('should display file icon when a file is selected', (WidgetTester tester) async {
+    // Arrange
+    final pickedFile = PlatformFile(
+      name: 'test_file.jpg',
+      size: 1024,
+      path: '/path/to/test_file.jpg',
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: selectedFileList(pickedFile: pickedFile),
+        ),
+      ),
+    );
+
+    // Act
+    final fileIconFinder = find.byIcon(FontAwesomeIcons.file);
+
+    // Assert
+    expect(fileIconFinder, findsOneWidget);
+  });
+
+  testWidgets('should not display anything when no file is selected', (WidgetTester tester) async {
+    // Arrange
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: selectedFileList(pickedFile: null),
+        ),
+      ),
+    );
+
+    // Act
+    final fileIconFinder = find.byIcon(FontAwesomeIcons.file);
+    final fileTextFinder = find.text('');
+
+    // Assert
+    expect(fileIconFinder, findsNothing);
+    expect(fileTextFinder, findsNothing);
+  });
+
+
+
+  //customAnnouncementCard
+  testWidgets('customAnnouncementCard should display teacher name and announcement content', (WidgetTester tester) async {
+    // Arrange
+    const teacherName = 'Baybars Arslan';
+    const announcementContent = 'Hello Students.';
+
+    // Act
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: customAnnouncementCard(
+            teacherName: teacherName,
+            announcementContent: announcementContent,
+          ),
+        ),
+      ),
+    );
+
+    // Assert
+    expect(find.text(teacherName), findsOneWidget);
+    expect(find.text(announcementContent), findsOneWidget);
+  });
+
+  testWidgets('customAnnouncementCard should display teacher icon', (WidgetTester tester) async {
+    // Arrange
+    const teacherName = 'Baybars Arslan';
+    const announcementContent = 'hello students.';
+
+    // Act
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: customAnnouncementCard(
+            teacherName: teacherName,
+            announcementContent: announcementContent,
+          ),
+        ),
+      ),
+    );
+
+    // Assert
+    expect(find.byIcon(Icons.person), findsOneWidget);
+  });
+
+  testWidgets('customAnnouncementCard should have secondary color', (WidgetTester tester) async {
+    // Arrange
+    const teacherName = 'Baybars Arslan';
+    const announcementContent = 'hello students.';
+
+    // Act
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: customAnnouncementCard(
+            teacherName: teacherName,
+            announcementContent: announcementContent,
+          ),
+        ),
+      ),
+    );
+
+    // Assert
+    final card = tester.widget<Card>(find.byType(Card));
+    expect(card.color, equals(PageColors.secondaryColor));
+  });
+
+  testWidgets('customAnnouncementCard should have border radius of 10', (WidgetTester tester) async {
+    // Arrange
+    const teacherName = 'Baybars Arslan';
+    const announcementContent = 'hello students.';
+
+    // Act
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: customAnnouncementCard(
+            teacherName: teacherName,
+            announcementContent: announcementContent,
+          ),
+        ),
+      ),
+    );
+
+    // Assert
+    final card = tester.widget<Card>(find.byType(Card));
+    expect(card.shape, equals(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))));
+  });
+
+  //customAlert
+  testWidgets('customAlertState cancelButton test', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: customAlert()));
+
+    // Find the cancel button
+    final cancelButtonFinder = find.widgetWithText(MaterialButton, 'Cancel');
+    expect(cancelButtonFinder, findsOneWidget);
+
+    // Tap the cancel button and verify that it pops the alert dialog
+    await tester.tap(cancelButtonFinder);
+    await tester.pumpAndSettle();
+    expect(find.byType(customAlert), findsNothing);
+  });
+
+  
 }
+
+
+
 
 
 
