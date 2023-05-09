@@ -464,7 +464,23 @@ testWidgets('customCourseGrid displays course name and book icon', (WidgetTester
     expect(find.byType(customEditExpansionPanel), findsOneWidget);
   });
 
-  
+  //customClassListCheckboxBuilder
+  testWidgets('customClassListCheckBoxBuilder', (WidgetTester tester) async {
+
+    final classes = ['Class A', 'Class B', 'Class C'];
+    void _testFunction() {
+
+    }
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: customClassListCheckboxBuilder(classes: classes, function: () => _testFunction()),
+      ),
+    ));
+    await tester.tap(find.byType(customClassListCheckboxBuilder));
+    await tester.pumpAndSettle();
+    expect(find.text(''), findsNothing);
+  });
+
 }
 
 
