@@ -136,7 +136,7 @@ void main() {
   testWidgets('Test whether customContentFeed displays text', (WidgetTester tester) async {
     // Create a customContentFeed widget with a text content
     final customFeed = customContentFeed(
-      userName: 'John Doe',
+      userName: 'Baybars Arslan',
       content: 'This is a text content',
     );
 
@@ -144,7 +144,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: customFeed)));
 
     // Verify that the user name is displayed
-    expect(find.text('John Doe'), findsOneWidget);
+    expect(find.text('Baybars Arslan '), findsOneWidget);
 
     // Verify that the text content is displayed
     expect(find.text('This is a text content'), findsOneWidget);
