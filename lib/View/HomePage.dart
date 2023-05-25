@@ -19,26 +19,15 @@ class _HomePage extends State<HomePage> {
   bool isStudent = true;
   Map<String, List<Question>?> dummyMap = {};
   List<dynamic> dummyList = [];
-  List<Image> dummyImages = [];
   QuerySnapshot? contents;
   List<Widget> allContents = [];
-  String link = '';
   Image? data;
-  int imageCount = 0;
-
 
   _checkUserIsStudent() async {
     bool? isData = await SharedFunctions.getUserStudentSharedPreference();
     setState(() {
       isStudent = isData!;
     });
-  }
-  _updateCounter() async {
-    if(imageCount < dummyImages.length - 1) {
-      setState(() {
-        imageCount = imageCount + 1;
-      });
-    }
   }
   _getImage(String url) async {
     setState(() {
@@ -90,7 +79,6 @@ class _HomePage extends State<HomePage> {
                     ],
                   ),
                   contentID: element.get('contentID'),
-                  likeCounter: () => {},
                 )
             );
           });
@@ -102,7 +90,6 @@ class _HomePage extends State<HomePage> {
                   userName: element.get('sender'),
                   content: element.get('paragraph'),
                   contentID: element.get('contentID'),
-                  likeCounter: () => {},
                 )
             );
           });
@@ -114,9 +101,7 @@ class _HomePage extends State<HomePage> {
                 customContentFeed(
                   userName: element.get('sender'),
                   content: data,
-                  function: () => _updateCounter(),
                   contentID: element.get('contentID'),
-                  likeCounter: () => {},
                 )
             );
           });
