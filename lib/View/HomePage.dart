@@ -20,7 +20,8 @@ class _HomePage extends State<HomePage> {
   Map<String, List<Question>?> dummyMap = {};
   List<dynamic> dummyList = [];
   List<Image> dummyImages = [];
-  Stream<QuerySnapshot>? contents;
+  QuerySnapshot? contents;
+  List<Widget> allContents = [];
   String link = '';
   Image? data;
   int imageCount = 0;
@@ -39,20 +40,17 @@ class _HomePage extends State<HomePage> {
       });
     }
   }
-  _getImage() async {
+  _getImage(String url) async {
     setState(() {
       isLoading = true;
     });
-    List<String> dummyUrls = await FirebaseFunctions().getAllImageURLs();
-    dummyUrls.forEach((element) {
       setState(() {
         data = Image.network(
-          element,
+          url,
           fit: BoxFit.fill,
         );
-        dummyImages.add(data!);
       });
-    });
+      
     setState(() {
       isLoading = false;
     });
@@ -64,17 +62,82 @@ class _HomePage extends State<HomePage> {
       contents = val;
     });
   }
+  _createAllContent() async {
+    setState(() {
+      isLoading = true;
+    });
+    await _getAllContent();
+    bool available = await contents!.docs.isNotEmpty;
+    if(available) {
+      contents!.docs.forEach((element) {
+        if(element.get('contentType') == 'Survey') {
+          dummyList.clear();
+          dummyList = element.get('surveyOptions');
+          dummyMap.clear();
+          for(int i = 0; i < dummyList.length; i++) {
+            dummyMap[dummyList[i]] = null;
+          }
+          setState(() {
+            allContents.add(
+                customContentFeed(
+                  userName: element.get('sender'),
+                  content: Survey(
+                    initialData: [
+                      Question(
+                        question: element.get('surveyTitle'),
+                        answerChoices: dummyMap,
+                      )
+                    ],
+                  ),
+                  contentID: element.get('contentID'),
+                  likeCounter: () => {},
+                )
+            );
+          });
+        }
+        if(element.get('contentType') == 'Text') {
+          setState(() {
+            allContents.add(
+                customContentFeed(
+                  userName: element.get('sender'),
+                  content: element.get('paragraph'),
+                  contentID: element.get('contentID'),
+                  likeCounter: () => {},
+                )
+            );
+          });
+        }
+        if(element.get('contentType') == 'Image') {
+          _getImage(element.get('imageURL'));
+          setState(() {
+            allContents.add(
+                customContentFeed(
+                  userName: element.get('sender'),
+                  content: data,
+                  function: () => _updateCounter(),
+                  contentID: element.get('contentID'),
+                  likeCounter: () => {},
+                )
+            );
+          });
+        }
+      });
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
   
   @override
   void initState() {
     super.initState();
-    _getAllContent();
     _checkUserIsStudent();
-    _getImage();
+    _createAllContent();
   }
 
   @override
   Widget build(BuildContext context) {
+    //initState suresinde tum postlari yarat ve bir liste icine al sonra goster
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -85,46 +148,14 @@ class _HomePage extends State<HomePage> {
         ),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
-          child: StreamBuilder<QuerySnapshot>(
-            stream: contents,
-            builder: (context, snapshot) {
-              return snapshot.hasData ? ListView.builder(
-                physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  if(snapshot.data!.docs[index].get('contentType') == 'Text') {
-                    return customContentFeed(
-                        userName: snapshot.data!.docs[index].get('sender'),
-                        content: snapshot.data!.docs[index].get('paragraph')
-                    );
-                  }
-                  if(snapshot.data!.docs[index].get('contentType') == 'Survey') {
-                    dummyList.clear();
-                    dummyList = snapshot.data!.docs[index].get('surveyOptions');
-                    dummyMap.clear();
-                      for(int i = 0; i < dummyList.length; i++) {
-                        dummyMap[dummyList[i]] = null;
-                      }
-                    return customContentFeed(
-                        userName: snapshot.data!.docs[index].get('sender'),
-                        content: Survey(
-                          initialData: [
-                            Question(
-                              question: snapshot.data!.docs[index].get('surveyTitle'),
-                              answerChoices: dummyMap,
-                            )
-                          ],
-                        )
-                    );
-                  }
-                  if(snapshot.data!.docs[index].get('contentType') == 'Image') {
-                    return isLoading ? CircularProgressIndicator() : customContentFeed(userName: snapshot.data!.docs[index].get('sender'), content: dummyImages[imageCount], function: () => _updateCounter());
-                  }
-                },
-              ) : CircularProgressIndicator();
-            }
-          ),
+          child: allContents.isNotEmpty ? ListView.builder(
+            physics: BouncingScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: allContents.length,
+            itemBuilder: (context, index) {
+              return allContents[index];
+            },
+          ) : CircularProgressIndicator(),
         ),
         drawer: customDrawer(),
         floatingActionButton: Visibility(

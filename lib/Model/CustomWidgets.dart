@@ -279,10 +279,12 @@ class _customAttendanceCardState extends State<customAttendanceCard> {
 
 class customContentFeed extends StatefulWidget {
   final String userName;
+  final String contentID;
   final dynamic content;
   Function? function;
+  final Function likeCounter;
 
-  customContentFeed({Key? key, required this.userName, required this.content, this.function}) : super(key: key);
+  customContentFeed({Key? key, required this.userName, required this.content, this.function, required this.likeCounter, required this.contentID}) : super(key: key);
   @override
   State<customContentFeed> createState() => _customContentFeedState();
 }
@@ -291,6 +293,20 @@ class _customContentFeedState extends State<customContentFeed> {
 
   bool click = false;
   int likeCounter = 0;
+
+  _getLikeCount(String contentID) async {
+    var content = await FirebaseFunctions().getContent(contentID);
+    var val = content.docs[0].get('likeCount');
+    setState(() {
+      likeCounter = val;
+    });
+  }
+  _increaseCounter() async {
+    setState(() {
+      likeCounter++;
+    });
+    await FirebaseFunctions().incrementLikeCounter(widget.contentID, likeCounter);
+  }
 
   _defineContentsType(dynamic content) {
     if(content is String) {
@@ -357,6 +373,7 @@ class _customContentFeedState extends State<customContentFeed> {
   @override
   void initState() {
     super.initState();
+    _getLikeCount(widget.contentID);
   }
 
   @override
@@ -381,9 +398,6 @@ class _customContentFeedState extends State<customContentFeed> {
           ],
         ),
         _defineContentsType(widget.content),
-        /*
-        
-        */
         Row(
           children: [
             Padding(
@@ -402,13 +416,13 @@ class _customContentFeedState extends State<customContentFeed> {
                     onPressed: () {
                       setState(() {
                         click = !click;
+                      });
                         if(click==true){
-                          likeCounter++;
+                          _increaseCounter();
                         }
                         else{
-                          likeCounter--;
+
                         }
-                      });
                     }),
                      SizedBox(width: 10,),
                      Container(

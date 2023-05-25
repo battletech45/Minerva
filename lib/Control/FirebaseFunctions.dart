@@ -55,6 +55,11 @@ class FirebaseFunctions {
       'submittedStudents': FieldValue.arrayUnion([data]),
     });
   }
+  Future incrementLikeCounter(String contentID, int count) async {
+    contentsCollection.doc(contentID).update({
+      'likeCount': count
+    });
+  }
   Future<String?> findStudentsClass(String studentID) async {
     QuerySnapshot snapshot = await getAllClasses();
     for(int i =  0; i < snapshot.size; i++) {
@@ -77,6 +82,11 @@ class FirebaseFunctions {
     QuerySnapshot snapshot = await classCollection.where('className', isEqualTo: className).get();
     return snapshot;
   }
+  Future<QuerySnapshot> getContent(String contentID) async {
+    QuerySnapshot snapshot = await contentsCollection.where('contentID', isEqualTo: contentID).get();
+    return snapshot;
+  }
+
   Future<QuerySnapshot> getTeacherData(String email) async {
     QuerySnapshot snapshot = await teacherCollection.where('email', isEqualTo: email).get();
     return snapshot;
@@ -96,8 +106,8 @@ class FirebaseFunctions {
   Future<QuerySnapshot> getAllClasses() async {
     return classCollection.get();
   }
-  Future<Stream<QuerySnapshot>> getAllContents() async {
-    return contentsCollection.snapshots();
+  Future<QuerySnapshot> getAllContents() async {
+    return contentsCollection.get();
   }
   Future<List<String>> getAllImageURLs() async {
     var val = await contentsCollection.get();
