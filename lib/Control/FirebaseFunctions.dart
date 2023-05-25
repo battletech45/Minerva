@@ -55,9 +55,15 @@ class FirebaseFunctions {
       'submittedStudents': FieldValue.arrayUnion([data]),
     });
   }
-  Future incrementLikeCounter(String contentID, int count) async {
+  Future updateLikeCounter(String contentID, int count, String userID) async {
     contentsCollection.doc(contentID).update({
-      'likeCount': count
+      'likeCount': count,
+      'whoLiked': FieldValue.arrayUnion([userID])
+    });
+  }
+  Future deleteUserFromLikedList(String contentID, String userID) async {
+    contentsCollection.doc(contentID).update({
+      'whoLiked': FieldValue.arrayRemove([userID])
     });
   }
   Future<String?> findStudentsClass(String studentID) async {

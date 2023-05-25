@@ -50,12 +50,14 @@ class _customDrawerState extends State<customDrawer> {
       var student = await FirebaseFunctions().getStudentData(mail!);
       setState(() {
         userNumber = student.docs[0].get('studentNumber');
+        userID = student.docs[0].get('studentID');
       });
     }
     else {
       var teacher = await FirebaseFunctions().getTeacherData(mail!);
       setState(() {
         userNumber = teacher.docs[0].get('teacherNumber');
+        userID = teacher.docs[0].get('teacherID');
       });
     }
   }
@@ -289,6 +291,8 @@ class customContentFeed extends StatefulWidget {
 
 class _customContentFeedState extends State<customContentFeed> {
 
+  String userID = '';
+  bool isStudent = false;
   bool click = false;
   int likeCounter = 0;
 
@@ -298,12 +302,45 @@ class _customContentFeedState extends State<customContentFeed> {
     setState(() {
       likeCounter = val;
     });
+    await getUserInfos();
+    List data = content.docs[0].get('whoLiked');
+    if(data.contains(userID)) {
+      setState(() {
+        click = true;
+      });
+    }
+  }
+  getUserInfos() async {
+    var check = await SharedFunctions.getUserStudentSharedPreference();
+    var mail = await SharedFunctions.getUserEmailSharedPreference();
+    setState(() {
+      isStudent = check!;
+    });
+    if(isStudent) {
+      var student = await FirebaseFunctions().getStudentData(mail!);
+      setState(() {
+        userID = student.docs[0].get('studentID');
+      });
+    }
+    else {
+      var teacher = await FirebaseFunctions().getTeacherData(mail!);
+      setState(() {
+        userID = teacher.docs[0].get('teacherID');
+      });
+    }
   }
   _increaseCounter() async {
     setState(() {
       likeCounter++;
     });
-    await FirebaseFunctions().incrementLikeCounter(widget.contentID, likeCounter);
+    await FirebaseFunctions().updateLikeCounter(widget.contentID, likeCounter, userID);
+  }
+  _decreaseCounter() async {
+    setState(() {
+      likeCounter--;
+    });
+    await FirebaseFunctions().updateLikeCounter(widget.contentID, likeCounter, userID);
+    await FirebaseFunctions().deleteUserFromLikedList(widget.contentID, userID);
   }
 
   _defineContentsType(dynamic content) {
@@ -418,7 +455,7 @@ class _customContentFeedState extends State<customContentFeed> {
                           _increaseCounter();
                         }
                         else{
-
+                          _decreaseCounter();
                         }
                     }),
                      SizedBox(width: 10,),
