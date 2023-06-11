@@ -1,16 +1,10 @@
-# minerva
+# Minerva 
 
-A new Flutter project.
+Minerva is a Class Management System, which is planned to be a mobile application developed using Flutter. Minerva is designed for both high schools and middle schools, with teachers and students being the main users of this system. The system is expected to provide significant benefits for its users. Its main aim is to minimize the daily problems and issues faced by students and teachers throughout high school. Furthermore, minerva offers advantages such as saving time, reducing workload, and strengthening communication between teachers and students.
 
-## Getting Started
+## How To Build ?
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1- Setup Dart/Flutter on your local machine. (You can follow offical instructions)
+2- Clone this repository. 
+3- Crete your virtual device or setup a real phone to work on.
+4- Run this project and wait until it is compile. 
