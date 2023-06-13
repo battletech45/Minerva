@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             width: 2, color: Color.fromRGBO(28, 88, 140, 1))),
-                    labelText: 'School Number',
+                    labelText: 'Email',
                     labelStyle: TextStyle(
                       fontStyle: FontStyle.italic,
                       color: Colors.black,
