@@ -8,6 +8,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../Control/FirebaseFunctions.dart';
 import '../../../Control/SharedFunctions.dart';
 import '../../../Model/WidgetProperties.dart';
+import '../../../Model/WidgetProperties.dart';
+import '../../../Model/WidgetProperties.dart';
 
 class StudentHomeWorkViewPage extends StatefulWidget {
   @override
@@ -98,11 +100,22 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
       body: isHomeWorkExist ? ListView.builder(
         itemCount: homeworkItems.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(homeworkItems[index].name),
-            onTap: () {
-              _onItemTapped(index);
-            },
+          return Card(
+            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: ListTile(
+              tileColor: PageColors.secondaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              title: Text(homeworkItems[index].name, 
+              style: TextStyle(
+                fontWeight: FontWeight.w400, 
+                fontSize: 25.0, 
+              ),),
+              onTap: () {
+                _onItemTapped(index);
+              },
+            ),
           );
         },
       ) : Column(
@@ -138,18 +151,18 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
                 child: Text(
                   homeworkItems[_selectedIndex].definition,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18.0),
+                  style: TextStyle(fontSize: 20.0),
                 ),
               ),
               Visibility(
                 visible: homeworkItems[_selectedIndex].fileName!.isNotEmpty,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(width: 10.0),
-                    Text('Homework Material', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, fontStyle: FontStyle.italic, color: PageColors.thirdColor)),
+                    Text('Homework Material: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, fontStyle: FontStyle.italic, color: PageColors.thirdColor)),
                     SizedBox(width: 15.0),
-                    Icon(FontAwesomeIcons.arrowTurnDown)
+                    //Icon(FontAwesomeIcons.arrowTurnDown)
                   ],
                 ),
               ),
@@ -158,10 +171,10 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
                 visible: homeworkItems[_selectedIndex].fileName!.isNotEmpty,
                 child: Container(
                   width: 300,
-                    child: Text(homeworkItems[_selectedIndex].fileName!)
+                    child: Text(homeworkItems[_selectedIndex].fileName!,textAlign: TextAlign.center,style: TextStyle(fontSize: 17),)
                 ),
               ),
-             SizedBox(height: 20.0),
+             SizedBox(height: 30.0),
               if(isSelected)
                 Card(
                   margin: EdgeInsets.symmetric(horizontal: 18, vertical: 5),

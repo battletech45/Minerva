@@ -46,7 +46,7 @@ class _StudentGradePage extends State<StudentGradePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('GRADES'),
+        title: Text('GRADES',style: TextStyle(fontSize: 25),),
         elevation: 0.0,
         automaticallyImplyLeading: true,
         backgroundColor: PageColors.mainColor,
