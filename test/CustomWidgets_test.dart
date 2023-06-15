@@ -138,6 +138,7 @@ void main() {
     final customFeed = customContentFeed(
       userName: 'Baybars Arslan',
       content: 'This is a text content',
+      contentID: '4YFA6cjqiMANy9CH2nrn',
     );
 
     // Render the widget
@@ -157,6 +158,7 @@ void main() {
     final customFeed = customContentFeed(
       userName: 'Baybars Arslan',
       content: 'Hello World!',
+      contentID: '4YFA6cjqiMANy9CH2nrn',
     );
 
     // render the widget
