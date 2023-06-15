@@ -46,14 +46,13 @@ class _customDrawerState extends State<customDrawer> {
       userName = name!;
       isStudent = check!;
     });
-    if(isStudent) {
+    if (isStudent) {
       var student = await FirebaseFunctions().getStudentData(mail!);
       setState(() {
         userNumber = student.docs[0].get('studentNumber');
         userID = student.docs[0].get('studentID');
       });
-    }
-    else {
+    } else {
       var teacher = await FirebaseFunctions().getTeacherData(mail!);
       setState(() {
         userNumber = teacher.docs[0].get('teacherNumber');
@@ -94,7 +93,7 @@ class _customDrawerState extends State<customDrawer> {
                   title: Text('$userName',
                       style: TextStyle(color: Colors.black, fontSize: 25)),
                   subtitle: Text('$userNumber',
-                      style: TextStyle(color: Colors.black,fontSize: 18)),
+                      style: TextStyle(color: Colors.black, fontSize: 18)),
                 ),
               ],
             ),
@@ -126,8 +125,9 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) =>
-                      isStudent ? StudentGradePage() : TeacherGradeStudentList() /* TeacherGradePage(studentID: 'skIaAFi6EbtaTEKSMymx')*/));
+                  builder: (context) => isStudent
+                      ? StudentGradePage()
+                      : TeacherGradeStudentList() /* TeacherGradePage(studentID: 'skIaAFi6EbtaTEKSMymx')*/));
             },
           ),
           ListTile(
@@ -137,9 +137,8 @@ class _customDrawerState extends State<customDrawer> {
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => isStudent
-                      ? AttendanceStudentPage()
-                      : EditAttendance()));
+                  builder: (context) =>
+                      isStudent ? AttendanceStudentPage() : EditAttendance()));
             },
           ),
           ListTile(
@@ -180,12 +179,13 @@ class _customDrawerState extends State<customDrawer> {
             color: PageColors.secondaryColor,
           ),
           ListTile(
-            leading: Icon(FontAwesomeIcons.key,
-                size: 30, color: Colors.black54),
+            leading:
+                Icon(FontAwesomeIcons.key, size: 30, color: Colors.black54),
             title: Text('Reset Password',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ResetPassword()));
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => ResetPassword()));
             },
           ),
           ListTile(
@@ -221,58 +221,72 @@ class customAttendanceCard extends StatefulWidget {
   @override
   State<customAttendanceCard> createState() => _customAttendanceCardState();
 
-  const customAttendanceCard({Key? key, required this.teacherName, required this.courseName, required this.attendance}) : super(key: key);
+  const customAttendanceCard(
+      {Key? key,
+      required this.teacherName,
+      required this.courseName,
+      required this.attendance})
+      : super(key: key);
 }
 
 class _customAttendanceCardState extends State<customAttendanceCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: PageColors.secondaryColor,
+      // color: PageColors.secondaryColor,
       elevation: 10.0,
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-      shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: ListTile(
-              leading: Icon(Icons.person,
-              size: 35,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      shadowColor: Colors.black,
+      child: Row(
+        children: [
+          SizedBox(
+            width: 130.0,
+            height: 120.0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: PageColors.secondaryColor,
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
-              title: Text(widget.teacherName, textAlign: TextAlign.center, style: TextStyle( fontSize: 20,)),
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(left: 27.0, right: 10.0, top: 47.0),
+                child: Text(
+                  '${widget.courseName}',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
             ),
           ),
-          SizedBox(height: 4),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Text('Course Name',
-                  style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      )),
-              Text('Attendance',
-                  style: TextStyle(
-                      fontStyle: FontStyle.italic, 
-                      fontWeight: FontWeight.bold,
-                        fontSize: 16,))
-            ],
-          ),
-          SizedBox(height: 10.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Text(widget.courseName,
-              style: TextStyle( fontSize: 16,),
+          Expanded(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Teacher: ${widget.teacherName}',
+                style: TextStyle(
+                  fontSize: 19.0,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-               Text(widget.attendance + ' Hours',
-            style: TextStyle( fontSize: 16,))
+              SizedBox(
+                height: 15.0,
+              ),
+              Text(
+                'Attendance:  ${widget.attendance}Hour',
+                style: TextStyle(
+                  fontSize: 19.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ],
-          ),
-          SizedBox(height: 15.0)
+          )),
         ],
       ),
     );
@@ -284,13 +298,17 @@ class customContentFeed extends StatefulWidget {
   final String contentID;
   final dynamic content;
 
-  customContentFeed({Key? key, required this.userName, required this.content, required this.contentID}) : super(key: key);
+  customContentFeed(
+      {Key? key,
+      required this.userName,
+      required this.content,
+      required this.contentID})
+      : super(key: key);
   @override
   State<customContentFeed> createState() => _customContentFeedState();
 }
 
 class _customContentFeedState extends State<customContentFeed> {
-
   String userID = '';
   bool isStudent = false;
   bool click = false;
@@ -304,47 +322,51 @@ class _customContentFeedState extends State<customContentFeed> {
     });
     await getUserInfos();
     List data = content.docs[0].get('whoLiked');
-    if(data.contains(userID)) {
+    if (data.contains(userID)) {
       setState(() {
         click = true;
       });
     }
   }
+
   getUserInfos() async {
     var check = await SharedFunctions.getUserStudentSharedPreference();
     var mail = await SharedFunctions.getUserEmailSharedPreference();
     setState(() {
       isStudent = check!;
     });
-    if(isStudent) {
+    if (isStudent) {
       var student = await FirebaseFunctions().getStudentData(mail!);
       setState(() {
         userID = student.docs[0].get('studentID');
       });
-    }
-    else {
+    } else {
       var teacher = await FirebaseFunctions().getTeacherData(mail!);
       setState(() {
         userID = teacher.docs[0].get('teacherID');
       });
     }
   }
+
   _increaseCounter() async {
     setState(() {
       likeCounter++;
     });
-    await FirebaseFunctions().updateLikeCounter(widget.contentID, likeCounter, userID);
+    await FirebaseFunctions()
+        .updateLikeCounter(widget.contentID, likeCounter, userID);
   }
+
   _decreaseCounter() async {
     setState(() {
       likeCounter--;
     });
-    await FirebaseFunctions().updateLikeCounter(widget.contentID, likeCounter, userID);
+    await FirebaseFunctions()
+        .updateLikeCounter(widget.contentID, likeCounter, userID);
     await FirebaseFunctions().deleteUserFromLikedList(widget.contentID, userID);
   }
 
   _defineContentsType(dynamic content) {
-    if(content is String) {
+    if (content is String) {
       //Stringi doncebilecek sekilde bir widget yapisi kurulabilir
       return Container(
         padding: EdgeInsets.all(16),
@@ -378,8 +400,8 @@ class _customContentFeedState extends State<customContentFeed> {
         ),
       );
     }
-    if(content is Widget) {
-      if(content is Image) {
+    if (content is Widget) {
+      if (content is Image) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Container(
@@ -387,19 +409,18 @@ class _customContentFeedState extends State<customContentFeed> {
             width: 400,
             decoration: BoxDecoration(
               color: PageColors.secondaryColor,
-              borderRadius: BorderRadius.circular(8),),
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: widget.content,
           ),
         );
-      }
-      else {
+      } else {
         return Container(
-          height: 300,
-          width: 400,
-          color: PageColors.thirdColor,
-          alignment: Alignment.bottomCenter,
-          child: content
-        );
+            height: 300,
+            width: 400,
+            color: PageColors.thirdColor,
+            alignment: Alignment.bottomCenter,
+            child: content);
       }
     }
   }
@@ -440,28 +461,32 @@ class _customContentFeedState extends State<customContentFeed> {
                 child: Row(
                   children: [
                     IconButton(
-                    icon: click
-                        ? Icon(
-                            FontAwesomeIcons.solidHeart,
-                            size: 38,
-                            color: Colors.red,
-                          )
-                        : Icon(FontAwesomeIcons.heart, size: 38),
-                    onPressed: () {
-                      setState(() {
-                        click = !click;
-                      });
-                        if(click==true){
-                          _increaseCounter();
-                        }
-                        else{
-                          _decreaseCounter();
-                        }
-                    }),
-                     SizedBox(width: 10,),
-                     Container(
-                      padding: EdgeInsets.only(top: 10),
-                      child: Text("$likeCounter",style: TextStyle(fontSize: 30),)),
+                        icon: click
+                            ? Icon(
+                                FontAwesomeIcons.solidHeart,
+                                size: 38,
+                                color: Colors.red,
+                              )
+                            : Icon(FontAwesomeIcons.heart, size: 38),
+                        onPressed: () {
+                          setState(() {
+                            click = !click;
+                          });
+                          if (click == true) {
+                            _increaseCounter();
+                          } else {
+                            _decreaseCounter();
+                          }
+                        }),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "$likeCounter",
+                          style: TextStyle(fontSize: 30),
+                        )),
                   ],
                 )),
           ],
@@ -506,30 +531,43 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
         ),
       ),
       child: ExpansionTile(
-        title: Text("$course",
-            style: TextStyle(fontSize: 21),),
+        title: Text(
+          "$course",
+          style: TextStyle(fontSize: 21),
+        ),
         trailing: Icon(
             expansionIcon ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown,
             color: Colors.pink),
         children: <Widget>[
           ListTile(
-            leading: Text("Exam: ",
-            style: TextStyle(fontSize: 18),
+            leading: Text(
+              "Exam: ",
+              style: TextStyle(fontSize: 18),
             ),
-            trailing: Text('$exam',
-            style: TextStyle(fontSize: 18),),
+            trailing: Text(
+              '$exam',
+              style: TextStyle(fontSize: 18),
+            ),
           ),
           ListTile(
-            leading: Text("Project: ",
-            style: TextStyle(fontSize: 18),),
-            trailing: Text("$project",
-            style: TextStyle(fontSize: 18),),
+            leading: Text(
+              "Project: ",
+              style: TextStyle(fontSize: 18),
+            ),
+            trailing: Text(
+              "$project",
+              style: TextStyle(fontSize: 18),
+            ),
           ),
           ListTile(
-            leading: Text("Quiz: ",
-            style: TextStyle(fontSize: 18),),
-            trailing: Text("$quiz",
-            style: TextStyle(fontSize: 18),),
+            leading: Text(
+              "Quiz: ",
+              style: TextStyle(fontSize: 18),
+            ),
+            trailing: Text(
+              "$quiz",
+              style: TextStyle(fontSize: 18),
+            ),
           )
         ],
         onExpansionChanged: (bool expanded) {
@@ -541,6 +579,7 @@ class _customExpansionPanelState extends State<customExpansionPanel> {
     );
   }
 }
+
 //Sınıf Listesi Checkbox design
 class customCheckBoxListTile extends StatefulWidget {
   final List<String> classes;
@@ -549,7 +588,10 @@ class customCheckBoxListTile extends StatefulWidget {
   String? selectedClass;
 
   customCheckBoxListTile(
-      {Key? key, required this.classes, required this.index, required this.function})
+      {Key? key,
+      required this.classes,
+      required this.index,
+      required this.function})
       : super(key: key);
   @override
   State<customCheckBoxListTile> createState() => _customCheckBoxListTileState();
@@ -606,7 +648,9 @@ class selectedFileList extends StatelessWidget {
                 children: <Widget>[
                   SizedBox(height: 75.0),
                   Icon(FontAwesomeIcons.file, size: 50.0),
-                  Text(pickedFile!.name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
+                  Text(pickedFile!.name,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
                 ],
               ),
             ),
@@ -615,17 +659,21 @@ class selectedFileList extends StatelessWidget {
     );
   }
 }
+
 //Upload sayfalarında kullanılabilir sınıf sayısı kadar checkbox oluşturan sistem
 class customClassListCheckboxBuilder extends StatefulWidget {
   final Function function;
   final List<String> classes;
 
-  const customClassListCheckboxBuilder({super.key, required this.function, required this.classes});
+  const customClassListCheckboxBuilder(
+      {super.key, required this.function, required this.classes});
   @override
-  State<customClassListCheckboxBuilder> createState() => _customClassListCheckboxBuilderState();
+  State<customClassListCheckboxBuilder> createState() =>
+      _customClassListCheckboxBuilderState();
 }
 
-class _customClassListCheckboxBuilderState extends State<customClassListCheckboxBuilder> {
+class _customClassListCheckboxBuilderState
+    extends State<customClassListCheckboxBuilder> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -647,7 +695,10 @@ class _customClassListCheckboxBuilderState extends State<customClassListCheckbox
                 borderRadius: BorderRadius.circular(8),
                 color: PageColors.secondaryColor,
               ),
-              child: customCheckBoxListTile(classes: widget.classes, index: index, function: widget.function));
+              child: customCheckBoxListTile(
+                  classes: widget.classes,
+                  index: index,
+                  function: widget.function));
         },
       ),
     );
@@ -661,15 +712,23 @@ class customEditCheckBoxListTile extends StatefulWidget {
   final Function onChange;
   bool selected = false;
 
-  customEditCheckBoxListTile({Key? key, required this.hours, required this.onPressed,required this.selected, required this.onChange}) : super(key: key);
+  customEditCheckBoxListTile(
+      {Key? key,
+      required this.hours,
+      required this.onPressed,
+      required this.selected,
+      required this.onChange})
+      : super(key: key);
   @override
-  State<customEditCheckBoxListTile> createState() => _customEditCheckBoxListTileState();
+  State<customEditCheckBoxListTile> createState() =>
+      _customEditCheckBoxListTileState();
 }
 
-class _customEditCheckBoxListTileState extends State<customEditCheckBoxListTile> {
+class _customEditCheckBoxListTileState
+    extends State<customEditCheckBoxListTile> {
   @override
   Widget build(BuildContext context) {
-    final String hours=widget.hours;
+    final String hours = widget.hours;
     return CheckboxListTile(
       title: Text("$hours",
           style: TextStyle(
@@ -694,47 +753,64 @@ class customEditExpansionPanel extends StatefulWidget {
   final String name;
   final Function function;
 
-  const customEditExpansionPanel({super.key, required this.name, required this.function});
+  const customEditExpansionPanel(
+      {super.key, required this.name, required this.function});
   @override
-  State<customEditExpansionPanel> createState() => _customEditExpansionPanelState();
+  State<customEditExpansionPanel> createState() =>
+      _customEditExpansionPanelState();
 }
 
 class _customEditExpansionPanelState extends State<customEditExpansionPanel> {
   bool isSelected = false;
-  int selectedCheckboxIndex =-1;
+  int selectedCheckboxIndex = -1;
   List<bool> selections = [false, false, false];
 
   _deselectOthers(int index) {
     print('here');
-      selections = List.filled(selections.length, false, growable: true);
-      setState(() {
-        if (selectedCheckboxIndex == index) {
-          selectedCheckboxIndex = -1;
-        } else {
-          selectedCheckboxIndex = index;
-        }
-      });
-      print(selections);
+    selections = List.filled(selections.length, false, growable: true);
+    setState(() {
+      if (selectedCheckboxIndex == index) {
+        selectedCheckboxIndex = -1;
+      } else {
+        selectedCheckboxIndex = index;
+      }
+    });
+    print(selections);
   }
+
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-        title: Text(widget.name, style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: Colors.black,
-            letterSpacing: 0.5)
-        ),
-      trailing: Icon(isSelected ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown, color: Colors.pink),
+      title: Text(widget.name,
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              letterSpacing: 0.5)),
+      trailing: Icon(
+          isSelected ? FontAwesomeIcons.sortUp : FontAwesomeIcons.sortDown,
+          color: Colors.pink),
       children: <Widget>[
-        customEditCheckBoxListTile(hours: "1  ", onPressed: widget.function, selected: selectedCheckboxIndex == 0, onChange: () => _deselectOthers(0)),
-        customEditCheckBoxListTile(hours: "2  ", onPressed: widget.function, selected: selectedCheckboxIndex == 1, onChange: () =>_deselectOthers(1)),
-        customEditCheckBoxListTile(hours: "3  ", onPressed: widget.function, selected: selectedCheckboxIndex == 2, onChange: () => _deselectOthers(2)),
+        customEditCheckBoxListTile(
+            hours: "1  ",
+            onPressed: widget.function,
+            selected: selectedCheckboxIndex == 0,
+            onChange: () => _deselectOthers(0)),
+        customEditCheckBoxListTile(
+            hours: "2  ",
+            onPressed: widget.function,
+            selected: selectedCheckboxIndex == 1,
+            onChange: () => _deselectOthers(1)),
+        customEditCheckBoxListTile(
+            hours: "3  ",
+            onPressed: widget.function,
+            selected: selectedCheckboxIndex == 2,
+            onChange: () => _deselectOthers(2)),
       ],
       onExpansionChanged: (bool val) {
-          setState(() {
-            isSelected = val;
-          });
+        setState(() {
+          isSelected = val;
+        });
       },
     );
   }
@@ -744,7 +820,9 @@ class customAnnouncementCard extends StatefulWidget {
   final String teacherName;
   final String announcementContent;
 
-  const customAnnouncementCard({Key? key, required this.teacherName, required this.announcementContent}) : super(key: key);
+  const customAnnouncementCard(
+      {Key? key, required this.teacherName, required this.announcementContent})
+      : super(key: key);
 
   @override
   State<customAnnouncementCard> createState() => _customAnnouncementCardState();
@@ -754,25 +832,33 @@ class _customAnnouncementCardState extends State<customAnnouncementCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical:6.0),
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Card(
         color: PageColors.secondaryColor,
         elevation: 10.0,
         margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-        shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(vertical:5.0),
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical:5.0,horizontal: 5.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
                 child: ListTile(
-                  leading: Icon(Icons.person,size: 35,),
-                  title: Text(widget.teacherName,style: TextStyle(fontSize: 20),),
+                  leading: Icon(
+                    Icons.person,
+                    size: 35,
+                  ),
+                  title: Text(
+                    widget.teacherName,
+                    style: TextStyle(fontSize: 20),
+                  ),
                   subtitle: Padding(
-                    padding: const EdgeInsets.only(top:8.0),
-                    child: Text(widget.announcementContent, style: TextStyle(fontSize: 17)),
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(widget.announcementContent,
+                        style: TextStyle(fontSize: 17)),
                   ),
                 ),
               ),
@@ -797,8 +883,10 @@ class _customCourseGridState extends State<customCourseGrid> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => CourseContent(courseName: widget.courseName)));
-        },
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                CourseContent(courseName: widget.courseName)));
+      },
       child: Card(
         elevation: 6,
         shape: CustomBorders.mainBorder,
@@ -807,11 +895,11 @@ class _customCourseGridState extends State<customCourseGrid> {
           children: <Widget>[
             SizedBox(height: 25.0),
             Text(widget.courseName,
-                  textAlign: TextAlign.center,
-                  style:
-                  TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
             SizedBox(height: 20.0),
-            Icon(FontAwesomeIcons.bookOpen, color: PageColors.thirdColor, size: 50.0)
+            Icon(FontAwesomeIcons.bookOpen,
+                color: PageColors.thirdColor, size: 50.0)
           ],
         ),
       ),
@@ -825,7 +913,6 @@ class customAlert extends StatefulWidget {
 }
 
 class _customAlertState extends State<customAlert> {
-
   int currentIndex = 0;
   int surveyOptionCount = 2;
   bool isHomeWorkExist = false;
@@ -834,7 +921,8 @@ class _customAlertState extends State<customAlert> {
   bool isLoaded = false;
   TextEditingController surveyTitleController = TextEditingController();
   TextEditingController paragraphController = TextEditingController();
-  List<TextEditingController> controllers = List.generate(2, (index) => TextEditingController());
+  List<TextEditingController> controllers =
+      List.generate(2, (index) => TextEditingController());
   List<String> controllerValues = [];
   PlatformFile? pickedFile;
   String link = '';
@@ -874,10 +962,12 @@ class _customAlertState extends State<customAlert> {
 
   @override
   Widget build(BuildContext context) {
-
     Widget cancelButton = MaterialButton(
-      padding: EdgeInsets.symmetric(vertical:12,horizontal: 20),
-      child: Text("Cancel",style: TextStyle(fontSize: 16,color: Colors.white),),
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+      child: Text(
+        "Cancel",
+        style: TextStyle(fontSize: 16, color: Colors.white),
+      ),
       elevation: 5.0,
       color: PageColors.mainColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
@@ -887,13 +977,14 @@ class _customAlertState extends State<customAlert> {
     );
 
     Widget createButton = MaterialButton(
-      padding: EdgeInsets.symmetric(vertical:12,horizontal: 20),
-      child: Text("Create",style: TextStyle(fontSize: 16,color: Colors.white)),
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+      child:
+          Text("Create", style: TextStyle(fontSize: 16, color: Colors.white)),
       elevation: 5.0,
       color: PageColors.mainColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       onPressed: () async {
-        if(currentIndex == 0) {
+        if (currentIndex == 0) {
           var val = await SharedFunctions.getUserNameSharedPreference();
           Map<String, dynamic> survey = {
             'sender': val,
@@ -901,16 +992,17 @@ class _customAlertState extends State<customAlert> {
             'surveyTitle': surveyTitleController.text,
             'surveyOptions': []
           };
-          for(int i = 0; i < controllers.length; i++) {
+          for (int i = 0; i < controllers.length; i++) {
             controllerValues.add(controllers[i].text);
           }
-          survey.update('surveyOptions', (value) => FieldValue.arrayUnion(controllerValues));
+          survey.update('surveyOptions',
+              (value) => FieldValue.arrayUnion(controllerValues));
           await FirebaseFunctions().sendContent(survey);
           Navigator.of(context).pop();
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()));
         }
-        if(currentIndex == 1) {
+        if (currentIndex == 1) {
           print('this is link' + link);
           var val = await SharedFunctions.getUserNameSharedPreference();
           Map<String, dynamic> Image = {
@@ -923,7 +1015,7 @@ class _customAlertState extends State<customAlert> {
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()));
         }
-        if(currentIndex == 2) {
+        if (currentIndex == 2) {
           var val = await SharedFunctions.getUserNameSharedPreference();
           Map<String, dynamic> paragraph = {
             'sender': val,
@@ -949,8 +1041,7 @@ class _customAlertState extends State<customAlert> {
               controller: surveyTitleController,
               decoration: InputDecoration(
                   label: Text('Please Write Your Title Here ...'),
-                  filled: true
-              ),
+                  filled: true),
               keyboardType: TextInputType.multiline,
               maxLines: null,
             ),
@@ -966,12 +1057,11 @@ class _customAlertState extends State<customAlert> {
                     TextFormField(
                       controller: controllers[index],
                       decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(width: 2, color: PageColors.mainColor)
-                        ),
-                        label: Text('Please Write Your Option Here...'),
-                        filled: true
-                      ),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2, color: PageColors.mainColor)),
+                          label: Text('Please Write Your Option Here...'),
+                          filled: true),
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                     ),
@@ -1017,13 +1107,20 @@ class _customAlertState extends State<customAlert> {
                 height: 90,
                 decoration: BoxDecoration(
                     color: PageColors.secondaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(30.0))
-                ),
+                    borderRadius: BorderRadius.all(Radius.circular(30.0))),
                 child: Icon(FontAwesomeIcons.plus),
               ),
             ),
             SizedBox(height: 20.0),
-            Text(isSelected ? isLoading ? isLoaded ? 'Loaded...' : 'Loading...' : 'Uploaded' : 'To Select Your Image Press Here ...', style: TextStyle(fontWeight: FontWeight.bold))
+            Text(
+                isSelected
+                    ? isLoading
+                        ? isLoaded
+                            ? 'Loaded...'
+                            : 'Loading...'
+                        : 'Uploaded'
+                    : 'To Select Your Image Press Here ...',
+                style: TextStyle(fontWeight: FontWeight.bold))
           ],
         ),
       ),
@@ -1038,11 +1135,10 @@ class _customAlertState extends State<customAlert> {
               controller: paragraphController,
               decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: PageColors.mainColor)
-                  ),
+                      borderSide:
+                          BorderSide(width: 2, color: PageColors.mainColor)),
                   label: Text('Please Write Your Paragraph Here ...'),
-                  filled: true
-              ),
+                  filled: true),
               keyboardType: TextInputType.multiline,
               maxLines: null,
             )
@@ -1075,9 +1171,20 @@ class _customAlertState extends State<customAlert> {
                   });
                 },
                 destinations: <Widget>[
-                  Transform.scale(scale: 1.4, child: NavigationDestination(icon: Icon(FontAwesomeIcons.book), label: 'Survey')),
-                  Transform.scale(scale: 1.4,child: NavigationDestination(icon: Icon(FontAwesomeIcons.photoFilm), label: 'Image')),
-                  Transform.scale(scale: 1.4,child: NavigationDestination(icon: Icon(FontAwesomeIcons.textSlash), label: 'text')),
+                  Transform.scale(
+                      scale: 1.4,
+                      child: NavigationDestination(
+                          icon: Icon(FontAwesomeIcons.book), label: 'Survey')),
+                  Transform.scale(
+                      scale: 1.4,
+                      child: NavigationDestination(
+                          icon: Icon(FontAwesomeIcons.photoFilm),
+                          label: 'Image')),
+                  Transform.scale(
+                      scale: 1.4,
+                      child: NavigationDestination(
+                          icon: Icon(FontAwesomeIcons.textSlash),
+                          label: 'text')),
                 ],
               ),
               body[currentIndex]
