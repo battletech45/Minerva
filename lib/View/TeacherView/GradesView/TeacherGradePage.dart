@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:flutter/material.dart';
+import '../../../Control/SharedFunctions.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class TeacherGradePage extends StatefulWidget {
@@ -15,10 +16,19 @@ class TeacherGradePage extends StatefulWidget {
 class _TeacherGradePageState extends State<TeacherGradePage> {
   final _formKey = GlobalKey<FormState>();
   String _grade = '';
+  String profession = '';
 
   TextEditingController? _projectController;
   TextEditingController? _quizController;
   TextEditingController? _examController;
+
+  getProfession() async {
+    var email = await SharedFunctions.getUserEmailSharedPreference();
+    var teacher = await FirebaseFunctions().getTeacherData(email!);
+    setState(() {
+      profession = teacher.docs[0].get('profession');
+    });
+  }
 
   @override
   void initState() {
@@ -26,6 +36,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
     _projectController = TextEditingController();
     _quizController = TextEditingController();
     _examController = TextEditingController();
+    getProfession();
   }
 
   @override
@@ -50,7 +61,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         child: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.all(20.0),
@@ -72,12 +83,6 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                   decoration: InputDecoration(
                     hintText: 'Enter your project grade',
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a grade';
-                    }
-                    return null;
-                  },
                   onSaved: (value) {
                     _grade = value!;
                   },
@@ -89,7 +94,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      _gradeTask(widget.studentID, 'English', 'project',
+                      _gradeTask(widget.studentID, profession, 'project',
                           _projectController!.text);
                     }
                   },
@@ -109,12 +114,6 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                   decoration: InputDecoration(
                     hintText: 'Enter your quiz grade',
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a grade';
-                    }
-                    return null;
-                  },
                   onSaved: (value) {
                     _grade = value!;
                   },
@@ -127,7 +126,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       _gradeTask(
-                          widget.studentID, 'English', 'quiz', _quizController!.text);
+                          widget.studentID, profession, 'quiz', _quizController!.text);
                     }
                   },
                   child: Text(
@@ -146,12 +145,6 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                   decoration: InputDecoration(
                     hintText: 'Enter your exam grade',
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a grade';
-                    }
-                    return null;
-                  },
                   onSaved: (value) {
                     _grade = value!;
                   },
@@ -164,7 +157,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       _gradeTask(
-                          widget.studentID, 'English', 'exam', _examController!.text);
+                          widget.studentID, profession, 'exam', _examController!.text);
                     }
                   },
                   child: Text(
@@ -183,7 +176,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
                       shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                     onPressed: () {
-                      _gradeAllTasks(widget.studentID, 'English', _quizController!.text, _projectController!.text, _examController!.text);
+                      _gradeAllTasks(widget.studentID, profession, _quizController!.text, _projectController!.text, _examController!.text);
                     },
                     child: Text('Submit All', style: TextStyle(fontSize: 25)),
                   ),
