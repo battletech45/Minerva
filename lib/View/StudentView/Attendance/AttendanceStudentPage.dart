@@ -56,7 +56,7 @@ class _AttendanceStudentPageState extends State<AttendanceStudentPage> {
           return Column(
             children: <Widget>[
               SizedBox(height: 15.0),
-              customAttendanceCard(teacherName: 'teacherName', courseName: courseAttendance.keys.elementAt(index), attendance: courseAttendance[courseAttendance.keys.elementAt(index)]['attendance'] + ' ')
+              customAttendanceCard(teacherName: 'Metin Baybars Arslan', courseName: courseAttendance.keys.elementAt(index), attendance: courseAttendance[courseAttendance.keys.elementAt(index)]['attendance'] + ' ')
             ],
           );
         },
