@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_survey/flutter_survey.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
-import '../Control/FirebaseFunctions.dart';
-import '../Control/SharedFunctions.dart';
+import '../Controller/FirebaseFunctions.dart';
+import '../Controller/SharedFunctions.dart';
 import '../Model/CustomWidgets.dart';
 
 class HomePage extends StatefulWidget {

@@ -5,8 +5,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey/flutter_survey.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
-import 'package:minerva/Control/SharedFunctions.dart';
+import 'package:minerva/Controller/AuthService.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Controller/SharedFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/LoginPage.dart';
 import 'package:minerva/View/RegisterPage.dart';
@@ -194,14 +195,16 @@ class _customDrawerState extends State<customDrawer> {
             title: Text('Sign Out',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
-              signout();
+             AuthServices().signout();
+                Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => MainPage()));
             },
           ),
         ],
       ),
     );
   }
-
+/*
   Future signout() async {
     await FirebaseAuth.instance.signOut();
     await SharedFunctions.saveUserStudentSharedPreference(false);
@@ -210,8 +213,8 @@ class _customDrawerState extends State<customDrawer> {
     await SharedFunctions.saveUserNameSharedPreference('');
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => MainPage()));
-  }
-}
+  } */
+} 
 
 class customAttendanceCard extends StatefulWidget {
   final String teacherName;
