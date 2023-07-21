@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:minerva/Control/Notifications.dart';
 import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/View/StudentView/ProfileView/ProfilePage.dart';
 import 'package:minerva/View/TeacherView/ProfileView/ProfileTeacher.dart';
 import 'package:minerva/firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'View/WelcomePage.dart';
 
 void main() async {
@@ -47,7 +49,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return isLoggedIn ? MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: isStudent ? ProfilePage() : ProfileTeacherPage()
+      home: isStudent ? NotificationsScreen() : ProfileTeacherPage()
     ) :
     MaterialApp(
       debugShowCheckedModeBanner: false,
