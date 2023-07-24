@@ -5,59 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 
-class NotificationsScreen extends StatefulWidget {
-  @override
-  _NotificationsScreenState createState() => _NotificationsScreenState();
+
+Future<void> onBackgroundMessage(RemoteMessage message) async {
+
+  if (message.data.containsKey('data')) {
+    // Handle data message
+    final data = message.data['data'];
+  }
+
+  if (message.data.containsKey('notification')) {
+    // Handle notification message
+    final notification = message.data['notification'];
+  }
+  // Or do other work.
 }
 
-class _NotificationsScreenState extends State<NotificationsScreen> {
-
-  String? fcmToken;
+class FCM {
   final _firebaseMessaging = FirebaseMessaging.instance;
+
   final streamCtlr = StreamController<String>.broadcast();
   final titleCtlr = StreamController<String>.broadcast();
   final bodyCtlr = StreamController<String>.broadcast();
-
-  Future<void> saveDeviceToken() async {
-    fcmToken = await FirebaseMessaging.instance.getToken();
-    print(fcmToken);
-  }
-
-  Future<void> sendNotification(String fcmToken, String title, String message) async {
-    final url = Uri.parse('https://fcm.googleapis.com/fcm/send');
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'key=AAAAql75Hzc:APA91bHjN2iv42ZYYA_hDKVKEC3fhOKmmDsD36YQPA7WLJSiuQpP9xnZznsMuekHFj2Idkt25_SMTbnNN4kY3shHgD6fGBwiplfPSxfUcvIWHT3XHo4zYpkUexdSobQEtlUiyzjsoZ2m', // Replace with your FCM server key
-    };
-
-    final body = {
-      'to': fcmToken,
-      'notification': {'title': title, 'body': message},
-      'data': {'click_action': 'FLUTTER_NOTIFICATION_CLICK'},
-    };
-
-    final response = await http.post(url, headers: headers, body: jsonEncode(body));
-
-    if (response.statusCode == 200) {
-      print('Notification sent successfully!');
-    } else {
-      print('Failed to send notification. Error: ${response.body}');
-    }
-  }
-
-  Future<void> onBackgroundMessage(RemoteMessage message) async {
-
-    if (message.data.containsKey('data')) {
-      // Handle data message
-      final data = message.data['data'];
-    }
-
-    if (message.data.containsKey('notification')) {
-      // Handle notification message
-      final notification = message.data['notification'];
-    }
-    // Or do other work.
-  }
 
   setNotifications() {
     FirebaseMessaging.onBackgroundMessage(onBackgroundMessage);
@@ -76,14 +44,73 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         bodyCtlr.sink.add(message.notification!.body!);
       },
     );
+    // With this token you can test it easily on your phone
+    final token =
+    _firebaseMessaging.getToken().then((value) => print('Token: $value'));
   }
+
+  dispose() {
+    streamCtlr.close();
+    bodyCtlr.close();
+    titleCtlr.close();
+  }
+}
+
+class NotificationsScreen extends StatefulWidget {
+  @override
+  _NotificationsScreenState createState() => _NotificationsScreenState();
+}
+
+class _NotificationsScreenState extends State<NotificationsScreen> {
+
+  String? fcmToken;
+
+  Future<void> saveDeviceToken() async {
+    fcmToken = await FirebaseMessaging.instance.getToken();
+    print(fcmToken);
+  }
+
+  Future<void> sendNotification(String title, String body, String fcmToken) async {
+    final String fcmEndpoint = 'https://fcm.googleapis.com/fcm/send';
+
+    final Map<String, dynamic> notificationData = {
+      'notification': {
+        'title': title,
+        'body': body,
+      },
+      'priority': 'high',
+      'to': 'cwlkfOiVSQimEHgxCkAs81:APA91bGH0L23mOYog4iBWCb0VH7bQysS-p7T-Epn20Eko9BqKYi3vDUQQV8aGLlwS8cd3uIeD8Ie2o5dFJdsE6EEkxMyNxXYp6eD4kgqYOyYVnd96x5b8EGOx4VKchHPqQhO-rd309iH',
+    };
+
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'key=AAAAql75Hzc:APA91bHjN2iv42ZYYA_hDKVKEC3fhOKmmDsD36YQPA7WLJSiuQpP9xnZznsMuekHFj2Idkt25_SMTbnNN4kY3shHgD6fGBwiplfPSxfUcvIWHT3XHo4zYpkUexdSobQEtlUiyzjsoZ2m',
+    };
+
+    final response = await http.post(Uri.parse('https://fcm.googleapis.com/fcm/send'), headers: headers, body: jsonEncode(notificationData));
+
+    if (response.statusCode == 200) {
+      print('Notification sent successfully.');
+    } else {
+      print('Error sending notification: ${response.statusCode}');
+    }
+  }
+  String notificationTitle = 'No Title';
+  String notificationBody = 'No Body';
 
   @override
   void initState() {
     super.initState();
     saveDeviceToken();
-    setNotifications();
+    final _firebaseMessaging = FCM();
+    _firebaseMessaging.setNotifications();
+
+    _firebaseMessaging.bodyCtlr.stream.listen(_changeBody);
+    _firebaseMessaging.titleCtlr.stream.listen(_changeTitle);
   }
+
+  _changeBody(String msg) => setState(() => notificationBody = msg);
+  _changeTitle(String msg) => setState(() => notificationTitle = msg);
 
   @override
   Widget build(BuildContext context) {
