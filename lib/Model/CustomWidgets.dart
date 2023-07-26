@@ -3,11 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_survey/flutter_survey.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:minerva/Controller/AuthService.dart';
-import 'package:minerva/Controller/FirebaseFunctions.dart';
-import 'package:minerva/Controller/SharedFunctions.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
+import 'package:minerva/View/LoginPage.dart';
+import 'package:minerva/View/RegisterPage.dart';
 import 'package:minerva/View/StudentView/Announcement/AnnouncementStudentPage.dart';
 import 'package:minerva/View/StudentView/Attendance/AttendanceStudentPage.dart';
 import 'package:minerva/View/TeacherView/AttendanceView/EditAttendance.dart';
@@ -23,6 +25,7 @@ import '../View/StudentView/Content/StudentCourseContentPage.dart';
 import '../View/TeacherView/AnnouncementView/AnnouncementTeacherPage.dart';
 import '../View/ChatsListPage.dart';
 import '../View/StudentView/Content/ContentStudentPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class customDrawer extends StatefulWidget {
   @override
@@ -191,16 +194,14 @@ class _customDrawerState extends State<customDrawer> {
             title: Text('Sign Out',
                 style: TextStyle(fontSize: 24), textAlign: TextAlign.justify),
             onTap: () {
-             AuthServices().signout();
-                Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => MainPage()));
+              signout();
             },
           ),
         ],
       ),
     );
   }
-/*
+
   Future signout() async {
     await FirebaseAuth.instance.signOut();
     await SharedFunctions.saveUserStudentSharedPreference(false);
@@ -209,8 +210,8 @@ class _customDrawerState extends State<customDrawer> {
     await SharedFunctions.saveUserNameSharedPreference('');
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => MainPage()));
-  } */
-} 
+  }
+}
 
 class customAttendanceCard extends StatefulWidget {
   final String teacherName;

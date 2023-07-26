@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 import '../../../Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
 import 'package:firebase_storage/firebase_storage.dart';

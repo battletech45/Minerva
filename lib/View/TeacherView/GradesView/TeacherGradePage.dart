@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
-import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:flutter/material.dart';
-import '../../../Controller/SharedFunctions.dart';
+import '../../../Control/SharedFunctions.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class TeacherGradePage extends StatefulWidget {

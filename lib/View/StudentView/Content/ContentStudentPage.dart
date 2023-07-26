@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
+import 'package:minerva/View/StudentView/Content/StudentWeeklySchedule.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class ContentStudent extends StatefulWidget {

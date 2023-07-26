@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:minerva/Controller/Validators.dart';
+import 'package:minerva/Control/Validators.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
-import '../Controller/FirebaseFunctions.dart';
-import '../Controller/SharedFunctions.dart';
+import '../Control/FirebaseFunctions.dart';
+import '../Control/SharedFunctions.dart';
 import 'StudentView/ProfileView/ProfilePage.dart';
 import 'TeacherView/ProfileView/ProfileTeacher.dart';
 import 'WelcomePage.dart';
@@ -259,7 +260,6 @@ class _RegisterPage extends State<RegisterPage> {
                 child: TextButton(
                   onPressed: () {
                     register();
-                    
                   },
                   child: const Text(
                     'Register',

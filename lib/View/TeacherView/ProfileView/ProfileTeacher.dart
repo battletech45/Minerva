@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:minerva/Controller/SharedFunctions.dart';
+import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Control/FirebaseFunctions.dart';
 
 
 class ProfileTeacherPage extends StatefulWidget {

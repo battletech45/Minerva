@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:minerva/Controller/SharedFunctions.dart';
+import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/View/StudentView/ProfileView/ProfilePage.dart';
 import 'package:minerva/View/TeacherView/ProfileView/ProfileTeacher.dart';
 import 'package:minerva/firebase_options.dart';
