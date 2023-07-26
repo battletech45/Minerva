@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:minerva/Controller/SharedFunctions.dart';
 import 'package:minerva/View/ForgotPassword.dart';
-import 'package:minerva/View/TeacherView/ProfileView/ProfileTeacher.dart';
 import '../Controller/AuthService.dart';
 import '../Controller/Validators.dart';
-import 'StudentView/ProfileView/ProfilePage.dart';
 import 'WelcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -109,12 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextButton(
                   onPressed: () async {
                     AuthServices().signInWithEmailAndPassword(
-                        schoolNumberController.text, passwordController.text);
-                    var isStudent =
-                        await SharedFunctions.getUserStudentSharedPreference();
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) =>
-                            isStudent! ? ProfilePage() : ProfileTeacherPage()));
+                        schoolNumberController.text, passwordController.text, context, formKey);
                   },
                   child: const Text(
                     'Sign in',

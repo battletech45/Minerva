@@ -2,38 +2,85 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Controller/SharedFunctions.dart';
+import '../View/StudentView/ProfileView/ProfilePage.dart';
+import '../View/TeacherView/ProfileView/ProfileTeacher.dart';
 
 class AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool isStudent = false;
-  List<String> tokens = [];
+  //List<String> tokens = [];
 
-  Future signInWithEmailAndPassword(String email, String password) async {
-    var studentData = await FirebaseFunctions().getStudentData(email);
-    try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-      if (studentData.docs.isNotEmpty) {
-        await SharedFunctions.saveUserLoggedInSharedPreference(true);
-        await SharedFunctions.saveUserStudentSharedPreference(true);
-        await SharedFunctions.saveUserEmailSharedPreference(email);
-        await SharedFunctions.saveUserNameSharedPreference(
-            studentData.docs[0].get('studentName'));
-        if (studentData.docs[0].get('password') != password) {
-          await FirebaseFunctions().updateStudentPassword(
-              password, studentData.docs[0].get('studentID'));
+  Future signInWithEmailAndPassword(String email, String password,
+      BuildContext context, GlobalKey<FormState> formKey) async {
+    if (formKey.currentState!.validate()) {
+      var studentData = await FirebaseFunctions().getStudentData(email);
+      try {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        if (studentData.docs.isNotEmpty) {
+          await SharedFunctions.saveUserLoggedInSharedPreference(true);
+          await SharedFunctions.saveUserStudentSharedPreference(true);
+          await SharedFunctions.saveUserEmailSharedPreference(email);
+          await SharedFunctions.saveUserNameSharedPreference(
+              studentData.docs[0].get('studentName'));
+          if (studentData.docs[0].get('password') != password) {
+            await FirebaseFunctions().updateStudentPassword(
+                password, studentData.docs[0].get('studentID'));
+          }
+        } else {
+          var teacherData = await FirebaseFunctions().getTeacherData(email);
+          await SharedFunctions.saveUserStudentSharedPreference(false);
+          await SharedFunctions.saveUserLoggedInSharedPreference(true);
+          await SharedFunctions.saveUserEmailSharedPreference(email);
+          await SharedFunctions.saveUserNameSharedPreference(
+              teacherData.docs[0].get('teacherName'));
+          if (teacherData.docs[0].get('password') != password) {
+            await FirebaseFunctions().updateStudentPassword(
+                password, teacherData.docs[0].get('teacherID'));
+          }
         }
-      } else {
-        var teacherData = await FirebaseFunctions().getTeacherData(email);
-        await SharedFunctions.saveUserStudentSharedPreference(false);
-        await SharedFunctions.saveUserLoggedInSharedPreference(true);
-        await SharedFunctions.saveUserEmailSharedPreference(email);
-        await SharedFunctions.saveUserNameSharedPreference(
-            teacherData.docs[0].get('teacherName'));
-        if (teacherData.docs[0].get('password') != password) {
-          await FirebaseFunctions().updateStudentPassword(
-              password, teacherData.docs[0].get('teacherID'));
+        var isStudent = await SharedFunctions.getUserStudentSharedPreference();
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) =>
+                isStudent! ? ProfilePage() : ProfileTeacherPage(),
+          ),
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          print('No user found for that email.');
+        } else if (e.code == 'wrong-password') {
+          print('Wrong password provided for that user.');
         }
       }
+    }
+  }
+
+  Future passCheck(String userID, String userEmail, String oldPassword,
+      String newPassword, String safeNewPassword) async {
+    if (newPassword.isNotEmpty && safeNewPassword.isNotEmpty) {
+      if (newPassword == safeNewPassword) {
+        print("Passwords are succesfully matched");
+        final _credential = EmailAuthProvider.credential(
+            email: userEmail, password: oldPassword);
+        await _auth.currentUser!.reauthenticateWithCredential(_credential);
+        await _auth.currentUser!.updatePassword(newPassword);
+        if (isStudent) {
+          await FirebaseFunctions().updateStudentPassword(newPassword, userID);
+        } else {
+          await FirebaseFunctions().updateTeacherPassword(newPassword, userID);
+        }
+      } else {
+        print('Please Check Your Fields. Not Matching!');
+      }
+    } else {
+      print('PLease fill textFields to change your password');
+    }
+  }
+
+  Future resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       print(e.toString());
     }
@@ -70,37 +117,4 @@ class AuthServices {
     }
   }
 */
-
-  Future passCheck(String userID,String userEmail,String oldPassword, String newPassword, String safeNewPassword) async {
-    if (newPassword.isNotEmpty && safeNewPassword.isNotEmpty) {
-      if (newPassword == safeNewPassword) {
-        print("Passwords are succesfully matched");
-        final _credential = EmailAuthProvider.credential(email: userEmail, password: oldPassword);
-        await _auth.currentUser!.reauthenticateWithCredential(_credential);
-        await 
-        _auth.currentUser!.updatePassword(newPassword);
-        if(isStudent) {
-          await FirebaseFunctions().updateStudentPassword(newPassword, userID);
-        }
-        else {
-          await FirebaseFunctions().updateTeacherPassword(newPassword, userID);
-        }
-      }
-      else {
-        print('Please Check Your Fields. Not Matching!');
-      }
-    }
-    else {
-      print('PLease fill textFields to change your password');
-    }
-  }
-  Future resetPassword(String email) async {
-    try {
-      await _auth.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException catch (e) {
-      print(e.toString());
-    }
-  }
 }
-
-
