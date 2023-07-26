@@ -1,7 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 

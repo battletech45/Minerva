@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:minerva/View/TeacherView/AnnouncementView/AnnouncementCreateTeacherPage.dart';

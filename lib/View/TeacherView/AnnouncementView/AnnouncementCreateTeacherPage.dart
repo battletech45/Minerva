@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
-import 'package:minerva/Control/SharedFunctions.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Controller/SharedFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
 

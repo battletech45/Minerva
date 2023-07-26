@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/View/TeacherView/ContentView/TeacherClassContentPage.dart';
-import 'package:minerva/View/TeacherView/HomeworksView/TeacherUploadHomework.dart';
 import '../../../Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
 

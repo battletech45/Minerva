@@ -140,7 +140,7 @@ class _UploadFileState extends State<UploadFile> {
               width: 110,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Color.fromRGBO(100, 136, 174, 1)),
+                    backgroundColor: Color.fromRGBO(100, 136, 174, 1)),
                 child: Text('Select File'),
                 onPressed: selectFile,
               ),
@@ -153,7 +153,7 @@ class _UploadFileState extends State<UploadFile> {
               width: 110,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Color.fromRGBO(100, 136, 174, 1)),
+                    backgroundColor: Color.fromRGBO(100, 136, 174, 1)),
                 child: Text('Upload File'),
                 onPressed: uploadFile,
               ),
