@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Controller/SharedFunctions.dart';
 import 'package:minerva/View/ForgotPassword.dart';
 import 'package:minerva/View/TeacherView/ProfileView/ProfileTeacher.dart';

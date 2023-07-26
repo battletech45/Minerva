@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Controller/Validators.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
@@ -260,6 +259,7 @@ class _RegisterPage extends State<RegisterPage> {
                 child: TextButton(
                   onPressed: () {
                     register();
+                    
                   },
                   child: const Text(
                     'Register',
