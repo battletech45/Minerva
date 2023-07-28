@@ -45,17 +45,7 @@ class NotificationHelper {
 
 
 Future<void> onBackgroundMessage(RemoteMessage message) async {
-
-  if (message.data.containsKey('data')) {
-    // Handle data message
-    final data = message.data['data'];
-  }
-
-  if (message.data.containsKey('notification')) {
-    // Handle notification message
-    final notification = message.data['notification'];
-  }
-  // Or do other work.
+  NotificationHelper.showCustomNotification(message);
 }
 
 class FCM {
