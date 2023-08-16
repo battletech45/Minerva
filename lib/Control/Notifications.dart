@@ -92,7 +92,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     print(fcmToken);
   }
 
-  Future<void> sendNotification(String title, String body, String fcmToken) async {
+  Future<void> sendNotification( String fcmToken, String title, String body) async {
     final String fcmEndpoint = 'https://fcm.googleapis.com/fcm/send';
 
     final Map<String, dynamic> notificationData = {
@@ -101,7 +101,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         'body': body,
       },
       'priority': 'high',
-      'to': 'cwlkfOiVSQimEHgxCkAs81:APA91bGH0L23mOYog4iBWCb0VH7bQysS-p7T-Epn20Eko9BqKYi3vDUQQV8aGLlwS8cd3uIeD8Ie2o5dFJdsE6EEkxMyNxXYp6eD4kgqYOyYVnd96x5b8EGOx4VKchHPqQhO-rd309iH',
+      'to': fcmToken,
     };
 
     final headers = {
