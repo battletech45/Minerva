@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
-import 'package:minerva/View/HomePage.dart';
 
 
 void main() {

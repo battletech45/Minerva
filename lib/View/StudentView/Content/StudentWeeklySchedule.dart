@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:minerva/Model/CustomWidgets.dart';
-import 'package:table_calendar/table_calendar.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class StudentWeeklySchedule extends StatefulWidget {

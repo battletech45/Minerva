@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Controller/AuthService.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/View/LoginPage.dart';
 
@@ -90,7 +91,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     child: TextButton(
                       onPressed: () {
                         if(emailController.text.isNotEmpty) {
-                          FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
+                          AuthServices().resetPassword(emailController.text);
                           setState(() {
                             isVisible = true;
                           });

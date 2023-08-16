@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
-import 'package:minerva/Control/SharedFunctions.dart';
 import 'package:minerva/View/ForgotPassword.dart';
-import 'package:minerva/View/TeacherView/ProfileView/ProfileTeacher.dart';
-import '../Control/Validators.dart';
-import 'StudentView/ProfileView/ProfilePage.dart';
+import '../Controller/AuthService.dart';
+import '../Controller/Validators.dart';
 import 'WelcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -107,8 +104,9 @@ class _LoginPageState extends State<LoginPage> {
                     color: Color.fromRGBO(28, 88, 140, 1),
                     borderRadius: BorderRadius.circular(10)),
                 child: TextButton(
-                  onPressed: () {
-                    signIn();
+                  onPressed: () async {
+                    AuthServices().signInWithEmailAndPassword(
+                        schoolNumberController.text, passwordController.text, context, formKey);
                   },
                   child: const Text(
                     'Sign in',
@@ -145,37 +143,41 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
+/*
   Future signIn() async {
     if (formKey.currentState!.validate()) {
-      var studentData = await FirebaseFunctions().getStudentData(schoolNumberController.text);
+      var studentData =
+          await FirebaseFunctions().getStudentData(schoolNumberController.text);
       try {
         await authLog.signInWithEmailAndPassword(
           email: schoolNumberController.text.trim(),
           password: passwordController.text.trim(),
         );
-        if(studentData.docs.isNotEmpty) {
+        if (studentData.docs.isNotEmpty) {
           await SharedFunctions.saveUserLoggedInSharedPreference(true);
           await SharedFunctions.saveUserStudentSharedPreference(true);
-          await SharedFunctions.saveUserEmailSharedPreference(schoolNumberController.text);
-          await SharedFunctions.saveUserNameSharedPreference(studentData.docs[0].get('studentName'));
-          if(studentData.docs[0].get('password') != passwordController.text) {
-            await FirebaseFunctions().updateStudentPassword(passwordController.text, studentData.docs[0].get('studentID'));
+          await SharedFunctions.saveUserEmailSharedPreference(
+              schoolNumberController.text);
+          await SharedFunctions.saveUserNameSharedPreference(
+              studentData.docs[0].get('studentName'));
+          if (studentData.docs[0].get('password') != passwordController.text) {
+            await FirebaseFunctions().updateStudentPassword(
+                passwordController.text, studentData.docs[0].get('studentID'));
           }
-        }
-        else {
-          var teacherData = await FirebaseFunctions().getTeacherData(schoolNumberController.text);
+        } else {
+          var teacherData = await FirebaseFunctions()
+              .getTeacherData(schoolNumberController.text);
           await SharedFunctions.saveUserStudentSharedPreference(false);
           await SharedFunctions.saveUserLoggedInSharedPreference(true);
-          await SharedFunctions.saveUserEmailSharedPreference(schoolNumberController.text);
-          await SharedFunctions.saveUserNameSharedPreference(teacherData.docs[0].get('teacherName'));
-          if(teacherData.docs[0].get('password') != passwordController.text) {
-            await FirebaseFunctions().updateStudentPassword(passwordController.text, teacherData.docs[0].get('teacherID'));
+          await SharedFunctions.saveUserEmailSharedPreference(
+              schoolNumberController.text);
+          await SharedFunctions.saveUserNameSharedPreference(
+              teacherData.docs[0].get('teacherName'));
+          if (teacherData.docs[0].get('password') != passwordController.text) {
+            await FirebaseFunctions().updateStudentPassword(
+                passwordController.text, teacherData.docs[0].get('teacherID'));
           }
         }
-        var isStudent = await SharedFunctions.getUserStudentSharedPreference();
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => isStudent! ? ProfilePage() : ProfileTeacherPage()));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           print('No user found for that email.');
@@ -184,5 +186,5 @@ class _LoginPageState extends State<LoginPage> {
         }
       }
     }
-  }
+  } */
 }

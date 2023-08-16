@@ -5,10 +5,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../Control/FirebaseFunctions.dart';
-import '../../../Control/SharedFunctions.dart';
-import '../../../Model/WidgetProperties.dart';
-import '../../../Model/WidgetProperties.dart';
+import '../../../Controller/FirebaseFunctions.dart';
+import '../../../Controller/SharedFunctions.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class StudentHomeWorkViewPage extends StatefulWidget {

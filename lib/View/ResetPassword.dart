@@ -1,9 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
-import 'package:minerva/Control/SharedFunctions.dart';
+import 'package:minerva/Controller/AuthService.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Controller/SharedFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import '../Model/CustomWidgets.dart';
+
 
 class ResetPassword extends StatefulWidget {
   @override
@@ -14,7 +16,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final oldPasswordController = TextEditingController();
-  final _user = FirebaseAuth.instance;
+ // final _user = FirebaseAuth.instance;
   String userID = '';
   String userEmail = '';
   bool isStudent = false;
@@ -154,7 +156,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      passCheck(oldPasswordController.text, passwordController.text, confirmPasswordController.text);
+                      AuthServices().passCheck(userID,userEmail,oldPasswordController.text, passwordController.text, confirmPasswordController.text);
                     },
                     child: Text(
                       'Change Password',
@@ -169,7 +171,7 @@ class _ResetPasswordState extends State<ResetPassword> {
       ),
     );
   }
-
+/*
   Future passCheck(String oldPassword, String newPassword, String safeNewPassword) async {
     if (newPassword.isNotEmpty && safeNewPassword.isNotEmpty) {
       if (newPassword == safeNewPassword) {
@@ -191,5 +193,5 @@ class _ResetPasswordState extends State<ResetPassword> {
     else {
       print('PLease fill textFields to change your password');
     }
-  }
+  }*/
 }

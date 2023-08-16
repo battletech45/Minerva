@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:minerva/View/TeacherView/GradesView/TeacherGradePage.dart';
 
-import '../../../Control/FirebaseFunctions.dart';
+import '../../../Controller/FirebaseFunctions.dart';
 import '../../../Model/WidgetProperties.dart';
 
 
