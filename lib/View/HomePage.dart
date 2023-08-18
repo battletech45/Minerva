@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey/flutter_survey.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/Controller/ContentService.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import '../Controller/FirebaseFunctions.dart';
 import '../Controller/SharedFunctions.dart';
@@ -44,7 +45,7 @@ class _HomePage extends State<HomePage> {
   }
   
   _getAllContent() async {
-    var val = await FirebaseFunctions().getAllContents();
+    var val = await ContentService().getAllContents();
     setState(() {
       contents = val;
     });

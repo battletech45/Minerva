@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Controller/SharedFunctions.dart';
+import 'package:minerva/Controller/StudentService.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import '../../../Model/WidgetProperties.dart';
@@ -27,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
       email = val!;
     });
     print(email);
-    var user = await FirebaseFunctions().getStudentData(email);
+    var user = await StudentService().getStudentData(email);
     setState(() {
       userName = user.docs[0].get('studentName');
       tc = user.docs[0].get('tc');

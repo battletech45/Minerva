@@ -1,5 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Controller/ClassesService.dart';
+import 'package:minerva/Controller/StudentService.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:minerva/View/TeacherView/GradesView/TeacherGradePage.dart';
 
@@ -26,7 +28,7 @@ class _TeacherGradeStudentListState extends State<TeacherGradeStudentList> {
   String? selectedStudent;
 
   _getClasses() async {
-    var val = await FirebaseFunctions().getAllClasses();
+    var val = await ClassesService().getAllClasses();
     var size = val.size;
     for(int i = 0; i < size; i++) {
       setState(() {
@@ -38,10 +40,10 @@ class _TeacherGradeStudentListState extends State<TeacherGradeStudentList> {
   _getStudents(String className) async {
     students.clear();
     studentIDs.clear();
-    var val = await FirebaseFunctions().getClassData(className);
+    var val = await ClassesService().getClassData(className);
     List<dynamic> studentList = val.docs[0].get('students');
     for(int i = 0; i < studentList.length; i++) {
-      var name = await FirebaseFunctions().getStudentDataViaID(studentList[i]);
+      var name = await StudentService().getStudentDataViaID(studentList[i]);
       setState(() {
         studentIDs.add(name.docs[0].get('studentID'));
         students.add(name.docs[0].get('studentName'));

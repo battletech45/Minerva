@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Controller/StudentService.dart';
+import 'package:minerva/Controller/TeacherService.dart';
 import 'package:minerva/Controller/Validators.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import '../Controller/FirebaseFunctions.dart';
@@ -43,7 +45,7 @@ class _RegisterPage extends State<RegisterPage> {
             );
             User? user = userCredential.user;
             print(user!.uid);
-            await FirebaseFunctions(userID: user.uid).createStudent(
+            await StudentService(userID: user.uid).createStudent(
                 'test',
                 passwordController.text,
                 emailController.text,
@@ -51,7 +53,7 @@ class _RegisterPage extends State<RegisterPage> {
                 schoolNumberController.text,
                 registrationNumberController.text
             );
-            var data = await FirebaseFunctions().getStudentData(emailController.text);
+            var data = await StudentService().getStudentData(emailController.text);
             await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
             await SharedFunctions.saveUserStudentSharedPreference(isStudent);
             await SharedFunctions.saveUserNameSharedPreference(
@@ -67,7 +69,7 @@ class _RegisterPage extends State<RegisterPage> {
             );
             User? user = userCredential.user;
             print(user!.uid);
-            await FirebaseFunctions(userID: user.uid).createTeacher(
+            await TeacherService(userID: user.uid).createTeacher(
                 'test',
                 passwordController.text,
                 emailController.text,
@@ -75,7 +77,7 @@ class _RegisterPage extends State<RegisterPage> {
                 schoolNumberController.text,
                 registrationNumberController.text
             );
-            var data = await FirebaseFunctions().getTeacherData(emailController.text);
+            var data = await TeacherService().getTeacherData(emailController.text);
             await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
             await SharedFunctions.saveUserStudentSharedPreference(isStudent);
             await SharedFunctions.saveUserNameSharedPreference(

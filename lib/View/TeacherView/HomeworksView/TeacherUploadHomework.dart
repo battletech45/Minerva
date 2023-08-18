@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Controller/ClassesService.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
 import '../../../Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
@@ -190,7 +191,7 @@ class _UploadHomeworkState extends State<UploadHomework> {
                   'submitOpen': isChecked,
                   'pickedFileName': isDocumentExist ? pickedFile!.name : ''
                 };
-                FirebaseFunctions().createClassMaterial(widget.className, assignment);
+                ClassesService().createClassMaterial(widget.className, assignment);
                 setState(() {
                   titleController.clear();
                   contentController.clear();

@@ -1,10 +1,11 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:minerva/Controller/ClassesService.dart';
+import 'package:minerva/Controller/StudentService.dart';
+import 'package:minerva/Controller/TeacherService.dart';
 import '../../../Controller/FirebaseFunctions.dart';
 import '../../../Controller/SharedFunctions.dart';
 import '../../../Model/WidgetProperties.dart';
@@ -45,8 +46,8 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
       isLoading = true;
     });
     var email = await SharedFunctions.getUserEmailSharedPreference();
-    var student = await FirebaseFunctions().getStudentData(email!);
-    String? className = await FirebaseFunctions().findStudentsClass(student.docs[0].get('studentID'));
+    var student = await StudentService().getStudentData(email!);
+    String? className = await ClassesService().findStudentsClass(student.docs[0].get('studentID'));
     final path = '$className/submissions/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
 
@@ -68,9 +69,9 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
 
   _getHomeworks() async {
     var email = await SharedFunctions.getUserEmailSharedPreference();
-    var student = await FirebaseFunctions().getStudentData(email!);
-    String? className = await FirebaseFunctions().findStudentsClass(student.docs[0].get('studentID'));
-    var val = await FirebaseFunctions().getClassData(className!);
+    var student = await StudentService().getStudentData(email!);
+    String? className = await ClassesService().findStudentsClass(student.docs[0].get('studentID'));
+    var val = await ClassesService().getClassData(className!);
     List data = val.docs[0].get('Materials');
     data.forEach((element) {
       homeworkItems.add(HomeworkItem(name: element['assignmentTitle'], definition: element['assignmentContent'], isSubmitable: element['submitOpen'], fileName: element['pickedFileName']));
@@ -198,14 +199,14 @@ class _StudentHomeWorkViewPageState extends State<StudentHomeWorkViewPage > {
                     await uploadFile();
                     var name = await SharedFunctions.getUserNameSharedPreference();
                     var email = await SharedFunctions.getUserEmailSharedPreference();
-                    var student = await FirebaseFunctions().getStudentData(email!);
-                    String? className = await FirebaseFunctions().findStudentsClass(student.docs[0].get('studentID'));
+                    var student = await StudentService().getStudentData(email!);
+                    String? className = await ClassesService().findStudentsClass(student.docs[0].get('studentID'));
                     Map<String, dynamic> data = {
                       'studentName': name,
                       'fileName': pickedFile!.name,
                       'homeworkName': homeworkItems[_selectedIndex].name
                     };
-                    await FirebaseFunctions().addStudentToSubmittedList(className!, data);
+                    await ClassesService().addStudentToSubmittedList(className!, data);
                     print('finish');
                   },
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

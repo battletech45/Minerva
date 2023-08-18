@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minerva/Controller/ClassesService.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
@@ -12,7 +13,7 @@ class _ContentStudentState extends State<ContentStudent> {
   List<dynamic> courses = [];
 
   _getCourses() async {
-    var val = await FirebaseFunctions().getClassData('11-A');
+    var val = await ClassesService().getClassData('11-A');
     setState(() {
       courses = val.docs[0].get('courses');
     });

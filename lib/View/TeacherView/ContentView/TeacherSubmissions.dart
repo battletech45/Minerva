@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Controller/ClassesService.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -29,7 +30,7 @@ class _TeacherSubmissionsState extends State<TeacherSubmissions> {
   }
 
   _getSubmissions() async {
-    var val = await FirebaseFunctions().getClassData(widget.className);
+    var val = await ClassesService().getClassData(widget.className);
     setState(() {
       _students = val.docs[0].get('submittedStudents');
     });

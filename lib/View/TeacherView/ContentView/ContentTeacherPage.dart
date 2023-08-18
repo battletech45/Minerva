@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/Controller/ClassesService.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/View/TeacherView/ContentView/TeacherClassContentPage.dart';
 import '../../../Model/CustomWidgets.dart';
@@ -16,7 +17,7 @@ class _ContentTeacherPageState extends State<ContentTeacherPage> {
   List<String> classes = <String>[];
 
   _getClasses() async {
-    var val = await FirebaseFunctions().getAllClasses();
+    var val = await ClassesService().getAllClasses();
     for(int i = 0; i < val.size; i++) {
       setState(() {
         classes.add(val.docs[i].get('className'));

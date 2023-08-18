@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Controller/ChatService.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
@@ -27,8 +28,8 @@ class _ChatPageState extends State<ChatPage> {
         "sender": widget.userName,
         "time": DateTime.now().millisecondsSinceEpoch
       };
-      FirebaseFunctions().sendMessage(widget.chatID, chatMessageMap);
-      FirebaseFunctions().getChats(widget.chatID).then((Stream<QuerySnapshot> val) {
+      ChatService().sendMessage(widget.chatID, chatMessageMap);
+      ChatService().getChats(widget.chatID).then((Stream<QuerySnapshot> val) {
         setState(() {
           _chats = val;
           _textEditingController.text = "";
@@ -56,7 +57,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    FirebaseFunctions().getChats(widget.chatID).then((Stream<QuerySnapshot> val) {
+    ChatService().getChats(widget.chatID).then((Stream<QuerySnapshot> val) {
       setState(() {
         _chats = val;
       });

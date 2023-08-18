@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:minerva/Controller/AuthService.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Controller/SharedFunctions.dart';
+import 'package:minerva/Controller/StudentService.dart';
+import 'package:minerva/Controller/TeacherService.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import '../Model/CustomWidgets.dart';
 
@@ -28,7 +30,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     });
     var isOK = await SharedFunctions.getUserStudentSharedPreference();
     if(isOK!) {
-      var user = await FirebaseFunctions().getStudentData(userEmail);
+      var user = await StudentService().getStudentData(userEmail);
       setState(() {
         userID = user.docs[0].get('studentID');
         setState(() {
@@ -37,7 +39,7 @@ class _ResetPasswordState extends State<ResetPassword> {
       });
     }
     else {
-      var user = await FirebaseFunctions().getTeacherData(userEmail);
+      var user = await TeacherService().getTeacherData(userEmail);
       setState(() {
         userID = user.docs[0].get('teacherID');
       });

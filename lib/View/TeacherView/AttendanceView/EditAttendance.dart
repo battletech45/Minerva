@@ -1,6 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Controller/ClassesService.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Controller/StudentService.dart';
+import 'package:minerva/Controller/TeacherService.dart';
 import '../../../Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
 
@@ -22,7 +25,7 @@ class _EditAttendanceState extends State<EditAttendance> {
   bool selected = false;
 
   _getClasses() async {
-    var val = await FirebaseFunctions().getAllClasses();
+    var val = await ClassesService().getAllClasses();
     var size = val.size;
     for (int i = 0; i < size; i++) {
       setState(() {
@@ -32,10 +35,10 @@ class _EditAttendanceState extends State<EditAttendance> {
   }
 
   _getStudents(String className) async {
-    var val = await FirebaseFunctions().getClassData(className);
+    var val = await ClassesService().getClassData(className);
     List<dynamic> studentList = val.docs[0].get('students');
     for (int i = 0; i < studentList.length; i++) {
-      var name = await FirebaseFunctions().getStudentDataViaID(studentList[i]);
+      var name = await StudentService().getStudentDataViaID(studentList[i]);
       setState(() {
         studentIDs.add(name.docs[0].get('studentID'));
         students.add(name.docs[0].get('studentName'));
@@ -54,7 +57,7 @@ class _EditAttendanceState extends State<EditAttendance> {
 
   _uploadAttendance() async {
     enteredAttendance.forEach((key, value) {
-      FirebaseFunctions().changeAttendance('English', value, key);
+      StudentService().changeAttendance('English', value, key);
     });
   }
 

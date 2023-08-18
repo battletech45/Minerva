@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Controller/StudentService.dart';
 import 'package:minerva/Controller/SharedFunctions.dart';
+import 'package:minerva/Controller/TeacherService.dart';
 import '../View/StudentView/ProfileView/ProfilePage.dart';
 import '../View/TeacherView/ProfileView/ProfileTeacher.dart';
 
@@ -13,7 +14,7 @@ class AuthServices {
   Future signInWithEmailAndPassword(String email, String password,
       BuildContext context, GlobalKey<FormState> formKey) async {
     if (formKey.currentState!.validate()) {
-      var studentData = await FirebaseFunctions().getStudentData(email);
+      var studentData = await StudentService().getStudentData(email);
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
@@ -24,18 +25,19 @@ class AuthServices {
           await SharedFunctions.saveUserNameSharedPreference(
               studentData.docs[0].get('studentName'));
           if (studentData.docs[0].get('password') != password) {
-            await FirebaseFunctions().updateStudentPassword(
+            await StudentService().updateStudentPassword(
                 password, studentData.docs[0].get('studentID'));
           }
         } else {
-          var teacherData = await FirebaseFunctions().getTeacherData(email);
+          var teacherData = await TeacherService().getTeacherData(email);
           await SharedFunctions.saveUserStudentSharedPreference(false);
           await SharedFunctions.saveUserLoggedInSharedPreference(true);
           await SharedFunctions.saveUserEmailSharedPreference(email);
           await SharedFunctions.saveUserNameSharedPreference(
               teacherData.docs[0].get('teacherName'));
           if (teacherData.docs[0].get('password') != password) {
-            await FirebaseFunctions().updateStudentPassword(
+            //SANIRIM BURDA HATA VAR UPDATE TEACHER PASSWORD OLMASI GEREKMEZ Mİ?
+            await StudentService().updateStudentPassword(
                 password, teacherData.docs[0].get('teacherID'));
           }
         }
@@ -66,9 +68,9 @@ class AuthServices {
         await _auth.currentUser!.reauthenticateWithCredential(_credential);
         await _auth.currentUser!.updatePassword(newPassword);
         if (isStudent) {
-          await FirebaseFunctions().updateStudentPassword(newPassword, userID);
+          await StudentService().updateStudentPassword(newPassword, userID);
         } else {
-          await FirebaseFunctions().updateTeacherPassword(newPassword, userID);
+          await TeacherService().updateTeacherPassword(newPassword, userID);
         }
       } else {
         print('Please Check Your Fields. Not Matching!');

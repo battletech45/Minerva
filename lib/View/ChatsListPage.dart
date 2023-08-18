@@ -2,8 +2,11 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:minerva/Controller/ChatService.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Controller/SharedFunctions.dart';
+import 'package:minerva/Controller/StudentService.dart';
+import 'package:minerva/Controller/TeacherService.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import '../Model/WidgetProperties.dart';
 import 'ChatPage.dart';
@@ -29,14 +32,14 @@ class _ChatsListPageState extends State<ChatsListPage> {
     isStudent = (await SharedFunctions.getUserStudentSharedPreference())!;
     if(isStudent) {
       _getStudentID();
-      var val = await FirebaseFunctions().getAllTeachers();
+      var val = await TeacherService().getAllTeachers();
       setState(() {
         allChatsSnapshot = val;
       });
     }
     else {
       _getTeacherID();
-      var val = await FirebaseFunctions().getAllStudents();
+      var val = await StudentService().getAllStudents();
       setState(() {
         allChatsSnapshot = val;
       });
@@ -50,21 +53,21 @@ class _ChatsListPageState extends State<ChatsListPage> {
 
   _getStudentID() async {
     var mail = await SharedFunctions.getUserEmailSharedPreference();
-    var data = await FirebaseFunctions().getStudentData(mail.toString());
+    var data = await StudentService().getStudentData(mail.toString());
     setState(() {
       userID = data.docs[0].get('studentID');
     });
   }
   _getTeacherID() async {
     var mail = await SharedFunctions.getUserEmailSharedPreference();
-    var data = await FirebaseFunctions().getTeacherData(mail.toString());
+    var data = await TeacherService().getTeacherData(mail.toString());
     setState(() {
       userID = data.docs[0].get('teacherID');
     });
   }
   
   _findChat(String userID, targetID) async {
-    var val = await FirebaseFunctions().getAllChats();
+    var val = await ChatService().getAllChats();
     List<dynamic> IDs = [];
     String foundID = '';
     bool isCreated = false;
@@ -85,7 +88,7 @@ class _ChatsListPageState extends State<ChatsListPage> {
             MaterialPageRoute(builder: (context) => ChatPage(chatID: foundID, userName: userName)));
       }
       else {
-        var val = await FirebaseFunctions().createChat(userID, targetID);
+        var val = await ChatService().createChat(userID, targetID);
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => ChatPage(chatID: val, userName: userName)));
       }

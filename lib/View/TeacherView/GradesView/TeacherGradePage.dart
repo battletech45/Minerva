@@ -1,5 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Controller/StudentService.dart';
+import 'package:minerva/Controller/TeacherService.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import 'package:flutter/material.dart';
 import '../../../Controller/SharedFunctions.dart';
@@ -24,7 +26,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
 
   getProfession() async {
     var email = await SharedFunctions.getUserEmailSharedPreference();
-    var teacher = await FirebaseFunctions().getTeacherData(email!);
+    var teacher = await TeacherService().getTeacherData(email!);
     setState(() {
       profession = teacher.docs[0].get('profession');
     });
@@ -192,7 +194,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
 
   void _gradeTask(String studentID, String courseName, String gradeType, String grade) async {
     try {
-      await FirebaseFunctions()
+      await StudentService()
           .gradeTask(studentID, courseName, gradeType, grade);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Grade saved')),
@@ -205,7 +207,7 @@ class _TeacherGradePageState extends State<TeacherGradePage> {
   }
   void _gradeAllTasks(String studentID, String courseName, String quiz, String project, exam) async {
     try {
-      await FirebaseFunctions().gradeAllTasks(studentID, courseName, quiz, project, exam);
+      await StudentService().gradeAllTasks(studentID, courseName, quiz, project, exam);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Grade saved')),
       );
