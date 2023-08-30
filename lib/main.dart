@@ -39,17 +39,29 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  String notificationTitle = 'No Title';
+  String notificationBody = 'No Body';
+
+  _changeBody(String msg) => setState(() => notificationBody = msg);
+  _changeTitle(String msg) => setState(() => notificationTitle = msg);
+
   @override
   void initState() {
     super.initState();
     _checkUserStatus();
+    final _firebaseMessaging = FCM();
+    _firebaseMessaging.setNotifications();
+    NotificationHelper.initialize();
+
+    _firebaseMessaging.bodyCtlr.stream.listen(_changeBody);
+    _firebaseMessaging.titleCtlr.stream.listen(_changeTitle);
   }
 
   @override
   Widget build(BuildContext context) {
     return isLoggedIn ? MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: isStudent ? NotificationsScreen() : ProfileTeacherPage()
+      home: isStudent ? ProfilePage() : ProfileTeacherPage()
     ) :
     MaterialApp(
       debugShowCheckedModeBanner: false,

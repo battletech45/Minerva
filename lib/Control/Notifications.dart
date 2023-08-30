@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -71,29 +70,9 @@ class FCM {
     );
   }
 
-  dispose() {
-    streamCtlr.close();
-    bodyCtlr.close();
-    titleCtlr.close();
-  }
-}
+  Future<void> sendNotification(String title, String body) async {
 
-class NotificationsScreen extends StatefulWidget {
-  @override
-  _NotificationsScreenState createState() => _NotificationsScreenState();
-}
-
-class _NotificationsScreenState extends State<NotificationsScreen> {
-
-  String? fcmToken;
-
-  Future<void> saveDeviceToken() async {
-    fcmToken = await FirebaseMessaging.instance.getToken();
-    print(fcmToken);
-  }
-
-  Future<void> sendNotification( String fcmToken, String title, String body) async {
-    final String fcmEndpoint = 'https://fcm.googleapis.com/fcm/send';
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
 
     final Map<String, dynamic> notificationData = {
       'notification': {
@@ -117,33 +96,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       print('Error sending notification: ${response.statusCode}');
     }
   }
-  String notificationTitle = 'No Title';
-  String notificationBody = 'No Body';
 
-  @override
-  void initState() {
-    super.initState();
-    saveDeviceToken();
-    final _firebaseMessaging = FCM();
-    _firebaseMessaging.setNotifications();
-    NotificationHelper.initialize();
-
-    _firebaseMessaging.bodyCtlr.stream.listen(_changeBody);
-    _firebaseMessaging.titleCtlr.stream.listen(_changeTitle);
-  }
-
-  _changeBody(String msg) => setState(() => notificationBody = msg);
-  _changeTitle(String msg) => setState(() => notificationTitle = msg);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Notifications')),
-      body: MaterialButton(
-        color: Colors.blue,
-        child: Text('Send a notification'),
-        onPressed: () => sendNotification(fcmToken!, 'Hello test user', 'This is a test for new functionality.'),
-      )
-    );
+  dispose() {
+    streamCtlr.close();
+    bodyCtlr.close();
+    titleCtlr.close();
   }
 }
