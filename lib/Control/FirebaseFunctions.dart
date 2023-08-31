@@ -170,12 +170,13 @@ class FirebaseFunctions {
       'password': password
     });
   }
-  Future createChat(String studentID, String teacherID) async {
+  Future createChat(String studentID, String teacherID, String userToken, String targetToken) async {
     DocumentReference chatDocRef = await chatsCollection.add({
       'members': [],
       'chatID': '',
       'recentMessage': '',
       'recentMessageSender': '',
+      'tokens': [userToken, targetToken]
     });
 
     await chatDocRef.update({
