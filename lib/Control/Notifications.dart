@@ -70,9 +70,10 @@ class FCM {
     );
   }
 
-  Future<void> sendNotification(String title, String body) async {
+  Future<void> sendNotification(String title, String body, String targetToken) async {
 
     String? fcmToken = await FirebaseMessaging.instance.getToken();
+    print(fcmToken);
 
     final Map<String, dynamic> notificationData = {
       'notification': {
@@ -80,7 +81,7 @@ class FCM {
         'body': body,
       },
       'priority': 'high',
-      'to': fcmToken,
+      'to': targetToken,
     };
 
     final headers = {
