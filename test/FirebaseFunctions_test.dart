@@ -3,7 +3,6 @@ import 'package:cloud_firestore_platform_interface/src/method_channel/method_cha
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minerva/Controller/ChatService.dart';
-import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'integration.dart';
 
 import 'mockForFirebase.dart';
@@ -26,7 +25,7 @@ void main() {
   });
 
   test('Firebase testing', () async {
-    String data = await ChatService().createChat('password', 'uid');
+    String data = await ChatService().createChat('password', 'uid','uid2','uid3');
     print(data);
     expect(data.isNotEmpty, true);
   });

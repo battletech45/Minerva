@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:minerva/Controller/Notifications.dart';
 import 'package:minerva/Controller/SharedFunctions.dart';
 import 'package:minerva/View/StudentView/ProfileView/ProfilePage.dart';
 import 'package:minerva/View/TeacherView/ProfileView/ProfileTeacher.dart';
 import 'package:minerva/firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'View/WelcomePage.dart';
 
 void main() async {
@@ -37,10 +39,22 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  String notificationTitle = 'No Title';
+  String notificationBody = 'No Body';
+
+  _changeBody(String msg) => setState(() => notificationBody = msg);
+  _changeTitle(String msg) => setState(() => notificationTitle = msg);
+
   @override
   void initState() {
     super.initState();
     _checkUserStatus();
+    final _firebaseMessaging = FCM();
+    _firebaseMessaging.setNotifications();
+    NotificationHelper.initialize();
+
+    _firebaseMessaging.bodyCtlr.stream.listen(_changeBody);
+    _firebaseMessaging.titleCtlr.stream.listen(_changeTitle);
   }
 
   @override

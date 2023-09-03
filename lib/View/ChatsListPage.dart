@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Controller/ChatService.dart';
-import 'package:minerva/Controller/FirebaseFunctions.dart';
+
 import 'package:minerva/Controller/SharedFunctions.dart';
 import 'package:minerva/Controller/StudentService.dart';
 import 'package:minerva/Controller/TeacherService.dart';
@@ -22,6 +22,7 @@ class _ChatsListPageState extends State<ChatsListPage> {
   String userName = '';
   String chatID = '';
   String userID = '';
+  String token = '';
   bool isStudent = false;
   bool isLoading = false;
 
@@ -56,6 +57,7 @@ class _ChatsListPageState extends State<ChatsListPage> {
     var data = await StudentService().getStudentData(mail.toString());
     setState(() {
       userID = data.docs[0].get('studentID');
+      token = data.docs[0].get('token');
     });
   }
   _getTeacherID() async {
@@ -63,34 +65,40 @@ class _ChatsListPageState extends State<ChatsListPage> {
     var data = await TeacherService().getTeacherData(mail.toString());
     setState(() {
       userID = data.docs[0].get('teacherID');
+      token = data.docs[0].get('token');
     });
   }
   
   _findChat(String userID, targetID) async {
     var val = await ChatService().getAllChats();
     List<dynamic> IDs = [];
+    List<dynamic> tokens = [];
     String foundID = '';
     bool isCreated = false;
     if(val.docs.isNotEmpty) {
       val.docs.forEach((element) {
         print('here');
         IDs = element.get('members');
+        tokens = element.get('tokens');
         if(IDs.contains(userID) && IDs.contains(targetID)) {
           setState(() {
             isCreated = true;
             foundID = element.id;
           });
+          tokens.remove(token);
+          tokens.insert(0, token);
+          token = tokens[1];
         }
       });
       print(isCreated);
       if(isCreated) {
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => ChatPage(chatID: foundID, userName: userName)));
+            MaterialPageRoute(builder: (context) => ChatPage(chatID: foundID, userName: userName, targetToken: token)));
       }
       else {
-        var val = await ChatService().createChat(userID, targetID);
+        var val = await ChatService().createChat(userID, targetID, tokens[0], tokens[1]);
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => ChatPage(chatID: val, userName: userName)));
+            MaterialPageRoute(builder: (context) => ChatPage(chatID: val, userName: userName, targetToken: token)));
       }
     }
   }
