@@ -1,9 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:minerva/Control/Validators.dart';
+import 'package:minerva/Controller/StudentService.dart';
+import 'package:minerva/Controller/TeacherService.dart';
+import 'package:minerva/Controller/Validators.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
-import '../Control/FirebaseFunctions.dart';
-import '../Control/SharedFunctions.dart';
+import '../Controller/FirebaseFunctions.dart';
+import '../Controller/SharedFunctions.dart';
 import 'StudentView/ProfileView/ProfilePage.dart';
 import 'TeacherView/ProfileView/ProfileTeacher.dart';
 import 'WelcomePage.dart';
@@ -44,7 +45,7 @@ class _RegisterPage extends State<RegisterPage> {
             );
             User? user = userCredential.user;
             print(user!.uid);
-            await FirebaseFunctions(userID: user.uid).createStudent(
+            await StudentService(userID: user.uid).createStudent(
                 'test',
                 passwordController.text,
                 emailController.text,
@@ -52,7 +53,7 @@ class _RegisterPage extends State<RegisterPage> {
                 schoolNumberController.text,
                 registrationNumberController.text
             );
-            var data = await FirebaseFunctions().getStudentData(emailController.text);
+            var data = await StudentService().getStudentData(emailController.text);
             await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
             await SharedFunctions.saveUserStudentSharedPreference(isStudent);
             await SharedFunctions.saveUserNameSharedPreference(
@@ -68,7 +69,7 @@ class _RegisterPage extends State<RegisterPage> {
             );
             User? user = userCredential.user;
             print(user!.uid);
-            await FirebaseFunctions(userID: user.uid).createTeacher(
+            await TeacherService(userID: user.uid).createTeacher(
                 'test',
                 passwordController.text,
                 emailController.text,
@@ -76,7 +77,7 @@ class _RegisterPage extends State<RegisterPage> {
                 schoolNumberController.text,
                 registrationNumberController.text
             );
-            var data = await FirebaseFunctions().getTeacherData(emailController.text);
+            var data = await TeacherService().getTeacherData(emailController.text);
             await SharedFunctions.saveUserEmailSharedPreference(emailController.text);
             await SharedFunctions.saveUserStudentSharedPreference(isStudent);
             await SharedFunctions.saveUserNameSharedPreference(

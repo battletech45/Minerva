@@ -3,13 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_survey/flutter_survey.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
-import 'package:minerva/Control/SharedFunctions.dart';
+import 'package:minerva/Controller/ContentService.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Controller/SharedFunctions.dart';
+import 'package:minerva/Controller/StudentService.dart';
+import 'package:minerva/Controller/TeacherService.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
-import 'package:minerva/View/LoginPage.dart';
-import 'package:minerva/View/RegisterPage.dart';
 import 'package:minerva/View/StudentView/Announcement/AnnouncementStudentPage.dart';
 import 'package:minerva/View/StudentView/Attendance/AttendanceStudentPage.dart';
 import 'package:minerva/View/TeacherView/AttendanceView/EditAttendance.dart';
@@ -47,13 +47,13 @@ class _customDrawerState extends State<customDrawer> {
       isStudent = check!;
     });
     if (isStudent) {
-      var student = await FirebaseFunctions().getStudentData(mail!);
+      var student = await StudentService().getStudentData(mail!);
       setState(() {
         userNumber = student.docs[0].get('studentNumber');
         userID = student.docs[0].get('studentID');
       });
     } else {
-      var teacher = await FirebaseFunctions().getTeacherData(mail!);
+      var teacher = await TeacherService().getTeacherData(mail!);
       setState(() {
         userNumber = teacher.docs[0].get('teacherNumber');
         userID = teacher.docs[0].get('teacherID');
@@ -315,7 +315,7 @@ class _customContentFeedState extends State<customContentFeed> {
   int likeCounter = 0;
 
   _getLikeCount(String contentID) async {
-    var content = await FirebaseFunctions().getContent(contentID);
+    var content = await ContentService().getContent(contentID);
     var val = content.docs[0].get('likeCount');
     setState(() {
       likeCounter = val;
@@ -336,12 +336,12 @@ class _customContentFeedState extends State<customContentFeed> {
       isStudent = check!;
     });
     if (isStudent) {
-      var student = await FirebaseFunctions().getStudentData(mail!);
+      var student = await StudentService().getStudentData(mail!);
       setState(() {
         userID = student.docs[0].get('studentID');
       });
     } else {
-      var teacher = await FirebaseFunctions().getTeacherData(mail!);
+      var teacher = await TeacherService().getTeacherData(mail!);
       setState(() {
         userID = teacher.docs[0].get('teacherID');
       });
@@ -352,7 +352,7 @@ class _customContentFeedState extends State<customContentFeed> {
     setState(() {
       likeCounter++;
     });
-    await FirebaseFunctions()
+    await ContentService()
         .updateLikeCounter(widget.contentID, likeCounter, userID);
   }
 
@@ -360,9 +360,9 @@ class _customContentFeedState extends State<customContentFeed> {
     setState(() {
       likeCounter--;
     });
-    await FirebaseFunctions()
+    await ContentService()
         .updateLikeCounter(widget.contentID, likeCounter, userID);
-    await FirebaseFunctions().deleteUserFromLikedList(widget.contentID, userID);
+    await ContentService().deleteUserFromLikedList(widget.contentID, userID);
   }
 
   _defineContentsType(dynamic content) {
@@ -997,7 +997,7 @@ class _customAlertState extends State<customAlert> {
           }
           survey.update('surveyOptions',
               (value) => FieldValue.arrayUnion(controllerValues));
-          await FirebaseFunctions().sendContent(survey);
+          await ContentService().sendContent(survey);
           Navigator.of(context).pop();
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()));
@@ -1010,7 +1010,7 @@ class _customAlertState extends State<customAlert> {
             'contentType': 'Image',
             'imageURL': link
           };
-          await FirebaseFunctions().sendContent(Image);
+          await ContentService().sendContent(Image);
           Navigator.of(context).pop();
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()));
@@ -1022,7 +1022,7 @@ class _customAlertState extends State<customAlert> {
             'contentType': 'Text',
             'paragraph': paragraphController.text,
           };
-          await FirebaseFunctions().sendContent(paragraph);
+          await ContentService().sendContent(paragraph);
           Navigator.of(context).pop();
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()));

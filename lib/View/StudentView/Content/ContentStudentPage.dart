@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Controller/ClassesService.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
-import 'package:minerva/View/StudentView/Content/StudentWeeklySchedule.dart';
 import '../../../Model/WidgetProperties.dart';
 
 class ContentStudent extends StatefulWidget {
@@ -14,7 +13,7 @@ class _ContentStudentState extends State<ContentStudent> {
   List<dynamic> courses = [];
 
   _getCourses() async {
-    var val = await FirebaseFunctions().getClassData('11-A');
+    var val = await ClassesService().getClassData('11-A');
     setState(() {
       courses = val.docs[0].get('courses');
     });

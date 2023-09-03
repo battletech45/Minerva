@@ -1,10 +1,11 @@
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
-import 'package:minerva/Control/SharedFunctions.dart';
+import 'package:minerva/Controller/ClassesService.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Controller/SharedFunctions.dart';
+import 'package:minerva/Controller/StudentService.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../Model/WidgetProperties.dart';
 
@@ -24,9 +25,9 @@ class _StudentMaterialPageState extends State<StudentMaterialPage> {
 
   _getURLs() async {
     var email = await SharedFunctions.getUserEmailSharedPreference();
-    var student = await FirebaseFunctions().getStudentData(email!);
-    String? className = await FirebaseFunctions().findStudentsClass(student.docs[0].get('studentID'));
-    var val = await FirebaseFunctions().getClassData(className!);
+    var student = await StudentService().getStudentData(email!);
+    String? className = await ClassesService().findStudentsClass(student.docs[0].get('studentID'));
+    var val = await ClassesService().getClassData(className!);
     List data = val.docs[0].get('Materials');
     data.forEach((element) {
       materialURLs.add(element['materialURL']);

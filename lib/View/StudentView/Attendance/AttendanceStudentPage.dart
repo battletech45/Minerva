@@ -1,7 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
-import 'package:minerva/Control/SharedFunctions.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Controller/SharedFunctions.dart';
+import 'package:minerva/Controller/StudentService.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
@@ -21,11 +22,11 @@ class _AttendanceStudentPageState extends State<AttendanceStudentPage> {
       isLoading = true;
     });
     var email = await SharedFunctions.getUserEmailSharedPreference();
-    var val = await FirebaseFunctions().getStudentData(email!);
+    var val = await StudentService().getStudentData(email!);
     setState(() {
       studentID = val.docs[0].get('studentID');
     });
-    var map = await FirebaseFunctions().getStudentCourses(studentID);
+    var map = await StudentService().getStudentCourses(studentID);
     setState(() {
       courseAttendance = map;
       isLoading = false;

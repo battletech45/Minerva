@@ -5,11 +5,13 @@ class FirebaseFunctions {
   FirebaseFunctions({
     this.userID,
 });
-
+/*
   final CollectionReference studentCollection = FirebaseFirestore.instance.collection('students');
   final CollectionReference teacherCollection = FirebaseFirestore.instance.collection('teachers');
   final CollectionReference chatsCollection = FirebaseFirestore.instance.collection('chats');
+  */
   final CollectionReference modelCollection = FirebaseFirestore.instance.collection('model');
+  /*
   final CollectionReference classCollection = FirebaseFirestore.instance.collection('classes');
   final CollectionReference contentsCollection = FirebaseFirestore.instance.collection('contents');
 
@@ -185,7 +187,7 @@ class FirebaseFunctions {
     });
     return chatDocRef.id;
   }
-
+*/
   Future<List<String>> getTokens() async{
     List<String> data = [];
     var val = await modelCollection.doc('n3sugofTvAvEJEoxjcip').get();
@@ -195,4 +197,4 @@ class FirebaseFunctions {
     }
     return data;
   }
-}
+} 

@@ -1,12 +1,11 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey/flutter_survey.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minerva/Controller/ContentService.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
-import '../Control/FirebaseFunctions.dart';
-import '../Control/SharedFunctions.dart';
+import '../Controller/FirebaseFunctions.dart';
+import '../Controller/SharedFunctions.dart';
 import '../Model/CustomWidgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -46,7 +45,7 @@ class _HomePage extends State<HomePage> {
   }
   
   _getAllContent() async {
-    var val = await FirebaseFunctions().getAllContents();
+    var val = await ContentService().getAllContents();
     setState(() {
       contents = val;
     });

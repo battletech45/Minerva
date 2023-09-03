@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore_platform_interface/src/method_channel/method_channel_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Controller/ChatService.dart';
 import 'integration.dart';
 
 import 'mockForFirebase.dart';
@@ -26,7 +25,7 @@ void main() {
   });
 
   test('Firebase testing', () async {
-    String data = await FirebaseFunctions().createChat('password', 'uid');
+    String data = await ChatService().createChat('password', 'uid','uid2','uid3');
     print(data);
     expect(data.isNotEmpty, true);
   });

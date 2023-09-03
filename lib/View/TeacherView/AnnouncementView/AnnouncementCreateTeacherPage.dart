@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
-import 'package:minerva/Control/SharedFunctions.dart';
+import 'package:minerva/Controller/ClassesService.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
+import 'package:minerva/Controller/SharedFunctions.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import '../../../Model/WidgetProperties.dart';
 
@@ -16,7 +17,7 @@ class _AnnouncementCreateTeacherPageState extends State<AnnouncementCreateTeache
   List<String> selectedClasses = [];
 
   _getClasses() async {
-    var val = await FirebaseFunctions().getAllClasses();
+    var val = await ClassesService().getAllClasses();
     var size = val.size;
     for(int i = 0; i<size; i++) {
       setState(() {
@@ -45,7 +46,7 @@ class _AnnouncementCreateTeacherPageState extends State<AnnouncementCreateTeache
     };
     var announcementList = [announcement];
     selectedClasses.forEach((element) {
-      FirebaseFunctions().sendNewAnnouncement(element, announcementList);
+      ClassesService().sendNewAnnouncement(element, announcementList);
     });
   }
 

@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Controller/ClassesService.dart';
+import 'package:minerva/Controller/FirebaseFunctions.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 
@@ -19,7 +19,7 @@ class _AnnouncementStudentPageState extends State<AnnouncementStudentPage> {
     setState(() {
       isLoading = true;
     });
-    var val = await FirebaseFunctions().getClassData('11-A');
+    var val = await ClassesService().getClassData('11-A');
     setState(() {
       isLoading = false;
       announcements = val.docs[0].get('announcements');
