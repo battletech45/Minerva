@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:minerva/Control/FirebaseFunctions.dart';
+import 'package:minerva/Control/Notifications.dart';
 import 'package:minerva/Model/WidgetProperties.dart';
 import 'package:minerva/Model/CustomWidgets.dart';
 import '../Model/ChatTile.dart';
@@ -9,8 +10,9 @@ import '../Model/ChatTile.dart';
 class ChatPage extends StatefulWidget {
   final String chatID;
   final String userName;
+  final String targetToken;
 
-  const ChatPage({Key? key, required this.chatID, required this.userName}) : super(key: key);
+  const ChatPage({Key? key, required this.chatID, required this.userName, required this.targetToken}) : super(key: key);
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -94,6 +96,7 @@ class _ChatPageState extends State<ChatPage> {
                   IconButton(icon: Icon(Icons.send),
                     onPressed: () {
                       _sendMessage();
+                      FCM().sendNotification(widget.userName, _textEditingController.text, widget.targetToken);
                     }
                   )
                 ],
